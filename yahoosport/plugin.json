@@ -1,7 +1,7 @@
 {
 	"description": "Follow your favourite teams with scores for games in Smartspace. With live information including scores and timings provided by Yahoo Sport, you'll never miss a moment",
-	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/yahoosport/yahoosport-release.apk",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/yahoosport/yahoosport-release.apk",
 	"version_code": 1,
 	"required_package": "com.yahoo.mobile.client.android.sportacular",
-	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/yahoosport/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/yahoosport/2.jpg"]
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/yahoosport/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/yahoosport/screenshots/2.jpg"]
 }

@@ -1,6 +1,6 @@
 {
 	"description": "Complications for notification counts for WhatsApp, Facebook, Facebook Messenger, Telegram, Twitter, Instagram and Threads!",
-	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/notifications/notifications-release.apk",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/notifications/notifications-release.apk",
 	"version_code": 1,
-	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/notifications/3.jpg"]
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/notifications/screenshots/1.jpg"]
 }

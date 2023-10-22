@@ -1,6 +1,6 @@
 {
 	"description": "This plugin contains a Complication which displays your current mobile data or Wi-Fi data usage for the month. With a customisable cycle day, you can specify when your plan resets and keep an eye on how much data you have left.",
-	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/datausage/datausage-release.apk",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/datausage/datausage-release.apk",
 	"version_code": 11,
-	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/datausage/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/datausage/2.jpg"]
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/datausage/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/datausage/screenshots/2.jpg"]
 }

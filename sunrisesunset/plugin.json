@@ -1,6 +1,6 @@
 {
 	"description": "A simple Complication displaying the sunrise and sunset times for your location",
-	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/sunrisesunset/sunrisesunset-release.apk",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/sunrisesunset/sunrisesunset-release.apk",
 	"version_code": 1,
-	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/sunrisesunset/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/sunrisesunset/2.jpg"]
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/sunrisesunset/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/sunrisesunset/screenshots/2.jpg"]
 }

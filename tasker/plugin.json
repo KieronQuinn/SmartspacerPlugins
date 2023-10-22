@@ -1,7 +1,7 @@
 {
 	"description": "With infinite possibilities, this plugin adds Tasker support to Smartspacer. Configure your own Targets, Complications and Requirements, with any of the available templates and text formatting.",
-	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/tasker/tasker-release.apk",
-	"version_code": 11,
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/tasker/tasker-release.apk",
+	"version_code": 13,
 	"required_package": "net.dinglisch.android.taskerm",
-	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/tasker/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/tasker/2.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/tasker/3.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/tasker/4.jpg"]
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/2.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/3.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/4.jpg"]
 }

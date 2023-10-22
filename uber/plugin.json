@@ -1,7 +1,7 @@
 {
 	"description": "Using data from the Uber app, this plugin shows ride tracking and car information in a Target. Know exactly when your driver will arrive, their registration and their image for verification without needing to unlock your device",
-	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/uber/uber-release.apk",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/uber/uber-release.apk",
 	"version_code": 1,
 	"required_package": "com.ubercab",
-	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/uber/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/uber/2.jpg"]
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/uber/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/uber/screenshots/2.jpg"]
 }

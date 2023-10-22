@@ -1,7 +1,7 @@
 {
 	"description": "Lists & notes right on your lock screen, home screen and always on display with the Google Keep plugin for Smartspacer. This plugin provides a Target which can display the first three items in a list, or the first line of a regular note. Perfect for shopping lists, tapping the Target will open Expanded Smartspace on your lockscreen (if available & enabled) and allow checking items off without even unlocking your device.",
-	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/googlekeep/googlekeep-release.apk",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/googlekeep/googlekeep-release.apk",
 	"version_code": 1,
 	"required_package": "com.google.android.keep",
-	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/googlekeep/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/googlekeep/2.jpg"]
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlekeep/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlekeep/screenshots/2.jpg"]
 }
