@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Uber Plugin for Smartspacer</string>
+    <string name="target_label">Uber</string>
+    <string name="target_description">Displays information about your Uber journey, including pickup time and driver &amp; car information</string>
+    <string name="target_incompatible">This Target requires the Uber app</string>
+
+    <string name="configuration_show_expanded_info_title">Show Dynamic Information</string>
+    <string name="configuration_show_expanded_info_content">Display dynamic information, including progress and vehicle information, alongside the pickup information (not supported on OEM Smartspace)</string>
+    <string name="configuration_hide_notification_title">Hide Notification</string>
+    <string name="configuration_hide_notification_content">Hide the Uber notification on the lock screen, when the Uber Target is the first visible Target (requires Native Smartspace)</string>
+    <string name="target_configuration_settings_title">Settings</string>
+    <string name="target_configuration_settings_description">Set whether to show dynamic information and hide the Uber notification on the lock screen</string>
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_configuration"
+    app:startDestination="@id/configurationGoogleWalletValuableFragment">
+
+    <fragment
+        android:id="@+id/configurationGoogleWalletValuablePickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.configuration.valuable.picker.ConfigurationGoogleWalletValuablePickerFragment"
+        android:label="@string/target_wallet_valuable_settings_select_card_title"
+        tools:layout="@layout/fragment_configuration_google_wallet_valuable_sign_in" >
+        <action
+            android:id="@+id/action_configurationGoogleWalletValuablePickerFragment_to_signInWithGoogleFragment"
+            app:destination="@id/signInWithGoogleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signInWithGoogleFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.configuration.signin.SignInWithGoogleFragment"
+        android:label="@string/sign_in_with_google"
+        tools:layout="@layout/fragment_sign_in_with_google"/>
+    <fragment
+        android:id="@+id/configurationGoogleWalletValuableFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.configuration.valuable.ConfigurationGoogleWalletValuableFragment"
+        android:label="@string/target_wallet_valuable_title_short"
+        tools:layout="@layout/fragment_settings_base">
+        <action
+            android:id="@+id/action_configurationGoogleWalletValuableFragment_to_configurationGoogleWalletValuablePickerFragment"
+            app:destination="@id/configurationGoogleWalletValuablePickerFragment" />
+    </fragment>
+
+</navigation>

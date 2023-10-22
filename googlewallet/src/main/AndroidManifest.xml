@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".GoogleWalletPluginApplication"
+        android:theme="@style/Theme.Smartspacer">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
+        <activity android:name=".ui.activities.PopupWalletDialogActivity"
+            android:theme="@style/PopupWalletDialog"
+            android:showOnLockScreen="true"
+            android:noHistory="true"
+            android:launchMode="singleInstance"
+            android:exported="true"
+            android:excludeFromRecents="true"/>
+
+        <activity-alias
+            android:name=".ui.activities.StaticConfigurationActivity"
+            android:description="@string/target_wallet_valuable_settings_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/target_wallet_valuable_settings_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <activity-alias
+            android:name=".ui.activities.DynamicConfigurationActivity"
+            android:description="@string/target_wallet_dynamic_settings_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/target_wallet_valuable_settings_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:name=".targets.GoogleWalletValuableTarget"
+            android:authorities="${applicationId}.target.googlewalletvaluable"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:name=".targets.GoogleWalletDynamicTarget"
+            android:authorities="${applicationId}.target.googlewalletdynamic"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:name=".notifications.GoogleWalletDynamicNotificationProvider"
+            android:authorities="${applicationId}.notification.googlewalletdynamic"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_NOTIFICATIONS"
+            android:exported="true"/>
+
+        <receiver android:name=".receivers.GoogleWalletTargetReceiver"
+            android:exported="true"
+            android:permission="com.kieronquinn.app.smartspacer.permission.SEND_UPDATE_BROADCAST">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.REQUEST_TARGET_UPDATE" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+    <queries>
+        <package android:name="com.google.android.apps.walletnfcrel"/>
+    </queries>
+
+</manifest>

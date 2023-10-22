@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_complication_setup"
+    app:startDestination="@id/complicationSetupFragment">
+
+    <fragment
+        android:id="@+id/complicationSetupFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.setup.complication.ComplicationSetupFragment"
+        android:label="@string/complication_label"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_complicationSetupFragment_to_nav_graph_include_string"
+            app:destination="@id/nav_graph_include_string">
+            <argument
+                android:name="config"
+                app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.string.StringInputFragment$Config" />
+        </action>
+    </fragment>
+
+    <include app:graph="@navigation/nav_graph_include_string" />
+
+</navigation>

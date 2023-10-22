@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+}
+
+android {
+    namespace 'com.kieronquinn.app.smartspacer.plugins.datausage'
+    compileSdk compile_sdk
+
+    defaultConfig {
+        applicationId "com.kieronquinn.app.smartspacer.plugins.datausage"
+        minSdk min_sdk
+        targetSdk target_sdk
+        versionCode 11
+        versionName "1.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs rootProject.ext.signingConfigs
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.configureEach { variant ->
+        variant.outputs.each { output ->
+            output.outputFileName = new File(outputFileDir, output.outputFile.name)
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    implementation project(path: ':shared')
+
+    //Data storage
+    ksp "androidx.room:room-compiler:$room_version"
+}

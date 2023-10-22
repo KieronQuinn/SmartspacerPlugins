@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="configuration_target_list_items_content">
+        <item quantity="one">@string/configuration_target_list_items_content_one</item>
+        <item quantity="other">@string/configuration_target_list_items_content_other</item>
+    </plurals>
+    <plurals name="configuration_doorbell_images_uris">
+        <item quantity="one">@string/configuration_doorbell_images_uris_one</item>
+        <item quantity="other">@string/configuration_doorbell_images_uris_other</item>
+    </plurals>
+    <plurals name="configuration_images_images">
+        <item quantity="one">@string/configuration_images_images_one</item>
+        <item quantity="other">@string/configuration_images_images_other</item>
+    </plurals>
+    <plurals name="configuration_carousel_items">
+        <item quantity="one">@string/configuration_carousel_items_one</item>
+        <item quantity="other">@string/configuration_carousel_items_other</item>
+    </plurals>
+    <plurals name="configuration_target_refresh_period_content_set">
+        <item quantity="one">@string/configuration_target_refresh_period_content_set_one</item>
+        <item quantity="other">@string/configuration_target_refresh_period_content_set_other</item>
+    </plurals>
+</resources>

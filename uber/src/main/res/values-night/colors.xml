@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colour_background">@color/black</color>
+    <color name="colour_text">@color/white</color>
+    <color name="progress_bar_unfilled">#727272</color>
+    <color name="progress_bar_filled">#f3f3f3</color>
+</resources>

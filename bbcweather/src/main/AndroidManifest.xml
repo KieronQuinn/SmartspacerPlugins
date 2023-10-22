@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:name=".BBCWeatherPlugin"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Smartspacer">
+
+        <provider
+            android:name=".targets.BBCWeatherTarget"
+            android:authorities="${applicationId}.target.bbcweather"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:name=".complications.BBCWeatherComplication"
+            android:authorities="${applicationId}.complication.bbcweather"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.widgets.bbcweathercomplication"
+            android:name=".widgets.BBCWeatherComplicationWidget"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.bbcweathertarget"
+            android:name=".widgets.BBCWeatherTargetWidget"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <receiver android:name=".receivers.ComplicationClickReceiver"
+            android:exported="true"/>
+
+        <receiver android:name=".receivers.TargetClickReceiver"
+            android:exported="true"/>
+
+    </application>
+
+    <queries>
+        <package android:name="bbc.mobile.weather"/>
+    </queries>
+
+</manifest>

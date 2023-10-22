@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_requirement_update"
+    app:startDestination="@id/requirementUpdateFragment">
+
+    <fragment
+        android:id="@+id/requirementUpdateFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.requirement.RequirementUpdateFragment"
+        android:label="@string/action_requirement_set_label_short"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_requirementUpdateFragment_to_requirementPickerFragment"
+            app:destination="@id/requirementPickerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requirementPickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.requirement.picker.RequirementPickerFragment"
+        android:label="@string/configuration_requirement_select_requirement_title_short"
+        tools:layout="@layout/fragment_settings_base" />
+
+</navigation>

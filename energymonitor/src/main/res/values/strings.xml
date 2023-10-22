@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Energy Monitor Plugin for Smartspacer</string>
+
+    <string name="configuration_title">Reconfigure</string>
+    <string name="configuration_description">Set the selected device and refresh rate</string>
+    <string name="complication_title">Energy Monitor</string>
+    <string name="complication_description_unset">Shows the battery level for this or a connected device from Energy Monitor</string>
+    <string name="complication_description">Shows the battery level for %1s from Energy Monitor</string>
+    <string name="complication_incompatible">This Complication requires the Energy Monitor app</string>
+    <string name="complication_charging">%1s+</string>
+</resources>

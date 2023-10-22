@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_configuration_sunrise.xml"
+    app:startDestination="@id/sunriseConfigurationFragment">
+
+    <fragment
+        android:id="@+id/sunriseConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugins.sunrisesunset.ui.screens.configuration.sunrise.SunriseConfigurationFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_settings_base" />
+
+</navigation>

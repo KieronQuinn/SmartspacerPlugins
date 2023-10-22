@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".NotificationsPlugin"
+        android:theme="@style/Theme.Smartspacer">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"/>
+
+        <activity
+            android:name=".ui.activities.TelegramWidgetReconfigureActivity"
+            android:description="@string/complication_telegram_settings_content"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/complication_telegram_settings_title"
+            android:excludeFromRecents="true"/>
+
+        <activity-alias
+            android:name=".ui.activities.BadgeConfigurationActivity"
+            android:description="@string/config_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/config_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <receiver android:name=".receivers.DummyReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BADGE_COUNT_UPDATE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.sec.intent.action.BADGE_COUNT_UPDATE"/>
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:authorities="${applicationId}.complication.facebook"
+            android:name=".complications.FacebookComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+            <!-- Makes visible for Facebook apps -->
+            <intent-filter>
+                <action android:name="com.facebook.secure.packagefinder.intent.ACTION_QUERY_PACKAGES"/>
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.twitter"
+            android:name=".complications.TwitterComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.whatsapp"
+            android:name=".complications.WhatsAppComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.telegram"
+            android:name=".complications.TelegramComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.instagram"
+            android:name=".complications.InstagramComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.threads"
+            android:name=".complications.ThreadsComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.receivers.facebook"
+            android:name=".providers.FacebookBadgeReceiverProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_BROADCASTS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.receivers.twitter"
+            android:name=".providers.TwitterBadgeReceiverProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_BROADCASTS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.receivers.whatsapp"
+            android:name=".providers.WhatsAppBadgeReceiverProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_BROADCASTS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.receivers.instagram"
+            android:name=".providers.InstagramBadgeReceiverProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_BROADCASTS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.receivers.threads"
+            android:name=".providers.ThreadsBadgeReceiverProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_BROADCASTS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.telegram"
+            android:name=".providers.TelegramWidgetProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+    </application>
+
+    <queries>
+        <package android:name="com.facebook.katana"/>
+        <package android:name="com.twitter.android"/>
+        <package android:name="com.whatsapp"/>
+        <package android:name="org.telegram.messenger"/>
+        <package android:name="com.instagram.android"/>
+        <package android:name="com.instagram.barcelona"/>
+    </queries>
+
+</manifest>

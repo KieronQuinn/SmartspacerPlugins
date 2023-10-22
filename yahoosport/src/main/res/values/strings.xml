@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Yahoo! Sport Plugin for Smartspacer</string>
+    <string name="target_label">Yahoo! Sport</string>
+    <string name="target_description">Shows game scores for your favourite team</string>
+    <string name="target_description_set">Shows game scores for %1s</string>
+    <string name="target_incompatible">This Target requires the Yahoo! Sport app</string>
+    <string name="target_title_template">%1s • %1s</string>
+    <string name="target_subtitle_template">vs %1s</string>
+    <string name="configuration_clear_info">Games are dismissed based on the team pairing, you will need to clear dismissed games to have the same pairing show again in the future</string>
+    <string name="configuration_clear_dismissed_games_title">Clear Dismissed Games</string>
+    <string name="configuration_clear_dismissed_games_content">Reset games which have been dismissed, allowing them to appear again</string>
+    <string name="configuration_reconfigure_title">Reconfigure</string>
+    <string name="configuration_reconfigure_content">Reselect the team to show games for</string>
+    <string name="target_configuration_settings_title">Settings</string>
+    <string name="target_configuration_settings_description">Clear dismissed games and reconfigure the selected team</string>
+</resources>

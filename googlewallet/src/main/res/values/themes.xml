@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PopupWalletDialog" parent="Theme.MaterialComponents.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:showWhenLocked">true</item>
+        <item name="android:showOnLockScreen">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/google_sans_text</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="fontFamily">@font/google_sans_text</item>
+    </style>
+
+</resources>

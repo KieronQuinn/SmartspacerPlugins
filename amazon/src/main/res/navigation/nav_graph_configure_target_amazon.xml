@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_configure_target_amazon"
+    app:startDestination="@id/amazonTargetConfigurationFragment">
+
+    <fragment
+        android:id="@+id/amazonTargetConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.amazon.ui.screens.configuration.AmazonTargetConfigurationFragment"
+        android:label="@string/target_amazon_title"
+        tools:layout="@layout/fragment_configuration_target_amazon" >
+        <action
+            android:id="@+id/action_amazonTargetConfigurationFragment_to_amazonTargetConfigurationSignInFragment"
+            app:destination="@id/amazonTargetConfigurationSignInFragment" />
+        <action
+            android:id="@+id/action_amazonTargetConfigurationFragment_to_amazonTargetConfigurationDumpFragment"
+            app:destination="@id/amazonTargetConfigurationDumpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/amazonTargetConfigurationSignInFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.amazon.ui.screens.configuration.signin.AmazonTargetConfigurationSignInFragment"
+        android:label="@string/target_amazon_settings_sign_in_title"
+        tools:layout="@layout/fragment_configuration_target_amazon_sign_in">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/amazonTargetConfigurationDumpFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.amazon.ui.screens.configuration.dump.AmazonTargetConfigurationDumpFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_configuration_target_amazon_dump">
+        <argument
+            android:name="deliveries"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.amazon.model.database.AmazonDelivery$Delivery[]" />
+        <argument
+            android:name="title"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>

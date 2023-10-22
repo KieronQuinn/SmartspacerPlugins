@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".AftershipPlugin"
+        android:theme="@style/Theme.Smartspacer">
+
+        <provider
+            android:name=".targets.AftershipTarget"
+            android:authorities="${applicationId}.target.aftership"
+            android:exported="true"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
+            </intent-filter>
+        </provider>
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+
+        <activity-alias
+            android:name=".ui.activities.AftershipConfigurationActivity"
+            android:exported="true"
+            android:label="@string/target_configuration_settings_title"
+            android:description="@string/target_configuration_settings_description"
+            android:icon="@drawable/ic_settings"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:name=".widgets.AftershipWidgetProvider"
+            android:authorities="${applicationId}.widget.aftership"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <receiver android:name=".receivers.AftershipUpdateReceiver"
+            android:exported="true"
+            android:permission="com.kieronquinn.app.smartspacer.permission.SEND_UPDATE_BROADCAST">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.REQUEST_TARGET_UPDATE" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+    <queries>
+        <package android:name="com.aftership.AfterShip"/>
+    </queries>
+
+</manifest>

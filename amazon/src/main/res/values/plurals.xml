@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="target_amazon_subtitle_stops_away">
+        <item quantity="one">@string/target_amazon_subtitle_stops_away_one</item>
+        <item quantity="other">@string/target_amazon_subtitle_stops_away_other</item>
+    </plurals>
+</resources>

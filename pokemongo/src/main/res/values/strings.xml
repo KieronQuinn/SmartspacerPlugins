@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Pokémon Go Plugin for Smartspacer</string>
+
+    <string name="complication_egg_label">Pokémon Go Egg Distance</string>
+    <string name="complication_egg_label_samsung">Pokémon Go Egg Distance (Galaxy Store)</string>
+    <string name="complication_egg_label_short">Egg Distance</string>
+    <string name="complication_egg_description">Shows your current Adventure Sync Egg Distance from Pokémon Go</string>
+
+    <string name="complication_buddy_label">Pokémon Go Buddy Walk Distance</string>
+    <string name="complication_buddy_label_samsung">Pokémon Go Buddy Walk Distance (Galaxy Store)</string>
+    <string name="complication_buddy_label_short">Walk Distance</string>
+    <string name="complication_buddy_description">Shows your current Adventure Sync Buddy Walk Together Distance from Pokémon Go</string>
+
+    <string name="complication_incompatible">This Complication requires the Play Store version of Pokémon Go</string>
+    <string name="complication_incompatible_samsung">This Complication requires the Galaxy Store version of Pokémon Go</string>
+
+    <string name="configuration_title">Settings</string>
+    <string name="configuration_description">Set whether to use a static icon</string>
+    <string name="configuration_use_static_title">Use Static Icon</string>
+    <string name="configuration_egg_use_static_content">Use a static egg icon rather than the currently incubating type</string>
+    <string name="configuration_buddy_use_static_content">Use a static walking icon rather than the current buddy</string>
+
+</resources>

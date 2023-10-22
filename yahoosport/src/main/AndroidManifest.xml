@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".YahooSportPlugin"
+        android:theme="@style/Theme.Smartspacer">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+
+        <activity-alias
+            android:name=".ui.activities.YahooSportConfigurationActivity"
+            android:exported="true"
+            android:label="@string/target_configuration_settings_title"
+            android:description="@string/target_configuration_settings_description"
+            android:icon="@drawable/ic_settings"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:name=".targets.YahooSportTarget"
+            android:authorities="${applicationId}.target.yahoosport"
+            android:exported="true"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:name=".widgets.YahooSportWidget"
+            android:authorities="${applicationId}.widgets.yahoosport"
+            android:exported="true"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"/>
+
+        <receiver android:name=".receivers.YahooSportTargetClickReceiver"
+            android:exported="true"/>
+
+    </application>
+
+    <queries>
+        <package android:name="com.yahoo.mobile.client.android.sportacular"/>
+    </queries>
+
+</manifest>

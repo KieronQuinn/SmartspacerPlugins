@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">YouTube Plugin for Smartspacer</string>
+
+    <string name="complication_subscriber_count_label">Subscriber Count</string>
+    <string name="complication_subscriber_count_content">Shows the current subscriber count for a YouTube channel</string>
+    <string name="complication_subscriber_count_content_set">Shows the current subscriber count for %1s on YouTube</string>
+
+    <string name="subscriber_configuration_settings_title">Settings</string>
+    <string name="subscriber_configuration_settings_description">Set the channel ID, refresh rate and API key</string>
+
+    <string name="subscriber_configuration_error_api_key">The entered API key is either invalid or has reached its rate limit, please check it is valid</string>
+    <string name="subscriber_configuration_error_channel_id">The entered channel ID is invalid, please verify it is correct (check the wiki page for more info)</string>
+    <string name="subscriber_configuration_error_general">The last refresh failed, check your connection and try again</string>
+    <string name="subscriber_configuration_error_hidden">This channel keeps its subscription count private, try a different channel</string>
+    <string name="subscriber_configuration_api_key_title">API Key</string>
+    <string name="subscriber_configuration_api_key_content"><b>Required:</b> Set your API key to use when loading statistics</string>
+    <string name="subscriber_configuration_api_key_content_set">[set]</string>
+    <string name="subscriber_configuration_channel_id_title">Channel ID</string>
+    <string name="subscriber_configuration_channel_id_content">The ID of the channel to load subscription info for. This is <b>not</b> the channel name, check the Wiki page for instructions on how to get the right ID</string>
+    <string name="subscriber_configuration_refresh_rate_title">Refresh Rate</string>
+    <string name="subscriber_configuration_refresh_rate_content">How often to refresh the count: %1s. Refreshing often may use more battery and data.</string>
+    <string name="subscriber_configuration_show_full_number_title">Show Full Number</string>
+    <string name="subscriber_configuration_show_full_number_content">Always show the full count, rather than short formatting it</string>
+    <string name="subscriber_configuration_refresh_title">Refresh</string>
+    <string name="subscriber_configuration_refresh_content">Refresh subscriber information now</string>
+    <string name="subscriber_configuration_info_title">Channel Information</string>
+    <string name="subscriber_configuration_info_content">Channel Name: %1s\nChannel ID: %1s\nSubscribers: %1s\nLast refresh at: %1s</string>
+    <string name="subscriber_configuration_info_content_unknown">Unknown</string>
+    <string name="subscriber_configuration_info_content_hidden">Hidden</string>
+    <string name="subscriber_configuration_info_footer_content">For information on how to get your API key and Channel ID, please see the Wiki page</string>
+    <string name="subscriber_configuration_info_footer_link">Learn more</string>
+
+    <string name="refresh_rate_30_minutes">30 minutes</string>
+    <string name="refresh_rate_60_minutes">1 hour</string>
+    <string name="refresh_rate_120_minutes">2 hours</string>
+    <string name="refresh_rate_180_minutes">3 hours</string>
+    <string name="refresh_rate_360_minutes">6 hours</string>
+    <string name="refresh_rate_720_minutes">12 hours</string>
+    <string name="refresh_rate_1440_minutes">24 hours</string>
+</resources>

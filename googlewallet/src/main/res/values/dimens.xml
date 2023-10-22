@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="popup_wallet_dialog_qr_size">200dp</dimen>
+    <dimen name="popup_wallet_dialog_barcode_height">100dp</dimen>
+    <dimen name="popup_wallet_dialog_logo_outline">0.75dp</dimen>
+</resources>

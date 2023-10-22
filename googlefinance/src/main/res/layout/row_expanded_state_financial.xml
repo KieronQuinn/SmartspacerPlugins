@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/row_expanded_state_financial_space_1"
+        android:layout_weight="0.25"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/row_expanded_state_financial_item_1"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/row_expanded_state_financial_item_2"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:id="@+id/row_expanded_state_financial_space_2"
+        android:layout_weight="0.25"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

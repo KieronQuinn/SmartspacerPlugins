@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Google Finance Plugin for Smartspacer</string>
+    <string name="target_label">Google Finance</string>
+    <string name="target_description">Shows live data of your stocks, indexes and crypto from Google Finance</string>
+    <string name="target_description_set">Shows live data of %1s from Google Finance</string>
+    <string name="target_subtitle">%1s%1s%1s (%1s)</string>
+    <string name="target_incompatible">This Target requires the Google App</string>
+
+    <string name="target_configuration_settings_title">Settings</string>
+    <string name="target_configuration_settings_description">Set minimum trend changes and configure the featured investment</string>
+
+    <string name="target_configuration_reconfigure_title">Configure</string>
+    <string name="target_configuration_reconfigure_content">Configure the featured investment and other options in the Google app</string>
+    <string name="target_configuration_minimum_trend_title">Minimum Trend</string>
+    <string name="target_configuration_minimum_trend_content">The minimum percentage trend change of the featured investment at which to show the Target: %1s</string>
+    <string name="target_configuration_minimum_trend_content_dialog">The minimum percentage trend change of the featured investment at which to show the Target</string>
+    <string name="target_configuration_minimum_trend_none">None (always show)</string>
+    <string name="target_configuration_minimum_trend_direction_title">Minimum Trend Direction</string>
+    <string name="target_configuration_minimum_trend_direction_up">Upwards</string>
+    <string name="target_configuration_minimum_trend_direction_down">Downwards</string>
+    <string name="target_configuration_minimum_trend_direction_both">Both</string>
+    <string name="target_configuration_filter_expanded_title">Filter in Expanded</string>
+    <string name="target_configuration_filter_expanded_content">Also apply minimum trend filtering to any additional investments in Expanded Smartspace</string>
+    <string name="target_configuration_clear_dismissed_title">Clear Dismissed</string>
+    <string name="target_configuration_clear_dismissed_content">Clears dismissed investments, making them appear again without needing a change of trend</string>
+</resources>

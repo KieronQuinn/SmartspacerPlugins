@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BBC Weather Plugin for Smartspacer</string>
+
+    <string name="complication_label">BBC Weather</string>
+    <string name="complication_description">Displays the current weather for your location</string>
+    <string name="complication_incompatible">This Complication requires the BBC Weather app</string>
+
+    <string name="target_label">BBC Weather</string>
+    <string name="target_description">Displays the current weather and 4 day forecast for your location</string>
+    <string name="target_incompatible">This Target requires the BBC Weather app</string>
+</resources>

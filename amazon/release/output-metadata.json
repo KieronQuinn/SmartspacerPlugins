@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.kieronquinn.app.smartspacer.plugin.amazon",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 11,
+      "versionName": "1.0.1",
+      "outputFile": "../../../../../apks/amazon-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

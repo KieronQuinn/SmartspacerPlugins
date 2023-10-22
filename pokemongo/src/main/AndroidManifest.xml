@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:name=".PokemonGoPlugin"
+        android:theme="@style/Theme.Smartspacer"
+        android:supportsRtl="true">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"/>
+
+        <activity-alias
+            android:name=".ui.activities.PokemonGoConfigurationActivity"
+            android:description="@string/configuration_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/configuration_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:authorities="${applicationId}.complication.egg.play"
+            android:name=".complications.EggComplicationPlay"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.egg.samsung"
+            android:name=".complications.EggComplicationSamsung"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.buddy.play"
+            android:name=".complications.BuddyComplicationPlay"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.buddy.samsung"
+            android:name=".complications.BuddyComplicationSamsung"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.widgets.egg.play"
+            android:name=".providers.EggWidgetProviderPlay"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.egg.samsung"
+            android:name=".providers.EggWidgetProviderSamsung"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.buddy.play"
+            android:name=".providers.BuddyWidgetProviderPlay"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.buddy.samsung"
+            android:name=".providers.BuddyWidgetProviderSamsung"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+    </application>
+
+    <queries>
+        <package android:name="com.nianticlabs.pokemongo"/>
+        <package android:name="com.nianticlabs.pokemongo.ares"/>
+    </queries>
+
+</manifest>

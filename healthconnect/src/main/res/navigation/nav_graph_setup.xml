@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_setup"
+    app:startDestination="@id/setupFragment">
+
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.healthconnect.ui.screens.setup.SetupFragment"
+        android:label="@string/setup_title"
+        tools:layout="@layout/fragment_settings_base" />
+
+</navigation>

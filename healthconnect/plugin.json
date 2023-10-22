@@ -1,0 +1,6 @@
+{
+	"description": "Get health data from Health Connect in a Complication with this plugin. With 20 available data types, you can always keep a track of what matters to you.\n\nNote: Health Connect is not a live system, there may be some delay in data updating.",
+	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/healthconnect/healthconnect-release.apk",
+	"version_code": 1,
+	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/healthconnect/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/healthconnect/2.jpg"]
+}

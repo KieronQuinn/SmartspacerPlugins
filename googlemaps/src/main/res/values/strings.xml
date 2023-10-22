@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Google Maps Plugin for Smartspacer</string>
+
+    <string name="target_google_maps_title">Google Maps Traffic</string>
+    <string name="target_google_maps_description">Displays traffic in your local area, using Google Maps</string>
+    <string name="target_google_maps_description_unsupported">This Target requires the Google Maps app on Android 12 or above</string>
+    <string name="target_google_maps_traffic_level_no">No traffic nearby</string>
+    <string name="target_google_maps_traffic_level_light">Light traffic nearby</string>
+    <string name="target_google_maps_traffic_level_mid">Medium traffic nearby</string>
+    <string name="target_google_maps_traffic_level_heavy">Heavy traffic nearby</string>
+    <string name="target_google_maps_traffic_permission_required_title">Background Location Required</string>
+    <string name="target_google_maps_traffic_permission_required_subtitle">Tap to Grant</string>
+    <string name="target_google_maps_traffic_subtitle">Google Maps</string>
+    <string name="target_google_maps_traffic_setting_title">Settings</string>
+    <string name="target_google_maps_traffic_setting_description">Configure the zoom and minimum traffic level at which to display the Target</string>
+    <string name="target_google_maps_traffic_setting_distance_title">Distance (Zoom)</string>
+    <string name="target_google_maps_traffic_setting_distance_zoomed_in">350 metres</string>
+    <string name="target_google_maps_traffic_setting_distance_zoomed_out">3 kilometres</string>
+    <string name="target_google_maps_traffic_setting_min_traffic_level">Minimum Traffic Level</string>
+    <string name="target_google_maps_traffic_setting_min_traffic_level_content">The minimum traffic level at which to show the Target: %1s</string>
+    <string name="target_google_maps_traffic_setting_min_traffic_level_no">No traffic (always show)</string>
+    <string name="target_google_maps_traffic_setting_min_traffic_level_light">Light traffic</string>
+    <string name="target_google_maps_traffic_setting_min_traffic_level_mid">Medium traffic</string>
+    <string name="target_google_maps_traffic_setting_min_traffic_level_heavy">Heavy traffic</string>
+</resources>

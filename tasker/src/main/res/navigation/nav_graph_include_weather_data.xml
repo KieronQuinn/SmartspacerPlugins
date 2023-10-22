@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_include_weather_data"
+    app:startDestination="@id/weatherDataFragment">
+    <fragment
+        android:id="@+id/weatherDataFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.weatherdata.WeatherDataFragment"
+        android:label="@string/configuration_complication_weather_data_title"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.weatherdata.WeatherDataFragment$Config" />
+        <action
+            android:id="@+id/action_weatherDataFragment_to_weatherDataIconFragment"
+            app:destination="@id/weatherDataIconFragment" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_include_string" />
+    <fragment
+        android:id="@+id/weatherDataIconFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.weatherdata.icon.WeatherDataIconFragment"
+        android:label="@string/weather_data_weather_state_icon_title"
+        tools:layout="@layout/fragment_settings_base" >
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.weatherdata.icon.WeatherDataIconFragment$Config" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_nav_graph_include_string3"
+        app:destination="@id/nav_graph_include_string">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.string.StringInputFragment$Config" />
+    </action>
+</navigation>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_complication_visibility"
+    app:startDestination="@id/complicationVisibilityFragment">
+
+    <fragment
+        android:id="@+id/complicationVisibilityFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.visibility.complication.ComplicationVisibilityFragment"
+        android:label="@string/action_complication_set_visibility_label_short"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_complicationVisibilityFragment_to_complicationPickerFragment2"
+            app:destination="@id/complicationPickerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/complicationPickerFragment2"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.complication.picker.ComplicationPickerFragment"
+        android:label="@string/configuration_complication_select_complication_title_short"
+        tools:layout="@layout/fragment_settings_base" />
+</navigation>

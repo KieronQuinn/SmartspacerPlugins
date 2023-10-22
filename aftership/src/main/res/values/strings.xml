@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Aftership Plugin for Smartspacer</string>
+    <string name="target_label">Aftership</string>
+    <string name="target_description">Shows delivery tracking updates from Aftership (up to 3 concurrent tracking items)</string>
+    <string name="target_incompatible">This Target requires the Aftership app</string>
+    <string name="target_configuration_show_image_title">Show Image</string>
+    <string name="target_configuration_show_image_content">Show package image (if available) on supported Smartspaces</string>
+    <string name="target_configuration_show_map_title">Show Map</string>
+    <string name="target_configuration_show_map_content">Show package location map (if available).\n<b>Note:</b> Location data is estimated from carrier information and may not be accurate.</string>
+    <string name="target_configuration_reset_dismissed_title">Reset Dismissed</string>
+    <string name="target_configuration_reset_dismissed_content">Reset dismissed packages, re-showing those which are not delivered if they were previously dismissed</string>
+    <string name="target_configuration_enable_updates_title">Refresh Tracking Automatically</string>
+    <string name="target_configuration_enable_updates_content">Periodically (every hour) refresh the tracking data for this package, even if Aftership\'s widget has not updated. May use more battery.</string>
+    <string name="target_configuration_settings_title">Settings</string>
+    <string name="target_configuration_settings_description">Set whether to show product images, location maps and reset dismissed packages</string>
+</resources>

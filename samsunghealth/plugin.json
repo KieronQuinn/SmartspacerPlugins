@@ -1,0 +1,7 @@
+{
+	"description": "Monitor your sleep and step tracking on your home screen, lock screen and always on display with a Complication provided by the Samsung Health plugin",
+	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/samsunghealth/samsunghealth-release.apk",
+	"version_code": 1,
+	"required_package": "com.sec.android.app.shealth",
+	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/samsunghealth/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/samsunghealth/2.jpg"]
+}

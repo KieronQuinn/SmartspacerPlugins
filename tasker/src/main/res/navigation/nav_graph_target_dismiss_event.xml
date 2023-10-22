@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_target_dismiss_event"
+    app:startDestination="@id/targetDismissEventConfigurationFragment">
+
+    <fragment
+        android:id="@+id/targetDismissEventConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.dismiss.TargetDismissEventConfigurationFragment"
+        android:label="@string/dismiss_target_event_title"
+        tools:layout="@layout/fragment_settings_base">
+        <action
+            android:id="@+id/action_targetDismissEventConfigurationFragment_to_targetPickerFragment3"
+            app:destination="@id/targetPickerFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetPickerFragment3"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.picker.TargetPickerFragment"
+        android:label="@string/dismiss_target_event_target_title"
+        tools:layout="@layout/fragment_settings_base"/>
+
+</navigation>

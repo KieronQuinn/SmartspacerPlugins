@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Notifications Plugin for Smartspacer</string>
+
+    <string name="config_title">Settings</string>
+    <string name="config_description">Notification options for this Complication</string>
+
+    <string name="config_info">This Complication uses legacy "Badges", previously used by launchers. You may need to force stop and re-open %1s after adding this complication.</string>
+    <string name="config_clear_title">Clear Notifications</string>
+    <string name="config_clear_description">Manually clear the notification count, if it is stuck. %1s may re-set the count once opened</string>
+    <string name="config_clear_toast">Count cleared</string>
+
+    <string name="complication_facebook_label">Facebook Notifications</string>
+    <string name="complication_facebook_label_short">Facebook</string>
+    <string name="complication_facebook_description">Display a count of Facebook notifications from the Facebook app</string>
+    <string name="complication_facebook_incompatible">This Complication requires the Facebook app</string>
+
+    <string name="complication_twitter_label">Twitter Notifications</string>
+    <string name="complication_twitter_label_short">Twitter</string>
+    <string name="complication_twitter_description">Display a count of Twitter notifications from the Twitter app</string>
+    <string name="complication_twitter_incompatible">This Complication requires the Twitter app</string>
+
+    <string name="complication_whatsapp_label">WhatsApp Notifications</string>
+    <string name="complication_whatsapp_label_short">WhatsApp</string>
+    <string name="complication_whatsapp_description">Display a count of WhatsApp notifications from the WhatsApp app</string>
+    <string name="complication_whatsapp_incompatible">This Complication requires the WhatsApp app</string>
+
+    <string name="complication_instagram_label">Instagram Notifications</string>
+    <string name="complication_instagram_label_short">Instagram</string>
+    <string name="complication_instagram_description">Display a count of Instagram message notifications from the Instagram app</string>
+    <string name="complication_instagram_incompatible">This Complication requires the Instagram app</string>
+
+    <string name="complication_threads_label">Threads Notifications</string>
+    <string name="complication_threads_label_short">Threads</string>
+    <string name="complication_threads_description">Display a count of Threads notifications from the Threads app</string>
+    <string name="complication_threads_incompatible">This Complication requires the Threads app</string>
+
+    <string name="complication_telegram_label">Telegram Notifications</string>
+    <string name="complication_telegram_label_short">Telegram</string>
+    <string name="complication_telegram_description">Display a count of Telegram notifications from the Telegram app</string>
+    <string name="complication_telegram_incompatible">This Complication requires the Telegram app</string>
+    <string name="complication_telegram_settings_title">Configure</string>
+    <string name="complication_telegram_settings_content">Change selected Chats</string>
+
+</resources>

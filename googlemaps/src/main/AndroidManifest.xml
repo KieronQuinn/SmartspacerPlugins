@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".GoogleMapsPlugin"
+        android:theme="@style/Theme.Smartspacer">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+
+        <activity-alias
+            android:name=".ui.activities.GoogleMapsConfigurationActivity"
+            android:description="@string/target_google_maps_traffic_setting_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/target_google_maps_traffic_setting_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:name=".targets.GoogleMapsTrafficTarget"
+            android:authorities="${applicationId}.target.googlemapstraffic"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:name=".widgets.GoogleMapsTrafficWidget"
+            android:authorities="${applicationId}.widget.googlemapstraffic"
+            android:exported="true" />
+
+        <receiver android:name=".receivers.GoogleMapsWidgetClickReceiver"/>
+
+    </application>
+
+    <queries>
+        <package android:name="com.google.android.apps.maps"/>
+    </queries>
+
+</manifest>

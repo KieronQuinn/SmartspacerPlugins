@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Google Keep Plugin for Smartspacer</string>
+    <string name="target_label">Google Keep</string>
+    <string name="target_description_unset">Shows a note or list from Google Keep for quick access</string>
+    <string name="target_description">Shows \"%1s\" from Google Keep</string>
+    <string name="target_incompatible">This Target requires the Google Keep app</string>
+    <string name="target_configuration_settings_title">Settings</string>
+    <string name="target_configuration_settings_description">Set the note to show in the Target and options for how to show it</string>
+    <string name="target_list_content_one">%1d item</string>
+    <string name="target_list_content_other">%1d items</string>
+    <string name="target_list_empty">Empty</string>
+    <string name="target_untitled">[Untitled]</string>
+    <string name="target_configuration_select_note_title">Select Note</string>
+    <string name="target_configuration_select_note_content">Pick a note to display in the Target</string>
+    <string name="target_configuration_show_indented_title">Show Indented</string>
+    <string name="target_configuration_show_indented_content">Show list items which are indented</string>
+    <string name="target_configuration_hide_if_empty_title">Hide If Empty</string>
+    <string name="target_configuration_hide_if_empty_content">Hide the Target when the list is empty, rather than showing it with \"Empty\" as the list</string>
+</resources>

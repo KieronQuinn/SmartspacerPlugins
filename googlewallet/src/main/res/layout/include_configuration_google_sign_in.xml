@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_16">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/configuration_google_wallet_valuable_sign_in_card"
+            style="@style/Widget.Material3.CardView.Filled.Smartspacer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="?android:colorControlHighlight">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_16">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:text="@string/target_wallet_valuable_settings_info_title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium.Smartspacer"
+                    android:textColor="?android:textColorPrimary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/target_wallet_valuable_settings_info_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/configuration_google_wallet_valuable_sign_in_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_32"
+            android:elevation="8dp"
+            android:minWidth="0dp"
+            android:paddingStart="@dimen/margin_16"
+            android:paddingEnd="@dimen/margin_16"
+            android:text="@string/sign_in_with_google"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer.Medium"
+            android:textColor="?android:textColorPrimary"
+            app:cornerRadius="4dp"
+            app:icon="@drawable/ic_search_google"
+            app:iconPadding="@dimen/margin_16"
+            app:iconTint="@null" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

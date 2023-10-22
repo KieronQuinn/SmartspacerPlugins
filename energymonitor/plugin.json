@@ -1,0 +1,7 @@
+{
+	"description": "Built for the Energy Monitor app, this plugin can show the battery level and charge state for any connected device from Energy Monitor - including remote devices - in a Complication",
+	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/energymonitor/energymonitor-release.apk",
+	"version_code": 1,
+	"required_package": "strange.watch.longevity.ion",
+	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/energymonitor/1.jpg"]
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_sleep"
+    app:startDestination="@id/sleepConfigurationFragment">
+
+    <fragment
+        android:id="@+id/sleepConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.samsunghealth.ui.screens.configuration.sleep.SleepConfigurationFragment"
+        android:label="@string/complication_sleep_title"
+        tools:layout="@layout/fragment_settings_base"/>
+
+</navigation>

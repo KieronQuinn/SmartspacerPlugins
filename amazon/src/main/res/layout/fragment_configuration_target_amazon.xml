@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:transitionGroup="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/configuration_amazon_sign_in_loading"
+        layout="@layout/include_loading" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/configuration_amazon_sign_in_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_8"
+                android:clipChildren="false"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_16">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/configuration_amazon_sign_in_card"
+                    style="@style/Widget.Material3.CardView.Filled.Smartspacer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="?android:colorControlHighlight">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_16">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_8"
+                            android:text="@string/target_amazon_settings_info_title"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Smartspacer"
+                            android:textColor="?android:textColorPrimary" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/target_amazon_settings_info_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/configuration_amazon_sign_in_button"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:elevation="8dp"
+                    android:minWidth="0dp"
+                    android:paddingStart="@dimen/margin_8"
+                    android:paddingEnd="@dimen/margin_16"
+                    android:text="@string/target_amazon_settings_sign_in_button"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer.Medium"
+                    android:textColor="?android:textColorPrimary"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_amazon"
+                    app:iconPadding="@dimen/margin_16"
+                    app:iconSize="24dp"
+                    app:iconTint="@null" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/configuration_amazon_unsupported"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_8"
+                android:clipChildren="false"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_16">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/configuration_unsupported_card"
+                    style="@style/Widget.Material3.CardView.Filled.Smartspacer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="?android:colorControlHighlight">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_16">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_8"
+                            android:text="@string/target_amazon_settings_unsupported_title"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Smartspacer"
+                            android:textColor="?android:textColorPrimary" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/target_amazon_settings_unsupported_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.kieronquinn.app.smartspacer.plugin.shared.ui.views.LifecycleAwareRecyclerView
+        android:id="@+id/configuration_amazon_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/margin_8"
+        android:paddingBottom="@dimen/margin_16"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_settings_text_item" />
+
+</FrameLayout>

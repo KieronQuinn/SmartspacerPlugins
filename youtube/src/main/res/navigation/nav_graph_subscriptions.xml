@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_subscriptions"
+    app:startDestination="@id/subscriptionsConfigurationFragment">
+
+    <fragment
+        android:id="@+id/subscriptionsConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.youtube.ui.screens.subscriptions.SubscriptionsConfigurationFragment"
+        android:label="@string/complication_subscriber_count_label"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_subscriptionsConfigurationFragment_to_apiKeyFragment"
+            app:destination="@id/apiKeyFragment" />
+        <action
+            android:id="@+id/action_subscriptionsConfigurationFragment_to_channelIdFragment"
+            app:destination="@id/channelIdFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/apiKeyFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.youtube.ui.screens.subscriptions.apikey.ApiKeyFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_api_key_bottom_sheet">
+        <argument
+            android:name="current"
+            app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/channelIdFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.youtube.ui.screens.subscriptions.channelid.ChannelIdFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_channel_id_bottom_sheet">
+        <argument
+            android:name="current"
+            app:argType="string" />
+    </dialog>
+
+</navigation>

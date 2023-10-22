@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="complication_countdown">
+        <item quantity="one">@string/complication_countdown_one</item>
+        <item quantity="other">@string/complication_countdown_other</item>
+    </plurals>
+</resources>

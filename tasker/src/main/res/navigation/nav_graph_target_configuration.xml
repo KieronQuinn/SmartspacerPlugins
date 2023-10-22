@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_target_configuration"
+    app:startDestination="@id/targetConfigurationFragment">
+
+    <fragment
+        android:id="@+id/targetConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.TargetConfigurationFragment"
+        android:label="@string/action_target_update_label_short"
+        tools:layout="@layout/fragment_target_configuration">
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_targetPickerFragment"
+            app:destination="@id/targetPickerFragment" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_targetTemplatePickerFragment"
+            app:destination="@id/targetTemplatePickerFragment" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_targetCarouselFragment"
+            app:destination="@id/targetCarouselFragment" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_targetImagesFragment"
+            app:destination="@id/targetImagesFragment" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_targetListItemsFragment"
+            app:destination="@id/targetListItemsFragment" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_targetDoorbellStateFragment"
+            app:destination="@id/targetDoorbellStateFragment" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_targetExpandedFragment"
+            app:destination="@id/targetExpandedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/targetPickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.picker.TargetPickerFragment"
+        android:label="@string/configuration_target_select_target_title_short"
+        tools:layout="@layout/fragment_settings_base" />
+    <fragment
+        android:id="@+id/targetTemplatePickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.template.TargetTemplatePickerFragment"
+        android:label="@string/configuration_target_template_title"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.template.TargetTemplatePickerFragment$Config" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_include_text" />
+    <action
+        android:id="@+id/action_global_nav_graph_include_text"
+        app:destination="@id/nav_graph_include_text">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.text.TextInputFragment$Config" />
+    </action>
+    <include app:graph="@navigation/nav_graph_include_string" />
+    <action
+        android:id="@+id/action_global_nav_graph_include_string"
+        app:destination="@id/nav_graph_include_string">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.string.StringInputFragment$Config" />
+    </action>
+    <include app:graph="@navigation/nav_graph_include_icon" />
+    <action
+        android:id="@+id/action_global_nav_graph_include_icon"
+        app:destination="@id/nav_graph_include_icon">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.icon.IconPickerFragment$Config" />
+    </action>
+    <fragment
+        android:id="@+id/targetCarouselFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.carousel.TargetCarouselFragment"
+        android:label="@string/configuration_carousel_items"
+        tools:layout="@layout/fragment_settings_fab">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.carousel.TargetCarouselFragment$Config" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetImagesFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.images.TargetImagesFragment"
+        android:label="@string/configuration_doorbell_images_title"
+        tools:layout="@layout/fragment_settings_fab">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.images.TargetImagesFragment$Config" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetListItemsFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.listitems.TargetListItemsFragment"
+        android:label="@string/configuration_target_list_items_title"
+        tools:layout="@layout/fragment_settings_fab">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.listitems.TargetListItemsFragment$Config" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_include_tap_action" />
+    <action
+        android:id="@+id/action_global_nav_graph_include_tap_action"
+        app:destination="@id/nav_graph_include_tap_action">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.tapaction.TapActionFragment$Config" />
+    </action>
+    <fragment
+        android:id="@+id/targetDoorbellStateFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.doorbellstate.TargetDoorbellStateFragment"
+        android:label="@string/configuration_doorbell_state_title"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.doorbellstate.TargetDoorbellStateFragment$Config" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetExpandedFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.TargetExpandedFragment"
+        android:label="@string/configuration_target_expanded_state_title_short"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.TargetExpandedFragment$Config" />
+        <action
+            android:id="@+id/action_targetExpandedFragment_to_targetExpandedWidgetFragment"
+            app:destination="@id/targetExpandedWidgetFragment" />
+        <action
+            android:id="@+id/action_targetExpandedFragment_to_targetExpandedShortcutsFragment"
+            app:destination="@id/targetExpandedShortcutsFragment" />
+        <action
+            android:id="@+id/action_targetExpandedFragment_to_targetExpandedAppShortcutsFragment"
+            app:destination="@id/targetExpandedAppShortcutsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetExpandedWidgetFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.widget.TargetExpandedWidgetFragment"
+        android:label="@string/configuration_target_expanded_widget_title"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.widget.TargetExpandedWidgetFragment$Config" />
+        <action
+            android:id="@+id/action_targetExpandedWidgetFragment_to_targetExpandedWidgetPickerFragment"
+            app:destination="@id/targetExpandedWidgetPickerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetExpandedShortcutsFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.shortcuts.TargetExpandedShortcutsFragment"
+        android:label="@string/configuration_target_expanded_shortcuts_title"
+        tools:layout="@layout/fragment_settings_fab">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.shortcuts.TargetExpandedShortcutsFragment$Config" />
+        <action
+            android:id="@+id/action_targetExpandedShortcutsFragment_to_targetExpandedShortcutFragment"
+            app:destination="@id/targetExpandedShortcutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetExpandedShortcutFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.shortcuts.shortcut.TargetExpandedShortcutFragment"
+        android:label="@string/configuration_target_expanded_shortcuts_shortcut_title"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.shortcuts.shortcut.TargetExpandedShortcutFragment$Config" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetExpandedAppShortcutsFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.appshortcuts.TargetExpandedAppShortcutsFragment"
+        android:label="@string/configuration_target_expanded_app_shortcuts_title"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.appshortcuts.TargetExpandedAppShortcutsFragment$Config" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_include_app" />
+    <action
+        android:id="@+id/action_global_nav_graph_include_app"
+        app:destination="@id/nav_graph_include_app">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.app.AppPickerFragment$Config" />
+    </action>
+    <fragment
+        android:id="@+id/targetExpandedWidgetPickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.widget.picker.TargetExpandedWidgetPickerFragment"
+        android:label="@string/configuration_target_expanded_widget_title"
+        tools:layout="@layout/fragment_settings_base">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.expanded.widget.picker.TargetExpandedWidgetPickerFragment$Config" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_include_surface" />
+    <action
+        android:id="@+id/action_global_nav_graph_include_surface"
+        app:destination="@id/nav_graph_include_surface">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.limittosurfaces.LimitToSurfacesFragment$Config" />
+    </action>
+    <include app:graph="@navigation/nav_graph_include_weather_data" />
+    <action
+        android:id="@+id/action_global_nav_graph_include_weather_data"
+        app:destination="@id/nav_graph_include_weather_data">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.weatherdata.WeatherDataFragment$Config" />
+    </action>
+
+</navigation>

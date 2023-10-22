@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">Google Wallet Plugin for Smartspacer</string>
+
+    <string name="target_wallet_valuable_title">Google Wallet (Static)</string>
+    <string name="target_wallet_valuable_title_short">Google Wallet</string>
+    <string name="target_wallet_valuable_description">Display a static Loyalty Card or Pass from Google Wallet</string>
+    <string name="target_wallet_valuable_description_with_name">Display %1s from Google Wallet</string>
+    <string name="target_wallet_valuable_settings_title">Settings</string>
+    <string name="target_wallet_valuable_settings_description">Select a Loyalty Card, Gift Card, Offer, Health Card or other Generic Card to display</string>
+    <string name="target_wallet_valuable_settings_info_title">Sign in required</string>
+    <string name="target_wallet_valuable_settings_info_content">Smartspacer requires you to log into your Google Account using the regular account flow to use Google Wallet integration. This is required as the API is not accessible using the regular account sign in.\n\n<b>Your Wallet data is kept encrypted on your device and never transmitted, nor is it included in backups, for your privacy and security.</b></string>
+    <string name="target_wallet_valuable_empty">No compatible Google Wallet items were found, make sure you have a Loyalty Card, Gift Card, Offer, Health Card or other Generic Card added to Wallet first.</string>
+    <string name="target_wallet_valuable_type_loyalty_card">Loyalty Card</string>
+    <string name="target_wallet_valuable_type_gift_card">Gift Card</string>
+    <string name="target_wallet_valuable_type_offer">Offer</string>
+    <string name="target_wallet_valuable_type_health_card">Health Card</string>
+    <string name="target_wallet_valuable_type_generic">Generic Card</string>
+    <string name="target_wallet_valuable_type_sensitive_generic">Sensitive Generic Card</string>
+    <string name="target_wallet_valuable_not_found_title">Item not found</string>
+    <string name="target_wallet_valuable_not_found_subtitle">Tap to reconfigure</string>
+    <string name="target_wallet_valuable_settings_select_card_title">Select Item</string>
+    <string name="target_wallet_valuable_settings_select_card_content">No item selected</string>
+    <string name="target_wallet_valuable_settings_show_card_image_title">Show Image</string>
+    <string name="target_wallet_valuable_settings_show_card_image_content">Show the item\'s image in the Target</string>
+    <string name="target_wallet_valuable_settings_show_card_image_content_unavailable">This item does not have an image</string>
+    <string name="target_wallet_valuable_settings_show_as_popup_title">Open as popup</string>
+    <string name="target_wallet_valuable_settings_show_as_popup_content">Open the item as a popup showing a scannable code when tapped, rather than opening Google Wallet directly. This also allows access from the lock screen.</string>
+
+    <string name="target_wallet_dynamic_title">Google Wallet (Dynamic)</string>
+    <string name="target_wallet_dynamic_title_short">Google Wallet</string>
+    <string name="target_wallet_dynamic_description">Show compatible Wallet items (Flights, Transit Cards, &amp; Event Tickets) with relevant and current information automatically</string>
+    <string name="target_wallet_dynamic_settings_description">Configure whether to reload on metered Wi-Fi, and trigger a reload of Wallet items</string>
+    <string name="target_wallet_dynamic_settings_allow_metered_title">Refresh on Metered Wi-Fi</string>
+    <string name="target_wallet_dynamic_settings_allow_metered_content">Allow refreshing the Target in the background when on Metered Wi-Fi. Mobile data and initial loading of the Target data is not effected by this setting.</string>
+    <string name="target_wallet_dynamic_settings_refresh_now_title">Reload Now</string>
+    <string name="target_wallet_dynamic_settings_refresh_now_content">Reload dynamic Wallet Targets now, without needing a Wallet notification</string>
+    <string name="target_wallet_dynamic_settings_refresh_now_content_reloading">Reloading…</string>
+
+    <string name="target_wallet_dynamic_flight_title_departed">Est arrival: %1s</string>
+    <string name="target_wallet_dynamic_flight_title_gate_closed">%1s → %1s</string>
+    <string name="target_wallet_dynamic_flight_title_gate_closing">Gate %1s closes in %1dm</string>
+    <string name="target_wallet_dynamic_flight_title_gate_open">Go to gate %1s</string>
+    <string name="target_wallet_dynamic_flight_title_status">%1s: %1s</string>
+    <string name="target_wallet_dynamic_flight_subtitle_arrow">→</string>
+    <string name="target_wallet_dynamic_flight_subtitle_to">%1s to %1s</string>
+    <string name="target_wallet_dynamic_flight_gate">Gate %1s</string>
+    <string name="target_wallet_dynamic_flight_terminal">Terminal %1s</string>
+
+    <string name="target_wallet_dynamic_transit_impossible_at_title">Delayed into %1s</string>
+    <string name="target_wallet_dynamic_transit_impossible_at_subtitle">Transfer impossible, seek alternative route.</string>
+    <string name="target_wallet_dynamic_transit_cancelled_at_title">Cancelled at %1s</string>
+    <string name="target_wallet_dynamic_transit_cancelled_at_subtitle">Seek alternative route</string>
+    <string name="target_wallet_dynamic_transit_go_to_platform_title">Go to Platform%1s (%1s)</string>
+    <string name="target_wallet_dynamic_transit_go_to_platform_subtitle">to</string>
+    <string name="target_wallet_dynamic_transit_generic_title">%1s to %1s</string>
+    <string name="target_wallet_dynamic_transit_generic_subtitle_arrow">→</string>
+    <string name="target_wallet_dynamic_transit_walk_title">Walk to Platform %1s (%1s)</string>
+    <string name="target_wallet_dynamic_transit_bus_title">Catch Bus to %1s</string>
+
+    <string name="popup_wallet_open_in_pay">Open in Google Wallet</string>
+
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_in_with_google_error">An error occurred, please try again</string>
+
+    <string name="target_sign_in_again_title">Sign in required</string>
+    <string name="target_sign_in_again_subtitle">Tap to sign in again</string>
+</resources>

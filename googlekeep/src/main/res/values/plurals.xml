@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="target_list_content">
+        <item quantity="one">@string/target_list_content_one</item>
+        <item quantity="other">@string/target_list_content_other</item>
+    </plurals>
+</resources>

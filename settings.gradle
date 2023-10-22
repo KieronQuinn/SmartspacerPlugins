@@ -1,0 +1,40 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+        maven { url 'https://jitpack.io' }
+    }
+}
+rootProject.name = "Smartspacer Plugins"
+include ':shared'
+include ':googlewallet'
+include ':systemstubs'
+include ':amazon'
+include ':notifications'
+include ':pokemongo'
+include ':shared-maps'
+include ':healthconnect'
+include ':samsunghealth'
+include ':energymonitor'
+include ':tasker'
+include ':aftership'
+include ':uber'
+include ':googlekeep'
+include ':googlemaps'
+include ':countdown'
+include ':datausage'
+include ':yahoosport'
+include ':googlefinance'
+include ':battery'
+include ':sunrisesunset'
+include ':bbcweather'
+include ':youtube'

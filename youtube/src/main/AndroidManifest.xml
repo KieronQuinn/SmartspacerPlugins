@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".YouTubePlugin"
+        android:theme="@style/Theme.Smartspacer">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+
+        <activity-alias
+            android:name=".ui.activities.SubscriptionsConfigurationActivity"
+            android:exported="true"
+            android:label="@string/subscriber_configuration_settings_title"
+            android:description="@string/subscriber_configuration_settings_description"
+            android:icon="@drawable/ic_settings"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:name=".complications.SubscriberComplication"
+            android:authorities="${applicationId}.complication.subscriber"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <receiver android:name=".receivers.SubscriptionRefreshReceiver"
+            android:exported="true"
+            android:permission="com.kieronquinn.app.smartspacer.permission.SEND_UPDATE_BROADCAST">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.REQUEST_COMPLICATION_UPDATE" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

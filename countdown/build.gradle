@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.devtools.ksp'
+}
+
+android {
+    namespace 'com.kieronquinn.app.smartspacer.plugin.countdown'
+    compileSdk compile_sdk
+
+    defaultConfig {
+        applicationId "com.kieronquinn.app.smartspacer.plugin.countdown"
+        minSdk min_sdk
+        targetSdk target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs rootProject.ext.signingConfigs
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.configureEach { variant ->
+        variant.outputs.each { output ->
+            output.outputFileName = new File(outputFileDir, output.outputFile.name)
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(path: ':shared')
+
+    //Countdown icons
+    implementation "com.mikepenz:iconics-core:5.4.0"
+    //noinspection GradleDynamicVersion
+    implementation 'com.mikepenz:google-material-typeface:+@aar'
+    //noinspection GradleDynamicVersion
+    implementation 'com.mikepenz:google-material-typeface-outlined:+@aar'
+    //noinspection GradleDynamicVersion
+    implementation 'com.mikepenz:google-material-typeface-rounded:+@aar'
+    //noinspection GradleDynamicVersion
+    implementation 'com.mikepenz:google-material-typeface-sharp:+@aar'
+    //noinspection GradleDynamicVersion
+    implementation 'com.mikepenz:fontawesome-typeface:+@aar'
+    //noinspection GradleDynamicVersion
+    implementation 'com.mikepenz:community-material-typeface:+@aar'
+    //noinspection GradleDynamicVersion
+    implementation 'com.mikepenz:phosphor-typeface:+@aar'
+
+    //Data storage
+    ksp "androidx.room:room-compiler:$room_version"
+}

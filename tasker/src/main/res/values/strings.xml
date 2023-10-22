@@ -1,0 +1,506 @@
+<resources>
+    <string name="app_name">Tasker Plugin for Smartspacer</string>
+    <string name="save">Save</string>
+    <string name="add">Add</string>
+
+    <string name="configuration_preview_permission_title">Preview Permission Required</string>
+    <string name="configuration_preview_permission_content">Tap to grant</string>
+
+    <string name="target_label">Tasker</string>
+    <string name="target_description_unset">Dynamically updated Tasker Target, with infinite possibilities</string>
+    <string name="target_description">Target \"%1s\", which can be updated from Tasker</string>
+    <string name="target_setup_name_title">Name</string>
+    <string name="target_setup_name_content">Set a name for this Target, this is only used in the Tasker configuration, and does not impact the Target itself</string>
+    <string name="target_setup_name_error">Please set a name</string>
+    <string name="target_setup_name_id_title">Smartspacer ID</string>
+    <string name="target_setup_header">This is just the Target setup. To set the content of the Target, use the Tasker Plugin for Smartspacer options in Tasker</string>
+    <string name="target_setup_label">Settings</string>
+    <string name="target_setup_description">Set a label for this Target</string>
+
+    <string name="complication_label">Tasker</string>
+    <string name="complication_description_unset">Dynamically updated Tasker Complication, with infinite possibilities</string>
+    <string name="complication_description">Complication \"%1s\", which can be updated from Tasker</string>
+    <string name="complication_setup_name_title">Name</string>
+    <string name="complication_setup_name_content">Set a name for this Complication, this is only used in the Tasker configuration, and does not impact the Complication itself</string>
+    <string name="complication_setup_name_error">Please set a name</string>
+    <string name="complication_setup_name_id_title">Smartspacer ID</string>
+    <string name="complication_setup_header">This is just the Complication setup. To set the content of the Complication, use the Tasker Plugin for Smartspacer options in Tasker</string>
+    <string name="complication_setup_label">Settings</string>
+    <string name="complication_setup_description">Set a label for this Complication</string>
+
+    <string name="requirement_label">Tasker</string>
+    <string name="requirement_description_unset">Dynamically set requirement from Tasker, with infinite possibilities</string>
+    <string name="requirement_description">Requirement \"%1s\", which can be set from Tasker</string>
+    <string name="requirement_setup_name_title">Name</string>
+    <string name="requirement_setup_name_content">Set a name for this Requirement, this is only used in the Tasker configuration, and does not impact the Requirement itself</string>
+    <string name="requirement_setup_name_error">Please set a name</string>
+    <string name="requirement_setup_name_id_title">Smartspacer ID</string>
+    <string name="requirement_setup_header">This is just the Requirement setup. To set whether the Requirement is met, use the Tasker Plugin for Smartspacer options in Tasker</string>
+    <string name="requirement_setup_label">Settings</string>
+    <string name="requirement_setup_description">Set a label for this Requirement</string>
+
+    <string name="configuration_text_text_title">Text</string>
+    <string name="configuration_text_text_content">Partial Markdown (bold, italic, strikethrough) and HTML (bold, italic, underline, strikethrough and colour) supported (not available in OEM Smartspace)\n\nTasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_text_truncate_at_title">Truncate At</string>
+    <string name="configuration_text_truncate_at_content">Where to truncate the text if the content is too long: %1s</string>
+
+    <string name="configuration_icon_none_title">None</string>
+    <string name="configuration_icon_none_content">No icon, this may not look right on some setups</string>
+    <string name="configuration_icon_from_font_title">Built In</string>
+    <string name="configuration_icon_from_font_content">Choose from thousands of built in icons</string>
+    <string name="configuration_icon_from_file_title">From File</string>
+    <string name="configuration_icon_from_file_content">Use an image from file</string>
+    <string name="configuration_icon_from_url_title">From URL</string>
+    <string name="configuration_icon_from_url_content">Load an image from the web</string>
+
+    <string name="configuration_icon_font_picker_content">%1d icons</string>
+    <string name="configuration_icon_font_icon_picker_title">Icons</string>
+    <string name="configuration_icon_font_description">%1s (%1s)</string>
+    <string name="configuration_icon_font_description_error">Icon not found</string>
+
+    <string name="configuration_icon_file_pick_title">Select File</string>
+    <string name="configuration_icon_tint_title">Tint</string>
+    <string name="configuration_icon_tint_content">Apply an automatic tint to this image, making it always visible in Smartspacer. This will break solid icons which are not of a distinct shape.</string>
+    <string name="configuration_icon_description">Image: %1s</string>
+    <string name="configuration_icon_description_error">Image from file</string>
+    <string name="configuration_icon_description_default">Example image</string>
+
+    <string name="configuration_icon_url_title">URL</string>
+    <string name="configuration_icon_url_content">Enter a web URL of an image. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_icon_url_description">URL: %1s</string>
+    <string name="configuration_icon_url_authentication_title">Authentication</string>
+    <string name="configuration_icon_url_authentication_description">Enter an Authorization header, in the format passed directly in a request header. For example, <b>Basic YTpi</b>. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_icon_url_authentication_content"><b>Optional:</b> Provide an Authorization header for this image, which will be sent as part of the request to load the image</string>
+
+    <string name="action_target_update_label">Update Target</string>
+    <string name="action_target_update_label_short">Update Target</string>
+    <string name="action_target_update_blurb">Update \"%1s\" with new Target configuration</string>
+
+    <string name="action_complication_update_label">Update Complication</string>
+    <string name="action_complication_update_label_short">Update Complication</string>
+    <string name="action_complication_update_blurb">Update \"%1s\" with new Complication configuration</string>
+
+    <string name="action_target_set_visibility_label">Target Visibility</string>
+    <string name="action_target_set_visibility_label_short">Set Visibility</string>
+    <string name="action_target_set_visibility_blurb_visible">Set \"%1s\" to visible</string>
+    <string name="action_target_set_visibility_blurb_invisible">Set \"%1s\" to invisible</string>
+
+    <string name="action_complication_set_visibility_label">Complication Visibility</string>
+    <string name="action_complication_set_visibility_label_short">Set Visibility</string>
+    <string name="action_complication_set_visibility_blurb_visible">Set \"%1s\" to visible</string>
+    <string name="action_complication_set_visibility_blurb_invisible">Set \"%1s\" to invisible</string>
+
+    <string name="action_requirement_set_label">Update Requirement</string>
+    <string name="action_requirement_set_label_short">Set Requirement</string>
+    <string name="action_requirement_set_blurb_met">Set \"%1s\" to met</string>
+    <string name="action_requirement_set_blurb_unmet">Set \"%1s\" to unmet</string>
+
+    <string name="target_initial_title">Tasker Target</string>
+    <string name="target_initial_content">@string/app_name</string>
+    <string name="complication_initial_content">Tasker Complication</string>
+
+    <string name="configuration_target_select_target_title">Target to Update</string>
+    <string name="configuration_target_select_target_title_short">Target</string>
+    <string name="configuration_target_select_target_content">Select a Target to update</string>
+    <string name="configuration_target_select_empty">No Targets have been set up. Add a Tasker Target in Smartspacer before configuring.</string>
+    <string name="configuration_target_select_subtitle">Smartspacer ID: %1s</string>
+
+    <string name="configuration_complication_select_complication_title">Complication to Update</string>
+    <string name="configuration_complication_select_complication_title_short">Complication</string>
+    <string name="configuration_complication_select_complication_content">Select a Complication to update</string>
+    <string name="configuration_complication_select_empty">No Complications have been set up. Add a Tasker Complication in Smartspacer before configuring.</string>
+    <string name="configuration_complication_select_subtitle">Smartspacer ID: %1s</string>
+
+    <string name="configuration_requirement_select_requirement_title">Requirement to Update</string>
+    <string name="configuration_requirement_select_requirement_title_short">Requirement</string>
+    <string name="configuration_requirement_select_requirement_content">Select a Requirement to update</string>
+    <string name="configuration_requirement_select_empty">No Requirements have been set up. Add a Tasker Requirement in Smartspacer before configuring.</string>
+    <string name="configuration_requirement_select_subtitle">Smartspacer ID: %1s</string>
+
+    <string name="configuration_target_basic_title">Basic</string>
+    <string name="configuration_target_basic_content">Regular Target with title, subtitle, icon and optional sub-Complication</string>
+    <string name="configuration_target_basic_sub_complication_header">Sub-complication</string>
+    <string name="configuration_target_basic_sub_complication_title">Enable Sub-complication</string>
+    <string name="configuration_target_basic_sub_complication_content">Attach a Complication to this Target to show next to it</string>
+    <string name="configuration_target_basic_sub_complication_extras_header">Sub-complication Extras</string>
+
+    <string name="configuration_target_hidden">This Target is currently hidden and will not be shown in Smartspace. Use the \"Set Target Visibility\" action to make it visible.</string>
+    <string name="configuration_complication_hidden">This Complication is currently hidden and will not be shown in Smartspace. Use the \"Set Complication Visibility\" action to make it visible.</string>
+    <string name="configuration_target_header">Target</string>
+    <string name="configuration_target_template_title">Template</string>
+    <string name="configuration_target_title_title">Title</string>
+    <string name="configuration_target_subtitle_title">Subtitle</string>
+    <string name="configuration_target_icon_title">Icon</string>
+    <string name="configuration_target_tap_action_title">Tap Action</string>
+    <string name="configuration_target_refresh_period_title">Refresh Period</string>
+    <string name="configuration_target_refresh_period_content">How often to send the \"Refresh\" event to the Tasker plugin for this Target, in minutes. Shorter refresh periods use more battery. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_target_refresh_period_content_set_one">%1s minute</string>
+    <string name="configuration_target_refresh_period_content_set_other">%1s minutes</string>
+    <string name="configuration_target_refresh_period_content_unset">Never (manual updates only)</string>
+    <string name="configuration_target_refresh_when_not_visible_title">Refresh when not Visible</string>
+    <string name="configuration_target_refresh_when_not_visible_content">Send \"Refresh\" events even when this Target is not visible on Smartspace. May use more battery.</string>
+
+    <string name="configuration_complication_refresh_period_title">Refresh Period</string>
+    <string name="configuration_complication_refresh_period_content">How often to send the \"Refresh\" event to the Tasker plugin for this Complication, in minutes. Shorter refresh periods use more battery. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_complication_refresh_period_content_set_one">%1s minute</string>
+    <string name="configuration_complication_refresh_period_content_set_other">%1s minutes</string>
+    <string name="configuration_complication_refresh_period_content_unset">Never (manual updates only)</string>
+    <string name="configuration_complication_refresh_when_not_visible_title">Refresh when not Visible</string>
+    <string name="configuration_complication_refresh_when_not_visible_content">Send \"Refresh\" events even when this Complication is not visible on Smartspace. May use more battery.</string>
+
+    <string name="configuration_target_extras_header">Target Extras</string>
+    <string name="configuration_target_source_notification_key_title">Source Notification Key</string>
+    <string name="configuration_target_source_notification_key_content"><b>Optional:</b> Set the key of the notification this Target is representing. If set, the notification will be hidden from the lockscreen when the Target is showing there</string>
+    <string name="configuration_target_source_notification_key_description">Set the key of the notification this Target is representing. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_target_can_be_dismissed_title">Allow Target Dismissing</string>
+    <string name="configuration_target_can_be_dismissed_content">Send \'Dismiss\' events to Tasker, disabling this will hide the option where supported, but not always (but the event will never be sent)</string>
+    <string name="configuration_target_can_take_two_complications_title">Fill two Complications</string>
+    <string name="configuration_target_can_take_two_complications_content">When enabled, the subtitle and icon of this Target will be ignored and two Complications will be filled instead</string>
+    <string name="configuration_target_hide_if_no_complications_title">Hide if no Complications</string>
+    <string name="configuration_target_hide_if_no_complications_content">When enabled, this Target will be hidden when no Complications are available. <b>This will remove the subtitle of this Target</b></string>
+    <string name="configuration_target_limit_to_surfaces_title">Limit to Surfaces</string>
+    <string name="configuration_target_limit_to_surfaces_content"><b>Optional:</b> Set the Smartspace surfaces (types of screen) to show this Target on, when not set this is left open to Smartspacer settings</string>
+    <string name="configuration_target_limit_to_surfaces_content_active">Only show on: %1s</string>
+    <string name="configuration_target_about_intent_title">About Tap Action</string>
+    <string name="configuration_target_about_intent_content"><b>Optional:</b> Show an \'About\' option in the long press pop-up by specifying its action</string>
+    <string name="configuration_target_feedback_intent_title">Feedback Tap Action</string>
+    <string name="configuration_target_feedback_intent_content"><b>Optional:</b> Show a \'Feedback\' option in the long press pop-up by specifying its action</string>
+    <string name="configuration_target_hide_title_on_aod_title">Hide Title on AoD</string>
+    <string name="configuration_target_hide_title_on_aod_content">Hides the Target\'s title on the AoD, where supported</string>
+    <string name="configuration_target_hide_subtitle_on_aod_title">Hide Subtitle on AoD</string>
+    <string name="configuration_target_hide_subtitle_on_aod_content">Hides the Target\'s subtitle on the AoD, where supported</string>
+
+    <string name="configuration_limit_to_surfaces_title_short">Surfaces</string>
+    <string name="configuration_limit_to_surfaces_info">This option works <b>in addition</b> to the options in Smartspacer itself. Showing on a surface in here does not override Smartspacer\'s settings.</string>
+
+    <string name="configuration_target_expanded_state_title">Expanded Smartspace</string>
+    <string name="configuration_target_expanded_state_title_short">Expanded</string>
+    <string name="configuration_target_expanded_state_content">Configure what to show in addition to this Target in Expanded Smartspace</string>
+    <string name="configuration_target_expanded_widget_title">Widget</string>
+    <string name="configuration_target_expanded_widget_content">Show an App Widget below the Target</string>
+    <string name="configuration_target_expanded_shortcuts_title">Shortcuts</string>
+    <string name="configuration_target_expanded_shortcuts_content">Show up to 10 Tap Action shortcuts below the Target</string>
+    <string name="configuration_target_expanded_app_shortcuts_title">App Shortcuts</string>
+    <string name="configuration_target_expanded_app_shortcuts_content">Show up to 10 App Shortcuts from another app below the Target (requires Smartspacer Enhanced Mode)</string>
+
+    <string name="configuration_target_expanded_widget_component_title">Widget</string>
+    <string name="configuration_target_expanded_widget_component_switch">Show Widget</string>
+    <string name="configuration_target_expanded_widget_component_content">Select an App Widget</string>
+    <string name="configuration_target_expanded_widget_id_title">ID</string>
+    <string name="configuration_target_expanded_widget_id_content"><b>Optional:</b> Specify an ID for this widget, which allows multiple of the same widget to be \'bound\' together and share the same configuration between different Targets</string>
+    <string name="configuration_target_expanded_widget_id_description">Specify an ID for this widget, which allows multiple of the same widget to be \'bound\' together and share the same configuration between different Targets. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_target_expanded_widget_show_when_locked_title">Show when Locked</string>
+    <string name="configuration_target_expanded_widget_show_when_locked_content">Show this Widget on Expanded Smartspace while the device is locked</string>
+    <string name="configuration_target_expanded_widget_skip_configuration_title">Skip Configuration</string>
+    <string name="configuration_target_expanded_widget_skip_configuration_content"><b>Advanced:</b> Skip configuration for this Widget, even if the app asks for it. This has <b>very limited</b> use, and breaks many widgets, but in some rare cases it allows for faster widget setup</string>
+    <string name="configuration_target_expanded_widget_width_title">Width</string>
+    <string name="configuration_target_expanded_widget_width_disabled">You must set an ID to use this option</string>
+    <string name="configuration_target_expanded_widget_width_content"><b>Optional:</b> Specify a width for this widget, in pixels, to force its size</string>
+    <string name="configuration_target_expanded_widget_width_description">Specify a width for this widget, in pixels, to force its size. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_target_expanded_widget_height_title">Height</string>
+    <string name="configuration_target_expanded_widget_height_disabled">You must set an ID to use this option</string>
+    <string name="configuration_target_expanded_widget_height_content"><b>Optional:</b> Specify a height for this widget, in pixels, to force its size</string>
+    <string name="configuration_target_expanded_widget_height_description">Specify a height for this widget, in pixels, to force its size. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_target_expanded_widget_picker_variable_content">Enter a Tasker variable (<b>%variable</b>) which will contain the <b>component name</b> (eg. com.example.app/com.example.app.Widget) of the Widget you wish to show. If the Widget is not found or the component name is invalid, no Widget will be shown.</string>
+    <string name="configuration_target_expanded_widget_picker_variable_hint">Widget Component Name</string>
+
+    <string name="configuration_target_expanded_shortcuts_shortcut_title">Shortcut</string>
+    <string name="configuration_target_expanded_shortcuts_shortcut_title_title">Title</string>
+    <string name="configuration_target_expanded_shortcuts_shortcut_icon_title">Icon</string>
+    <string name="configuration_target_expanded_shortcuts_shortcut_tap_action_title">Tap Action</string>
+    <string name="configuration_target_expanded_shortcuts_shortcut_show_when_locked_title">Show when Locked</string>
+    <string name="configuration_target_expanded_shortcuts_shortcut_show_when_locked_content">Show on Expanded Smartspace when device is locked</string>
+
+    <string name="configuration_target_expanded_app_shortcuts_switch">Show App Shortcuts</string>
+    <string name="configuration_target_expanded_app_shortcuts_app_title">Shortcut App</string>
+    <string name="configuration_target_expanded_app_shortcuts_app_content">The app to load App Shortcuts from</string>
+    <string name="configuration_target_expanded_app_shortcuts_count_title">Number of Shortcuts</string>
+    <string name="configuration_target_expanded_app_shortcuts_count_content">The maximum number of app App Shortcuts to show (apps may not send this many)</string>
+    <string name="configuration_target_expanded_app_shortcuts_show_when_locked_title">Show when Locked</string>
+    <string name="configuration_target_expanded_app_shortcuts_show_when_locked_content">Show on Expanded Smartspace when device is locked</string>
+
+    <string name="configuration_target_head_to_head_title">Head to Head</string>
+    <string name="configuration_target_head_to_head_content">Shows two teams with a score, logos and text</string>
+    <string name="configuration_target_head_to_head_main_title">Game Title</string>
+    <string name="configuration_target_head_to_head_main_content">Shown above the scores: %1s</string>
+    <string name="configuration_target_head_to_head_main_content_default">A v B</string>
+    <string name="configuration_target_head_to_head_first_text_title">First Team Text</string>
+    <string name="configuration_target_head_to_head_first_text_content">1</string>
+    <string name="configuration_target_head_to_head_first_icon_title">First Team Icon</string>
+    <string name="configuration_target_head_to_head_second_text_title">Second Team Text</string>
+    <string name="configuration_target_head_to_head_second_text_content">0</string>
+    <string name="configuration_target_head_to_head_second_icon_title">Second Team Icon</string>
+
+    <string name="configuration_target_button_title">Button</string>
+    <string name="configuration_target_button_content">Shows a button with icon and text</string>
+    <string name="configuration_target_button_content_title">Button Text</string>
+    <string name="configuration_target_button_content_content">Shown below the button icon: %1s</string>
+    <string name="configuration_target_button_content_content_default">Click me!</string>
+    <string name="configuration_target_button_icon_title">Button Icon</string>
+
+    <string name="configuration_target_list_title">List Items</string>
+    <string name="configuration_target_list_content">Shows a list of up to four items</string>
+    <string name="configuration_target_list_items_title">List Items</string>
+    <string name="configuration_target_list_items_content_default">Item %1d</string>
+    <string name="configuration_target_list_items_content_generic">Item</string>
+    <string name="configuration_target_list_items_content_one">%1d item</string>
+    <string name="configuration_target_list_items_content_other">%1d items</string>
+    <string name="configuration_target_list_icon_title">List Icon</string>
+    <string name="configuration_target_list_empty_title">Empty List Text</string>
+    <string name="configuration_target_list_empty_content">Shown when the list is empty on some devices: %1s</string>
+    <string name="configuration_target_list_empty_content_description">@string/configuration_text_text_content</string>
+    <string name="configuration_target_list_empty_content_default">Empty</string>
+
+    <string name="configuration_loyalty_card_title">Loyalty Card</string>
+    <string name="configuration_loyalty_card_content">Shows a small image and text, eg. a Loyalty Card</string>
+    <string name="configuration_loyalty_card_icon_title">Card Image</string>
+    <string name="configuration_loyalty_card_prompt_title">Card Name</string>
+    <string name="configuration_loyalty_card_prompt_content">My Loyalty Card</string>
+    <string name="configuration_loyalty_card_scale_type_title">Card Scale Type</string>
+    <string name="configuration_loyalty_card_width_title">Image Width</string>
+    <string name="configuration_loyalty_card_width_content">Optional, leave blank to automatically scale</string>
+    <string name="configuration_loyalty_card_width_description">Optional, leave blank to automatically scale. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_loyalty_card_height_title">Image Height</string>
+    <string name="configuration_loyalty_card_height_content">Optional, leave blank to automatically scale</string>
+    <string name="configuration_loyalty_card_height_description">Optional, leave blank to automatically scale. Tasker variables are supported using <b>%variable</b> replacements.</string>
+
+    <string name="configuration_image_title">Image</string>
+    <string name="configuration_image_content">Shows a rectangular image</string>
+    <string name="configuration_image_image_title">Image</string>
+
+    <string name="configuration_doorbell_title">Doorbell</string>
+    <string name="configuration_doorbell_content">Complex Target with options for multiple Doorbell-related states</string>
+
+    <string name="configuration_doorbell_state_title">State</string>
+    <string name="configuration_doorbell_state_content">The type of content to show in the Doorbell Target: %1s</string>
+
+    <string name="configuration_doorbell_loading_indeterminate_title">Loading (Indeterminate)</string>
+    <string name="configuration_doorbell_loading_indeterminate_content">Shows a loading spinner</string>
+
+    <string name="configuration_doorbell_loading_title">Loading</string>
+    <string name="configuration_doorbell_loading_content">Shows a custom loading icon and optional spinner</string>
+    <string name="configuration_doorbell_loading_icon_title">Loading Icon</string>
+    <string name="configuration_doorbell_loading_show_progress_bar_title">Show Loading Spinner</string>
+    <string name="configuration_doorbell_loading_show_progress_bar_content">Shows a loading spinner on top of the loading icon</string>
+
+    <string name="configuration_doorbell_videocam_title">Videocam</string>
+    <string name="configuration_doorbell_videocam_content">Shows a video camera icon</string>
+
+    <string name="configuration_doorbell_videocam_off_title">Videocam Off</string>
+    <string name="configuration_doorbell_videocam_off_content">Shows a video camera icon with a strikethrough</string>
+
+    <string name="configuration_doorbell_image_title">Image</string>
+    <string name="configuration_doorbell_image_content">Shows an image</string>
+    <string name="configuration_doorbell_image_scale_type_title">Image Scale Type</string>
+
+    <string name="configuration_doorbell_images_title">Images</string>
+    <string name="configuration_doorbell_images_content">Shows multiple images</string>
+    <string name="configuration_doorbell_images_uris_one">%1s image</string>
+    <string name="configuration_doorbell_images_uris_other">%1s images</string>
+    <string name="configuration_doorbell_images_frame_duration">Frame Duration</string>
+    <string name="configuration_doorbell_images_frame_duration_description">How long an image shows in the Target for, in milliseconds. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_doorbell_images_frame_duration_content">How long an image shows in the Target for, in milliseconds: %1s ms</string>
+
+    <string name="configuration_doorbell_width_title">Width</string>
+    <string name="configuration_doorbell_width_content">Optional, leave blank to automatically scale</string>
+    <string name="configuration_doorbell_width_description">Optional, leave blank to automatically scale. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_doorbell_height_title">Height</string>
+    <string name="configuration_doorbell_height_content">Optional, leave blank to automatically scale</string>
+    <string name="configuration_doorbell_height_description">Optional, leave blank to automatically scale. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_doorbell_ratio_width_title">Aspect Ratio (W)</string>
+    <string name="configuration_doorbell_ratio_width_content">Enter the width section of an aspect ratio for the image, leave blank to automatically scale. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_doorbell_ratio_height_title">Aspect Ratio (H)</string>
+    <string name="configuration_doorbell_ratio_height_content">Enter the height section of an aspect ratio for the image, leave blank to automatically scale. Tasker variables are supported using <b>%variable</b> replacements.</string>
+
+    <string name="configuration_images_title">Images</string>
+    <string name="configuration_images_content">Shows multiple images in a sequence</string>
+    <string name="configuration_images_images_one">%1s image</string>
+    <string name="configuration_images_images_other">%1s images</string>
+    <string name="configuration_images_click_title">Image Tap Action</string>
+    <string name="configuration_images_click_content">Use the same action as the Target</string>
+    <string name="configuration_images_image_dimension_ratio_title">Image Dimension Ratio</string>
+    <string name="configuration_images_image_dimension_ratio_content">The dimension ratio for this image, leave blank to automatically scale</string>
+    <string name="configuration_images_image_dimension_ratio_description">The dimension ratio for this image, leave blank to automatically scale.\nFormat should be that of an aspect ratio, for example <b>16:9</b>\nTasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_images_frame_duration">Frame Duration</string>
+    <string name="configuration_images_frame_duration_description">How long an image shows in the Target for, in milliseconds. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="configuration_images_frame_duration_content">How long an image shows in the Target for, in milliseconds: %1s</string>
+
+    <string name="configuration_images_image_title">Image %1d</string>
+    <string name="configuration_images_image_title_generic">Image</string>
+
+    <string name="configuration_carousel_title">Carousel</string>
+    <string name="configuration_carousel_content">Shows multiple columns of text and icons</string>
+    <string name="configuration_carousel_items">Items</string>
+    <string name="configuration_carousel_items_one">%1s item</string>
+    <string name="configuration_carousel_items_other">%1s items</string>
+    <string name="configuration_carousel_click_title">Carousel Tap Action</string>
+    <string name="configuration_carousel_click_content">Use the same action as the Target</string>
+    <string name="configuration_carousel_item_default_top">Item</string>
+    <string name="configuration_carousel_item_default_bottom">Bottom</string>
+    <string name="configuration_carousel_item_header">Item %1d</string>
+    <string name="configuration_carousel_item_upper_title">Upper Text</string>
+    <string name="configuration_carousel_item_icon_title">Icon</string>
+    <string name="configuration_carousel_item_lower_title">Lower Text</string>
+    <string name="configuration_carousel_item_delete">Delete Item</string>
+    <string name="configuration_carousel_item_tap_action">Tap Action</string>
+    <string name="configuration_carousel_sub_complication_header">Sub-complication</string>
+    <string name="configuration_carousel_sub_complication_title">Enable Sub-complication</string>
+    <string name="configuration_carousel_sub_complication_content">Attach a Complication to this Target to show next to it</string>
+
+    <string name="configuration_complication_header">Complication</string>
+    <string name="configuration_complication_icon_title">Icon</string>
+    <string name="configuration_complication_content_title">Content</string>
+    <string name="configuration_complication_tap_action_title">Tap Action</string>
+    <string name="configuration_complication_extras_header">Complication Extras</string>
+    <string name="configuration_complication_limit_to_surface_title">Limit to Surface</string>
+    <string name="configuration_complication_limit_to_surface_content"><b>Optional:</b> Set the Smartspace surfaces (types of screen) to show this Complication on, when not set this is left open to Smartspacer settings</string>
+    <string name="configuration_complication_limit_to_surfaces_content_active">Only show on: %1s</string>
+    <string name="configuration_complication_weather_data_title">Weather Data</string>
+    <string name="configuration_complication_weather_data_content">Set the weather data associated with this Complication, shown on the lock screen and AoD on supported devices when the \"Weather\" lock screen style is set</string>
+
+    <string name="configuration_complication_basic_title">Basic</string>
+
+    <string name="configuration_target_visibility_target_title">Target</string>
+    <string name="configuration_target_visibility_target_content">Set the Target to set the visibility of</string>
+    <string name="configuration_target_visibility_visibility_title">Visible</string>
+    <string name="configuration_target_visibility_visibility_content">Whether to show the Target in Smartspace</string>
+
+    <string name="configuration_complication_visibility_complication_title">Complication</string>
+    <string name="configuration_complication_visibility_complication_content">Set the Complication to set the visibility of</string>
+    <string name="configuration_complication_visibility_visibility_title">Visible</string>
+    <string name="configuration_complication_visibility_visibility_content">Whether to show the Complication in Smartspace</string>
+
+    <string name="configuration_requirement_update_requirement_title">Requirement</string>
+    <string name="configuration_requirement_update_requirement_content">Set the Requirement to update</string>
+    <string name="configuration_requirement_update_is_met_title">Requirement Met</string>
+    <string name="configuration_requirement_update_is_met_content">Whether this requirement should be set to met</string>
+
+    <string name="scale_type_matrix">Use image matrix</string>
+    <string name="scale_type_fit_xy">Fill the space fully</string>
+    <string name="scale_type_fit_start">Fill height, align start</string>
+    <string name="scale_type_fit_center">Fill height, align center</string>
+    <string name="scale_type_fit_end">Fill height, align end</string>
+    <string name="scale_type_center">Center without scaling</string>
+    <string name="scale_type_center_crop">Crop, scale and center</string>
+    <string name="scale_type_center_inside">Scale (maintaining aspect ratio), center</string>
+
+    <string name="truncate_at_start">Start</string>
+    <string name="truncate_at_middle">Middle</string>
+    <string name="truncate_at_end">End</string>
+    <string name="truncate_at_marquee">Marquee</string>
+
+    <string name="ui_surface_home">Home Screen</string>
+    <string name="ui_surface_lock">Lock Screen</string>
+
+    <string name="input_string_error_empty">Input cannot be empty</string>
+    <string name="input_string_error_url">Enter a valid URL or a Tasker variable</string>
+    <string name="input_string_error_aspect_ratio">Enter a valid aspect ratio, with at most one Tasker variable per part</string>
+    <string name="input_string_error_frame_duration">Enter a valid frame duration, in milliseconds, or a Tasker variable</string>
+    <string name="input_string_error_width">Enter a valid width or a Tasker variable</string>
+    <string name="input_string_error_height">Enter a valid height or a Tasker variable</string>
+    <string name="input_string_error_time">Enter a valid Epoch timestamp or a Tasker variable</string>
+    <string name="input_string_error_variable">Enter a valid Tasker variable</string>
+    <string name="input_string_error_temperature">Enter a valid temperature or Tasker variable</string>
+    <string name="input_string_error_refresh_period">Enter a valid refresh period in minutes or Tasker variable</string>
+    <string name="input_string_error_tap_action_id">Enter a valid Tap Action ID</string>
+    <string name="input_string_suffix_frame_duration">ms</string>
+    <string name="input_string_suffix_pixels">px</string>
+    <string name="input_string_suffix_milliseconds">Millseconds</string>
+    <string name="input_string_neutral_action_date_time_picker">Date/Time Picker</string>
+
+    <string name="tap_action_title_generic">Tap Action</string>
+    <string name="tap_action_use_parent_title">Use Parent</string>
+    <string name="tap_action_use_parent_content">Don\'t set a specific action, instead use that of the parent</string>
+    <string name="tap_action_none_title">None</string>
+    <string name="tap_action_none_content">Disable this Tap Action</string>
+    <string name="tap_action_launch_app_title">Launch App</string>
+    <string name="tap_action_launch_app_content">Select an app to launch</string>
+    <string name="tap_action_launch_app_description">Launch %1s</string>
+    <string name="tap_action_launch_app_variable_content">Enter a Tasker variable (<b>%variable</b>) which will contain the <b>package name</b> of the app you wish to launch. If the app is not found or the package name is invalid, no action will be run.</string>
+    <string name="tap_action_launch_app_variable_hint">Tasker Variable</string>
+    <string name="tap_action_open_url_title">Open URL</string>
+    <string name="tap_action_open_url_content">Opens a web URL</string>
+    <string name="tap_action_open_url_content_dialog">Enter a website URL. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="tap_action_open_url_hint">URL</string>
+    <string name="tap_action_open_url_description">Open URL: %1s</string>
+    <string name="tap_action_trigger_tasker_event_title">Trigger Tasker Event</string>
+    <string name="tap_action_trigger_tasker_event_content">Send the Tasker \'Tap\' event with an ID</string>
+    <string name="tap_action_trigger_tasker_event_dialog_title">Tasker Event ID</string>
+    <string name="tap_action_trigger_tasker_event_dialog_content">Specify an ID to be passed to the event, for your own use. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="tap_action_trigger_tasker_event_description">Send Tasker \'Tap\' event with ID: %1s</string>
+
+    <string name="weather_data_switch">Display Weather Data</string>
+    <string name="weather_data_weather_state_icon_title">Weather Icon</string>
+    <string name="weather_data_temperature_unit_title">Temperature Unit</string>
+    <string name="weather_data_temperature_title">Temperature</string>
+    <string name="weather_data_temperature_content">The temperature (without unit) to show in the weather data. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="weather_data_temperature_unit_celsius">°C</string>
+    <string name="weather_data_temperature_unit_fahrenheit">°F</string>
+    <string name="weather_data_temperature_unit_celsius_label">Celsius</string>
+    <string name="weather_data_temperature_unit_fahrenheit_label">Fahrenheit</string>
+    <string name="weather_data_icon_subtitle">Icon: %1s (ID: %1d)</string>
+    <string name="weather_data_icon_variable_content">Enter a Tasker variable (<b>%variable</b>) which will contain the <b>weather icon ID</b> (1 – 31) to show. IDs are displayed in the icon picker.</string>
+
+    <string name="weather_state_icon_sunny">Sunny</string>
+    <string name="weather_state_icon_mostly_sunny">Mostly Sunny</string>
+    <string name="weather_state_icon_partly_cloudy">Partly Cloudy</string>
+    <string name="weather_state_icon_drizzle">Drizzle</string>
+    <string name="weather_state_icon_heavy_rain">Heavy Rain</string>
+    <string name="weather_state_icon_showers_rain">Showers</string>
+    <string name="weather_state_icon_scatted_showers_day">Scattered Showers (Day)</string>
+    <string name="weather_state_icon_scatted_showers_night">Scattered Showers (Night)</string>
+    <string name="weather_state_icon_rain">Rain</string>
+    <string name="weather_state_icon_haze">Haze</string>
+    <string name="weather_state_icon_mostly_cloudy_day">Mostly Cloudy (Day)</string>
+    <string name="weather_state_icon_mostly_cloudy_night">Mostly Cloudy (Night)</string>
+    <string name="weather_state_icon_cloudy">Cloudy</string>
+    <string name="weather_state_icon_clear">Clear</string>
+    <string name="weather_state_icon_snow">Snow</string>
+    <string name="weather_state_icon_flurries">Flurries</string>
+    <string name="weather_state_icon_snow_showers_day">Snow Showers (Day)</string>
+    <string name="weather_state_icon_snow_showers_night">Snow Showers (Night)</string>
+    <string name="weather_state_icon_snow_showers">Snow Showers</string>
+    <string name="weather_state_icon_mixed_sleet_hail_rain">Mixed Sleet/Hail/Rain</string>
+    <string name="weather_state_icon_sleet">Sleet</string>
+    <string name="weather_state_icon_wintry">Wintry Rain/Snow</string>
+    <string name="weather_state_icon_scattered_thunderstorms_day">Scattered Thunderstorms (Day)</string>
+    <string name="weather_state_icon_scattered_thunderstorms_night">Scattered Thunderstorms (Night)</string>
+    <string name="weather_state_icon_thunderstorms">Thunderstorms</string>
+    <string name="weather_state_icon_blizzard">Blizzard</string>
+    <string name="weather_state_icon_blowing_snow">Blowing Snow</string>
+    <string name="weather_state_icon_heavy_snow">Heavy Snow</string>
+    <string name="weather_state_icon_windy">Windy</string>
+    <string name="weather_state_icon_breezy">Breezy</string>
+    <string name="weather_state_icon_tornado">Tornado</string>
+    <string name="weather_state_icon_hurricane">Hurricane</string>
+    <string name="weather_state_icon_mostly_clear">Mostly Clear</string>
+    <string name="weather_state_icon_partly_cloudy_night">Partly Cloudy (Night)</string>
+    <string name="weather_state_icon_unset">Unset</string>
+
+    <string name="menu_variable">Variable…</string>
+
+    <string name="tap_action_event_title">Tap Action</string>
+    <string name="tap_action_event_id_title">ID</string>
+    <string name="tap_action_event_id_content">Set the ID for the Tap Action, which you have configured in a Target or Complication update</string>
+    <string name="tap_action_event_id_description">Set the ID for the Tap Action, which you have configured in a Target or Complication update. Tasker variables are supported using <b>%variable</b> replacements.</string>
+    <string name="tap_action_event_blurb">Triggered when a Tap Action with the ID \"%1s\" is made</string>
+
+    <string name="dismiss_target_event_title">Target Dismissed</string>
+    <string name="dismiss_target_event_target_title">Target</string>
+    <string name="dismiss_target_event_target_content">Select the Target to trigger this event for when dismissed</string>
+    <string name="dismiss_target_event_target_not_sending">This Target is currently set to not send dismiss events. Make sure you update it with the Update Target option to allow sending dismiss events for this to work.</string>
+    <string name="dismiss_target_event_target_blurb">Triggered when the target \"%1s\" is dismissed</string>
+
+    <string name="update_target_event_title">Target Update</string>
+    <string name="update_target_event_target_title">Target</string>
+    <string name="update_target_event_target_content">Select the Target to trigger this event for when an update is requested</string>
+    <string name="update_target_event_target_not_sending">This Target is currently set to only be manually updated. Make sure you update it with the Update Target option to have an update period to receive update events.</string>
+    <string name="update_target_event_target_blurb">Triggered when the Target \"%1s\" has an update requested</string>
+
+    <string name="update_complication_event_title">Complication Update</string>
+    <string name="update_complication_event_complication_title">Complication</string>
+    <string name="update_complication_event_complication_content">Select the Complication to trigger this event for when an update is requested</string>
+    <string name="update_complication_event_complication_not_sending">This Complication is currently set to only be manually updated. Make sure you update it with the Update Complication option to have an update period to receive update events.</string>
+    <string name="update_complication_event_complication_blurb">Triggered when the Complication \"%1s\" has an update requested</string>
+
+</resources>

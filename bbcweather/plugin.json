@@ -1,0 +1,7 @@
+{
+	"description": "An alternative to Google Weather, the BBC Weather plugin shows weather conditions and forecasts on your home screen, lock screen and always on display. Powered by the BBC Weather app, this plugin contains both a Complication showing the current conditions and forecast Target with the forecast for the next 4 days. The Complication also supports Android 14's new large text style AoD, with the weather symbols displayed.",
+	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/bbcweather/bbcweather-release.apk",
+	"version_code": 1,
+	"required_package": "bbc.mobile.weather",
+	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/bbcweather/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/bbcweather/2.jpg"]
+}

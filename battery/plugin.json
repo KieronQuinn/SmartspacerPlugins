@@ -1,0 +1,7 @@
+{
+	"description": "Monitor battery percentages for your connected devices with the battery plugin. This plugin reads connected device info from the Android system Battery widget, and displays it as a complication with icon and percentage.",
+	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/battery/battery-release.apk",
+	"version_code": 1,
+	"required_package": "com.google.android.settings.intelligence",
+	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/battery/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/battery/2.jpg"]
+}

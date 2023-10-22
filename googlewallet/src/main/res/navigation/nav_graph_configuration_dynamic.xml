@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_configuration_dynamic"
+    app:startDestination="@id/configurationGoogleWalletDynamicFragment">
+
+    <fragment
+        android:id="@+id/configurationGoogleWalletDynamicFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.configuration.dynamic.ConfigurationGoogleWalletDynamicFragment"
+        android:label="@string/target_wallet_dynamic_title_short"
+        tools:layout="@layout/fragment_configuration_google_wallet_dynamic" >
+        <action
+            android:id="@+id/action_configurationGoogleWalletDynamicFragment_to_signInWithGoogleFragment2"
+            app:destination="@id/signInWithGoogleFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInWithGoogleFragment2"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.configuration.signin.SignInWithGoogleFragment"
+        android:label="@string/sign_in_with_google"
+        tools:layout="@layout/fragment_sign_in_with_google" />
+
+
+</navigation>

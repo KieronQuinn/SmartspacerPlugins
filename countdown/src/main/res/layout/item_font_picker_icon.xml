@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/font_picker_icon"
+    android:layout_width="@dimen/icon_size"
+    android:layout_height="@dimen/icon_size"
+    android:padding="@dimen/icon_padding"
+    android:background="@drawable/rounded_ripple_64"
+    android:layout_gravity="center"
+    tools:src="@drawable/ic_settings"
+    app:tint="?android:textColorPrimary" />

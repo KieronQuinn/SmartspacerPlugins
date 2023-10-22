@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Countdown Plugin for Smartspacer</string>
+    <string name="save">Save</string>
+
+    <string name="complication_configuration_settings_title">Settings</string>
+    <string name="complication_configuration_settings_description">Set when to countdown to and the icon to use</string>
+
+    <string name="complication_countdown_one">%1d day</string>
+    <string name="complication_countdown_other">%1d days</string>
+
+    <string name="complication_countdown_label">Countdown</string>
+    <string name="complication_countdown_description">Shows a countdown to a selected day with an icon</string>
+    <string name="complication_countdown_description_set">Shows a countdown to %1s</string>
+
+    <string name="configuration_permission_content">Permission to create alarms &amp; reminders is required to update the countdown at midnight (no noise will be made), tap to grant</string>
+    <string name="configuration_date_title">Countdown to</string>
+    <string name="configuration_date_content">Set the date to countdown to</string>
+
+    <string name="configuration_icon_title">Icon</string>
+    <string name="configuration_icon_from_font_title">Built In</string>
+    <string name="configuration_icon_from_font_content">Choose from thousands of built in icons</string>
+    <string name="configuration_icon_from_file_title">From File</string>
+    <string name="configuration_icon_from_file_content">Use an image from file</string>
+
+    <string name="configuration_icon_font_picker_content">%1d icons</string>
+    <string name="configuration_icon_font_icon_picker_title">Icons</string>
+    <string name="configuration_icon_font_description">%1s (%1s)</string>
+    <string name="configuration_icon_font_description_error">Icon not found</string>
+
+    <string name="configuration_icon_file_pick_title">Select File</string>
+    <string name="configuration_icon_tint_title">Tint</string>
+    <string name="configuration_icon_tint_content">Apply an automatic tint to this image, making it always visible in Smartspacer. This will break solid icons which are not of a distinct shape.</string>
+    <string name="configuration_icon_description">Image: %1s</string>
+    <string name="configuration_icon_description_error">Image from file</string>
+
+</resources>

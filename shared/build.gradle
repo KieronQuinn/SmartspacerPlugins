@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.devtools.ksp'
+}
+
+android {
+    namespace 'com.kieronquinn.app.shared'
+    compileSdk compile_sdk
+
+    defaultConfig {
+        minSdk min_sdk
+        targetSdk target_sdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    //AndroidX + Material
+    api 'androidx.core:core-ktx:1.12.0'
+    api 'androidx.appcompat:appcompat:1.6.1'
+    api 'com.google.android.material:material:1.9.0'
+    api "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    api "androidx.navigation:navigation-ui-ktx:$nav_version"
+    api "androidx.security:security-crypto:1.1.0-alpha06"
+
+    //Hidden APIs
+    api "dev.rikka.tools.refine:runtime:$refine_version"
+
+    //Smartspacer SDK
+    api 'com.kieronquinn.app.smartspacer:sdk-core:1.0.0'
+    api 'com.kieronquinn.app.smartspacer:sdk-plugin:1.0.0'
+
+    //Dependency Injection
+    api "io.insert-koin:koin-android:3.4.0"
+
+    //Theming
+    api 'com.github.KieronQuinn:MonetCompat:0.4.1'
+
+    //Image Loading
+    api 'com.github.bumptech.glide:glide:4.15.1'
+    ksp 'com.github.bumptech.glide:ksp:4.15.1'
+
+    //Data Loading
+    api "com.squareup.retrofit2:retrofit:2.9.0"
+    api "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    //Used in Backup + Restore
+    api 'com.google.code.gson:gson:2.10.1'
+
+    //Room for data storage
+    api "androidx.room:room-runtime:$room_version"
+    api "androidx.room:room-ktx:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
+
+    compileOnly project(path: ':systemstubs')
+}

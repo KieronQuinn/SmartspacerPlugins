@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Battery Plugin for Smartspacer</string>
+    <string name="complication_label">Battery</string>
+    <string name="complication_description">Shows battery level for a connected device</string>
+    <string name="complication_description_set">Shows battery level for %1s</string>
+    <string name="complication_charging">%1s+</string>
+    <string name="complication_configuration_settings_title">Select Device</string>
+    <string name="complication_configuration_settings_description">Set the connected device to show the battery status for</string>
+    <string name="complication_configuration_selected">%1s (Selected)</string>
+    <string name="configuration_info">Only devices which are currently connected will show here. Connect the device you wish to show the status for to select it.</string>
+</resources>

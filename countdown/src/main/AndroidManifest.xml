@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
+    <application
+        android:name=".CountdownPlugin"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Smartspacer">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+
+        <activity-alias
+            android:name=".ui.activities.CountdownConfigurationActivity"
+            android:exported="true"
+            android:label="@string/complication_configuration_settings_title"
+            android:description="@string/complication_configuration_settings_description"
+            android:icon="@drawable/ic_settings"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:name=".complications.CountdownComplication"
+            android:authorities="${applicationId}.complication.countdown"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.provider.proxy"
+            android:name=".providers.ProxyProvider"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider"/>
+
+        <provider
+            android:authorities="${applicationId}.provider.font"
+            android:name=".providers.FontIconProvider"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
+        <receiver android:name=".receivers.MidnightReceiver"/>
+
+        <receiver android:name=".receivers.AlarmUpdateReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

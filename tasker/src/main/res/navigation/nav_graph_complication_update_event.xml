@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_complication_update_event"
+    app:startDestination="@id/complicationUpdateEventConfigurationFragment">
+
+    <fragment
+        android:id="@+id/complicationUpdateEventConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.update.complication.ComplicationUpdateEventConfigurationFragment"
+        android:label="@string/update_complication_event_title"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_complicationUpdateEventConfigurationFragment_to_complicationPickerFragment3"
+            app:destination="@id/complicationPickerFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/complicationPickerFragment3"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.complication.picker.ComplicationPickerFragment"
+        android:label="@string/update_complication_event_complication_title"
+        tools:layout="@layout/fragment_settings_base" />
+
+</navigation>

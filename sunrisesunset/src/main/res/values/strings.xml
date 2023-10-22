@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Sun Times Plugin for Smartspacer</string>
+
+    <string name="complication_sunrise_label">Sunrise</string>
+    <string name="complication_sunrise_description">Displays the time of sunrise</string>
+    <string name="complication_sunset_label">Sunset</string>
+    <string name="complication_sunset_description">Displays the time of sunset</string>
+    <string name="complication_error">Error</string>
+
+    <string name="configuration_location_permission">Location permission required, tap to grant</string>
+    <string name="configuration_background_location_permission">Background location permission required, tap to grant</string>
+    <string name="configuration_alarm_permission">Alarm permission required to schedule exact timers (no sound will be made), tap to grant</string>
+    <string name="configuration_show_before_title">Show Before</string>
+    <string name="configuration_show_before_content">How long to show the %1s time before: %1s</string>
+    <string name="configuration_show_after_title">Show After</string>
+    <string name="configuration_show_after_content">How long to show the %1s time after: %1s</string>
+    <string name="configuration_refresh_location">Refresh Location</string>
+    <string name="configuration_refresh_location_content">Refresh your current location and re-calculate times</string>
+
+    <string name="target_configuration_settings_title">Settings</string>
+    <string name="target_configuration_settings_description">Set how long to show the time before &amp; after, and refresh the calculation location</string>
+
+    <string name="show_for_10">10 minutes</string>
+    <string name="show_for_15">15 minutes</string>
+    <string name="show_for_30">30 minutes</string>
+    <string name="show_for_60">1 hour</string>
+    <string name="show_for_120">2 hours</string>
+    <string name="show_for_360">6 hours</string>
+    <string name="show_for_720">12 hours</string>
+</resources>

@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">Amazon Plugin for Smartspacer</string>
+
+    <!-- Amazon Target -->
+    <string name="target_amazon_description">Show live delivery status of supported Amazon deliveries</string>
+    <string name="target_amazon_settings_title">Settings</string>
+    <string name="target_amazon_settings_description">Set whether to show product images &amp; clear dismissed orders</string>
+    <string name="target_amazon_settings_sign_in_title">Sign in</string>
+    <string name="target_amazon_settings_sign_in_button">Sign in with Amazon</string>
+    <string name="target_amazon_settings_info_title">Sign in required</string>
+    <string name="target_amazon_settings_info_content">Smartspacer requires you to log in to your Amazon account to use delivery tracking.\n\n<b>Your order details are kept encrypted on your device, and your account info is never used outside Amazon order tracking.</b></string>
+    <string name="target_amazon_settings_unsupported_title">Unsupported</string>
+    <string name="target_amazon_settings_unsupported_content">Either you do not have the Amazon App (Global or India) installed, or this Plugin does not support your region yet.</string>
+    <string name="target_amazon_settings_show_image_title">Show Product Image</string>
+    <string name="target_amazon_settings_show_image_content">Show the product\'s image when available, this may not work on all devices</string>
+    <string name="target_amazon_settings_clear_dismissed_title">Clear Dismissed Orders</string>
+    <string name="target_amazon_settings_clear_dismissed_content">Reset the state of dismissed orders. This will show <b>undelivered</b> items again, but will not re-show delivered items</string>
+    <string name="target_amazon_settings_reload_title">Reload Orders</string>
+    <string name="target_amazon_settings_reload_content">Reload orders now, without needing a notification</string>
+    <string name="target_amazon_settings_advanced">Advanced Settings</string>
+    <string name="target_amazon_settings_domain_title">Domain</string>
+    <string name="target_amazon_settings_domain_content">Currently selected Amazon domain, loaded securely from the Amazon app: %1s. Changing this option will sign you out.</string>
+    <string name="target_amazon_settings_domain_content_unknown">No domain currently selected. Changing this option will sign you out.</string>
+    <string name="target_amazon_settings_tracking_supported_title">Tracking Supported</string>
+    <string name="target_amazon_settings_tracking_supported_content_yes">Yes: %1s</string>
+    <string name="target_amazon_settings_tracking_supported_content_no">No (unsupported region)</string>
+    <string name="target_amazon_settings_known_orders_title">Known Orders</string>
+    <string name="target_amazon_settings_known_orders_content">%1d</string>
+    <string name="target_amazon_settings_trackable_orders_title">Trackable Orders</string>
+    <string name="target_amazon_settings_trackable_orders_content">%1d</string>
+    <string name="target_amazon_settings_sign_out">Sign Out</string>
+
+    <string name="target_amazon_subtitle_generic">Amazon</string>
+    <string name="target_amazon_subtitle_stops_away_next">You\'re next</string>
+    <string name="target_amazon_subtitle_stops_away_one">%1d stop remaining</string>
+    <string name="target_amazon_subtitle_stops_away_other">%1d stops remaining</string>
+    <string name="target_amazon_status_ordered">Ordered</string>
+    <string name="target_amazon_status_shipped">Shipped</string>
+    <string name="target_amazon_status_in_transit">In Transit</string>
+    <string name="target_amazon_status_out_for_delivery">Out for Delivery</string>
+    <string name="target_amazon_status_delivered">Delivered</string>
+    <string name="target_amazon_title">Amazon Deliveries</string>
+    <string name="target_amazon_title_signed_out">Signed out</string>
+    <string name="target_amazon_subtitle_signed_out">Tap to sign in again</string>
+
+    <!-- Domains -->
+    <string name="domain_AE">amazon.ae</string>
+    <string name="domain_CA">amazon.ca</string>
+    <string name="domain_CN">amazon.cn</string>
+    <string name="domain_JP">amazon.co.jp</string>
+    <string name="domain_UK">amazon.co.uk</string>
+    <string name="domain_US">amazon.com</string>
+    <string name="domain_AU">amazon.com.au</string>
+    <string name="domain_BE">amazon.com.be</string>
+    <string name="domain_BR">amazon.com.br</string>
+    <string name="domain_MX">amazon.com.mx</string>
+    <string name="domain_TR">amazon.com.tr</string>
+    <string name="domain_DE">amazon.de</string>
+    <string name="domain_EG">amazon.eg</string>
+    <string name="domain_ES">amazon.es</string>
+    <string name="domain_FR">amazon.fr</string>
+    <string name="domain_IN">amazon.in</string>
+    <string name="domain_NL">amazon.nl</string>
+    <string name="domain_PL">amazon.pl</string>
+    <string name="domain_SA">amazon.sa</string>
+    <string name="domain_SE">amazon.se</string>
+    <string name="domain_SG">amazon.sg</string>
+    <string name="domain_unknown">Unknown</string>
+
+</resources>

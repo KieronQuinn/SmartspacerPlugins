@@ -1,0 +1,6 @@
+{
+	"description": "This simple plugin contains a Complication which counts down to a day of your choice, with either a custom icon or one of thousands of built in ones",
+	"download_url": "https://kieronquinn.co.uk/smartspacer/plugins/countdown/countdown-release.apk",
+	"version_code": 1,
+	"screenshots": ["https://kieronquinn.co.uk/smartspacer/plugins/countdown/1.jpg", "https://kieronquinn.co.uk/smartspacer/plugins/countdown/2.jpg"]
+}

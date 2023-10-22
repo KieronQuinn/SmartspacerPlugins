@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Data Usage Plugin for Smartspacer</string>
+
+    <string name="complication_label">Data Usage</string>
+    <string name="complication_description">Shows your data usage for the current cycle</string>
+    <string name="complication_description_set">Shows your %1s data usage for the current cycle</string>
+
+    <string name="configuration_permission_required">Usage Access permission required, tap to grant</string>
+    <string name="configuration_title">Settings</string>
+    <string name="configuration_description">Set the Data Usage cycle day, network and refresh rate</string>
+    <string name="configuration_network_type_title">Network Type</string>
+    <string name="configuration_data_usage_cycle_day_title">Cycle Day</string>
+    <string name="configuration_data_usage_cycle_day_description">Day of the month when your data resets: %1d</string>
+    <string name="configuration_refresh_rate_title">Refresh Rate</string>
+
+    <string name="network_type_mobile_data">Mobile Data</string>
+    <string name="network_type_wifi">Wi-Fi</string>
+    <string name="network_type_ethernet">Ethernet</string>
+
+    <string name="refresh_rate_15_mins">15 minutes</string>
+    <string name="refresh_rate_30_mins">30 minutes</string>
+    <string name="refresh_rate_60_mins">1 hour</string>
+    <string name="refresh_rate_120_mins">2 hours</string>
+
+</resources>

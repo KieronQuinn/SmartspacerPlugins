@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Samsung Health Plugin for Smartspacer</string>
+
+    <string name="complication_sleep_title">Sleep</string>
+    <string name="complication_sleep_description">Shows your sleep time from Samsung Health</string>
+    <string name="complication_steps_title">Steps</string>
+    <string name="complication_steps_description">Shows your steps for today from Samsung Health</string>
+    <string name="complication_incompatible">This Complication requires the Samsung Health app</string>
+
+    <string name="configuration_sleep_title">Settings</string>
+    <string name="configuration_sleep_description">Set a timeout for how long to show the Sleep time for after it updates</string>
+    <string name="configuration_sleep_timeout">Hide After Timeout</string>
+    <string name="configuration_sleep_timeout_content">Hides the Complication after a time after the Sleep time updates, rather than showing it all the time. The Complication will re-appear for the next time change.</string>
+    <string name="configuration_sleep_timeout_time_title">Timeout Time</string>
+
+    <string name="timeout_15_minutes">15 minutes</string>
+    <string name="timeout_30_minutes">30 minutes</string>
+    <string name="timeout_60_minutes">1 hour</string>
+    <string name="timeout_120_minutes">2 hours</string>
+</resources>

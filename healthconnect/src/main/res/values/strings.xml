@@ -1,0 +1,156 @@
+<resources>
+    <string name="app_name">Health Connect Plugin for Smartspacer</string>
+    <string name="complication_title">Health Connect</string>
+    <string name="complication_description">%1s from Health Connect</string>
+    <string name="complication_incompatible">This Complication requires Health Connect</string>
+    <string name="complication_content_no_permission">\???</string>
+    <string name="complication_content_blank">-</string>
+
+    <string name="notification_channel_background_service_title">Background Service</string>
+    <string name="notification_channel_background_service_subtitle">Notifications required to run in the background</string>
+    <string name="notification_channel_errors_title">Errors</string>
+    <string name="notification_channel_errors_subtitle">Critical errors when using Health Connect</string>
+    <string name="notification_background_service_title">@string/app_name</string>
+    <string name="notification_background_service_content">Updating health data in the background, tap to disable</string>
+    <string name="notification_battery_optimisation_title">Disable Battery Optimisation</string>
+    <string name="notification_battery_optimisation_content">You must disable Battery Optimisation for Health Connect Smartspacer Plugin to work, tap to disable</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Health Connect</string>
+    <string name="setup_loading">Loading…</string>
+    <string name="setup_requesting">Requesting Permissions…</string>
+    <string name="setup_saving">Saving…</string>
+    <string name="setup_request_permission_title">Grant Health Connect Permissions</string>
+    <string name="setup_request_permission_content">This Complication requires Health Connect permission(s): %1s. Tap to open Health Connect to grant it manually.</string>
+    <string name="setup_request_notification_permission_title">Grant Notification Permission</string>
+    <string name="setup_request_notification_permission_content">Required to run in the background and show critical errors (you can disable the background notification)</string>
+    <string name="setup_request_disable_battery_optimisation_title">Disable Battery Optimisation</string>
+    <string name="setup_request_disable_battery_optimisation_content">Required to run in the background</string>
+
+    <!-- Configuration -->
+    <string name="configuration_label">Settings</string>
+    <string name="configuration_description">Set the refresh options and unit for this data</string>
+    <string name="configuration_rate_limited">Smartspacer is currently being rate limited for this Health Connect data type. Try refreshing, or come back later.</string>
+    <string name="configuration_unit_title">Unit</string>
+    <string name="configuration_unit_content">Set the unit to use for this data in the Complication: %1s</string>
+    <string name="configuration_reset_title">Reset Time</string>
+    <string name="configuration_reset_content">The time at which to consider a reset point: %1s</string>
+    <string name="configuration_timeout_title">Timeout</string>
+    <string name="configuration_timeout_content">Maximum time to show a measurement for after it was made: %1s</string>
+    <string name="configuration_refresh_title">Refresh</string>
+    <string name="configuration_refresh_content">Refresh the data for this Complication now</string>
+    <string name="configuration_refresh_success">Refreshed data successfully</string>
+    <string name="configuration_refresh_failed">Failed to refresh data</string>
+    <string name="configuration_refresh_period_title">Refresh Rate</string>
+    <string name="configuration_refresh_period_content">How often to poll Health Connect for updates: %1s</string>
+    <string name="configuration_footer"><b>Note:</b> Health Connect is a push/pull SDK, it does not provide live updates. Smartspacer can only poll for new data as often as your health app(s) push it, so data may be outdated if your health app doesn\'t push often.</string>
+
+    <!-- Duration labels -->
+    <string name="duration_5_minutes">5 minutes</string>
+    <string name="duration_10_minutes">10 minutes</string>
+    <string name="duration_15_minutes">15 minutes</string>
+    <string name="duration_30_minutes">30 minutes</string>
+    <string name="duration_60_minutes">1 hour</string>
+    <string name="duration_120_minutes">2 hours</string>
+
+    <!-- Data Type Labels -->
+    <string name="data_types_active_calories_burned_title">Active Calories Burned</string>
+    <string name="data_types_active_calories_burned_description">Your number of active calories burned today</string>
+    <string name="data_types_blood_glucose_title">Blood Glucose</string>
+    <string name="data_types_blood_glucose_description">Your current blood glucose reading</string>
+    <string name="data_types_blood_pressure_title">Blood Pressure</string>
+    <string name="data_types_blood_pressure_description">Your current blood pressure</string>
+    <string name="data_types_body_temperature_title">Body Temperature</string>
+    <string name="data_types_body_temperature_description">Your current body temperature</string>
+    <string name="data_types_distance_title">Distance</string>
+    <string name="data_types_distance_description">The distance you have travelled today</string>
+    <string name="data_types_elevation_gained_title">Elevation Gained</string>
+    <string name="data_types_elevation_gained_description">The elevation you have gained today</string>
+    <string name="data_types_floors_climbed_title">Floors Climbed</string>
+    <string name="data_types_floors_climbed_description">The number of floors you have climbed today</string>
+    <string name="data_types_heart_rate_title">Heart Rate</string>
+    <string name="data_types_heart_rate_description">Your average heart rate</string>
+    <string name="data_types_heart_rate_variability_title">Heart Rate Variability</string>
+    <string name="data_types_heart_rate_variability_description">Your current heart rate variability (HRV) by the root mean square of successive differences (RMSSD) between normal heartbeats</string>
+    <string name="data_types_hydration_record_title">Hydration</string>
+    <string name="data_types_hydration_record_description">How much water you have drunk today</string>
+    <string name="data_types_oxygen_saturation_title">Oxygen Saturation</string>
+    <string name="data_types_oxygen_saturation_description">The amount of oxygen circulating in your blood</string>
+    <string name="data_types_power_title">Power</string>
+    <string name="data_types_power_description">Your average power generated, e.g. during cycling or rowing with a power meter</string>
+    <string name="data_types_respiratory_rate_title">Respiratory Rate</string>
+    <string name="data_types_respiratory_rate_description">Your current respiratory rate</string>
+    <string name="data_types_resting_heart_rate_title">Resting Heart Rate</string>
+    <string name="data_types_resting_heart_rate_description">Your average resting heart rate</string>
+    <string name="data_types_sleep_title">Sleep</string>
+    <string name="data_types_sleep_description">How much sleep you got last night</string>
+    <string name="data_types_speed_title">Speed</string>
+    <string name="data_types_speed_description">Your most recent recorded speed, e.g. during running or cycling</string>
+    <string name="data_types_steps_title">Steps</string>
+    <string name="data_types_steps_description">The number of steps you have taken today</string>
+    <string name="data_types_total_calories_title">Total Calories Burned</string>
+    <string name="data_types_total_calories_description">The total number of calories you have burned today</string>
+    <string name="data_types_vo2_max_title">Vo2 Max</string>
+    <string name="data_types_vo2_max_description">Your current Vo2 max score</string>
+    <string name="data_types_wheelchair_pushes_title">Wheelchair Pushes</string>
+    <string name="data_types_wheelchair_pushes_description">Your number of wheelchair pushes today</string>
+    
+    <!-- Unit Types -->
+    <string name="unit_type_energy_calories_title">Calories</string>
+    <string name="unit_type_energy_kilocalories_title">Kilocalories</string>
+    <string name="unit_type_energy_joules_title">Joules</string>
+    <string name="unit_type_energy_kilojoules_title">Kilojoules</string>
+    <string name="unit_type_energy_calories_suffix">cal</string>
+    <string name="unit_type_energy_kilocalories_suffix">kcal</string>
+    <string name="unit_type_energy_joules_suffix">J</string>
+    <string name="unit_type_energy_kilojoules_suffix">kJ</string>
+
+    <string name="unit_type_blood_glucose_mmol_title">mmol/L</string>
+    <string name="unit_type_blood_glucose_mmol_description">Millimoles per liter</string>
+    <string name="unit_type_blood_glucose_mmol_suffix">mmol/L</string>
+    <string name="unit_type_blood_glucose_mgdl_title">mg/dL</string>
+    <string name="unit_type_blood_glucose_mgdl_description">Milligrams per deciliter</string>
+    <string name="unit_type_blood_glucose_mgdl_suffix">mg/dL</string>
+
+    <string name="unit_type_blood_pressure_suffix">mmHg</string>
+
+    <string name="unit_type_blood_temperature_celsius">Celsius</string>
+    <string name="unit_type_blood_temperature_celsius_suffix">°C</string>
+    <string name="unit_type_blood_temperature_fahrenheit">Fahrenheit</string>
+    <string name="unit_type_blood_temperature_fahrenheit_suffix">°F</string>
+
+    <string name="unit_type_length_meters">Meters</string>
+    <string name="unit_type_length_meters_suffix">m</string>
+    <string name="unit_type_length_kilometers">Kilometers</string>
+    <string name="unit_type_length_kilometers_suffix">km</string>
+    <string name="unit_type_length_miles">Miles</string>
+    <string name="unit_type_length_miles_suffix">m</string>
+    <string name="unit_type_length_inches">Inches</string>
+    <string name="unit_type_length_inches_suffix">in</string>
+    <string name="unit_type_length_feet">Feet</string>
+    <string name="unit_type_length_feet_suffix">ft</string>
+
+    <string name="unit_type_volume_liters">Liters</string>
+    <string name="unit_type_volume_liters_suffix">L</string>
+    <string name="unit_type_volume_milliliters">Milliliters</string>
+    <string name="unit_type_volume_milliliters_suffix">ml</string>
+    <string name="unit_type_volume_fluid_oz">US Fluid Ounces</string>
+    <string name="unit_type_volume_fluid_oz_suffix">oz</string>
+
+    <string name="unit_type_percent_suffix">%</string>
+
+    <string name="unit_type_power_watts">Watts</string>
+    <string name="unit_type_power_watts_suffix">W</string>
+    <string name="unit_type_power_kilocalories">Kilocalories</string>
+    <string name="unit_type_power_kilocalories_suffix">kcal</string>
+
+    <string name="unit_type_duration_suffix">%1dh%1dm</string>
+
+    <string name="unit_type_velocity_meters_per_second">Meters Per Second</string>
+    <string name="unit_type_velocity_meters_per_second_suffix">m/s</string>
+    <string name="unit_type_velocity_kilometers_per_hour">Kilometers Per Second</string>
+    <string name="unit_type_velocity_kilometers_per_hour_suffix">km/h</string>
+    <string name="unit_type_velocity_miles_per_hour">Miles Per Hour</string>
+    <string name="unit_type_velocity_miles_per_hour_suffix">mph</string>
+
+</resources>

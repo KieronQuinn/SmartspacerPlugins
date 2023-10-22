@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_bar_expanded_screen_edges_distance_s">110dp</dimen>
+    <dimen name="progress_bar_expanded_screen_edges_distance_before_s">44dp</dimen>
+</resources>

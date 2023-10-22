@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_target_update_event"
+    app:startDestination="@id/targetUpdateEventConfigurationFragment">
+
+    <fragment
+        android:id="@+id/targetUpdateEventConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.update.target.TargetUpdateEventConfigurationFragment"
+        android:label="@string/update_target_event_title"
+        tools:layout="@layout/fragment_settings_base">
+        <action
+            android:id="@+id/action_targetUpdateEventConfigurationFragment_to_targetPickerFragment4"
+            app:destination="@id/targetPickerFragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetPickerFragment4"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.picker.TargetPickerFragment"
+        android:label="@string/update_target_event_target_title"
+        tools:layout="@layout/fragment_settings_base" />
+
+</navigation>

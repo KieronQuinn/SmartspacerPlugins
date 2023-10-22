@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="search_icon_tint_primary">#4285f4</color>
+    <color name="search_icon_tint_quaternary">#ea4335</color>
+    <color name="search_icon_tint_secondary">#34a853</color>
+    <color name="search_icon_tint_tertiary">#fbbc05</color>
+</resources>
