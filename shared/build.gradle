@@ -48,8 +48,8 @@ dependencies {
     api "dev.rikka.tools.refine:runtime:$refine_version"
 
     //Smartspacer SDK
-    api 'com.kieronquinn.app.smartspacer:sdk-core:1.0.0'
-    api 'com.kieronquinn.app.smartspacer:sdk-plugin:1.0.0'
+    api 'com.kieronquinn.smartspacer:sdk-core:1.0.0'
+    api 'com.kieronquinn.smartspacer:sdk-plugin:1.0.0'
 
     //Dependency Injection
     api "io.insert-koin:koin-android:3.4.0"

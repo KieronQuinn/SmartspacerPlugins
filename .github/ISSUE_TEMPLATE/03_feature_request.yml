@@ -1,0 +1,45 @@
+name: Feature Request
+description: Submit a feature request for one of the existing plugins
+title: "[Feature Request] "
+labels: ["feature_request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+         Thank you for submitting a Feature Request. Please select the Plugin you are requesting for below, and provide a descripton of what you'd like to see.
+         
+         **Important Note:** This is not for requesting new Plugins. To do that, go back and use the Plugin Request option
+         
+         Make sure the request has not been made already, duplicate requests will be closed.
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Select the Plugin you are requesting for
+      multiple: true
+      options:
+        - Aftership
+        - Amazon
+        - Battery
+        - BBC Weather
+        - Countdown
+        - Data Usage
+        - Energy Monitor
+        - Google Finance
+        - Google Maps
+        - Google Wallet
+        - Health Connect
+        - Notifications
+        - Pokémon Go
+        - Samsung Health
+        - Sun Times
+        - Tasker
+        - Uber
+        - Yahoo! Sport
+        - YouTube
+  - type: textarea
+    id: request
+    attributes:
+      label: Request
+      description: Describe your feature request
+    validations:
+      required: true

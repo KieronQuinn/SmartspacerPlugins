@@ -1,0 +1,54 @@
+name: Plugin Request
+description: Submit a request for a plugin to be created 
+title: "[Plugin Request] "
+labels: ["plugin_request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+         Thank you for submitting a Plugin Request. Please note that not every plugin will be created, and they may not be picked up by me. Anyone is free to get ideas from this repo.
+         
+         Make sure the plugin has not been requested already, duplicate requests will be closed.
+         
+         **Important:** For a plugin to be considered, it must be possible to load the required data. Each plugin must be able to load data from a widget, notification, or free API. You will be required to select the data source below.
+  - type: input
+    id: app_name
+    attributes:
+      label: App / Plugin Name
+      description: The name of the app data should be loaded from, or if a new idea your suggested name for the plugin
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: Where the app can be found, or the API if applicable
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe what the plugin should do, what it should show etc.
+    validations:
+      required: true
+  - type: dropdown
+    id: data_source
+    attributes:
+      label: Where will the plugin get data from?
+      multiple: true
+      options:
+        - Widget
+        - Notification
+        - Free API
+        - Other (please specify in the description)
+  - type: checkboxes
+    id: requirements
+    attributes:
+      label: Requirements
+      description: By submitting this request, you agree that you have read the requirements and provided the correct information required for this plugin to work.
+      options:
+        - label: I have read the requirements
+          required: true
+        - label: The information I have provided is correct
+          required: true

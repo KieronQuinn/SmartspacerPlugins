@@ -1,0 +1,45 @@
+name: Bug Report
+description: Submit a bug report for one of the existing plugins
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+         Thank you for submitting a Bug Report. Please select the Plugin you are reporting for below, and provide a descripton of what's happening.
+         
+         You may be required to provide logs for some bugs.
+         
+         Make sure the bug has not been reported already, duplicate reports will be closed.
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Select the Plugin you are reporting for
+      multiple: true
+      options:
+        - Aftership
+        - Amazon
+        - Battery
+        - BBC Weather
+        - Countdown
+        - Data Usage
+        - Energy Monitor
+        - Google Finance
+        - Google Maps
+        - Google Wallet
+        - Health Connect
+        - Notifications
+        - Pokémon Go
+        - Samsung Health
+        - Sun Times
+        - Tasker
+        - Uber
+        - Yahoo! Sport
+        - YouTube
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the bug
+    validations:
+      required: true
