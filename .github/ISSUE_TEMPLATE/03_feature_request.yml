@@ -36,6 +36,8 @@ body:
         - Uber
         - Yahoo! Sport
         - YouTube
+    validations:
+      required: true
   - type: textarea
     id: request
     attributes:

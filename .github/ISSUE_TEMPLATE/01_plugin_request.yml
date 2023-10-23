@@ -42,6 +42,8 @@ body:
         - Notification
         - Free API
         - Other (please specify in the description)
+    validations:
+      required: true
   - type: checkboxes
     id: requirements
     attributes:
