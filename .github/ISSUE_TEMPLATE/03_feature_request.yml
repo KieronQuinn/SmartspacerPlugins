@@ -15,7 +15,7 @@ body:
     id: plugin
     attributes:
       label: Select the Plugin you are requesting for
-      multiple: true
+      multiple: false
       options:
         - Aftership
         - Amazon
