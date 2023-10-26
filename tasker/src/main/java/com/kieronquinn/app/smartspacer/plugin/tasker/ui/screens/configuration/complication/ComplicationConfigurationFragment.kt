@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,6 +50,7 @@ import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.text.TextInputFr
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.weatherdata.WeatherDataFragment.Companion.setupWeatherDataResultListener
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.views.DemoBcSmartspaceView.Companion.TARGET_ID_PREVIEW
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.views.DemoBcSmartspaceView.Companion.toDemoComplication
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.allowBackground
 import com.kieronquinn.app.smartspacer.sdk.client.SmartspacerClient
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceTarget
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.TapAction
@@ -223,7 +225,10 @@ class ComplicationConfigurationFragment: BoundFragment<FragmentComplicationConfi
                 if(client.checkCallingPermission() == false){
                     val intentSender = client.createPermissionRequestIntentSender()
                         ?: return@collect
-                    permissionResult.launch(IntentSenderRequest.Builder(intentSender).build())
+                    permissionResult.launch(
+                        IntentSenderRequest.Builder(intentSender).build(),
+                        ActivityOptionsCompat.makeBasic().allowBackground()
+                    )
                 }
             }
         }

@@ -3,9 +3,11 @@ package com.kieronquinn.app.smartspacer.plugins.yahoosport.ui.screens.configurat
 import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DataRepository
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.allowBackground
 import com.kieronquinn.app.smartspacer.plugins.yahoosport.repositories.GameRepository
 import com.kieronquinn.app.smartspacer.plugins.yahoosport.targets.YahooSportTarget
 import com.kieronquinn.app.smartspacer.plugins.yahoosport.targets.YahooSportTarget.TargetData
@@ -68,7 +70,10 @@ class ConfigurationViewModelImpl(
         val reconfigureIntentSender = SmartspacerWidgetProvider.getReconfigureIntentSender(
             context, smartspacerId
         ) ?: return
-        launcher.launch(IntentSenderRequest.Builder(reconfigureIntentSender).build())
+        launcher.launch(
+            IntentSenderRequest.Builder(reconfigureIntentSender).build(),
+            ActivityOptionsCompat.makeBasic().allowBackground()
+        )
     }
 
     override fun onClearDismissedClicked() {

@@ -9,10 +9,14 @@ import java.io.File
 
 suspend fun RequestManager.downloadToFile(url: String, authentication: String?): File? {
     return withContext(Dispatchers.IO){
-        val glideUrl = GlideUrl(url).apply {
-            if(authentication != null){
-                headers["Authorization"] = authentication
-            }
+        val glideUrl = GlideUrl(url) {
+            listOf(
+                Pair("Authorization", authentication)
+            ).filterNot {
+                it.second == null
+            }.let {
+                it as List<Pair<String, String>>
+            }.toMap()
         }
         try {
             asFile().load(glideUrl).submit().get()
