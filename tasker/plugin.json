@@ -1,5 +1,6 @@
 {
 	"description": "With infinite possibilities, this plugin adds Tasker support to Smartspacer. Configure your own Targets, Complications and Requirements, with any of the available templates and text formatting.",
+	"changelog": "This release contains fixes for the permission prompt not showing and crashes related to image authentication",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/tasker/tasker-release.apk",
 	"version_code": 14,
 	"required_package": "net.dinglisch.android.taskerm",
