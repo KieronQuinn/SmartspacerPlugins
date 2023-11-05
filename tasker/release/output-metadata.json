@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.kieronquinn.app.smartspacer.plugin.tasker",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 105,
+      "versionName": "1.0.5",
+      "outputFile": "../../../../../apks/tasker-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

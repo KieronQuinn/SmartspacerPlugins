@@ -1,6 +1,6 @@
 {
 	"description": "With infinite possibilities, this plugin adds Tasker support to Smartspacer. Configure your own Targets, Complications and Requirements, with any of the available templates and text formatting.",
-	"changelog": "This release makes it so Tasker Tap Actions can be run without unlocking. If you are invoking a Tasker Tap Action which requires unlock, ",
+	"changelog": "- Added option to Tap Action to allow running while locked\n- Fixed selected Target, Complication and Requirement not updating when being re-selected in the configuration screen",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/tasker/tasker-release.apk",
 	"version_code": 105,
 	"required_package": "net.dinglisch.android.taskerm",
