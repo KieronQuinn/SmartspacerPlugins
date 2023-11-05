@@ -1,6 +1,7 @@
 {
 	"description": "Track your Amazon orders right from your home screen, lock screen and always on display with the Amazon plugin. This plugin automatically gets order information and updates you when your package moves, including showing a live delivery map where available.\n\nRequires Amazon sign in, [source code is available on GitHub for inspection](https://github.com/KieronQuinn/SmartspacerPlugins/tree/main/amazon).",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/amazon/amazon-release.apk",
-	"version_code": 11,
+	"changelog": "- Fixed crash with certain HTML encoded characters\n- Fixed sign in not working automatically with some Amazon regions",
+	"version_code": 102,
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/amazon/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/amazon/screenshots/2.jpg"]
 }
