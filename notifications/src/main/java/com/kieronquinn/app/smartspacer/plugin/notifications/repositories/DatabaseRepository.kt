@@ -19,6 +19,8 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 interface DatabaseRepository {
 
@@ -29,12 +31,14 @@ interface DatabaseRepository {
 
 class DatabaseRepositoryImpl(private val context: Context): DatabaseRepository {
 
-    companion object {
+    companion object: KoinComponent {
+        private val telegramRepository by inject<TelegramRepository>()
+
         private val COMPLICATIONS = mapOf(
             FacebookComplication.PACKAGE_NAME to FacebookComplication::class.java,
             TwitterComplication.PACKAGE_NAME to TwitterComplication::class.java,
             WhatsAppComplication.PACKAGE_NAME to WhatsAppComplication::class.java,
-            TelegramComplication.PACKAGE_NAME to TelegramComplication::class.java,
+            telegramRepository.getTelegramPackageName() to TelegramComplication::class.java,
             ThreadsComplication.PACKAGE_NAME to ThreadsComplication::class.java,
             InstagramComplication.PACKAGE_NAME to InstagramComplication::class.java
         )

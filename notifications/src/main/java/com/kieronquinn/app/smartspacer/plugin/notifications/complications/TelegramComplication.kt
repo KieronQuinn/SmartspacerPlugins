@@ -4,6 +4,7 @@ import android.content.Intent
 import com.kieronquinn.app.smartspacer.plugin.notifications.BuildConfig
 import com.kieronquinn.app.smartspacer.plugin.notifications.R
 import com.kieronquinn.app.smartspacer.plugin.notifications.repositories.DatabaseRepository
+import com.kieronquinn.app.smartspacer.plugin.notifications.repositories.TelegramRepository
 import com.kieronquinn.app.smartspacer.plugin.notifications.ui.activities.TelegramWidgetReconfigureActivity
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceAction
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.Icon
@@ -15,16 +16,13 @@ import android.graphics.drawable.Icon as AndroidIcon
 
 class TelegramComplication: BaseComplication() {
 
-    companion object {
-        const val PACKAGE_NAME = "org.telegram.messenger"
-    }
-
     private val databaseRepository by inject<DatabaseRepository>()
+    private val telegramRepository by inject<TelegramRepository>()
 
-    override val packageName = PACKAGE_NAME
+    override val packageName = telegramRepository.getTelegramPackageName()
 
     override fun getSmartspaceActions(smartspacerId: String): List<SmartspaceAction> {
-        val badgeCount = databaseRepository.getBadgeCount(PACKAGE_NAME)
+        val badgeCount = databaseRepository.getBadgeCount(packageName)
         if(badgeCount == 0) return emptyList()
         return listOf(
             ComplicationTemplate.Basic(

@@ -1,6 +1,7 @@
 {
 	"description": "Complications for notification counts for WhatsApp, Facebook, Facebook Messenger, Telegram, Twitter, Instagram and Threads!",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/notifications/notifications-release.apk",
-	"version_code": 1,
+	"changelog": "- Fixed Telegram reconfigure not working on Android 14\n- Added the ability for the Telegram complication to use any compatible Telegram app. Note: This uses the first encountered installed Telegram app, so if you have multiple installed it will only use the first one by package name.",
+	"version_code": 101,
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/notifications/screenshots/1.jpg"]
 }
