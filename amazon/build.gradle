@@ -14,8 +14,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.amazon"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 11
-        versionName "1.0.1"
+        versionCode 102
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

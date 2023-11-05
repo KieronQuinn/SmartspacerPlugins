@@ -12,13 +12,13 @@ import com.google.gson.annotations.SerializedName
 import com.kieronquinn.app.smartspacer.plugin.amazon.R
 import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.ImageType
 import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.readEncryptedBitmap
+import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.unescape
 import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.writeEncryptedBitmap
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.room.EncryptedValue
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.net.URLDecoder
 
 @Entity
 @Parcelize
@@ -107,12 +107,12 @@ data class AmazonDelivery(
         val decryptedMap = context.readEncryptedBitmap(shipmentId, ImageType.MAP)
         return Delivery(
             shipmentId,
-            URLDecoder.decode(String(name.bytes), "UTF-8"),
+            String(name.bytes).unescape(),
             String(imageUrl.bytes),
             String(lineItemId.bytes),
             String(orderId.bytes),
             Status.values().first { it.name == String(status.bytes) },
-            URLDecoder.decode(String(message.bytes), "UTF-8"),
+            String(message.bytes).unescape(),
             trackingId?.bytes?.let { String(it) },
             trackingData?.bytes?.let { gson.fromJson(String(it), TrackingData::class.java) },
             dismissedAtStatus,

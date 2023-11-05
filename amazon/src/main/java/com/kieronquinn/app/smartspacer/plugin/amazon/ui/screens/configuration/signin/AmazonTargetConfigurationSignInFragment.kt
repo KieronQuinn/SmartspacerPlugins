@@ -59,7 +59,7 @@ class AmazonTargetConfigurationSignInFragment: BoundFragment<FragmentConfigurati
 
     private fun checkCookies() {
         val cookies = cookieManager.getCookies(args.url)
-        if(cookies["x-acbuk"] == null) return
+        if(cookies.none { it.key.startsWith("x-acb") }) return
         whenResumed {
             setFragmentResult(REQUEST_KEY, bundleOf(KEY_RESULT to true))
             findNavController().navigateUp()
