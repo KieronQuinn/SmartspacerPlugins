@@ -49,7 +49,7 @@ android {
 dependencies {
     implementation project(path: ':shared')
 
-    implementation('com.kieronquinn.smartspacer:sdk-client:1.0.2'){
+    implementation('com.kieronquinn.smartspacer:sdk-client:1.0.3'){
         //Exclude transitive dependencies from the client as we already include them in :shared
         exclude group: "com.kieronquinn.smartspacer", module: "sdk-core"
         exclude group: "com.kieronquinn.smartspacer", module: "sdk-plugin"
