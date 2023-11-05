@@ -58,6 +58,7 @@ abstract class TargetConfigurationViewModel: ViewModel() {
 
     abstract val state: StateFlow<State>
 
+    abstract fun setInitialSmartspacerId(smartspacerId: String?)
     abstract fun setSmartspacerId(smartspacerId: String?)
     abstract fun setup(input: SmartspacerTargetUpdateTaskerInput?, blank: TargetTemplate)
     abstract fun setTargetTemplate(targetTemplate: TargetTemplate)
@@ -188,11 +189,6 @@ abstract class TargetConfigurationViewModel: ViewModel() {
         ): State()
     }
 
-    sealed class SmartspacerId {
-        object Unset: SmartspacerId()
-        data class Id(val id: String): SmartspacerId()
-    }
-
 }
 
 class TargetConfigurationViewModelImpl(
@@ -200,7 +196,16 @@ class TargetConfigurationViewModelImpl(
     databaseRepository: DatabaseRepository
 ): TargetConfigurationViewModel(), KoinComponent {
 
-    private val smartspacerId = MutableStateFlow<SmartspacerId?>(null)
+    private val passedSmartspacerId = MutableStateFlow<String?>(null)
+    private val setSmartspacerId = MutableStateFlow<String?>(null)
+
+    private val smartspacerId = combine(
+        passedSmartspacerId,
+        setSmartspacerId
+    ) { passed, set ->
+        set ?: passed
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     private val targetTemplate = MutableStateFlow<TargetTemplate?>(null)
     private val refreshPeriod = MutableStateFlow<String?>(null)
     private val refreshIfNotVisible = MutableStateFlow<Boolean?>(null)
@@ -214,8 +219,8 @@ class TargetConfigurationViewModelImpl(
     }
 
     private val target = smartspacerId.flatMapLatest {
-        if(it !is SmartspacerId.Id) return@flatMapLatest flowOf(null)
-        databaseRepository.getTargetAsFlow(it.id)
+        if(it == null) return@flatMapLatest flowOf(null)
+        databaseRepository.getTargetAsFlow(it)
     }.flowOn(Dispatchers.IO)
 
     private val template = combine(
@@ -227,29 +232,27 @@ class TargetConfigurationViewModelImpl(
     }
 
     override val state = combine(
-        smartspacerId.filterNotNull(),
+        smartspacerId,
         template,
         refreshPeriod.filterNotNull(),
         refreshIfNotVisible.filterNotNull(),
     ) { id, target, period, notVisible ->
-        if(id !is SmartspacerId.Id || target.first == null){
+        if(id == null || target.first == null){
             State.SelectTarget
         }else{
             State.Target(target.first, period, notVisible, target.second, target.third)
         }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
 
-    override fun setSmartspacerId(smartspacerId: String?) {
-        val id = when {
-            smartspacerId != null -> {
-                SmartspacerId.Id(smartspacerId)
-            }
-            //Cannot be unset
-            this.smartspacerId.value is SmartspacerId.Id -> return
-            else -> SmartspacerId.Unset
-        }
+    override fun setInitialSmartspacerId(smartspacerId: String?) {
         viewModelScope.launch {
-            this@TargetConfigurationViewModelImpl.smartspacerId.emit(id)
+            this@TargetConfigurationViewModelImpl.passedSmartspacerId.emit(smartspacerId)
+        }
+    }
+
+    override fun setSmartspacerId(smartspacerId: String?) {
+        viewModelScope.launch {
+            this@TargetConfigurationViewModelImpl.setSmartspacerId.emit(smartspacerId)
         }
     }
 

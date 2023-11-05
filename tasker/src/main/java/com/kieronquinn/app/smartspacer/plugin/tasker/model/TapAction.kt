@@ -16,11 +16,15 @@ import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.TapAction as Sma
 
 sealed class TapAction(
     @SerializedName(NAME_TYPE)
-    val type: TapActionType
+    val type: TapActionType,
+    @Transient
+    @SerializedName(NAME_RUN_WHILE_LOCKED)
+    open val runWhileLocked: Boolean = false
 ): Manipulative<TapAction>, Parcelable {
 
     companion object {
         const val NAME_TYPE = "type"
+        const val NAME_RUN_WHILE_LOCKED = "run_while_locked"
     }
 
     abstract fun toTapAction(context: Context, forceIntent: Boolean = false): SmartspacerTapAction?
@@ -29,8 +33,10 @@ sealed class TapAction(
     @Parcelize
     data class Url(
         @SerializedName("url")
-        val url: String
-    ): TapAction(TapActionType.URL) {
+        val url: String,
+        @SerializedName(NAME_RUN_WHILE_LOCKED)
+        override val runWhileLocked: Boolean = false
+    ): TapAction(TapActionType.URL, runWhileLocked) {
 
         override fun toTapAction(context: Context, forceIntent: Boolean): SmartspacerTapAction? {
             val uri = try {
@@ -42,7 +48,7 @@ sealed class TapAction(
                 addFlags(AndroidIntent.FLAG_ACTIVITY_NEW_TASK)
                 data = uri
             }
-            return SmartspacerTapAction(intent = intent)
+            return SmartspacerTapAction(intent = intent, shouldShowOnLockScreen = runWhileLocked)
         }
 
         override fun describe(context: Context): String {
@@ -64,8 +70,10 @@ sealed class TapAction(
         @SerializedName("package_name")
         val packageName: String,
         @SerializedName("app_name")
-        val appName: String
-    ): TapAction(TapActionType.LAUNCH_APP) {
+        val appName: String,
+        @SerializedName(NAME_RUN_WHILE_LOCKED)
+        override val runWhileLocked: Boolean = false
+    ): TapAction(TapActionType.LAUNCH_APP, runWhileLocked) {
 
         companion object {
             fun fromPackageName(context: Context, packageName: String): LaunchApp {
@@ -76,7 +84,7 @@ sealed class TapAction(
 
         override fun toTapAction(context: Context, forceIntent: Boolean): SmartspacerTapAction {
             val intent = context.packageManager.getLaunchIntentForPackage(packageName)
-            return SmartspacerTapAction(intent = intent)
+            return SmartspacerTapAction(intent = intent, shouldShowOnLockScreen = runWhileLocked)
         }
 
         override suspend fun copyWithManipulations(context: Context, replacements: Map<String, String>): LaunchApp {
@@ -98,8 +106,10 @@ sealed class TapAction(
     @Parcelize
     data class TaskerEvent(
         @SerializedName("id")
-        val id: String
-    ): TapAction(TapActionType.TASKER_EVENT) {
+        val id: String,
+        @SerializedName(NAME_RUN_WHILE_LOCKED)
+        override val runWhileLocked: Boolean = false
+    ): TapAction(TapActionType.TASKER_EVENT, runWhileLocked) {
 
         override fun toTapAction(context: Context, forceIntent: Boolean): SmartspacerTapAction {
             return if (forceIntent) {
@@ -111,7 +121,10 @@ sealed class TapAction(
                 val pendingIntent = PendingIntent.getBroadcast(
                     context, id.hashCode(), intent, PendingIntent_MUTABLE_FLAGS
                 )
-                SmartspacerTapAction(pendingIntent = pendingIntent)
+                SmartspacerTapAction(
+                    pendingIntent = pendingIntent,
+                    shouldShowOnLockScreen = runWhileLocked
+                )
             }
         }
 

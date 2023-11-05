@@ -110,7 +110,7 @@ class RequirementUpdateFragment: BaseSettingsFragment(), BackAvailable, Provides
                 getString(R.string.configuration_requirement_update_is_met_title),
                 getString(R.string.configuration_requirement_update_is_met_content),
                 icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_requirement_met),
-                onChanged = viewModel::setUpdate
+                onChanged = viewModel::setIsMet
             ).takeIf { requirement != null }
         )
     }

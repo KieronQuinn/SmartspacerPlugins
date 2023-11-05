@@ -26,6 +26,7 @@ abstract class TapActionViewModel: ViewModel() {
     abstract fun onLaunchAppClicked(key: String)
     abstract fun onOpenUrlClicked(key: String, current: TapAction.Url?)
     abstract fun onTaskerEventClicked(key: String, current: TapAction.TaskerEvent?)
+    abstract fun onRunWhileLockedChanged(enabled: Boolean)
 
     sealed class State {
         object Loading: State()
@@ -97,6 +98,18 @@ class TapActionViewModelImpl(private val navigation: ContainerNavigation): TapAc
                     inputType = InputType.TYPE_CLASS_TEXT
                 )
             ))
+        }
+    }
+
+    override fun onRunWhileLockedChanged(enabled: Boolean) {
+        viewModelScope.launch {
+            val current = tapAction.value?.tapAction ?: return@launch
+            val new = when(current) {
+                is TapAction.Url -> current.copy(runWhileLocked = enabled)
+                is TapAction.TaskerEvent -> current.copy(runWhileLocked = enabled)
+                is TapAction.LaunchApp -> current.copy(runWhileLocked = enabled)
+            }
+            tapAction.emit(TapActionWrapper(new))
         }
     }
 

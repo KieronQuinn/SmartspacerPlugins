@@ -12,8 +12,11 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.navArgs
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.BaseSettingsItem
+import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Header
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Setting
+import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.SwitchSetting
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.BackAvailable
+import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.ProvidesBack
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.ProvidesTitle
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsAdapter
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsFragment
@@ -28,7 +31,7 @@ import kotlinx.parcelize.Parcelize
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.kieronquinn.app.shared.R as SharedR
 
-class TapActionFragment: BaseSettingsFragment(), BackAvailable, ProvidesTitle {
+class TapActionFragment: BaseSettingsFragment(), BackAvailable, ProvidesTitle, ProvidesBack {
 
     companion object {
         private const val KEY_RESULT = "result"
@@ -81,6 +84,15 @@ class TapActionFragment: BaseSettingsFragment(), BackAvailable, ProvidesTitle {
 
     override fun getTitle(): CharSequence {
         return getString(config.title)
+    }
+
+    override fun onBackPressed(): Boolean {
+        val current = (viewModel.state.value as? State.Loaded)?.tapAction ?: run {
+            viewModel.dismiss()
+            return true
+        }
+        dismissWithResult(current)
+        return true
     }
 
     private fun setupListeners() {
@@ -166,7 +178,15 @@ class TapActionFragment: BaseSettingsFragment(), BackAvailable, ProvidesTitle {
                     REQUEST_KEY_TASKER_ID,
                     tapAction as? TapAction.TaskerEvent
                 )
-            }
+            },
+            Header(getString(R.string.tap_action_options)).takeIf { tapAction != null },
+            SwitchSetting(
+                tapAction?.runWhileLocked ?: true,
+                getString(R.string.tap_action_run_while_locked_title),
+                getString(R.string.tap_action_run_while_locked_content),
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_tap_action_run_while_locked),
+                onChanged = viewModel::onRunWhileLockedChanged
+            ).takeIf { tapAction != null }
         )
     }
 

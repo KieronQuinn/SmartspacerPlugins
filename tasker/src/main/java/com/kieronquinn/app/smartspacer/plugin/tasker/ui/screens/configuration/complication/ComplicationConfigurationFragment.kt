@@ -24,6 +24,7 @@ import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.ProvidesBack
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsAdapter
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.appbar.DragOptionalAppBarLayoutBehaviour.Companion.isDraggable
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.appbar.DragOptionalAppBarLayoutBehaviour.Companion.setDraggable
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.allowBackground
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.applyBottomNavigationInset
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.collapsedState
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.expandProgress
@@ -50,7 +51,6 @@ import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.text.TextInputFr
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.weatherdata.WeatherDataFragment.Companion.setupWeatherDataResultListener
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.views.DemoBcSmartspaceView.Companion.TARGET_ID_PREVIEW
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.views.DemoBcSmartspaceView.Companion.toDemoComplication
-import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.allowBackground
 import com.kieronquinn.app.smartspacer.sdk.client.SmartspacerClient
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceTarget
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.TapAction
@@ -120,7 +120,7 @@ class ComplicationConfigurationFragment: BoundFragment<FragmentComplicationConfi
         setupPreview()
         setupContent()
         setupListeners()
-        viewModel.setSmartspacerId(configurationActivity.taskerInput?.smartspacerId)
+        viewModel.setInitialSmartspacerId(configurationActivity.taskerInput?.smartspacerId)
         viewModel.setup(configurationActivity.taskerInput, createNewComplicationTemplate())
     }
 

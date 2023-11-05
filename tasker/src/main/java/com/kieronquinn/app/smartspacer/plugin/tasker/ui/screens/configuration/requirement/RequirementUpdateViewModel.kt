@@ -22,8 +22,8 @@ abstract class RequirementUpdateViewModel: ViewModel() {
 
     abstract fun setup(input: SmartspacerRequirementSetTaskerInput)
     abstract fun onSmartspacerRequirementClicked()
-    abstract fun setSmartspacerId(smartspacerId: String)
-    abstract fun setUpdate(visible: Boolean)
+    abstract fun setSmartspacerId(smartspacerId: String?)
+    abstract fun setIsMet(visible: Boolean)
 
     sealed class State {
         object Loading: State()
@@ -37,8 +37,25 @@ class RequirementUpdateViewModelImpl(
     databaseRepository: DatabaseRepository
 ): RequirementUpdateViewModel() {
 
-    private val smartspacerId = MutableStateFlow<String?>(null)
-    private val isMet = MutableStateFlow<Boolean?>(null)
+    private val passedSmartspacerId = MutableStateFlow<String?>(null)
+    private val setSmartspacerId = MutableStateFlow<String?>(null)
+
+    private val smartspacerId = combine(
+        passedSmartspacerId,
+        setSmartspacerId
+    ) { passed, set ->
+        set ?: passed
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    private val passedIsMet = MutableStateFlow<Boolean?>(null)
+    private val setIsMet = MutableStateFlow<Boolean?>(null)
+
+    private val isMet = combine(
+        passedIsMet,
+        setIsMet
+    ) { passed, set ->
+        set ?: passed
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
     private val requirement = smartspacerId.flatMapLatest {
         databaseRepository.getRequirementAsFlow(
@@ -54,10 +71,9 @@ class RequirementUpdateViewModelImpl(
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
 
     override fun setup(input: SmartspacerRequirementSetTaskerInput) {
-        if(smartspacerId.value != null || isMet.value != null) return
         viewModelScope.launch {
-            smartspacerId.emit(input.smartspacerId)
-            isMet.emit(input.isMet ?: true)
+            passedIsMet.emit(input.isMet ?: true)
+            passedSmartspacerId.emit(input.smartspacerId)
         }
     }
 
@@ -67,15 +83,15 @@ class RequirementUpdateViewModelImpl(
         }
     }
 
-    override fun setSmartspacerId(smartspacerId: String) {
+    override fun setSmartspacerId(smartspacerId: String?) {
         viewModelScope.launch {
-            this@RequirementUpdateViewModelImpl.smartspacerId.emit(smartspacerId)
+            setSmartspacerId.emit(smartspacerId)
         }
     }
 
-    override fun setUpdate(visible: Boolean) {
+    override fun setIsMet(isMet: Boolean) {
         viewModelScope.launch {
-            this@RequirementUpdateViewModelImpl.isMet.emit(visible)
+            setIsMet.emit(isMet)
         }
     }
 

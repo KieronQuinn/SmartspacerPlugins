@@ -428,6 +428,9 @@
     <string name="tap_action_trigger_tasker_event_dialog_title">Tasker Event ID</string>
     <string name="tap_action_trigger_tasker_event_dialog_content">Specify an ID to be passed to the event, for your own use. Tasker variables are supported using <b>%variable</b> replacements.</string>
     <string name="tap_action_trigger_tasker_event_description">Send Tasker \'Tap\' event with ID: %1s</string>
+    <string name="tap_action_options">Options</string>
+    <string name="tap_action_run_while_locked_title">Run While Locked</string>
+    <string name="tap_action_run_while_locked_content">If the device is locked, run this action immediately rather than prompting to unlock first. Use this only if the action can be run without unlocking, otherwise it will be displayed behind the lock screen and manual unlock will be required.</string>
 
     <string name="weather_data_switch">Display Weather Data</string>
     <string name="weather_data_weather_state_icon_title">Weather Icon</string>

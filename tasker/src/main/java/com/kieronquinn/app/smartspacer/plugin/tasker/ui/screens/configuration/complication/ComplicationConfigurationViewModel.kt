@@ -44,6 +44,7 @@ abstract class ComplicationConfigurationViewModel: ViewModel() {
 
     abstract val state: StateFlow<State>
 
+    abstract fun setInitialSmartspacerId(smartspacerId: String?)
     abstract fun setSmartspacerId(smartspacerId: String?)
     abstract fun setup(input: SmartspacerComplicationUpdateTaskerInput?, blank: ComplicationTemplate)
     abstract fun setComplicationTemplate(complicationTemplate: ComplicationTemplate)
@@ -76,11 +77,6 @@ abstract class ComplicationConfigurationViewModel: ViewModel() {
         ): State()
     }
 
-    sealed class SmartspacerId {
-        object Unset: SmartspacerId()
-        data class Id(val id: String): SmartspacerId()
-    }
-
 }
 
 class ComplicationConfigurationViewModelImpl(
@@ -88,7 +84,16 @@ class ComplicationConfigurationViewModelImpl(
     databaseRepository: DatabaseRepository
 ): ComplicationConfigurationViewModel(), KoinComponent {
 
-    private val smartspacerId = MutableStateFlow<SmartspacerId?>(null)
+    private val passedSmartspacerId = MutableStateFlow<String?>(null)
+    private val setSmartspacerId = MutableStateFlow<String?>(null)
+
+    private val smartspacerId = combine(
+        passedSmartspacerId,
+        setSmartspacerId
+    ) { passed, set ->
+        set ?: passed
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     private val complicationTemplate = MutableStateFlow<ComplicationTemplate?>(null)
     private val refreshPeriod = MutableStateFlow<String?>(null)
     private val refreshIfNotVisible = MutableStateFlow<Boolean?>(null)
@@ -102,8 +107,8 @@ class ComplicationConfigurationViewModelImpl(
     }
 
     private val complication = smartspacerId.flatMapLatest {
-        if(it !is SmartspacerId.Id) return@flatMapLatest flowOf(null)
-        databaseRepository.getComplicationAsFlow(it.id)
+        if(it == null) return@flatMapLatest flowOf(null)
+        databaseRepository.getComplicationAsFlow(it)
     }.flowOn(Dispatchers.IO)
 
     private val template = combine(
@@ -115,29 +120,27 @@ class ComplicationConfigurationViewModelImpl(
     }
 
     override val state = combine(
-        smartspacerId.filterNotNull(),
+        smartspacerId,
         template,
         refreshPeriod.filterNotNull(),
         refreshIfNotVisible.filterNotNull(),
     ) { id, complication, period, notVisible ->
-        if(id !is SmartspacerId.Id || complication.first == null){
+        if(id == null || complication.first == null){
             State.SelectComplication
         }else{
             State.Complication(complication.first, period, notVisible, complication.second, complication.third)
         }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
 
-    override fun setSmartspacerId(smartspacerId: String?) {
-        val id = when {
-            smartspacerId != null -> {
-                SmartspacerId.Id(smartspacerId)
-            }
-            //Cannot be unset
-            this.smartspacerId.value is SmartspacerId.Id -> return
-            else -> SmartspacerId.Unset
-        }
+    override fun setInitialSmartspacerId(smartspacerId: String?) {
         viewModelScope.launch {
-            this@ComplicationConfigurationViewModelImpl.smartspacerId.emit(id)
+            this@ComplicationConfigurationViewModelImpl.passedSmartspacerId.emit(smartspacerId)
+        }
+    }
+
+    override fun setSmartspacerId(smartspacerId: String?) {
+        viewModelScope.launch {
+            this@ComplicationConfigurationViewModelImpl.setSmartspacerId.emit(smartspacerId)
         }
     }
 

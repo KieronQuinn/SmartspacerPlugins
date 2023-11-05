@@ -1,8 +1,8 @@
 {
 	"description": "With infinite possibilities, this plugin adds Tasker support to Smartspacer. Configure your own Targets, Complications and Requirements, with any of the available templates and text formatting.",
-	"changelog": "This release contains fixes for the permission prompt not showing and crashes related to image authentication",
+	"changelog": "This release makes it so Tasker Tap Actions can be run without unlocking. If you are invoking a Tasker Tap Action which requires unlock, ",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/tasker/tasker-release.apk",
-	"version_code": 14,
+	"version_code": 105,
 	"required_package": "net.dinglisch.android.taskerm",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/2.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/3.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/4.jpg"]
 }
