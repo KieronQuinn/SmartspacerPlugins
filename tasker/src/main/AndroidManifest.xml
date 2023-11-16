@@ -140,6 +140,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.activities.SmartspaceVisibilityEventActivity"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/smartspace_visibility_event_title">
+            <intent-filter>
+                <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+            </intent-filter>
+        </activity>
+
         <provider
             android:name=".targets.TaskerTarget"
             android:authorities="${applicationId}.target.tasker"
@@ -185,6 +195,14 @@
             android:permission="com.kieronquinn.app.smartspacer.permission.SEND_UPDATE_BROADCAST">
             <intent-filter>
                 <action android:name="com.kieronquinn.app.smartspacer.REQUEST_COMPLICATION_UPDATE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receivers.SmartspaceVisibilityReceiver"
+            android:exported="true"
+            android:permission="com.kieronquinn.app.smartspacer.permission.SEND_UPDATE_BROADCAST">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.SMARTSPACE_VISIBILITY_CHANGED" />
             </intent-filter>
         </receiver>
 

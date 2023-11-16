@@ -14,8 +14,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.tasker"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 105
-        versionName "1.0.5"
+        versionCode 110
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,7 +49,7 @@ android {
 dependencies {
     implementation project(path: ':shared')
 
-    implementation('com.kieronquinn.smartspacer:sdk-client:1.0.3'){
+    implementation('com.kieronquinn.smartspacer:sdk-client:1.0.5'){
         //Exclude transitive dependencies from the client as we already include them in :shared
         exclude group: "com.kieronquinn.smartspacer", module: "sdk-core"
         exclude group: "com.kieronquinn.smartspacer", module: "sdk-plugin"

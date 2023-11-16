@@ -9,6 +9,8 @@ import com.kieronquinn.app.smartspacer.plugin.tasker.model.SmartspacerTargetDism
 import com.kieronquinn.app.smartspacer.plugin.tasker.repositories.DatabaseRepository
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.activities.ConfigurationActivity.NavGraphMapping
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.activities.TargetDismissEventActivity
+import com.kieronquinn.app.smartspacer.plugin.tasker.utils.extensions.isTaskerInstalled
+import com.kieronquinn.app.smartspacer.sdk.model.CompatibilityState
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceTarget
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerTargetProvider
 import org.koin.android.ext.android.inject
@@ -39,8 +41,15 @@ class TaskerTarget: SmartspacerTargetProvider() {
             configActivity = createIntent(provideContext(), NavGraphMapping.TARGET_SETUP),
             refreshIfNotVisible = target?.refreshIfNotVisible ?: false,
             refreshPeriodMinutes = target?.refreshPeriod ?: 0,
-            allowAddingMoreThanOnce = true
+            allowAddingMoreThanOnce = true,
+            compatibilityState = getCompatibilityState()
         )
+    }
+
+    private fun getCompatibilityState(): CompatibilityState {
+        return if(!provideContext().isTaskerInstalled()) {
+            CompatibilityState.Incompatible(resources.getString(R.string.target_incompatible))
+        } else CompatibilityState.Compatible
     }
 
     override fun onDismiss(smartspacerId: String, targetId: String): Boolean {

@@ -609,6 +609,8 @@ class TargetConfigurationFragment: BoundFragment<FragmentTargetConfigurationBind
     override fun onComplicationRefreshPeriodClicked() = viewModel.onTargetRefreshPeriodClicked()
     override fun onComplicationRefreshIfNotVisibleChanged(enabled: Boolean) =
         viewModel.onTargetRefreshWhenNotVisibleChanged(enabled)
+    override fun onComplicationDisableTrimChanged(enabled: Boolean) =
+        viewModel.onTargetSubComplicationDisableTrimChanged(enabled)
 
     inner class SettingsAdapter: BaseSettingsAdapter(binding.targetConfigurationRecyclerview, emptyList())
 

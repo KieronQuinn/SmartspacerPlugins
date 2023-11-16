@@ -62,6 +62,8 @@ import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.ta
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.picker.TargetPickerViewModelImpl
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.template.TargetTemplatePickerViewModel
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.target.template.TargetTemplatePickerViewModelImpl
+import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.visibility.SmartspaceVisibilityEventConfigurationViewModel
+import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.visibility.SmartspaceVisibilityEventConfigurationViewModelImpl
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.icon.IconPickerViewModel
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.icon.IconPickerViewModelImpl
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.icon.file.FilePickerViewModel
@@ -154,6 +156,7 @@ class TaskerPlugin: SmartspacerPlugin() {
         viewModel<RequirementSetupViewModel> { RequirementSetupViewModelImpl(get(), get()) }
         viewModel<RequirementUpdateViewModel> { RequirementUpdateViewModelImpl(get(), get()) }
         viewModel<RequirementPickerViewModel> { RequirementPickerViewModelImpl(get(), get()) }
+        viewModel<SmartspaceVisibilityEventConfigurationViewModel> { SmartspaceVisibilityEventConfigurationViewModelImpl() }
     }
 
     override fun GsonBuilder.configure() = apply {

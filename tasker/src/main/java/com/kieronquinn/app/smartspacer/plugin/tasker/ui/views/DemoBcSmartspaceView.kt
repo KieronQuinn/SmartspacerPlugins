@@ -42,8 +42,9 @@ class DemoBcSmartspaceView @JvmOverloads constructor(
         super.onSmartspaceTargetsUpdate(targets)
     }
 
-    override fun onLongPress(target: SmartspaceTarget) {
+    override fun onLongPress(target: SmartspaceTarget): Boolean {
         //Ignore long presses since the dialog is useless here
+        return true
     }
 
 }

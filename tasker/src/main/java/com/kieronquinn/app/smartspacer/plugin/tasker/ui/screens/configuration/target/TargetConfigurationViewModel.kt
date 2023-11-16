@@ -176,6 +176,7 @@ abstract class TargetConfigurationViewModel: ViewModel() {
     abstract fun onTargetSubComplicationLimitToSurfacesChanged(surfaces: Set<UiSurface>)
     abstract fun onTargetSubComplicationWeatherDataClicked()
     abstract fun onTargetSubComplicationWeatherDataChanged(weatherData: WeatherData?)
+    abstract fun onTargetSubComplicationDisableTrimChanged(enabled: Boolean)
 
     sealed class State {
         object Loading: State()
@@ -1284,6 +1285,12 @@ class TargetConfigurationViewModelImpl(
             copyWithSubComplication(subComplication?.copyCompat(
                 complicationExtras = extras.copy(weatherData = weatherData))
             )
+        }
+    }
+
+    override fun onTargetSubComplicationDisableTrimChanged(enabled: Boolean) {
+        updateSubComplication {
+            copyWithSubComplication(subComplication?.copyCompat(disableTrim = enabled))
         }
     }
 

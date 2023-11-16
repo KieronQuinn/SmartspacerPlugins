@@ -16,6 +16,7 @@
     <string name="target_setup_header">This is just the Target setup. To set the content of the Target, use the Tasker Plugin for Smartspacer options in Tasker</string>
     <string name="target_setup_label">Settings</string>
     <string name="target_setup_description">Set a label for this Target</string>
+    <string name="target_incompatible">This Target requires Tasker or Automate, get them from the Play Store</string>
 
     <string name="complication_label">Tasker</string>
     <string name="complication_description_unset">Dynamically updated Tasker Complication, with infinite possibilities</string>
@@ -27,6 +28,7 @@
     <string name="complication_setup_header">This is just the Complication setup. To set the content of the Complication, use the Tasker Plugin for Smartspacer options in Tasker</string>
     <string name="complication_setup_label">Settings</string>
     <string name="complication_setup_description">Set a label for this Complication</string>
+    <string name="complication_incompatible">This Complication requires Tasker or Automate, get them from the Play Store</string>
 
     <string name="requirement_label">Tasker</string>
     <string name="requirement_description_unset">Dynamically set requirement from Tasker, with infinite possibilities</string>
@@ -350,6 +352,8 @@
     <string name="configuration_complication_header">Complication</string>
     <string name="configuration_complication_icon_title">Icon</string>
     <string name="configuration_complication_content_title">Content</string>
+    <string name="configuration_complication_disable_trim_title">Disable Automatic Trim</string>
+    <string name="configuration_complication_disable_trim_content">Allow content of unlimited length.\n<b>Warning:</b> This may cause UI issues</string>
     <string name="configuration_complication_tap_action_title">Tap Action</string>
     <string name="configuration_complication_extras_header">Complication Extras</string>
     <string name="configuration_complication_limit_to_surface_title">Limit to Surface</string>
@@ -505,5 +509,14 @@
     <string name="update_complication_event_complication_content">Select the Complication to trigger this event for when an update is requested</string>
     <string name="update_complication_event_complication_not_sending">This Complication is currently set to only be manually updated. Make sure you update it with the Update Complication option to have an update period to receive update events.</string>
     <string name="update_complication_event_complication_blurb">Triggered when the Complication \"%1s\" has an update requested</string>
+
+    <string name="smartspace_visibility_event_title">Smartspace Visibility</string>
+    <string name="smartspace_visibility_event_title_short">Visibility</string>
+    <string name="smartspace_visibility_event_title_visibility_warning">You must have at least one Tasker Target or Complication added to Smartspacer for this option to work (it does not need to be currently visible)</string>
+    <string name="smartspace_visibility_event_title_visibility_title">Trigger When</string>
+    <string name="smartspace_visibility_event_title_visibility_content_visible">Smartspace becomes visible</string>
+    <string name="smartspace_visibility_event_title_visibility_content_invisible">Smartspace stops being visible</string>
+    <string name="smartspace_visibility_event_blurb_visible">Triggered when Smartspace becomes visible</string>
+    <string name="smartspace_visibility_event_blurb_invisible">Triggered when Smartspace stops being visible</string>
 
 </resources>

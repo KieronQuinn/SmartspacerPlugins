@@ -107,6 +107,11 @@ class ComplicationConfigurationFragment: BoundFragment<FragmentComplicationConfi
         taskerAction.onCreate()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        SmartspacerClient.close()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val background = monet.getBackgroundColorSecondary(requireContext())
@@ -336,6 +341,8 @@ class ComplicationConfigurationFragment: BoundFragment<FragmentComplicationConfi
         viewModel.onComplicationRefreshPeriodClicked()
     override fun onComplicationRefreshIfNotVisibleChanged(enabled: Boolean) =
         viewModel.onComplicationRefreshWhenNotVisibleChanged(enabled)
+    override fun onComplicationDisableTrimChanged(enabled: Boolean) =
+        viewModel.onComplicationDisableTrimChanged(enabled)
 
     inner class SettingsAdapter: BaseSettingsAdapter(binding.complicationConfigurationRecyclerview, emptyList())
 

@@ -5,6 +5,8 @@ import com.kieronquinn.app.smartspacer.plugin.shared.ui.activities.BaseConfigura
 import com.kieronquinn.app.smartspacer.plugin.tasker.R
 import com.kieronquinn.app.smartspacer.plugin.tasker.repositories.DatabaseRepository
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.activities.ConfigurationActivity
+import com.kieronquinn.app.smartspacer.plugin.tasker.utils.extensions.isTaskerInstalled
+import com.kieronquinn.app.smartspacer.sdk.model.CompatibilityState
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceAction
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerComplicationProvider
 import org.koin.android.ext.android.inject
@@ -40,8 +42,15 @@ class TaskerComplication: SmartspacerComplicationProvider() {
             ),
             refreshIfNotVisible = complication?.refreshIfNotVisible ?: false,
             refreshPeriodMinutes = complication?.refreshPeriod ?: 0,
-            allowAddingMoreThanOnce = true
+            allowAddingMoreThanOnce = true,
+            compatibilityState = getCompatibilityState()
         )
+    }
+
+    private fun getCompatibilityState(): CompatibilityState {
+        return if(!provideContext().isTaskerInstalled()) {
+            CompatibilityState.Incompatible(resources.getString(R.string.complication_incompatible))
+        } else CompatibilityState.Compatible
     }
 
     override fun onProviderRemoved(smartspacerId: String) {

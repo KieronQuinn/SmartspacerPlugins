@@ -25,6 +25,7 @@ import com.kieronquinn.app.smartspacer.plugin.tasker.R
 import com.kieronquinn.app.smartspacer.plugin.tasker.model.Text
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.string.StringInputFragment.Companion.setupStringResultListener
 import com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.text.TextInputViewModel.State
+import com.kieronquinn.app.smartspacer.plugin.tasker.utils.extensions.filterUsable
 import com.kieronquinn.app.smartspacer.plugin.tasker.utils.extensions.label
 import com.kieronquinn.app.smartspacer.sdk.utils.getParcelableCompat
 import kotlinx.parcelize.Parcelize
@@ -125,7 +126,7 @@ class TextInputFragment: BaseSettingsFragment(), BackAvailable, ProvidesTitle, P
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_text_truncate_at),
                 text.truncateAtType,
                 viewModel::onTruncateChanged,
-                TruncateAt.values().filterNot { it.label() == null }.toList()
+                TruncateAt.values().toList().filterUsable()
             ) {
                 it.label() ?: 0
             }

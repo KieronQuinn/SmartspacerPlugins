@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.kieronquinn.app.smartspacer.plugin.tasker.utils.extensions.UiSurface_validSurfaces
+import com.kieronquinn.app.smartspacer.sdk.annotations.DisablingTrim
 import com.kieronquinn.app.smartspacer.sdk.annotations.LimitedNativeSupport
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceAction
 import com.kieronquinn.app.smartspacer.sdk.model.UiSurface
 import com.kieronquinn.app.smartspacer.sdk.model.weather.WeatherData.WeatherStateIcon
+import com.kieronquinn.app.smartspacer.sdk.utils.TrimToFit
 import kotlinx.parcelize.Parcelize
 import com.kieronquinn.app.smartspacer.sdk.model.weather.WeatherData as SmartspacerWeatherData
 import com.kieronquinn.app.smartspacer.sdk.utils.ComplicationTemplate.Basic as ComplicationTemplateBasic
@@ -26,6 +28,9 @@ sealed class ComplicationTemplate(
     @Transient
     @SerializedName(NAME_COMPLICATION_EXTRAS)
     open val complicationExtras: ComplicationExtras,
+    @Transient
+    @SerializedName(NAME_DISABLE_TRIM)
+    open val disableTrim: Boolean,
     @SerializedName(NAME_COMPLICATION_TYPE)
     val templateType: TemplateType
 ): Manipulative<ComplicationTemplate> {
@@ -36,6 +41,7 @@ sealed class ComplicationTemplate(
         private const val NAME_CONTENT = "content"
         private const val NAME_ON_CLICK = "on_click"
         private const val NAME_COMPLICATION_EXTRAS = "complication_extras"
+        private const val NAME_DISABLE_TRIM = "disable_trim"
     }
 
     abstract fun toComplication(
@@ -47,10 +53,11 @@ sealed class ComplicationTemplate(
         icon: Icon? = this.icon,
         content: Text = this.content,
         complicationExtras: ComplicationExtras = this.complicationExtras,
-        onClick: TapAction = this.onClick
+        onClick: TapAction = this.onClick,
+        disableTrim: Boolean = this.disableTrim
     ): ComplicationTemplate {
         return when(this) {
-            is Basic -> copy(icon, content, onClick, complicationExtras)
+            is Basic -> copy(icon, content, onClick, complicationExtras, disableTrim)
         }
     }
 
@@ -63,14 +70,18 @@ sealed class ComplicationTemplate(
         override val onClick: TapAction,
         @SerializedName(NAME_COMPLICATION_EXTRAS)
         override val complicationExtras: ComplicationExtras,
+        @SerializedName(NAME_DISABLE_TRIM)
+        override val disableTrim: Boolean = false
     ): ComplicationTemplate(
         icon,
         content,
         onClick,
         complicationExtras,
+        disableTrim,
         TemplateType.BASIC
     ) {
 
+        @OptIn(DisablingTrim::class)
         override fun toComplication(
             context: Context, id: String
         ): SmartspaceAction {
@@ -79,7 +90,8 @@ sealed class ComplicationTemplate(
                 icon = icon?.toIcon(context),
                 content = content.toText(),
                 onClick = onClick.toTapAction(context),
-                extras = Bundle.EMPTY
+                extras = Bundle.EMPTY,
+                trimToFit = if(disableTrim) TrimToFit.Disabled else TrimToFit.Enabled
             ).create().apply {
                 complicationExtras.applyToComplication(this)
             }

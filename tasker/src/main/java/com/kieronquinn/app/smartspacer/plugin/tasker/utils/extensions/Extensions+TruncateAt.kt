@@ -14,3 +14,7 @@ fun TruncateAt.label(): Int? {
         else -> null
     }
 }
+
+fun List<TruncateAt>.filterUsable(): List<TruncateAt> {
+    return filter { it.label() != null }.filterNot { it == TruncateAt.MARQUEE }
+}

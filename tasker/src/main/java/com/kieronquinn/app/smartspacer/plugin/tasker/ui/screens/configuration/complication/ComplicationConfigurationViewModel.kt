@@ -64,6 +64,7 @@ abstract class ComplicationConfigurationViewModel: ViewModel() {
     abstract fun onComplicationRefreshPeriodClicked()
     abstract fun onComplicationRefreshPeriodChanged(refreshPeriod: String)
     abstract fun onComplicationRefreshWhenNotVisibleChanged(enabled: Boolean)
+    abstract fun onComplicationDisableTrimChanged(enabled: Boolean)
 
     sealed class State {
         object Loading: State()
@@ -283,6 +284,14 @@ class ComplicationConfigurationViewModelImpl(
     override fun onComplicationRefreshWhenNotVisibleChanged(enabled: Boolean) {
         viewModelScope.launch {
             refreshIfNotVisible.emit(enabled)
+        }
+    }
+
+    override fun onComplicationDisableTrimChanged(enabled: Boolean) {
+        viewModelScope.launch {
+            updateComplication<ComplicationTemplate> {
+                copyCompat(disableTrim = enabled)
+            }
         }
     }
 

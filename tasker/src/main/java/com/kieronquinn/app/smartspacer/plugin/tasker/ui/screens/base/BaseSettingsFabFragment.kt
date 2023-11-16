@@ -1,5 +1,6 @@
 package com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.base
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +48,7 @@ abstract class BaseSettingsFabFragment: BoundFragment<FragmentSettingsFabBinding
     }
 
     private fun setupFab() = with(binding.settingsBaseFab) {
-        applyMonet()
+        backgroundTintList = ColorStateList.valueOf(monet.getPrimaryColor(requireContext()))
         val margin = resources.getDimensionPixelSize(R.dimen.margin_16)
         onApplyInsets { view, insets ->
             view.updateLayoutParams<ConstraintLayout.LayoutParams> {

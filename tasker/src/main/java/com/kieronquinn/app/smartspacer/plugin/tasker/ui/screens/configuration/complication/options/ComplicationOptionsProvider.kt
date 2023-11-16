@@ -3,9 +3,9 @@ package com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.c
 import android.content.Context
 import android.os.Build
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.BaseSettingsItem
-import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Header
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Setting
+import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.SwitchSetting
 import com.kieronquinn.app.smartspacer.plugin.tasker.R
 import com.kieronquinn.app.smartspacer.plugin.tasker.model.ComplicationTemplate
 import com.kieronquinn.app.smartspacer.plugin.tasker.model.Icon
@@ -95,6 +95,13 @@ interface ComplicationOptionsProvider<T: ComplicationTemplate, L: ComplicationOp
                 null,
                 onClick = listener::onComplicationContentClicked
             ),
+            SwitchSetting(
+                template.disableTrim,
+                context.getString(R.string.configuration_complication_disable_trim_title),
+                context.getText(R.string.configuration_complication_disable_trim_content),
+                null,
+                onChanged = listener::onComplicationDisableTrimChanged
+            ),
             Setting(
                 context.getString(R.string.configuration_complication_tap_action_title),
                 template.onClick.describe(context),
@@ -107,7 +114,7 @@ interface ComplicationOptionsProvider<T: ComplicationTemplate, L: ComplicationOp
                 null,
                 onClick = listener::onComplicationRefreshPeriodClicked
             ).takeIf { showExtras },
-            GenericSettingsItem.SwitchSetting(
+            SwitchSetting(
                 refreshWhenNotVisible,
                 context.getString(R.string.configuration_target_refresh_when_not_visible_title),
                 context.getString(R.string.configuration_complication_refresh_when_not_visible_content),
@@ -165,6 +172,7 @@ interface ComplicationOptionsProvider<T: ComplicationTemplate, L: ComplicationOp
         fun onComplicationWeatherDataClicked()
         fun onComplicationRefreshPeriodClicked()
         fun onComplicationRefreshIfNotVisibleChanged(enabled: Boolean)
+        fun onComplicationDisableTrimChanged(enabled: Boolean)
     }
 
 }

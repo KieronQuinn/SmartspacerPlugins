@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_smartspace_visibility_event"
+    app:startDestination="@id/smartspaceVisibilityEventConfigurationFragment">
+
+    <fragment
+        android:id="@+id/smartspaceVisibilityEventConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.tasker.ui.screens.configuration.visibility.SmartspaceVisibilityEventConfigurationFragment"
+        android:label="@string/smartspace_visibility_event_title_short"
+        tools:layout="@layout/fragment_settings_base" />
+
+</navigation>

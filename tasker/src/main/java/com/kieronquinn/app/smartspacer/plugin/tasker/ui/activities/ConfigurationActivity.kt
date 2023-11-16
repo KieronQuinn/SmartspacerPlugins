@@ -4,6 +4,7 @@ import androidx.annotation.NavigationRes
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.NavGraphRepository
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.activities.BaseConfigurationActivity
 import com.kieronquinn.app.smartspacer.plugin.tasker.R
+import com.kieronquinn.app.smartspacer.sdk.client.SmartspacerClient
 
 open class ConfigurationActivity: BaseConfigurationActivity() {
 
@@ -59,7 +60,16 @@ open class ConfigurationActivity: BaseConfigurationActivity() {
         REQUIREMENT_UPDATE(
             ".ui.activities.RequirementUpdateActivity",
             R.navigation.nav_graph_requirement_update
+        ),
+        SMARTSPACE_VISIBLITY(
+            ".ui.activities.SmartspaceVisibilityEventActivity",
+            R.navigation.nav_graph_smartspace_visibility_event
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        SmartspacerClient.close()
     }
 
 }
