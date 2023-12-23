@@ -1,6 +1,7 @@
 {
 	"description": "Get health data from Health Connect in a Complication with this plugin. With 20 available data types, you can always keep a track of what matters to you.\n\nNote: Health Connect is not a live system, there may be some delay in data updating.",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/healthconnect/healthconnect-release.apk",
-	"version_code": 1,
+	"version_code": 101,
+	"changelog": "Fixed miles showing as 'm' rather than 'mi'",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/healthconnect/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/healthconnect/screenshots/2.jpg"]
 }
