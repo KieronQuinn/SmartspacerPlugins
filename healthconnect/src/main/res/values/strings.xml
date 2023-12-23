@@ -124,7 +124,7 @@
     <string name="unit_type_length_kilometers">Kilometers</string>
     <string name="unit_type_length_kilometers_suffix">km</string>
     <string name="unit_type_length_miles">Miles</string>
-    <string name="unit_type_length_miles_suffix">m</string>
+    <string name="unit_type_length_miles_suffix">mi</string>
     <string name="unit_type_length_inches">Inches</string>
     <string name="unit_type_length_inches_suffix">in</string>
     <string name="unit_type_length_feet">Feet</string>
