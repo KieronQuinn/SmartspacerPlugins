@@ -1,7 +1,7 @@
 {
-	"description": "Complications for notification counts for WhatsApp, Facebook, Facebook Messenger, Telegram, Twitter, Instagram and Threads!",
+	"description": "Complications for notification counts for WhatsApp, Facebook, Facebook Messenger, Telegram, Outlook, K9 Mail, Google Voice, Twitter, Instagram and Threads!",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/notifications/notifications-release.apk",
-	"changelog": "- Fixed Telegram reconfigure not working on Android 14\n- Added the ability for the Telegram complication to use any compatible Telegram app. Note: This uses the first encountered installed Telegram app, so if you have multiple installed it will only use the first one by package name.",
-	"version_code": 101,
+	"changelog": "- Added Outlook Complication\n- Added K9 Mail Complication\n- Added Google Voice Complication\n- Added new WhatsApp Complication, widget based, replacing the badge one. The badge one will still work, but will be removed in a future release",
+	"version_code": 110,
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/notifications/screenshots/1.jpg"]
 }
