@@ -1,5 +1,6 @@
 package com.kieronquinn.app.smartspacer.plugin.googlefinance.ui.screens.configuration
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -85,7 +86,7 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_configuration_reconfigure)
             ) {
                 viewModel.onReconfigureClicked(requireContext(), reconfigureLauncher)
-            },
+            }.takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.S },
             Setting(
                 getString(R.string.target_configuration_minimum_trend_title),
                 targetData.getMinimumTrendContent(),

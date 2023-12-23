@@ -1,8 +1,10 @@
 package com.kieronquinn.app.smartspacer.plugin.googlefinance.ui.screens.configuration
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.smartspacer.plugin.googlefinance.targets.GoogleFinanceTarget
@@ -10,6 +12,7 @@ import com.kieronquinn.app.smartspacer.plugin.googlefinance.targets.GoogleFinanc
 import com.kieronquinn.app.smartspacer.plugin.googlefinance.targets.GoogleFinanceTarget.TargetData.MinimumTrendDirection
 import com.kieronquinn.app.smartspacer.plugin.shared.components.navigation.ContainerNavigation
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DataRepository
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.allowBackground
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerTargetProvider
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -64,6 +67,7 @@ class ConfigurationViewModelImpl(
         }
     }
 
+    @SuppressLint("NewApi")
     override fun onReconfigureClicked(
         context: Context,
         launcher: ActivityResultLauncher<IntentSenderRequest>
@@ -72,7 +76,10 @@ class ConfigurationViewModelImpl(
         val intentSender = SmartspacerWidgetProvider.getReconfigureIntentSender(
             context, smartspacerId
         ) ?: return
-        launcher.launch(IntentSenderRequest.Builder(intentSender).build())
+        launcher.launch(
+            IntentSenderRequest.Builder(intentSender).build(),
+            ActivityOptionsCompat.makeBasic().allowBackground()
+        )
     }
 
     override fun onMinimumTrendClicked() {
