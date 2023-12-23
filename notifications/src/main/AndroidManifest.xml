@@ -20,11 +20,11 @@
             android:excludeFromRecents="true"/>
 
         <activity
-            android:name=".ui.activities.TelegramWidgetReconfigureActivity"
-            android:description="@string/complication_telegram_settings_content"
+            android:name=".ui.activities.WidgetReconfigureActivity"
+            android:description="@string/complication_settings_content"
             android:exported="true"
             android:icon="@drawable/ic_settings"
-            android:label="@string/complication_telegram_settings_title"
+            android:label="@string/complication_settings_title"
             android:excludeFromRecents="true"/>
 
         <activity-alias
@@ -71,7 +71,7 @@
 
         <provider
             android:authorities="${applicationId}.complication.whatsapp"
-            android:name=".complications.WhatsAppComplication"
+            android:name=".complications.WhatsAppLegacyComplication"
             android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
             android:exported="true">
             <intent-filter>
@@ -102,6 +102,46 @@
         <provider
             android:authorities="${applicationId}.complication.threads"
             android:name=".complications.ThreadsComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.googlevoice"
+            android:name=".complications.GoogleVoiceComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.whatsappv2"
+            android:name=".complications.WhatsAppComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.outlook"
+            android:name=".complications.OutlookComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.k9"
+            android:name=".complications.K9Complication"
             android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
             android:exported="true">
             <intent-filter>
@@ -142,6 +182,30 @@
         <provider
             android:authorities="${applicationId}.widgets.telegram"
             android:name=".providers.TelegramWidgetProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.googlevoice"
+            android:name=".providers.GoogleVoiceWidgetProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.whatsapp"
+            android:name=".providers.WhatsAppWidgetProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.outlook"
+            android:name=".providers.OutlookWidgetProvider"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.k9"
+            android:name=".providers.K9WidgetProvider"
             android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
             android:exported="true"/>
 

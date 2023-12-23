@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="90.0dp"
+    android:height="90.0dp"
+    android:viewportWidth="90.0"
+    android:viewportHeight="90.0">
+    <group
+        android:pivotX="45"
+        android:pivotY="45"
+        android:scaleY="2"
+        android:scaleX="2">
+        <path
+            android:fillColor="?android:textColorPrimary"
+            android:pathData="M45.75,36.75C45.75,40.5 45.75,43.5 45.75,43.5C45.75,43.914 46.086,44.25 46.5,44.25H53.25C56.625,44.25 52.785,39.928 51.428,38.572C50.072,37.215 45.75,33 45.75,36.75Z" />
+        <path
+            android:fillColor="?android:textColorPrimary"
+            android:pathData="M53.111,59.107C49.963,59.623 46.144,58.697 42.495,56.507L43.723,53.779L46.502,52.5L50.86,54.982L53.111,59.107Z" />
+        <path
+            android:fillColor="?android:textColorPrimary"
+            android:pathData="M31.267,37.268C30.75,40.414 31.676,44.233 33.868,47.882L36.682,46.568L37.875,43.875L35.516,40.016L31.267,37.268Z" />
+        <path
+            android:fillColor="?android:textColorPrimary"
+            android:pathData="M46.875,31.125C46.254,31.125 45.75,31.629 45.75,32.25V36.75C49.892,36.75 53.25,40.108 53.25,44.25H57.75C58.371,44.25 58.875,43.746 58.875,43.125C58.875,36.497 53.503,31.125 46.875,31.125Z" />
+        <path
+            android:fillColor="?android:textColorPrimary"
+            android:pathData="M57.81,56.528C58.401,55.958 58.425,55.02 57.863,54.422L52.437,48.636C51.846,48.073 50.916,48.086 50.34,48.662L46.506,52.502L53.111,59.11C54.896,58.851 56.235,58.088 57.454,56.871L57.81,56.528Z" />
+        <path
+            android:fillColor="?android:textColorPrimary"
+            android:pathData="M33.868,47.882C34.862,49.522 36.178,51.182 37.667,52.678C39.159,54.173 40.854,55.513 42.497,56.507L46.508,52.502L37.875,43.875" />
+        <path
+            android:fillColor="?android:textColorPrimary"
+            android:pathData="M40.764,41.074L40.774,41.083L41.38,40.474C42.114,39.739 42.114,38.544 41.38,37.806L36.294,32.708C35.56,31.972 34.363,31.972 33.63,32.708L33.448,32.831C32.267,34.014 31.551,35.541 31.268,37.268L37.875,43.875L40.764,41.074Z" />
+    </group>
+</vector>

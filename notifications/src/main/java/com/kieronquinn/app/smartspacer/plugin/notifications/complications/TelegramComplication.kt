@@ -1,11 +1,12 @@
 package com.kieronquinn.app.smartspacer.plugin.notifications.complications
 
 import android.content.Intent
+import android.os.Build
 import com.kieronquinn.app.smartspacer.plugin.notifications.BuildConfig
 import com.kieronquinn.app.smartspacer.plugin.notifications.R
 import com.kieronquinn.app.smartspacer.plugin.notifications.repositories.DatabaseRepository
 import com.kieronquinn.app.smartspacer.plugin.notifications.repositories.TelegramRepository
-import com.kieronquinn.app.smartspacer.plugin.notifications.ui.activities.TelegramWidgetReconfigureActivity
+import com.kieronquinn.app.smartspacer.plugin.notifications.ui.activities.WidgetReconfigureActivity
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceAction
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.Icon
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.TapAction
@@ -42,7 +43,9 @@ class TelegramComplication: BaseComplication() {
             AndroidIcon.createWithResource(provideContext(), R.drawable.ic_complication_telegram),
             widgetProvider = "${BuildConfig.APPLICATION_ID}.widgets.telegram",
             compatibilityState = getCompatibilityState(R.string.complication_telegram_incompatible),
-            configActivity = Intent(provideContext(), TelegramWidgetReconfigureActivity::class.java)
+            configActivity = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                Intent(provideContext(), WidgetReconfigureActivity::class.java)
+            }else null
         )
     }
 

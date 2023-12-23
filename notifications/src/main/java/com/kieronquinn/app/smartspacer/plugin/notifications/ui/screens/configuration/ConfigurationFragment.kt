@@ -12,7 +12,7 @@ import com.kieronquinn.app.smartspacer.plugin.notifications.complications.Facebo
 import com.kieronquinn.app.smartspacer.plugin.notifications.complications.InstagramComplication
 import com.kieronquinn.app.smartspacer.plugin.notifications.complications.ThreadsComplication
 import com.kieronquinn.app.smartspacer.plugin.notifications.complications.TwitterComplication
-import com.kieronquinn.app.smartspacer.plugin.notifications.complications.WhatsAppComplication
+import com.kieronquinn.app.smartspacer.plugin.notifications.complications.WhatsAppLegacyComplication
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.BaseSettingsItem
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.BackAvailable
@@ -85,7 +85,7 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable, ProvidesTitl
     enum class Config(@StringRes val title: Int, val packageName: String) {
         FACEBOOK(R.string.complication_facebook_label_short, FacebookComplication.PACKAGE_NAME),
         TWITTER(R.string.complication_twitter_label_short, TwitterComplication.PACKAGE_NAME),
-        WHATSAPP(R.string.complication_whatsapp_label_short, WhatsAppComplication.PACKAGE_NAME),
+        WHATSAPP(R.string.complication_whatsapp_label_short, WhatsAppLegacyComplication.PACKAGE_NAME),
         INSTAGRAM(R.string.complication_instagram_label_short, InstagramComplication.PACKAGE_NAME),
         THREADS(R.string.complication_threads_label_short, ThreadsComplication.PACKAGE_NAME)
     }

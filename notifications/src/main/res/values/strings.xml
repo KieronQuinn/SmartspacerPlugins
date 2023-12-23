@@ -20,8 +20,11 @@
     <string name="complication_twitter_incompatible">This Complication requires the Twitter app</string>
 
     <string name="complication_whatsapp_label">WhatsApp Notifications</string>
+    <string name="complication_whatsapp_label_deprecated">WhatsApp Notifications (Legacy)</string>
     <string name="complication_whatsapp_label_short">WhatsApp</string>
     <string name="complication_whatsapp_description">Display a count of WhatsApp notifications from the WhatsApp app</string>
+    <string name="complication_whatsapp_description_deprecated">This Complication has been replaced and will be removed in a future update, consider removing and replacing with the new WhatsApp Notifications complication (included in the same plugin)</string>
+    <string name="complication_whatsapp_description_legacy">This Complication has been replaced, please use the new one included in this plugin</string>
     <string name="complication_whatsapp_incompatible">This Complication requires the WhatsApp app</string>
 
     <string name="complication_instagram_label">Instagram Notifications</string>
@@ -38,7 +41,20 @@
     <string name="complication_telegram_label_short">Telegram</string>
     <string name="complication_telegram_description">Display a count of Telegram notifications from the Telegram app</string>
     <string name="complication_telegram_incompatible">This Complication requires the Telegram app</string>
-    <string name="complication_telegram_settings_title">Configure</string>
-    <string name="complication_telegram_settings_content">Change selected Chats</string>
+
+    <string name="complication_google_voice_label">Google Voice</string>
+    <string name="complication_google_voice_description">Display a count of unseen Google Voice messages, calls and voicemails</string>
+    <string name="complication_google_voice_incompatible">This Complication requires the Google Voice app</string>
+
+    <string name="complication_outlook_label">Outlook Unread</string>
+    <string name="complication_outlook_description">Display a count of unread Outlook messages</string>
+    <string name="complication_outlook_incompatible">This Complication requires the Outlook app</string>
+
+    <string name="complication_k9_label">K9 Mail Unread</string>
+    <string name="complication_k9_description">Display a count of unread K9 Mail messages</string>
+    <string name="complication_k9_incompatible">This Complication requires the K9 Mail app</string>
+
+    <string name="complication_settings_title">Configure</string>
+    <string name="complication_settings_content">Change settings in the app</string>
 
 </resources>

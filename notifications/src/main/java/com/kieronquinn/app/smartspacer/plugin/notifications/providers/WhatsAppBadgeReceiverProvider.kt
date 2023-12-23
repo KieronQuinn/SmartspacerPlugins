@@ -1,9 +1,9 @@
 package com.kieronquinn.app.smartspacer.plugin.notifications.providers
 
-import com.kieronquinn.app.smartspacer.plugin.notifications.complications.WhatsAppComplication
+import com.kieronquinn.app.smartspacer.plugin.notifications.complications.WhatsAppLegacyComplication
 
 class WhatsAppBadgeReceiverProvider: BaseBadgeReceiverProvider() {
 
-    override val packageName = WhatsAppComplication.PACKAGE_NAME
+    override val packageName = WhatsAppLegacyComplication.PACKAGE_NAME
 
 }

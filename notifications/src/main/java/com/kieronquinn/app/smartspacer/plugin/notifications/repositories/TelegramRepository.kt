@@ -2,7 +2,6 @@ package com.kieronquinn.app.smartspacer.plugin.notifications.repositories
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
-import android.util.Log
 
 interface TelegramRepository {
 
@@ -21,8 +20,7 @@ class TelegramRepositoryImpl(context: Context): TelegramRepository {
          */
         private fun List<String>.isTelegram(): Boolean {
             if(none { it.endsWith(".ChatsWidgetProvider") }) return false
-            if(none { it.endsWith(".ContactsWidgetProvider") }) return false
-            return true
+            return any { it.endsWith(".ContactsWidgetProvider") }
         }
 
         /**
@@ -41,9 +39,7 @@ class TelegramRepositoryImpl(context: Context): TelegramRepository {
     }
 
     private val currentTelegramPackageName by lazy {
-        findTelegramPackageName(context).also {
-            Log.d("TR", "Got Telegram package name $it")
-        }
+        findTelegramPackageName(context)
     }
 
     override fun getTelegramPackageName(): String {
