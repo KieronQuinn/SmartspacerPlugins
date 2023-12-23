@@ -1,13 +1,16 @@
 package com.kieronquinn.app.smartspacer.plugin.googlekeep.ui.screens.configuration
 
 import android.content.Context
+import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.smartspacer.plugin.googlekeep.targets.GoogleKeepTarget
 import com.kieronquinn.app.smartspacer.plugin.googlekeep.targets.GoogleKeepTarget.TargetData
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DataRepository
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.allowBackground
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerTargetProvider
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -63,8 +66,13 @@ class ConfigurationViewModelImpl(
         intentSender: ActivityResultLauncher<IntentSenderRequest>
     ) {
         val smartspacerId = smartspacerId.value ?: return
-        SmartspacerWidgetProvider.getReconfigureIntentSender(context, smartspacerId)?.let {
-            intentSender.launch(IntentSenderRequest.Builder(it).build())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            SmartspacerWidgetProvider.getReconfigureIntentSender(context, smartspacerId)?.let {
+                intentSender.launch(
+                    IntentSenderRequest.Builder(it).build(),
+                    ActivityOptionsCompat.makeBasic().allowBackground()
+                )
+            }
         }
     }
 

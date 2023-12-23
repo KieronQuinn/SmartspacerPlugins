@@ -1,10 +1,10 @@
 import com.android.build.gradle.internal.dsl.SigningConfig
 
 buildscript {
-    ext.nav_version = "2.7.3"
+    ext.nav_version = "2.7.6"
     ext.protobuf_version = '0.9.0'
-    ext.refine_version = '4.3.1'
-    ext.room_version = "2.5.2"
+    ext.refine_version = '4.4.0'
+    ext.room_version = "2.6.1"
     ext.compile_sdk = 34
     ext.min_sdk = 29
     ext.target_sdk = 34

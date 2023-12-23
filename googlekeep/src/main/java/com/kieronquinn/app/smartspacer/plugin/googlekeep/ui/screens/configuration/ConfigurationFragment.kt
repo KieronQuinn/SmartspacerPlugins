@@ -1,5 +1,6 @@
 package com.kieronquinn.app.smartspacer.plugin.googlekeep.ui.screens.configuration
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult
@@ -73,7 +74,7 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_keep)
             ) {
                 viewModel.onSelectNoteClicked(requireContext(), noteSelectLauncher)
-            },
+            }.takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.S },
             SwitchSetting(
                 data.showIndented,
                 getString(R.string.target_configuration_show_indented_title),
