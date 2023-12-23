@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.RemoteViews
 import android.widget.ViewFlipper
 import androidx.core.graphics.drawable.toBitmap
@@ -15,6 +16,7 @@ import com.kieronquinn.app.smartspacer.plugin.googlemaps.R
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories.GoogleMapsRepository
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
 import com.kieronquinn.app.smartspacer.sdk.utils.findViewByIdentifier
+import com.kieronquinn.app.smartspacer.sdk.utils.getClickPendingIntent
 import org.koin.android.ext.android.inject
 
 class GoogleMapsTrafficWidget: SmartspacerWidgetProvider() {
@@ -28,6 +30,9 @@ class GoogleMapsTrafficWidget: SmartspacerWidgetProvider() {
 
         private const val IDENTIFIER_PERMISSION_CONTAINER =
             "$PACKAGE_NAME:id/traffic_widget_permissions_container"
+
+        private const val IDENTIFIER_LOADING_CONTAINER =
+            "$PACKAGE_NAME:id/traffic_widget_loading_container"
 
         private const val IDENTIFIER_VIEW_FLIPPER =
             "$PACKAGE_NAME:id/traffic_widget_map_view_flipper"
@@ -72,17 +77,38 @@ class GoogleMapsTrafficWidget: SmartspacerWidgetProvider() {
         val views = remoteViews?.load() ?: return
         val permissionContainer =
             views.findViewByIdentifier<FrameLayout>(IDENTIFIER_PERMISSION_CONTAINER)
-        if(permissionContainer?.isVisible == true) {
-            //User needs to grant background location permission
-            googleMapsRepository
-                .updateTrafficState(false, null, null)
-        }else{
-            val images = views.loadImages()
-            if(images != null) {
-                googleMapsRepository
-                    .updateTrafficState(true, images.first, images.second)
-            }else{
-                googleMapsRepository.clearTrafficImage()
+        val requiresPermission = permissionContainer?.isVisible == true
+        val isLoading =
+            views.findViewByIdentifier<RelativeLayout>(IDENTIFIER_LOADING_CONTAINER)
+                ?.isVisible == true
+        when {
+            requiresPermission -> {
+                val clickIntent = permissionContainer?.getClickPendingIntent()
+                //User needs to grant background location permission
+                googleMapsRepository.updateTrafficState(
+                    false,
+                    null,
+                    null,
+                    clickIntent,
+                    isLoading
+                )
+            }
+            isLoading -> {
+                googleMapsRepository.clearTrafficImage(hasPermission = true, isLoading = true)
+            }
+            else -> {
+                val images = views.loadImages()
+                if(images != null) {
+                    googleMapsRepository.updateTrafficState(
+                        true,
+                        images.first,
+                        images.second,
+                        null,
+                        false
+                    )
+                }else{
+                    googleMapsRepository.clearTrafficImage(hasPermission = true, isLoading = false)
+                }
             }
         }
     }

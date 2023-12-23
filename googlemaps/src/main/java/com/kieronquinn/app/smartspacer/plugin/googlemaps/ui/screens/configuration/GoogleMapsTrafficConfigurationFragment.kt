@@ -42,6 +42,11 @@ class GoogleMapsTrafficConfigurationFragment: BaseSettingsFragment(), BackAvaila
         viewModel.setupWithId(id)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onResume()
+    }
+
     private fun setupState() {
         handleState(viewModel.state.value)
         whenResumed {
@@ -66,7 +71,11 @@ class GoogleMapsTrafficConfigurationFragment: BaseSettingsFragment(), BackAvaila
         }
     }
 
-    private fun State.Loaded.loadItems(): List<BaseSettingsItem> = listOf(
+    private fun State.Loaded.loadItems(): List<BaseSettingsItem> = listOfNotNull(
+        GenericSettingsItem.Card(
+            ContextCompat.getDrawable(requireContext(), SharedR.drawable.ic_info),
+            getString(R.string.target_google_maps_traffic_setting_loading)
+        ).takeIf { isLoading },
         GenericSettingsItem.Dropdown(
             getString(R.string.target_google_maps_traffic_setting_distance_title),
             getString(zoomMode.description),

@@ -1,21 +1,22 @@
 package com.kieronquinn.app.smartspacer.plugin.googlemaps.targets
 
-import android.app.PendingIntent
+import android.Manifest
 import android.content.ComponentName
 import android.content.Context
 import android.graphics.Bitmap
 import com.google.gson.Gson
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.BuildConfig
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.R
-import com.kieronquinn.app.smartspacer.plugin.googlemaps.receivers.GoogleMapsWidgetClickReceiver
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories.GoogleMapsRepository
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories.GoogleMapsRepository.TrafficLevel
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories.GoogleMapsRepository.ZoomMode
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.ui.activities.ConfigurationActivity.NavGraphMapping
+import com.kieronquinn.app.smartspacer.plugin.googlemaps.ui.activities.GoogleMapsTrafficTrampolineActivity.Companion.getIntent
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.widgets.GoogleMapsTrafficWidget
+import com.kieronquinn.app.smartspacer.plugin.googlemaps.widgets.GoogleMapsTrafficWidget.Companion.PACKAGE_NAME
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DataRepository
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.activities.BaseConfigurationActivity
-import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.PendingIntent_MUTABLE_FLAGS
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.packageHasPermission
 import com.kieronquinn.app.smartspacer.sdk.model.Backup
 import com.kieronquinn.app.smartspacer.sdk.model.CompatibilityState
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceTarget
@@ -51,7 +52,7 @@ class GoogleMapsTrafficTarget: SmartspacerTargetProvider() {
     }
 
     override fun onDismiss(smartspacerId: String, targetId: String): Boolean {
-        googleMapsRepository.clearTrafficImage()
+        googleMapsRepository.clearTrafficImage(hasPermission = true, isLoading = true)
         notifyChange(smartspacerId)
         return true
     }
@@ -92,7 +93,7 @@ class GoogleMapsTrafficTarget: SmartspacerTargetProvider() {
     private fun loadTarget(id: String): SmartspaceTarget? {
         val traffic = googleMapsRepository.getTrafficState() ?: return null
         val settings = dataRepository.getTargetData(id, TargetData::class.java) ?: TargetData()
-        if(!traffic.hasPermission) return getPermissionRequiredTarget(id)
+        if(!traffic.hasPermission && !hasPermission()) return getPermissionRequiredTarget(id)
         val zoomedOut = settings.mode == ZoomMode.OUT
         val trafficLevel = if(zoomedOut){
             traffic.trafficLevelZoomedOut
@@ -108,6 +109,13 @@ class GoogleMapsTrafficTarget: SmartspacerTargetProvider() {
         return getMapTarget(bitmap, trafficLevel)
     }
 
+    private fun hasPermission(): Boolean {
+        return provideContext().packageManager.packageHasPermission(
+            PACKAGE_NAME,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+        )
+    }
+
     private fun getMapTarget(map: Bitmap, trafficLevel: TrafficLevel): SmartspaceTarget {
         return TargetTemplate.Image(
             context = provideContext(),
@@ -119,11 +127,7 @@ class GoogleMapsTrafficTarget: SmartspacerTargetProvider() {
                 provideContext(), R.drawable.ic_target_google_maps_traffic
             )),
             image = Icon(AndroidIcon.createWithBitmap(map), shouldTint = false),
-            onClick = TapAction(
-                intent = provideContext().packageManager.getLaunchIntentForPackage(
-                    GoogleMapsTrafficWidget.PACKAGE_NAME
-                )
-            )
+            onClick = TapAction(intent = getIntent(provideContext()))
         ).create()
     }
 
@@ -140,14 +144,7 @@ class GoogleMapsTrafficTarget: SmartspacerTargetProvider() {
             icon = Icon(AndroidIcon.createWithResource(
                 provideContext(), R.drawable.ic_target_google_maps_traffic
             )),
-            onClick = TapAction(
-                pendingIntent = PendingIntent.getBroadcast(
-                    provideContext(),
-                    1001,
-                    GoogleMapsWidgetClickReceiver.createIntent(provideContext(), smartspacerId),
-                    PendingIntent_MUTABLE_FLAGS
-                )
-            )
+            onClick = TapAction(intent = getIntent(provideContext()))
         ).create()
     }
 

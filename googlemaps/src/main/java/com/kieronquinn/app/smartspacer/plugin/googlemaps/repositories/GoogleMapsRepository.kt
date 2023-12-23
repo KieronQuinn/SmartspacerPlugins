@@ -1,5 +1,6 @@
 package com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories
 
+import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -22,16 +23,24 @@ import java.io.File
 
 interface GoogleMapsRepository {
 
-    fun clearTrafficImage()
-    fun updateTrafficState(hasPermission: Boolean, zoomedIn: Bitmap?, zoomedOut: Bitmap?)
+    fun clearTrafficImage(hasPermission: Boolean, isLoading: Boolean)
+    fun updateTrafficState(
+        hasPermission: Boolean,
+        zoomedIn: Bitmap?,
+        zoomedOut: Bitmap?,
+        clickIntent: PendingIntent?,
+        isLoading: Boolean
+    )
     fun getTrafficState(): TrafficState?
+    fun getClickIntent(): PendingIntent?
 
     data class TrafficState(
         val hasPermission: Boolean,
         val zoomedIn: Bitmap?,
         val zoomedOut: Bitmap?,
         val trafficLevelZoomedIn: TrafficLevel?,
-        val trafficLevelZoomedOut: TrafficLevel?
+        val trafficLevelZoomedOut: TrafficLevel?,
+        val isLoading: Boolean
     )
 
     enum class TrafficLevel(
@@ -79,13 +88,27 @@ class GoogleMapsRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): GoogleMapsRepository {
 
+    /**
+     *  Cannot be written to storage, will fall back if not set
+     */
+    private var clickIntent: PendingIntent? = null
+
     private val stateFile = File(context.filesDir, "state.json").apply {
         parentFile?.mkdirs()
     }
 
-    override fun clearTrafficImage() {
+    override fun clearTrafficImage(hasPermission: Boolean, isLoading: Boolean) {
         scope.launch {
-            writeState(null)
+            writeState(
+                TrafficState(
+                hasPermission,
+                null,
+                null,
+                null,
+                null,
+                isLoading
+            )
+            )
             notifyTarget()
         }
     }
@@ -94,7 +117,18 @@ class GoogleMapsRepositoryImpl(
         return readState()
     }
 
-    override fun updateTrafficState(hasPermission: Boolean, zoomedIn: Bitmap?, zoomedOut: Bitmap?) {
+    override fun getClickIntent(): PendingIntent? {
+        return clickIntent
+    }
+
+    override fun updateTrafficState(
+        hasPermission: Boolean,
+        zoomedIn: Bitmap?,
+        zoomedOut: Bitmap?,
+        clickIntent: PendingIntent?,
+        isLoading: Boolean
+    ) {
+        this.clickIntent = clickIntent
         scope.launch {
             val state = TrafficState(
                 hasPermission,
@@ -102,6 +136,7 @@ class GoogleMapsRepositoryImpl(
                 zoomedOut,
                 zoomedIn?.let { calculateTrafficLevel(it, ZoomMode.IN) },
                 zoomedOut?.let { calculateTrafficLevel(it, ZoomMode.OUT) },
+                isLoading
             )
             writeState(state)
             notifyTarget()

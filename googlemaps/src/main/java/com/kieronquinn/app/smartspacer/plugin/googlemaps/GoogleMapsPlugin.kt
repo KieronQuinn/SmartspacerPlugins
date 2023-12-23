@@ -24,7 +24,7 @@ class GoogleMapsPlugin: SmartspacerPlugin() {
             single<DatabaseRepository> { DatabaseRepositoryImpl(get()) }
             single<NavGraphRepository> { NavGraphRepositoryImpl() }
             viewModel<GoogleMapsTrafficConfigurationViewModel> {
-                GoogleMapsTrafficConfigurationViewModelImpl(get())
+                GoogleMapsTrafficConfigurationViewModelImpl(get(), get())
             }
         }
     }

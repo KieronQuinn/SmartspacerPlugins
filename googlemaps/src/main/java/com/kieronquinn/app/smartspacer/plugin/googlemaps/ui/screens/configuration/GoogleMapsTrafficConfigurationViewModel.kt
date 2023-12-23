@@ -3,6 +3,7 @@ package com.kieronquinn.app.smartspacer.plugin.googlemaps.ui.screens.configurati
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories.GoogleMapsRepository
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories.GoogleMapsRepository.TrafficLevel
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.repositories.GoogleMapsRepository.ZoomMode
 import com.kieronquinn.app.smartspacer.plugin.googlemaps.targets.GoogleMapsTrafficTarget
@@ -13,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
@@ -25,6 +27,7 @@ abstract class GoogleMapsTrafficConfigurationViewModel(): ViewModel() {
 
     abstract val state: StateFlow<State>
 
+    abstract fun onResume()
     abstract fun setupWithId(id: String)
     abstract fun onZoomModeChanged(zoomMode: ZoomMode)
     abstract fun onTrafficLevelChanged(trafficLevel: TrafficLevel)
@@ -32,6 +35,7 @@ abstract class GoogleMapsTrafficConfigurationViewModel(): ViewModel() {
     sealed class State {
         object Loading: State()
         data class Loaded(
+            val isLoading: Boolean,
             val zoomMode: ZoomMode,
             val minTrafficLevel: TrafficLevel
         ): State()
@@ -40,10 +44,16 @@ abstract class GoogleMapsTrafficConfigurationViewModel(): ViewModel() {
 }
 
 class GoogleMapsTrafficConfigurationViewModelImpl(
-    private val dataRepository: DataRepository
+    private val dataRepository: DataRepository,
+    googleMapsRepository: GoogleMapsRepository
 ): GoogleMapsTrafficConfigurationViewModel() {
 
     private val id = MutableStateFlow<String?>(null)
+    private val resumeBus = MutableStateFlow(System.currentTimeMillis())
+
+    private val isLoading = resumeBus.mapLatest {
+        googleMapsRepository.getTrafficState()?.isLoading == true
+    }
 
     private val settings = id.filterNotNull().flatMapLatest { id ->
         dataRepository.getTargetDataFlow(id, TargetData::class.java).map {
@@ -51,9 +61,18 @@ class GoogleMapsTrafficConfigurationViewModelImpl(
         }
     }.flowOn(Dispatchers.IO)
 
-    override val state = settings.mapLatest {
-        State.Loaded(it.mode, it.minTrafficLevel)
+    override val state = combine(
+        settings,
+        isLoading
+    ) { settings, loading ->
+        State.Loaded(loading, settings.mode, settings.minTrafficLevel)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
+
+    override fun onResume() {
+        viewModelScope.launch {
+            resumeBus.emit(System.currentTimeMillis())
+        }
+    }
 
     override fun setupWithId(id: String) {
         viewModelScope.launch {

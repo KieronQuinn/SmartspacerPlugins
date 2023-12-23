@@ -9,10 +9,11 @@
     <string name="target_google_maps_traffic_level_mid">Medium traffic nearby</string>
     <string name="target_google_maps_traffic_level_heavy">Heavy traffic nearby</string>
     <string name="target_google_maps_traffic_permission_required_title">Background Location Required</string>
-    <string name="target_google_maps_traffic_permission_required_subtitle">Tap to Grant</string>
+    <string name="target_google_maps_traffic_permission_required_subtitle">Tap to Continue</string>
     <string name="target_google_maps_traffic_subtitle">Google Maps</string>
     <string name="target_google_maps_traffic_setting_title">Settings</string>
     <string name="target_google_maps_traffic_setting_description">Configure the zoom and minimum traffic level at which to display the Target</string>
+    <string name="target_google_maps_traffic_setting_loading">Google Maps is loading traffic data, make sure you have a good GPS signal and check again data</string>
     <string name="target_google_maps_traffic_setting_distance_title">Distance (Zoom)</string>
     <string name="target_google_maps_traffic_setting_distance_zoomed_in">350 metres</string>
     <string name="target_google_maps_traffic_setting_distance_zoomed_out">3 kilometres</string>
