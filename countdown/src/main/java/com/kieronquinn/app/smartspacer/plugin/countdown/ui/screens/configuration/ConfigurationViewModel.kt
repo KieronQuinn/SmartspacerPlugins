@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.Instant
-import java.time.ZoneId
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 abstract class ConfigurationViewModel: ViewModel() {
@@ -78,7 +78,7 @@ class ConfigurationViewModelImpl(
     }
 
     override fun onDateChanged(date: Long) {
-        val instant = Instant.ofEpochMilli(date).atZone(ZoneId.systemDefault())
+        val instant = Instant.ofEpochMilli(date).atOffset(ZoneOffset.UTC)
             .toLocalDate().format(DateTimeFormatter.ISO_LOCAL_DATE)
         updateComplicationData {
             it.copy(endDate = instant)
