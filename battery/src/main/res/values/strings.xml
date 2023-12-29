@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">Battery Plugin for Smartspacer</string>
     <string name="complication_label">Battery</string>
-    <string name="complication_description">Shows battery level for a connected device</string>
+    <string name="complication_description">Shows battery level for a device</string>
     <string name="complication_description_set">Shows battery level for %1s</string>
     <string name="complication_charging">%1s+</string>
     <string name="complication_configuration_settings_title">Select Device</string>
-    <string name="complication_configuration_settings_description">Set the connected device to show the battery status for</string>
+    <string name="complication_configuration_settings_description">Set the device to show the battery status for</string>
     <string name="complication_configuration_selected">%1s (Selected)</string>
-    <string name="configuration_info">Only devices which are currently connected will show here. Connect the device you wish to show the status for to select it.</string>
+    <string name="configuration_header_devices">Select Device</string>
+    <string name="configuration_info">You may need to connect your device for it to appear for the first time. If you are having trouble making a device appear, try adding the Battery widget to your home screen to force an update and come back.\n\nLong press an old or renamed device to remove it from the list.</string>
+    <string name="configuration_header_options">Additional Options</string>
+    <string name="configuration_show_when_disconnected_title">Always Show</string>
+    <string name="configuration_show_when_disconnected_content">Continues to show the last known battery level when the device\'s battery level is not known, either due to being disconnected or not appearing in the Battery widget</string>
+
 </resources>

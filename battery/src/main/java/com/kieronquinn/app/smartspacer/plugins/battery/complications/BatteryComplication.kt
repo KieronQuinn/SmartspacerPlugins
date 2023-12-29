@@ -33,6 +33,9 @@ class BatteryComplication: SmartspacerComplicationProvider() {
         val batteryLevel = batteryRepository.getBatteryLevel(
             complicationData.name ?: return emptyList()
         ) ?: return emptyList()
+        if(!batteryLevel.isConnected && !complicationData.showWhenDisconnected) {
+            return emptyList()
+        }
         return listOf(batteryLevel.toComplication(smartspacerId))
     }
 
@@ -105,7 +108,9 @@ class BatteryComplication: SmartspacerComplicationProvider() {
 
     data class ComplicationData(
         @SerializedName("name")
-        val name: String? = null
+        val name: String? = null,
+        @SerializedName("show_when_disconnected")
+        val showWhenDisconnected: Boolean = false
     ) {
 
         companion object {

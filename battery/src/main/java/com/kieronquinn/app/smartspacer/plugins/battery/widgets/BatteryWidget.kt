@@ -1,11 +1,14 @@
 package com.kieronquinn.app.smartspacer.plugins.battery.widgets
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
 import android.content.ComponentName
 import android.content.Context
+import android.content.res.Resources
 import android.util.SizeF
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RemoteViews
@@ -16,6 +19,7 @@ import androidx.core.view.isVisible
 import com.kieronquinn.app.smartspacer.plugins.battery.BatteryPlugin.Companion.PACKAGE_NAME
 import com.kieronquinn.app.smartspacer.plugins.battery.BuildConfig
 import com.kieronquinn.app.smartspacer.plugins.battery.model.BatteryLevels
+import com.kieronquinn.app.smartspacer.plugins.battery.model.BatteryLevels.BatteryLevel
 import com.kieronquinn.app.smartspacer.plugins.battery.repositories.BatteryRepository
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
 import com.kieronquinn.app.smartspacer.sdk.utils.findViewByIdentifier
@@ -66,15 +70,16 @@ class BatteryWidget: SmartspacerWidgetProvider() {
         val sized = getSizedRemoteView(remoteViews, size)
         val views = sized?.load() ?: return
         val listContainer = views.findViewByIdentifier<LinearLayout>(IDENTIFIER_LIST_CONTAINER)
-            ?: return
-        val otherDevices = listContainer.context.getOtherDevicesString()
-        val batteryLevels = listContainer.children.drop(1).mapNotNull {
-            it.loadBatteryLevel(otherDevices)
-        }.toList()
-        batteryRepository.setBatteryLevels(BatteryLevels(batteryLevels))
+        val batteryLevels = if(listContainer != null) {
+            val otherDevices = listContainer.context.getOtherDevicesString()
+            listContainer.children.mapNotNull {
+                it.loadBatteryLevel(otherDevices)
+            }.toList()
+        }else null
+        batteryRepository.setBatteryLevels(BatteryLevels(batteryLevels ?: return))
     }
 
-    private fun View.loadBatteryLevel(otherDevices: String?): BatteryLevels.BatteryLevel? {
+    private fun View.loadBatteryLevel(otherDevices: String?): BatteryLevel? {
         val name = findViewByIdentifier<TextView>(IDENTIFIER_DEVICE_NAME)?.text?.toString()
             ?: return null
         if(name == otherDevices) return null
@@ -84,7 +89,7 @@ class BatteryWidget: SmartspacerWidgetProvider() {
             ?: return null
         val isCharging = findViewByIdentifier<ImageView>(IDENTIFIER_STATUS_ICON)?.isVisible
             ?: false
-        return BatteryLevels.BatteryLevel(name, batteryLevel, isCharging, icon)
+        return BatteryLevel(name, batteryLevel, isCharging, icon, true)
     }
 
     override fun getAppWidgetProviderInfo(smartspacerId: String): AppWidgetProviderInfo? {
@@ -104,4 +109,44 @@ class BatteryWidget: SmartspacerWidgetProvider() {
         }
     }
 
+}
+
+fun View.dumpToString(builder: StringBuilder, indent: Int = 0, index: Int = 0) {
+    builder.appendLine("${" ".repeat(indent)}${this::class.java.simpleName}[${getDumpData(index)}]")
+    if(this is ViewGroup){
+        children.forEachIndexed { index, view ->
+            view.dumpToString(builder, indent + 1, index)
+        }
+    }
+}
+
+private fun View.getDumpData(index: Int): String {
+    val extra = when(this) {
+        is TextView -> ", text=$text"
+        is ImageView -> ", drawable=$drawable, contentDescription=$contentDescription"
+        else -> ""
+    }
+    return "index=$index id=${getResourceName()} ($id), pendingIntent=${getClickPendingIntent()}, clickable=$isClickable $extra"
+}
+
+fun View.getClickPendingIntent(): PendingIntent? {
+    val pendingIntentTag = resources.getIdentifier(
+        "pending_intent_tag", "id", "android"
+    )
+    return getTag(pendingIntentTag) as? PendingIntent ?: tag as? PendingIntent
+}
+
+fun View.getResourceName(): String? {
+    if(id == 0) return null
+    return context.resources.getResourceNameOrNull(id)
+}
+
+private fun Resources.getResourceNameOrNull(resource: Int, checkSystem: Boolean = true): String? {
+    return try {
+        getResourceName(resource)
+    }catch (e: Resources.NotFoundException){
+        if(checkSystem) {
+            Resources.getSystem().getResourceNameOrNull(resource, false)
+        }else null
+    }
 }

@@ -9,28 +9,25 @@ import com.kieronquinn.app.smartspacer.plugins.battery.complications.BatteryComp
 import com.kieronquinn.app.smartspacer.plugins.battery.model.BatteryLevels
 import com.kieronquinn.app.smartspacer.plugins.battery.model.BatteryLevels.BatteryLevel
 import com.kieronquinn.app.smartspacer.plugins.battery.repositories.BatteryRepository
+import com.kieronquinn.app.smartspacer.plugins.battery.repositories.DatabaseRepository
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerComplicationProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class ConfigurationViewModel: ViewModel() {
 
-    abstract val dismissBus: Flow<Unit>
     abstract val state: StateFlow<State>
 
     abstract fun setup(smartspacerId: String)
     abstract fun onDeviceClicked(batteryLevel: BatteryLevel)
+    abstract fun onDeviceLongClicked(name: String)
+    abstract fun onShowWhenDisconnectedChanged(enabled: Boolean)
 
     sealed class State {
         data object Loading: State()
@@ -44,7 +41,8 @@ abstract class ConfigurationViewModel: ViewModel() {
 
 class ConfigurationViewModelImpl(
     private val dataRepository: DataRepository,
-    private val batteryRepository: BatteryRepository
+    private val databaseRepository: DatabaseRepository,
+    batteryRepository: BatteryRepository
 ): ConfigurationViewModel() {
 
     private val smartspacerId = MutableStateFlow<String?>(null)
@@ -53,15 +51,9 @@ class ConfigurationViewModelImpl(
         dataRepository.getComplicationDataFlow(it, ComplicationData::class.java)
     }
 
-    private val batteryLevels = batteryRepository.batteryLevelsChanged.mapLatest {
-        batteryRepository.getBatteryLevels()
-    }.flowOn(Dispatchers.IO)
-
-    override val dismissBus = MutableSharedFlow<Unit>()
-
     override val state = combine(
         complicationData,
-        batteryLevels
+        batteryRepository.getBatteryLevels()
     ) { complication, battery ->
         State.Loaded(complication ?: ComplicationData(), battery)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
@@ -73,6 +65,32 @@ class ConfigurationViewModelImpl(
     }
 
     override fun onDeviceClicked(batteryLevel: BatteryLevel) {
+        viewModelScope.launch {
+            updateComplicationData {
+                it.copy(name = batteryLevel.name)
+            }
+        }
+    }
+
+    override fun onDeviceLongClicked(name: String) {
+        viewModelScope.launch {
+            databaseRepository.deleteCachedBatteryLevel(name)
+        }
+    }
+
+    override fun onShowWhenDisconnectedChanged(enabled: Boolean) {
+        updateComplicationData {
+            it.copy(showWhenDisconnected = enabled)
+        }
+    }
+
+    private fun onUpdated(context: Context, smartspacerId: String) {
+        SmartspacerComplicationProvider.notifyChange(
+            context, BatteryComplication::class.java, smartspacerId
+        )
+    }
+
+    private fun updateComplicationData(block: (ComplicationData) -> ComplicationData) {
         val smartspacerId = smartspacerId.value ?: return
         dataRepository.updateComplicationData(
             smartspacerId,
@@ -81,16 +99,7 @@ class ConfigurationViewModelImpl(
             ::onUpdated
         ) {
             val data = it ?: ComplicationData()
-            data.copy(name = batteryLevel.name)
-        }
-    }
-
-    private fun onUpdated(context: Context, smartspacerId: String) {
-        SmartspacerComplicationProvider.notifyChange(
-            context, BatteryComplication::class.java, smartspacerId
-        )
-        viewModelScope.launch {
-            dismissBus.emit(Unit)
+            block(data)
         }
     }
 

@@ -1,65 +1,81 @@
 package com.kieronquinn.app.smartspacer.plugins.battery.repositories
 
 import android.content.Context
-import com.google.gson.Gson
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.firstNotNull
 import com.kieronquinn.app.smartspacer.plugins.battery.complications.BatteryComplication
 import com.kieronquinn.app.smartspacer.plugins.battery.model.BatteryLevels
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerComplicationProvider
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.io.File
 
 interface BatteryRepository {
 
-    val batteryLevelsChanged: StateFlow<Long>
-
     fun setBatteryLevels(batteryLevels: BatteryLevels)
-    fun getBatteryLevels(): BatteryLevels?
+    fun getBatteryLevels(): Flow<BatteryLevels>
     fun getBatteryLevel(name: String): BatteryLevels.BatteryLevel?
 
 }
 
 class BatteryRepositoryImpl(
-    private val gson: Gson,
-    private val context: Context
+    context: Context,
+    private val databaseRepository: DatabaseRepository
 ): BatteryRepository {
 
-    private val batteryLevelFile = File(context.filesDir, "levels.json").also {
-        it.parentFile?.mkdirs()
-    }
-
     private val scope = MainScope()
-    private val writeLock = Mutex()
+    private val updateLock = Mutex()
 
-    override val batteryLevelsChanged = MutableStateFlow(System.currentTimeMillis())
-
-    override fun setBatteryLevels(batteryLevels: BatteryLevels) {
-        scope.launch(Dispatchers.IO) {
-            writeLock.withLock {
-                val json = gson.toJson(batteryLevels)
-                batteryLevelFile.writeText(json)
-            }
-            batteryLevelsChanged.emit(System.currentTimeMillis())
-            SmartspacerComplicationProvider.notifyChange(context, BatteryComplication::class.java)
+    private val cacheDir by lazy {
+        File(context.cacheDir, "icons").apply {
+            mkdirs()
         }
     }
 
-    override fun getBatteryLevels(): BatteryLevels? {
-        return try {
-            gson.fromJson(batteryLevelFile.readText(), BatteryLevels::class.java)
-        }catch (e: Exception){
-            null
+    private val cachedBatteryLevels = databaseRepository.getCachedBatteryLevels()
+        .onEach {
+            SmartspacerComplicationProvider.notifyChange(context, BatteryComplication::class.java)
+        }.stateIn(scope, SharingStarted.Eagerly, null)
+
+    override fun setBatteryLevels(batteryLevels: BatteryLevels) {
+        scope.launch {
+            updateLock.withLock {
+                val current = cachedBatteryLevels.firstNotNull()
+                batteryLevels.levels.forEach {
+                    val cached = it.toCachedBatteryLevel(cacheDir)
+                    databaseRepository.setCachedBatteryLevel(cached)
+                }
+                val disconnected = current.filter {
+                    batteryLevels.levels.none { level ->
+                        level.name == it.name
+                    }
+                }
+                disconnected.forEach {
+                    databaseRepository.setCachedBatteryLevelConnected(it.name,false)
+                }
+            }
+        }
+    }
+
+    override fun getBatteryLevels(): Flow<BatteryLevels> {
+        return cachedBatteryLevels.filterNotNull().map {
+            BatteryLevels(it.mapNotNull { battery -> battery.toBatteryLevel() })
         }
     }
 
     override fun getBatteryLevel(name: String): BatteryLevels.BatteryLevel? {
-        return getBatteryLevels()?.levels?.firstOrNull {
-            it.name == name
+        return runBlocking {
+            getBatteryLevels().firstNotNull().levels.firstOrNull {
+                it.name == name
+            }
         }
     }
 

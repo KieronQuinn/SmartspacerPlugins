@@ -1,6 +1,5 @@
 package com.kieronquinn.app.smartspacer.plugins.battery.ui.screens.configuration
 
-import android.app.Activity
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
@@ -8,7 +7,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.BaseSettingsItem
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Card
+import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Header
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Setting
+import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.SwitchSetting
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.BackAvailable
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsAdapter
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsFragment
@@ -34,20 +35,8 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupDismiss()
         setupState()
         viewModel.setup(requireActivity().intent.getStringExtra(EXTRA_SMARTSPACER_ID)!!)
-    }
-
-    private fun setupDismiss() {
-        whenResumed {
-            viewModel.dismissBus.collect {
-                requireActivity().let {
-                    it.setResult(Activity.RESULT_OK)
-                    it.finish()
-                }
-            }
-        }
     }
 
     private fun setupState() {
@@ -79,15 +68,25 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_info),
                 getString(R.string.configuration_info)
             ),
+            Header(getString(R.string.configuration_header_devices)),
             *batteryLevels?.levels?.map {
                 Setting(
                     it.name,
                     getLabel(it),
-                    BitmapDrawable(resources, it.icon)
+                    BitmapDrawable(resources, it.icon),
+                    onLongClick = { viewModel.onDeviceLongClicked(it.name) }
                 ) {
                     viewModel.onDeviceClicked(it)
                 }
-            }?.toTypedArray() ?: emptyArray()
+            }?.toTypedArray() ?: emptyArray(),
+            Header(getString(R.string.configuration_header_options)),
+            SwitchSetting(
+                complicationData.showWhenDisconnected,
+                getString(R.string.configuration_show_when_disconnected_title),
+                getString(R.string.configuration_show_when_disconnected_content),
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_battery),
+                onChanged = viewModel::onShowWhenDisconnectedChanged
+            )
         )
     }
 
