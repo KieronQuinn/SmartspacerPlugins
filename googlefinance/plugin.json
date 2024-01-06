@@ -1,8 +1,8 @@
 {
 	"description": "Powered by the Google app, the Google Finance plugin displays your selected investment with a chart in a Target, with movements for up to four other invesments in Expanded Smartspace. Don't want to see it all the time? Set the minimum movement setting and be dynamically shown when there's been significant movement for the selected investment.",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/googlefinance/googlefinance-release.apk",
-	"version_code": 101,
-	"changelog": "Fixed settings not launching on some devices",
+	"version_code": 102,
+	"changelog": "Updated widget mapping to fix it not working after recent Google app update",
 	"required_package": "com.google.android.googlequicksearchbox",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlefinance/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlefinance/screenshots/2.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlefinance/screenshots/3.jpg"]
 }
