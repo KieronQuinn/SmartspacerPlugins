@@ -6,7 +6,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.os.Build
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.RemoteViews
 import android.widget.TextView
 import androidx.core.graphics.drawable.toBitmap
@@ -43,12 +42,14 @@ class GoogleFinanceWidget: SmartspacerWidgetProvider() {
         private const val IDENTIFIER_DIRECTION = "direction"
 
         private val STRUCTURE_ROOT: ViewGroup.() -> Unit = {
-            frameLayout {
-                frameLayout {
+            relativeLayout {
+                relativeLayout {
                     linearLayout {
                         index = 1
-                        listView {
-                            id = IDENTIFIER_LIST
+                        linearLayout {
+                            listView {
+                                id = IDENTIFIER_LIST
+                            }
                         }
                     }
                 }
@@ -56,16 +57,16 @@ class GoogleFinanceWidget: SmartspacerWidgetProvider() {
         }
 
         private val STRUCTURE_ITEM: ViewGroup.() -> Unit = {
-            frameLayout {
-                frameLayout {
-                    frameLayout {
-                        frameLayout {
+            relativeLayout {
+                relativeLayout {
+                    relativeLayout {
+                        relativeLayout {
                             linearLayout {
                                 linearLayout {
                                     linearLayout(STRUCTURE_ITEM_TOP)
-                                    frameLayout(STRUCTURE_ITEM_RIGHT)
+                                    relativeLayout(STRUCTURE_ITEM_RIGHT)
                                 }
-                                frameLayout(STRUCTURE_ITEM_BOTTOM)
+                                relativeLayout(STRUCTURE_ITEM_BOTTOM)
                             }
                         }
                     }
@@ -112,10 +113,10 @@ class GoogleFinanceWidget: SmartspacerWidgetProvider() {
         }
 
         private val STRUCTURE_ITEM_NO_CHART: ViewGroup.() -> Unit = {
-            frameLayout {
-                frameLayout {
-                    frameLayout {
-                        frameLayout {
+            relativeLayout {
+                relativeLayout {
+                    relativeLayout {
+                        relativeLayout {
                             linearLayout {
                                 index = 1
                                 linearLayout {
@@ -135,7 +136,7 @@ class GoogleFinanceWidget: SmartspacerWidgetProvider() {
                                             id = IDENTIFIER_TREND
                                         }
                                     }
-                                    frameLayout {
+                                    relativeLayout {
                                         imageView {
                                             index = 1
                                             id = IDENTIFIER_DIRECTION
