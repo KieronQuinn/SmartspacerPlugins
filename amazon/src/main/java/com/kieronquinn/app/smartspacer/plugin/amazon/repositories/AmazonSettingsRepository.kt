@@ -3,7 +3,7 @@ package com.kieronquinn.app.smartspacer.plugin.amazon.repositories
 import android.content.Context
 import android.content.SharedPreferences
 import com.kieronquinn.app.smartspacer.plugin.amazon.BuildConfig
-import com.kieronquinn.app.smartspacer.plugin.amazon.model.AmazonDomain
+import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.AmazonDomain
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.BaseSettingsRepository.SmartspacerSetting
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.BaseSettingsRepositoryImpl
 
@@ -19,7 +19,7 @@ class AmazonSettingsRepositoryImpl(context: Context): AmazonSettingsRepository()
 
     companion object {
         private const val KEY_DOMAIN = "domain"
-        private val DEFAULT_DOMAIN = AmazonDomain.UNKNOWN
+        private val DEFAULT_DOMAIN = AmazonDomain.US
         private const val KEY_SHOW_PRODUCT_IMAGE = "show_product_image"
         private const val DEFAULT_SHOW_PRODUCT_IMAGE = true
         private const val KEY_SHOW_ADVANCED = "show_advanced"
@@ -27,7 +27,7 @@ class AmazonSettingsRepositoryImpl(context: Context): AmazonSettingsRepository()
     }
 
     override val sharedPreferences: SharedPreferences by lazy {
-        context.getSharedPreferences("${BuildConfig.APPLICATION_ID}_prefs", Context.MODE_PRIVATE)
+        context.getSharedPreferences("${BuildConfig.APPLICATION_ID}_preferences", Context.MODE_PRIVATE)
     }
 
     override val domain = enum(KEY_DOMAIN, DEFAULT_DOMAIN)

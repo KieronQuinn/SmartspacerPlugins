@@ -32,6 +32,15 @@ fun <T: Parcelable> Intent.getParcelableArrayListCompat(key: String, clazz: Clas
     }
 }
 
+@Suppress("DEPRECATION")
+fun <T: Parcelable> Intent.getParcelableExtraCompat(key: String, type: Class<T>): T? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        getParcelableExtra(key, type)
+    } else {
+        getParcelableExtra(key)
+    }
+}
+
 private const val INTENT_KEY_SECURITY_TAG = "security_tag"
 private const val PENDING_INTENT_REQUEST_CODE = 999
 

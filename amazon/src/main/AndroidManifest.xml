@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
-        android:name=".AmazonPluginApplication"
-        android:allowBackup="false"
-        android:fullBackupContent="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:name=".AmazonPlugin"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
@@ -22,16 +25,22 @@
         <activity-alias
             android:name=".ui.activities.AmazonConfigurationActivity"
             android:exported="true"
-            android:label="@string/target_amazon_settings_title"
-            android:description="@string/target_amazon_settings_description"
+            android:label="@string/target_configuration_settings_title"
+            android:description="@string/target_configuration_settings_description"
             android:icon="@drawable/ic_settings"
             android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <service android:name=".service.AmazonDeliveryRefreshService"
+            android:foregroundServiceType="specialUse"/>
+
+        <service android:name=".service.AmazonTrackingRefreshService"
+            android:foregroundServiceType="specialUse"/>
 
         <provider
             android:name=".targets.AmazonTarget"
             android:authorities="${applicationId}.target.amazon"
-            android:exported="true"
-            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS">
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
             </intent-filter>

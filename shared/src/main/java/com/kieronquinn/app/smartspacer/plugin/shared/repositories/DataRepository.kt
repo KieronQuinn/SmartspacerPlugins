@@ -16,11 +16,13 @@ interface DataRepository {
 
     fun <T> getTargetDataFlow(id: String, type: Class<T>): Flow<T?>
     fun <T> getTargetData(id: String, type: Class<T>): T?
+    fun <T> getAllTargetData(ofType: String, type: Class<T>): Flow<List<T>>
     fun deleteTargetData(id: String)
     suspend fun addTargetData(targetData: TargetData)
 
     fun <T> getComplicationDataFlow(id: String, type: Class<T>): Flow<T?>
     fun <T> getComplicationData(id: String, type: Class<T>): T?
+    fun <T> getAllComplicationData(ofType: String, type: Class<T>): Flow<List<T>>
     fun deleteComplicationData(id: String)
     suspend fun addComplicationData(complicationData: ComplicationData)
 
@@ -69,6 +71,14 @@ class DataRepositoryImpl(
         }
     }
 
+    override fun <T> getAllTargetData(ofType: String, type: Class<T>): Flow<List<T>> {
+        return databaseRepository.getTargetDataOfType(ofType).map { items ->
+            items.map { item ->
+                gson.fromJson(item.data, type)
+            }
+        }
+    }
+
     override fun <T> getTargetDataFlow(id: String, type: Class<T>): Flow<T?> {
         return databaseRepository.getTargetDataByIdAsFlow(id).map {
             gson.fromJson(it?.data ?: return@map null, type)
@@ -111,6 +121,14 @@ class DataRepositoryImpl(
     override fun <T> getComplicationDataFlow(id: String, type: Class<T>): Flow<T?> {
         return databaseRepository.getComplicationDataByIdAsFlow(id).map {
             gson.fromJson(it?.data ?: return@map null, type)
+        }
+    }
+
+    override fun <T> getAllComplicationData(ofType: String, type: Class<T>): Flow<List<T>> {
+        return databaseRepository.getComplicationDataOfType(ofType).map { items ->
+            items.map { item ->
+                gson.fromJson(item.data, type)
+            }
         }
     }
 

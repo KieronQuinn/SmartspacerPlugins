@@ -1,15 +1,30 @@
 package com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions
 
+import android.Manifest
 import android.content.ContentResolver
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.Uri
-import com.kieronquinn.app.smartspacer.plugin.amazon.AmazonPluginApplication.Companion.PACKAGE_NAME_GLOBAL
-import com.kieronquinn.app.smartspacer.plugin.amazon.AmazonPluginApplication.Companion.PACKAGE_NAME_INDIA
-import com.kieronquinn.app.smartspacer.plugin.amazon.model.AmazonDomain
+import android.os.Build
+import android.os.PowerManager
+import com.kieronquinn.app.smartspacer.plugin.amazon.PACKAGE_NAME_GLOBAL
+import com.kieronquinn.app.smartspacer.plugin.amazon.PACKAGE_NAME_INDIA
+import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.AmazonDomain
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.getPackageInfoCompat
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.isPackageInstalled
 
-fun Context.getAmazonMarketplaceDomain(): AmazonDomain {
+fun Context.hasNotificationPermission(): Boolean {
+    if(Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return true
+    return checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
+            PackageManager.PERMISSION_GRANTED
+}
+
+fun Context.hasDisabledBatteryOptimisation(): Boolean {
+    val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+    return powerManager.isIgnoringBatteryOptimizations(packageName)
+}
+
+fun Context.getAmazonMarketplaceDomain(): AmazonDomain? {
     val packageManager = packageManager
     return when {
         packageManager.isPackageInstalled(PACKAGE_NAME_INDIA) -> {
@@ -18,7 +33,7 @@ fun Context.getAmazonMarketplaceDomain(): AmazonDomain {
         packageManager.isPackageInstalled(PACKAGE_NAME_GLOBAL) -> {
             contentResolver.getMarketplaceDomain(PACKAGE_NAME_GLOBAL)
         }
-        else -> AmazonDomain.UNKNOWN
+        else -> null
     }
 }
 
@@ -35,9 +50,9 @@ fun Context.getAmazonAppVersion(): String? {
     }
 }
 
-private fun ContentResolver.getMarketplaceDomain(packageName: String): AmazonDomain {
+private fun ContentResolver.getMarketplaceDomain(packageName: String): AmazonDomain? {
     val uri = Uri.parse("content://$packageName.marketplace.provider")
-    val client = acquireUnstableContentProviderClient(uri) ?: return AmazonDomain.UNKNOWN
+    val client = acquireUnstableContentProviderClient(uri) ?: return null
     val domainName = try {
         val cursor = client.query(uri, null, null, null, null)
         cursor?.moveToFirst()
@@ -45,9 +60,9 @@ private fun ContentResolver.getMarketplaceDomain(packageName: String): AmazonDom
             cursor?.close()
         }
     }catch (e: Exception){
-        AmazonDomain.UNKNOWN.domainName
+        null
     } finally {
         client.close()
     }
-    return AmazonDomain.values().firstOrNull { it.domainName == domainName } ?: AmazonDomain.UNKNOWN
+    return AmazonDomain.entries.firstOrNull { "www.${it.domainName}" == domainName }
 }

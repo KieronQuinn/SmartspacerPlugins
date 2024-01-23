@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
         maven { url 'https://jitpack.io' }
     }
 }
@@ -37,3 +38,4 @@ include ':battery'
 include ':sunrisesunset'
 include ':bbcweather'
 include ':youtube'
+include ':controls'

@@ -1,5 +1,6 @@
 package com.kieronquinn.app.smartspacer.plugins.yahoosport.ui.screens.configuration
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -66,7 +67,7 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable {
     }
 
     private fun loadItems(): List<BaseSettingsItem> {
-        return listOf(
+        return listOfNotNull(
             Card(
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_info),
                 getString(R.string.configuration_clear_info)
@@ -77,7 +78,7 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_reconfigure)
             ) {
                 viewModel.onReconfigureClicked(requireContext(), reconfigureLauncher)
-            },
+            }.takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.S },
             Setting(
                 getString(R.string.configuration_clear_dismissed_games_title),
                 getString(R.string.configuration_clear_dismissed_games_content),

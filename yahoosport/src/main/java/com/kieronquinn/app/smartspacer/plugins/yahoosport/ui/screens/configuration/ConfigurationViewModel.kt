@@ -1,5 +1,6 @@
 package com.kieronquinn.app.smartspacer.plugins.yahoosport.ui.screens.configuration
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
@@ -62,6 +63,7 @@ class ConfigurationViewModelImpl(
         }
     }
 
+    @SuppressLint("NewApi")
     override fun onReconfigureClicked(
         context: Context,
         launcher: ActivityResultLauncher<IntentSenderRequest>

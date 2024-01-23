@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 102,
-      "versionName": "1.0.2",
+      "versionCode": 200,
+      "versionName": "2.0",
       "outputFile": "../../../../../apks/amazon-release.apk"
     }
   ],

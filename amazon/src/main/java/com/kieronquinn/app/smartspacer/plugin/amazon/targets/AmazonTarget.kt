@@ -3,15 +3,16 @@ package com.kieronquinn.app.smartspacer.plugin.amazon.targets
 import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import com.kieronquinn.app.smartspacer.plugin.amazon.BuildConfig
 import com.kieronquinn.app.smartspacer.plugin.amazon.R
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.database.AmazonDelivery.Delivery
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.database.AmazonDelivery.Status
 import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonRepository
 import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonSettingsRepository
-import com.kieronquinn.app.smartspacer.plugin.amazon.ui.activities.ConfigurationActivity
 import com.kieronquinn.app.smartspacer.plugin.amazon.ui.activities.ConfigurationActivity.NavGraphMapping.TARGET_AMAZON
+import com.kieronquinn.app.smartspacer.plugin.amazon.ui.screens.packages.PackagesFragment.Companion.setIsSetup
+import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.hasDisabledBatteryOptimisation
+import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.hasNotificationPermission
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.activities.BaseConfigurationActivity.Companion.createIntent
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceTarget
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.Icon
@@ -26,7 +27,6 @@ import android.graphics.drawable.Icon as AndroidIcon
 class AmazonTarget: SmartspacerTargetProvider() {
 
     companion object {
-        const val AUTHORITY = "${BuildConfig.APPLICATION_ID}.target.amazon"
         private const val TARGET_ID_PREFIX = "amazon_"
     }
 
@@ -34,16 +34,29 @@ class AmazonTarget: SmartspacerTargetProvider() {
     private val settings by inject<AmazonSettingsRepository>()
 
     override fun getSmartspaceTargets(smartspacerId: String): List<SmartspaceTarget> {
-        val isSignedIn = amazonRepository.isSignedIn()
-        if(!isSignedIn) return listOf(createSignInTarget(smartspacerId))
+        if(!provideContext().hasDisabledBatteryOptimisation()
+            || !provideContext().hasNotificationPermission()) {
+            return listOf(getSetupRequiredTarget(smartspacerId))
+        }
         return amazonRepository.getDeliveries().mapNotNull {
             it.loadTarget()
         }
     }
 
+    private fun getSetupRequiredTarget(smartspacerId: String): SmartspaceTarget {
+        return TargetTemplate.Basic(
+            id = "amazon_setup_$smartspacerId",
+            componentName = ComponentName(provideContext(), AmazonTarget::class.java),
+            title = Text(resources.getString(R.string.target_amazon_setup_required_title)),
+            icon = Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_target_amazon)),
+            subtitle = Text(resources.getString(R.string.target_amazon_setup_required_subtitle)),
+            onClick = TapAction(intent = createIntent(provideContext(), TARGET_AMAZON))
+        ).create()
+    }
+
     private fun Delivery.loadTarget(): SmartspaceTarget? {
-        if(dismissedAtStatus == status) return null //Item has been dismissed
         return when {
+            isDismissed() -> null
             getBestStatus() != Status.DELIVERED && mapBitmap != null -> {
                 createTargetWithMap(mapBitmap)
             }
@@ -54,27 +67,11 @@ class AmazonTarget: SmartspacerTargetProvider() {
         }
     }
 
-    private fun Delivery.getTapAction(): TapAction? {
+    private fun Delivery.getTapAction(): TapAction {
         val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = amazonRepository.getClickUrl(this@getTapAction)?.let {
-                Uri.parse(it)
-            } ?: return null
+            data = amazonRepository.getClickUrl(this@getTapAction)
         }
         return TapAction(intent = intent)
-    }
-
-    private fun createSignInTarget(smartspacerId: String): SmartspaceTarget {
-        val configIntent = createIntent(provideContext(), TARGET_AMAZON).also {
-            ConfigurationActivity.setIsSettings(it)
-        }
-        return TargetTemplate.Basic(
-            id = "${smartspacerId}_amazon_sign_in",
-            componentName = ComponentName(provideContext(), AmazonTarget::class.java),
-            title = Text(resources.getString(R.string.target_amazon_title_signed_out)),
-            subtitle = Text(resources.getString(R.string.target_amazon_subtitle_signed_out)),
-            icon = Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_target_amazon)),
-            onClick = TapAction(intent = configIntent)
-        ).create()
     }
 
     private fun Delivery.createTargetWithImage(imageBitmap: Bitmap): SmartspaceTarget {
@@ -114,32 +111,33 @@ class AmazonTarget: SmartspacerTargetProvider() {
     }
 
     private fun Delivery.getSubtitle(): String {
+        val bestMessage = trackingStatus?.getBestMessage()
         return when {
             getBestStatus() == Status.DELIVERED -> {
-                message.ifBlank {
-                    resources.getString(R.string.target_amazon_status_delivered)
-                }
+                //We can't use the message in the target as it says "today" and will get stale
+                resources.getString(R.string.target_amazon_status_delivered)
             }
-            trackingData?.stopsRemaining == 0 -> {
+            bestMessage != null -> bestMessage
+            trackingData?.packageLocationDetails?.stopsRemaining == 0 -> {
                 resources.getString(R.string.target_amazon_subtitle_stops_away_next)
             }
-            trackingData?.stopsRemaining != null -> {
+            trackingData?.packageLocationDetails?.stopsRemaining != null -> {
                 resources.getQuantityString(
                     R.plurals.target_amazon_subtitle_stops_away,
-                    trackingData.stopsRemaining,
-                    trackingData.stopsRemaining
+                    trackingData.packageLocationDetails.stopsRemaining,
+                    trackingData.packageLocationDetails.stopsRemaining
                 )
             }
-            else -> resources.getString(status.content)
+            else -> message
         }
     }
 
     private fun Delivery.getId(): String {
-        return "${TARGET_ID_PREFIX}_at_${System.currentTimeMillis()}_$shipmentId"
+        return "${TARGET_ID_PREFIX}_at_${System.currentTimeMillis()}_$orderId"
     }
 
     override fun onDismiss(smartspacerId: String, targetId: String): Boolean {
-        amazonRepository.dismissDelivery(targetId.removePrefix(), smartspacerId)
+        amazonRepository.dismissDelivery(targetId.removePrefix())
         return true
     }
 
@@ -149,16 +147,21 @@ class AmazonTarget: SmartspacerTargetProvider() {
     }
 
     override fun getConfig(smartspacerId: String?): Config {
+        /**
+         *  We only want to trigger the refresh intent more often if there's actually orders to
+         *  refresh, otherwise the Target is effectively static, but we refresh it periodically
+         *  just in case
+         */
+        val hasTrackable = amazonRepository.getDeliveries().any { it.canBeTracked() }
+        val refreshPeriod = if(hasTrackable) 1 else 30
         return Config(
-            label = resources.getString(R.string.target_amazon_title),
-            description = resources.getString(R.string.target_amazon_description),
+            label = resources.getString(R.string.target_label),
+            description = resources.getString(R.string.target_description),
             icon = AndroidIcon.createWithResource(provideContext(), R.drawable.ic_target_amazon),
-            setupActivity = createIntent(provideContext(), TARGET_AMAZON),
-            configActivity = createIntent(provideContext(), TARGET_AMAZON).also {
-                ConfigurationActivity.setIsSettings(it)
-            },
+            setupActivity = createIntent(provideContext(), TARGET_AMAZON).setIsSetup(),
+            configActivity = createIntent(provideContext(), TARGET_AMAZON),
             notificationProvider = "${BuildConfig.APPLICATION_ID}.notifications.amazon",
-            refreshPeriodMinutes = 1
+            refreshPeriodMinutes = refreshPeriod
         )
     }
 

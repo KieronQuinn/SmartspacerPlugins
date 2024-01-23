@@ -8,8 +8,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
 import com.kieronquinn.app.smartspacer.plugin.amazon.R
+import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.TrackingData
+import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.TrackingStatus
 import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.ImageType
 import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.readEncryptedBitmap
 import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.unescape
@@ -24,24 +25,32 @@ import org.koin.core.component.inject
 @Parcelize
 data class AmazonDelivery(
     @PrimaryKey
+    @ColumnInfo(name = "order_id")
+    val orderId: String,
     @ColumnInfo(name = "shipment_id")
-    val shipmentId: String,
+    val shipmentId: String?,
+    @ColumnInfo("index")
+    val index: Int,
     @ColumnInfo(name = "name")
     val name: EncryptedValue,
     @ColumnInfo(name = "image_url")
     val imageUrl: EncryptedValue,
-    @ColumnInfo("line_item_id")
-    val lineItemId: EncryptedValue,
-    @ColumnInfo("order_id")
-    val orderId: EncryptedValue,
+    @ColumnInfo("order_details_url")
+    val orderDetailsUrl: EncryptedValue?,
     @ColumnInfo(name = "status")
     val status: EncryptedValue,
     @ColumnInfo(name = "message")
     val message: EncryptedValue,
     @ColumnInfo(name = "tracking_id")
     val trackingId: EncryptedValue?,
+    @ColumnInfo(name = "customer_id")
+    val customerId: EncryptedValue?,
+    @ColumnInfo(name = "csrf_token")
+    val csrfToken: EncryptedValue?,
     @ColumnInfo(name = "tracking_data")
     val trackingData: EncryptedValue?,
+    @ColumnInfo(name = "tracking_status")
+    val trackingStatus: EncryptedValue?,
     @ColumnInfo(name = "dismissed_at_status")
     val dismissedAtStatus: Status? = null
 ): KoinComponent, Parcelable {
@@ -56,15 +65,19 @@ data class AmazonDelivery(
 
     @Parcelize
     data class Delivery(
-        val shipmentId: String,
+        val orderId: String,
+        val shipmentId: String?,
+        val index: Int,
         val name: String,
         val imageUrl: String,
-        val lineItemId: String,
-        val orderId: String,
+        val orderDetailsUrl: String?,
         val status: Status,
         val message: String,
         val trackingId: String?,
+        val customerId: String?,
+        var csrfToken: String?,
         val trackingData: TrackingData?,
+        val trackingStatus: TrackingStatus?,
         val dismissedAtStatus: Status?,
         @IgnoredOnParcel
         val imageBitmap: Bitmap? = null,
@@ -75,80 +88,75 @@ data class AmazonDelivery(
         suspend fun encrypt(context: Context): AmazonDelivery {
             val gson by inject<Gson>()
             if (imageBitmap != null) {
-                context.writeEncryptedBitmap(shipmentId, ImageType.IMAGE, imageBitmap)
+                context.writeEncryptedBitmap(orderId, ImageType.IMAGE, imageBitmap)
             }
             if (mapBitmap != null) {
-                context.writeEncryptedBitmap(shipmentId, ImageType.MAP, mapBitmap)
+                context.writeEncryptedBitmap(orderId, ImageType.MAP, mapBitmap)
             }
             return AmazonDelivery(
+                orderId,
                 shipmentId,
+                index,
                 EncryptedValue(name.toByteArray()),
                 EncryptedValue(imageUrl.toByteArray()),
-                EncryptedValue(lineItemId.toByteArray()),
-                EncryptedValue(orderId.toByteArray()),
+                orderDetailsUrl?.let { EncryptedValue(it.toByteArray()) },
                 EncryptedValue(status.name.toByteArray()),
                 EncryptedValue(message.toByteArray()),
                 trackingId?.let { EncryptedValue(it.toByteArray()) },
+                customerId?.let { EncryptedValue(it.toByteArray()) },
+                csrfToken?.let { EncryptedValue(it.toByteArray()) },
                 trackingData?.let { EncryptedValue(gson.toJson(it).toByteArray()) },
+                trackingStatus?.let { EncryptedValue(gson.toJson(it).toByteArray()) },
                 dismissedAtStatus
             )
         }
 
+        fun isDismissed(): Boolean {
+            return dismissedAtStatus != null && dismissedAtStatus == status
+        }
+
         fun getBestStatus(): Status {
             //Prefer live tracking data if it is available
-            return trackingData?.status ?: status
+            return trackingData?.packageLocationDetails?.status?.toStatus() ?: status
+        }
+
+        fun requiresLinkingDelivery(): Boolean {
+            return status != Status.ORDERED && status != Status.DELIVERED && trackingId == null
+        }
+
+        fun canBeTracked(): Boolean {
+            return trackingId != null && orderDetailsUrl != null && csrfToken != null
+                    && status == Status.OUT_FOR_DELIVERY
+        }
+
+        fun isTracking(): Boolean {
+            return status == Status.OUT_FOR_DELIVERY && mapBitmap != null
         }
 
     }
 
     suspend fun decrypt(context: Context): Delivery {
         val gson by inject<Gson>()
-        val decryptedBitmap = context.readEncryptedBitmap(shipmentId, ImageType.IMAGE)
-        val decryptedMap = context.readEncryptedBitmap(shipmentId, ImageType.MAP)
+        val decryptedBitmap = context.readEncryptedBitmap(orderId, ImageType.IMAGE)
+        val decryptedMap = context.readEncryptedBitmap(orderId, ImageType.MAP)
         return Delivery(
+            orderId,
             shipmentId,
+            index,
             String(name.bytes).unescape(),
             String(imageUrl.bytes),
-            String(lineItemId.bytes),
-            String(orderId.bytes),
-            Status.values().first { it.name == String(status.bytes) },
+            orderDetailsUrl?.bytes?.let { String(it) },
+            Status.entries.first { it.name == String(status.bytes) },
             String(message.bytes).unescape(),
             trackingId?.bytes?.let { String(it) },
+            customerId?.bytes?.let { String(it) },
+            csrfToken?.bytes?.let { String(it) },
             trackingData?.bytes?.let { gson.fromJson(String(it), TrackingData::class.java) },
+            trackingStatus?.bytes?.let { gson.fromJson(String(it), TrackingStatus::class.java) },
             dismissedAtStatus,
             decryptedBitmap,
             decryptedMap
         )
-    }
-
-    @Parcelize
-    data class TrackingData(
-        @SerializedName("destinationAddress")
-        val destinationAddress: Location,
-        @SerializedName("stopsRemaining")
-        val stopsRemaining: Int?,
-        @SerializedName("trackingObjectState")
-        val status: Status?,
-        @SerializedName("transporterDetails")
-        val transporterDetails: Location?
-    ): Parcelable {
-
-        @Parcelize
-        data class Location(
-            @SerializedName("geoLocation")
-            val geoLocation: GeoLocation?
-        ): Parcelable {
-
-            @Parcelize
-            data class GeoLocation(
-                @SerializedName("latitude")
-                val latitude: Double,
-                @SerializedName("longitude")
-                val longitude: Double
-            ): Parcelable
-
-        }
-
     }
 
 }

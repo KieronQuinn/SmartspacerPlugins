@@ -8,15 +8,19 @@ import com.kieronquinn.app.smartspacer.plugin.shared.model.database.TargetData
 import com.kieronquinn.app.smartspacer.plugin.shared.model.database.TargetDataDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.withContext
 
 interface DatabaseRepository {
 
     suspend fun getTargetDataById(id: String): TargetData?
+    fun getTargetDataOfType(type: String): Flow<List<TargetData>>
     suspend fun addTargetData(targetData: TargetData)
     suspend fun deleteTargetData(id: String)
 
     suspend fun getComplicationDataById(id: String): ComplicationData?
+    fun getComplicationDataOfType(type: String): Flow<List<ComplicationData>>
     suspend fun addComplicationData(complicationData: ComplicationData)
     suspend fun deleteComplicationData(id: String)
 
@@ -53,6 +57,12 @@ open class DatabaseRepositoryImpl(
         return targetData.getByIdAsFlow(id)
     }
 
+    override fun getTargetDataOfType(type: String): Flow<List<TargetData>> {
+        return targetData.getAll().mapLatest {
+            it.filter { t -> t.type == type }
+        }.flowOn(Dispatchers.IO)
+    }
+
     override suspend fun addTargetData(targetData: TargetData) = withContext(Dispatchers.IO) {
         this@DatabaseRepositoryImpl.targetData.insert(targetData)
     }
@@ -69,6 +79,12 @@ open class DatabaseRepositoryImpl(
 
     override fun getComplicationDataByIdAsFlow(id: String): Flow<ComplicationData?> {
         return complicationData.getByIdAsFlow(id)
+    }
+
+    override fun getComplicationDataOfType(type: String): Flow<List<ComplicationData>> {
+        return complicationData.getAll().mapLatest {
+            it.filter { t -> t.type == type }
+        }.flowOn(Dispatchers.IO)
     }
 
     override suspend fun addComplicationData(complicationData: ComplicationData) {

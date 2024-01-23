@@ -1,35 +1,48 @@
 <resources>
     <string name="app_name">Amazon Plugin for Smartspacer</string>
 
-    <!-- Amazon Target -->
-    <string name="target_amazon_description">Show live delivery status of supported Amazon deliveries</string>
-    <string name="target_amazon_settings_title">Settings</string>
-    <string name="target_amazon_settings_description">Set whether to show product images &amp; clear dismissed orders</string>
-    <string name="target_amazon_settings_sign_in_title">Sign in</string>
-    <string name="target_amazon_settings_sign_in_button">Sign in with Amazon</string>
-    <string name="target_amazon_settings_info_title">Sign in required</string>
-    <string name="target_amazon_settings_info_content">Smartspacer requires you to log in to your Amazon account to use delivery tracking.\n\n<b>Your order details are kept encrypted on your device, and your account info is never used outside Amazon order tracking.</b></string>
-    <string name="target_amazon_settings_unsupported_title">Unsupported</string>
-    <string name="target_amazon_settings_unsupported_content">Either you do not have the Amazon App (Global or India) installed, or this Plugin does not support your region yet.</string>
-    <string name="target_amazon_settings_show_image_title">Show Product Image</string>
-    <string name="target_amazon_settings_show_image_content">Show the product\'s image when available, this may not work on all devices</string>
-    <string name="target_amazon_settings_clear_dismissed_title">Clear Dismissed Orders</string>
-    <string name="target_amazon_settings_clear_dismissed_content">Reset the state of dismissed orders. This will show <b>undelivered</b> items again, but will not re-show delivered items</string>
-    <string name="target_amazon_settings_reload_title">Reload Orders</string>
-    <string name="target_amazon_settings_reload_content">Reload orders now, without needing a notification</string>
-    <string name="target_amazon_settings_advanced">Advanced Settings</string>
-    <string name="target_amazon_settings_domain_title">Domain</string>
-    <string name="target_amazon_settings_domain_content">Currently selected Amazon domain, loaded securely from the Amazon app: %1s. Changing this option will sign you out.</string>
-    <string name="target_amazon_settings_domain_content_unknown">No domain currently selected. Changing this option will sign you out.</string>
-    <string name="target_amazon_settings_tracking_supported_title">Tracking Supported</string>
-    <string name="target_amazon_settings_tracking_supported_content_yes">Yes: %1s</string>
-    <string name="target_amazon_settings_tracking_supported_content_no">No (unsupported region)</string>
-    <string name="target_amazon_settings_known_orders_title">Known Orders</string>
-    <string name="target_amazon_settings_known_orders_content">%1d</string>
-    <string name="target_amazon_settings_trackable_orders_title">Trackable Orders</string>
-    <string name="target_amazon_settings_trackable_orders_content">%1d</string>
-    <string name="target_amazon_settings_sign_out">Sign Out</string>
+    <string name="close">Close</string>
 
+    <string name="target_label">Amazon Deliveries</string>
+    <string name="target_description">Show live delivery status of supported Amazon deliveries</string>
+
+    <string name="target_configuration_settings_title">Settings</string>
+    <string name="target_configuration_settings_description">Configure options and link orders to deliveries</string>
+    <string name="target_configuration_settings_battery_optimisation">Battery optimisation must be disabled for this plugin to work, tap to disable</string>
+    <string name="target_configuration_settings_notification_permission">Notification permission is required to show notifications to link deliveries, tap to grant</string>
+    <string name="target_configuration_settings_recent_orders">Recent Orders</string>
+    <string name="target_configuration_settings_recent_orders_empty">No orders have been made in the last 30 days, tap to reload</string>
+    <string name="target_configuration_settings_recent_orders_error">An error occurred when loading orders, check your connection and tap to retry</string>
+    <string name="target_configuration_settings_recent_orders_parse_error">An error occurred when loading orders, tap to retry</string>
+    <string name="target_configuration_settings_recent_orders_mismatch_error">An error occurred linking this delivery, tap to retry</string>
+    <string name="target_configuration_settings_settings">Settings</string>
+    <string name="target_configuration_settings_domain_title">Amazon Domain</string>
+    <string name="target_configuration_settings_domain_title_short">Select Domain</string>
+    <string name="target_configuration_settings_domain_dialog_title">Set Domain</string>
+    <string name="target_configuration_settings_info_title">Privacy &amp; Your Data</string>
+    <string name="target_configuration_settings_info_p1">This plugin requires signing into your Amazon account, in order to load and track order statuses &amp; deliveries.</string>
+    <string name="target_configuration_settings_info_p2">To keep your data safe, all order &amp; delivery information is stored encrypted on device. Your username and password are not stored. Behind the scenes, using this plugin is no different than signing in using a browser.</string>
+    <string name="target_configuration_settings_info_p3"><![CDATA[This plugin is open source, and available for code inspection on <a href="https://github.com/KieronQuinn/SmartspacerPlugins">GitHub</a>]]></string>
+    <string name="target_configuration_settings_info_sign_in">Sign in with Amazon</string>
+    <string name="target_configuration_settings_show_product_image_title">Show Product Image</string>
+    <string name="target_configuration_settings_show_product_image_content">Show the product\'s image when available, this may not work on all devices</string>
+    <string name="target_configuration_settings_bottom_sheet_title">Options</string>
+    <string name="target_configuration_settings_bottom_sheet_unlink">Unlink Delivery</string>
+    <string name="target_configuration_settings_bottom_sheet_unlink_content">Reset the delivery attached to this order</string>
+    <string name="target_configuration_settings_bottom_sheet_dismiss">Dismiss from Smartspace</string>
+    <string name="target_configuration_settings_bottom_sheet_dismiss_content">Hides this order in Smartspace until the next change of delivery status</string>
+    <string name="target_configuration_settings_bottom_sheet_undismiss">Un-dismiss from Smartspace</string>
+    <string name="target_configuration_settings_bottom_sheet_undismiss_content">Shows this order in Smartspace again</string>
+    <string name="target_configuration_settings_sign_out_title">Sign out</string>
+    <string name="target_configuration_settings_sign_out_content">Sign out of your Amazon account and clear all stored orders &amp; deliveries on this device</string>
+    <string name="target_configuration_settings_sign_out_dialog_content">This will sign you out and clear all orders &amp; deliveries, requiring you to re-link them if you sign in again. <b>This cannot be undone.</b></string>
+
+    <string name="item_package_link_delivery">Link Delivery</string>
+    <string name="item_package_link_delivery_toast">Select the order you are linking</string>
+    <string name="item_package_link_delivery_toast_optional">Opening the order\'s tracking page</string>
+
+    <string name="target_amazon_setup_required_title">Additional Setup Required</string>
+    <string name="target_amazon_setup_required_subtitle">Tap to continue</string>
     <string name="target_amazon_subtitle_generic">Amazon</string>
     <string name="target_amazon_subtitle_stops_away_next">You\'re next</string>
     <string name="target_amazon_subtitle_stops_away_one">%1d stop remaining</string>
@@ -39,9 +52,20 @@
     <string name="target_amazon_status_in_transit">In Transit</string>
     <string name="target_amazon_status_out_for_delivery">Out for Delivery</string>
     <string name="target_amazon_status_delivered">Delivered</string>
-    <string name="target_amazon_title">Amazon Deliveries</string>
-    <string name="target_amazon_title_signed_out">Signed out</string>
-    <string name="target_amazon_subtitle_signed_out">Tap to sign in again</string>
+
+    <string name="notification_channel_background_service_title">Background Service</string>
+    <string name="notification_channel_background_service_subtitle">Notifications shown when Amazon Plugin for Smartspacer is running in the background</string>
+    <string name="notification_channel_error_title">Errors</string>
+    <string name="notification_channel_error_subtitle">Notifications shown if Amazon Plugin for Smartspacer encounters an error</string>
+    <string name="notification_channel_order_link_title">Order Link Prompts</string>
+    <string name="notification_channel_order_link_subtitle">Notifications shown when an order can be linked to a delivery</string>
+
+    <string name="notification_title_background_service">Running in the background</string>
+    <string name="notification_content_background_service">Amazon for Smartspacer is running in the background, tap to hide</string>
+    <string name="notification_title_error_updating_deliveries">Error Updating Deliveries</string>
+    <string name="notification_content_error_updating_deliveries">An error occurred when updating deliveries, tap to try again</string>
+    <string name="notification_title_new_delivery">New Dispatched Order Detected</string>
+    <string name="notification_content_new_delivery">Tap to link to a delivery and enable live tracking</string>
 
     <!-- Domains -->
     <string name="domain_AE">amazon.ae</string>
@@ -65,6 +89,5 @@
     <string name="domain_SA">amazon.sa</string>
     <string name="domain_SE">amazon.se</string>
     <string name="domain_SG">amazon.sg</string>
-    <string name="domain_unknown">Unknown</string>
 
 </resources>

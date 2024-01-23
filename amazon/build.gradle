@@ -14,8 +14,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.amazon"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 102
-        versionName "1.0.2"
+        versionCode 200
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,7 +52,11 @@ dependencies {
 
     //Data loading
     implementation 'org.apache.commons:commons-text:1.7'
-    implementation 'org.jsoup:jsoup:1.15.4'
+    implementation 'org.jsoup:jsoup:1.16.1'
+    implementation 'androidx.lifecycle:lifecycle-service:2.7.0'
+
+    implementation 'com.airbnb.android:lottie:6.3.0'
+    implementation 'me.saket:better-link-movement-method:2.2.0'
 
     //Data storage
     ksp "androidx.room:room-compiler:$room_version"

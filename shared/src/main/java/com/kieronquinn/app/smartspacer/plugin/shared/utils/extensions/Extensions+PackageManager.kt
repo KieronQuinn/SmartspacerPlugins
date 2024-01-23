@@ -2,9 +2,15 @@ package com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions
 
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.*
+import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
+import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
+import android.content.pm.ProviderInfo
+import android.content.pm.ResolveInfo
+import android.content.pm.ServiceInfo
 import android.os.Build
 
 fun PackageManager.isPackageInstalled(packageName: String): Boolean {
@@ -29,12 +35,19 @@ fun PackageManager.getInstalledApplications(): List<ApplicationInfo> {
     }
 }
 
-@Suppress("DEPRECATION")
 fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): List<ResolveInfo> {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
     }else{
         queryIntentActivities(intent, flags)
+    }
+}
+
+fun PackageManager.queryIntentServicesCompat(intent: Intent, flags: Int = 0): List<ResolveInfo> {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        queryIntentServices(intent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
+    }else{
+        queryIntentServices(intent, flags)
     }
 }
 

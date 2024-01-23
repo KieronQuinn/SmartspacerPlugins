@@ -18,7 +18,7 @@ abstract class AmazonDatabase: RoomDatabase() {
             return Room.databaseBuilder(
                 context,
                 AmazonDatabase::class.java,
-                "amazon"
+                "amazon_orders"
             ).build()
         }
     }
