@@ -16,7 +16,8 @@ fun Context.resolveAppWidget(componentName: ComponentName): AppWidgetProviderInf
 private val PACKAGE_NAMES_COMPATIBLE = setOf(
     "net.dinglisch.android.taskerm", //Play Store version
     "net.dinglisch.android.tasker", //Direct Purchase version
-    "com.llamalab.automate" //Automate, supports Tasker plugins
+    "com.llamalab.automate", //Automate, supports Tasker plugins
+    "com.arlosoft.macrodroid" //Macrodroid, supports Tasker plugins
 )
 
 fun Context.isTaskerInstalled(): Boolean {

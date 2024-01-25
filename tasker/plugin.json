@@ -1,8 +1,8 @@
 {
 	"description": "With infinite possibilities, this plugin adds Tasker support to Smartspacer. Configure your own Targets, Complications and Requirements, with any of the available templates and text formatting.",
-	"changelog": "- Added a Tasker Event for Smartspace showing/hiding, this can be used to update data or stop/start background work\n- Added the ability to disable automatic length trimming on Complications content\n- Allowed use in Automate without Tasker being installed\n- Removed TruncateAt marquee option as it does nothing\n\nNote: If the new visibility event is not working after updating, you may need to reboot.",
+	"changelog": "- Added MacroDroid to the list of supported Tasker-compatible plugin apps",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/tasker/tasker-release.apk",
-	"version_code": 110,
+	"version_code": 111,
 	"minimum_smartspacer_version": 130,
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/2.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/3.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/tasker/screenshots/4.jpg"]
 }
