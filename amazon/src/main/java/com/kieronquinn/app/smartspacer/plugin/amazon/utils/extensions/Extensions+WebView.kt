@@ -11,6 +11,7 @@ import com.kieronquinn.app.smartspacer.plugin.amazon.HEADERS
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.getDisplayPortraitHeight
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.getDisplayPortraitWidth
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 import org.apache.commons.text.StringEscapeUtils
@@ -97,6 +98,7 @@ fun WebView.load(url: String) = callbackFlow {
         override fun onPageFinished(view: WebView, url: String) {
             super.onPageFinished(view, url)
             launch {
+                delay(1000L)
                 val document = getHtml().loadHtml(url) ?: Document("")
                 trySend(document)
             }
