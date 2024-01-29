@@ -177,6 +177,7 @@ class PackagesFragment: BaseFragment<FragmentPackagesBinding>(FragmentPackagesBi
                 }
                 if(state.webViewState is WebViewState.OrderDetails) {
                     viewModel.persistOrderDetails(
+                        state.webViewState.id,
                         state.webViewState.orderId,
                         state.webViewState.orderDetailsUrl,
                         state.webViewState.trackingId,
@@ -264,7 +265,7 @@ class PackagesFragment: BaseFragment<FragmentPackagesBinding>(FragmentPackagesBi
         ))
         settingsItems.add(Setting(
             getString(R.string.target_configuration_settings_domain_title),
-            getString(settings.domain.nameRes),
+            getString(settings.domain.countryRes),
             ContextCompat.getDrawable(requireContext(), R.drawable.ic_settings_domain),
             onClick = viewModel::onSetAmazonDomainClicked
         ))

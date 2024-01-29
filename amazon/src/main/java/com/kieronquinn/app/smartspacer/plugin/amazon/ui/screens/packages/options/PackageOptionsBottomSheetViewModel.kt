@@ -22,21 +22,21 @@ class PackageOptionsBottomSheetViewModelImpl(
 
     override fun onDismissClicked(delivery: AmazonDelivery.Delivery) {
         viewModelScope.launch {
-            amazonRepository.dismissDelivery(delivery.orderId)
+            amazonRepository.dismissDelivery(delivery.id)
             navigation.navigateBack()
         }
     }
 
     override fun onUndismissClicked(delivery: AmazonDelivery.Delivery) {
         viewModelScope.launch {
-            amazonRepository.unDismissDelivery(delivery.orderId)
+            amazonRepository.unDismissDelivery(delivery.id)
             navigation.navigateBack()
         }
     }
 
     override fun onUnlinkClicked(delivery: AmazonDelivery.Delivery) {
         viewModelScope.launch {
-            amazonRepository.clearOrderDetails(delivery.orderId)
+            amazonRepository.clearOrderDetails(delivery.id)
             navigation.navigateBack()
         }
     }

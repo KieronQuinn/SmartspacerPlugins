@@ -44,7 +44,7 @@ class AmazonPlugin: SmartspacerPlugin() {
         single<DatabaseRepository> { DatabaseRepositoryImpl(get()) }
         single<AmazonSettingsRepository> { AmazonSettingsRepositoryImpl(get()) }
         viewModel<PackagesViewModel> { PackagesViewModelImpl(get(), get(), get(), get(), get()) }
-        viewModel<DomainPickerViewModel> { DomainPickerViewModelImpl(get(), get(), get()) }
+        viewModel<DomainPickerViewModel> { DomainPickerViewModelImpl(get(), get(), get(), get()) }
         viewModel<PackageOptionsBottomSheetViewModel> { PackageOptionsBottomSheetViewModelImpl(get(), get()) }
     }
 

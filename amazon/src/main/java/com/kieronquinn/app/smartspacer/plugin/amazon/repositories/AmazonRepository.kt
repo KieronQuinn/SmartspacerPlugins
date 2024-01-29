@@ -29,6 +29,7 @@ import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.TrackingData.Pack
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.TrackingStatus
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.database.AmazonDelivery.Delivery
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.database.AmazonDelivery.Status
+import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonRepository.SelectingFor
 import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonRepository.WebViewState
 import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonRepository.WebViewState.Error.Reason
 import com.kieronquinn.app.smartspacer.plugin.amazon.service.AmazonTrackingService
@@ -77,19 +78,20 @@ interface AmazonRepository {
     fun getUserAgent(): String
     fun getDeliveriesAsFlow(): Flow<List<Delivery>>
     fun getDeliveries(): List<Delivery>
-    fun getDelivery(orderId: String): Delivery?
+    fun getDelivery(id: String): Delivery?
     fun updateTrackingData(webView: WebView)
     suspend fun updateDeliveriesAndShowNotificationIfNeeded(
         ordersWebView: WebView,
         orderDetailsWebView: WebView
     )
     fun getClickUrl(delivery: Delivery): Uri
-    fun dismissDelivery(orderId: String)
-    fun unDismissDelivery(orderId: String)
+    fun dismissDelivery(id: String)
+    fun unDismissDelivery(id: String)
     fun reloadTarget()
     suspend fun signOut()
 
     suspend fun persistOrderDetails(
+        id: String,
         orderId: String,
         orderDetailsUrl: String,
         trackingId: String,
@@ -97,12 +99,12 @@ interface AmazonRepository {
         csrfToken: String
     )
 
-    suspend fun clearOrderDetails(orderId: String)
+    suspend fun clearOrderDetails(id: String)
 
     fun getWebViewState(
         orderDetailsWebView: WebView,
         document: Document,
-        selectingForOrderId: String? = null
+        selectingFor: SelectingFor? = null,
     ): Flow<WebViewState?>
 
     sealed class WebViewState {
@@ -112,6 +114,7 @@ interface AmazonRepository {
         ): WebViewState()
         data class OrdersUpdated(val trackingUpdated: Boolean): WebViewState()
         data class OrderDetails(
+            val id: String,
             val orderId: String,
             val orderDetailsUrl: String,
             val trackingId: String,
@@ -126,6 +129,11 @@ interface AmazonRepository {
             }
         }
     }
+
+    data class SelectingFor(
+        val id: String,
+        val orderId: String
+    )
 
 }
 
@@ -232,9 +240,9 @@ class AmazonRepositoryImpl(
         }
     }
 
-    override fun getDelivery(orderId: String): Delivery? {
+    override fun getDelivery(id: String): Delivery? {
         return runBlocking {
-            deliveries.firstNotNull().firstOrNull { it.orderId == orderId }
+            deliveries.firstNotNull().firstOrNull { it.id == id }
         }
     }
 
@@ -282,9 +290,9 @@ class AmazonRepositoryImpl(
         return Uri.parse(url)
     }
 
-    override fun dismissDelivery(orderId: String) {
+    override fun dismissDelivery(id: String) {
         scope.launch {
-            val delivery = deliveries.firstNotNull().firstOrNull { it.orderId == orderId }
+            val delivery = deliveries.firstNotNull().firstOrNull { it.id == id }
                 ?: return@launch
             databaseRepository.addAmazonDelivery(
                 delivery.copy(dismissedAtStatus = delivery.status).encrypt(context)
@@ -292,9 +300,9 @@ class AmazonRepositoryImpl(
         }
     }
 
-    override fun unDismissDelivery(orderId: String) {
+    override fun unDismissDelivery(id: String) {
         scope.launch {
-            val delivery = deliveries.firstNotNull().firstOrNull { it.orderId == orderId }
+            val delivery = deliveries.firstNotNull().firstOrNull { it.id == id }
                 ?: return@launch
             databaseRepository.addAmazonDelivery(
                 delivery.copy(dismissedAtStatus = null).encrypt(context)
@@ -409,7 +417,8 @@ class AmazonRepositoryImpl(
     private suspend fun Delivery.updateCsrfToken(webView: WebView): Boolean {
         val document = webView.load(orderDetailsUrl ?: return false)
             .firstOrNull() ?: return false
-        val state = getWebViewState(webView, document, orderId).firstNotNull()
+        val selectingFor = SelectingFor(id, orderId)
+        val state = getWebViewState(webView, document, selectingFor).firstNotNull()
         return if(state is WebViewState.OrderDetails) {
             csrfToken = state.csrfToken
             true
@@ -438,6 +447,7 @@ class AmazonRepositoryImpl(
     }
 
     override suspend fun persistOrderDetails(
+        id: String,
         orderId: String,
         orderDetailsUrl: String,
         trackingId: String,
@@ -445,7 +455,7 @@ class AmazonRepositoryImpl(
         csrfToken: String
     ) = persistDetailsLock.withLock {
         withContext(Dispatchers.IO) {
-            val delivery = getDelivery(orderId) ?: return@withContext
+            val delivery = getDelivery(id) ?: return@withContext
             val updatedDelivery = delivery.copy(
                 orderDetailsUrl = orderDetailsUrl,
                 trackingId = trackingId,
@@ -456,9 +466,9 @@ class AmazonRepositoryImpl(
         }
     }
 
-    override suspend fun clearOrderDetails(orderId: String) = persistDetailsLock.withLock {
+    override suspend fun clearOrderDetails(id: String) = persistDetailsLock.withLock {
         withContext(Dispatchers.IO) {
-            val delivery = getDelivery(orderId) ?: return@withContext
+            val delivery = getDelivery(id) ?: return@withContext
             val updatedDelivery = delivery.copy(
                 orderDetailsUrl = null,
                 trackingId = null,
@@ -471,7 +481,7 @@ class AmazonRepositoryImpl(
     override fun getWebViewState(
         orderDetailsWebView: WebView,
         document: Document,
-        selectingForOrderId: String?
+        selectingFor: SelectingFor?
     ) = flow {
         emit(null)
         val result = when {
@@ -487,7 +497,7 @@ class AmazonRepositoryImpl(
                 val orders = document.loadOrders()
                 orders.persistDeliveries()
                 when {
-                    selectingForOrderId != null -> {
+                    selectingFor != null -> {
                         WebViewState.UserInteractionRequired(
                             document.location(),
                             R.string.item_package_link_delivery_toast
@@ -503,9 +513,10 @@ class AmazonRepositoryImpl(
             document.isOrderDetailsPage() -> {
                 val aState = document.getAState()
                 val csrfToken = document.getCsrfToken()
-                if(selectingForOrderId != null && aState != null && csrfToken != null) {
-                    if(aState.orderId == selectingForOrderId) {
+                if(selectingFor != null && aState != null && csrfToken != null) {
+                    if(aState.orderId == selectingFor.orderId) {
                         WebViewState.OrderDetails(
+                            selectingFor.id,
                             aState.orderId,
                             document.location(),
                             aState.trackingId,
@@ -522,7 +533,7 @@ class AmazonRepositoryImpl(
             }
             //Otherwise, fall back to interaction required to catch all other cases
             else -> {
-                val toast = if(selectingForOrderId != null) {
+                val toast = if(selectingFor != null) {
                     R.string.item_package_link_delivery_toast_optional
                 }else null
                 WebViewState.UserInteractionRequired(document.location(), toast)
@@ -572,8 +583,8 @@ class AmazonRepositoryImpl(
         return orders.mapIndexedNotNull { index, it ->
             val url = it.getElementsByTag("a").firstOrNull()
                 ?.attr("href")?.toUri() ?: return@mapIndexedNotNull null
-            val orderId = url.getQueryParameter("orderId") ?: return@mapIndexedNotNull null
-            val shipmentId = url.getQueryParameter("shipmentId")
+            val orderId = url.getOrderId() ?: return@mapIndexedNotNull null
+            val shipmentId = url.getShipmentId()
             val image = it.getElementsByTag("img").firstOrNull()
                 ?: return@mapIndexedNotNull null
             val title = image.attr("title") ?: return@mapIndexedNotNull null
@@ -581,7 +592,10 @@ class AmazonRepositoryImpl(
             val cookiePayload = it.getElementsByClass("js-shipment-info")
                 .firstOrNull()?.attr("data-cookiepayload")?.parseCookiePayload()
                 ?: return@mapIndexedNotNull null
+            //Create a unique ID based on the order ID and the title (should be unique to the order)
+            val id = "$orderId${title.hashCode()}"
             Delivery(
+                id,
                 orderId,
                 shipmentId,
                 index,
@@ -599,21 +613,30 @@ class AmazonRepositoryImpl(
                 null,
                 src.loadImageBitmap()
             )
-        }
+        }.distinctBy { it.id }
+    }
+
+    private fun Uri.getOrderId(): String? {
+        return getQueryParameter("orderId") ?: getQueryParameter("oid")
+    }
+
+    private fun Uri.getShipmentId(): String? {
+        return getQueryParameter("shipmentId") ?: getQueryParameter("sid")
     }
 
     private suspend fun List<Delivery>.persistDeliveries() {
         val current = deliveries.firstNotNull().toMutableList()
-        val removed = current.filter { none { delivery -> delivery.orderId == it.orderId } }
+        val removed = current.filter { none { delivery -> delivery.id == it.id } }
         removed.forEach {
             current.remove(it)
-            context.deleteEncryptedBitmaps(it.orderId)
-            databaseRepository.deleteAmazonDelivery(it.orderId)
+            context.deleteEncryptedBitmaps(it.id)
+            databaseRepository.deleteAmazonDelivery(it.id)
         }
-        val merged = (this + current).groupBy { it.orderId }.mapNotNull {
+        val merged = (this + current).groupBy { it.id }.mapNotNull {
             Delivery(
+                it.getBestItem { id } ?: return@mapNotNull null,
                 it.getBestItem { orderId } ?: return@mapNotNull null,
-                it.getBestItem { shipmentId } ?: return@mapNotNull null,
+                it.getBestItem { shipmentId },
                 it.getBestItem { index } ?: return@mapNotNull null,
                 it.getBestItem { name } ?: return@mapNotNull null,
                 it.getBestItem { imageUrl } ?: return@mapNotNull null,

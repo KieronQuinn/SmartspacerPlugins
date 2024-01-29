@@ -25,6 +25,8 @@ import org.koin.core.component.inject
 @Parcelize
 data class AmazonDelivery(
     @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: String,
     @ColumnInfo(name = "order_id")
     val orderId: String,
     @ColumnInfo(name = "shipment_id")
@@ -65,6 +67,7 @@ data class AmazonDelivery(
 
     @Parcelize
     data class Delivery(
+        val id: String,
         val orderId: String,
         val shipmentId: String?,
         val index: Int,
@@ -88,12 +91,13 @@ data class AmazonDelivery(
         suspend fun encrypt(context: Context): AmazonDelivery {
             val gson by inject<Gson>()
             if (imageBitmap != null) {
-                context.writeEncryptedBitmap(orderId, ImageType.IMAGE, imageBitmap)
+                context.writeEncryptedBitmap(id, ImageType.IMAGE, imageBitmap)
             }
             if (mapBitmap != null) {
-                context.writeEncryptedBitmap(orderId, ImageType.MAP, mapBitmap)
+                context.writeEncryptedBitmap(id, ImageType.MAP, mapBitmap)
             }
             return AmazonDelivery(
+                id,
                 orderId,
                 shipmentId,
                 index,
@@ -137,9 +141,10 @@ data class AmazonDelivery(
 
     suspend fun decrypt(context: Context): Delivery {
         val gson by inject<Gson>()
-        val decryptedBitmap = context.readEncryptedBitmap(orderId, ImageType.IMAGE)
-        val decryptedMap = context.readEncryptedBitmap(orderId, ImageType.MAP)
+        val decryptedBitmap = context.readEncryptedBitmap(id, ImageType.IMAGE)
+        val decryptedMap = context.readEncryptedBitmap(id, ImageType.MAP)
         return Delivery(
+            id,
             orderId,
             shipmentId,
             index,

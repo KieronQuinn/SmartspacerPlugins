@@ -133,7 +133,7 @@ class AmazonTarget: SmartspacerTargetProvider() {
     }
 
     private fun Delivery.getId(): String {
-        return "${TARGET_ID_PREFIX}_at_${System.currentTimeMillis()}_$orderId"
+        return "${TARGET_ID_PREFIX}_at_${System.currentTimeMillis()}_$id"
     }
 
     override fun onDismiss(smartspacerId: String, targetId: String): Boolean {

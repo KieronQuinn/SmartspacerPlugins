@@ -15,8 +15,8 @@ interface AmazonDeliveryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(delivery: AmazonDelivery)
 
-    @Query("delete from `AmazonDelivery` where shipment_id=:shipmentId")
-    fun delete(shipmentId: String)
+    @Query("delete from `AmazonDelivery` where id=:id")
+    fun delete(id: String)
 
     @Query("delete from `AmazonDelivery`")
     fun clear()

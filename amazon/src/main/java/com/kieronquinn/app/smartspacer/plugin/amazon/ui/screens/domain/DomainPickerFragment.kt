@@ -75,8 +75,8 @@ class DomainPickerFragment: BaseSettingsFragment(), BackAvailable {
     private fun State.Loaded.loadItems(): List<BaseSettingsItem> {
         return listOfNotNull(recommendedDomain, *otherDomains.toTypedArray()).map {
             Setting(
+                getString(it.countryRes),
                 getString(it.nameRes),
-                "",
                 ContextCompat.getDrawable(requireContext(), it.iconRes),
                 tintIcon = false
             ) {

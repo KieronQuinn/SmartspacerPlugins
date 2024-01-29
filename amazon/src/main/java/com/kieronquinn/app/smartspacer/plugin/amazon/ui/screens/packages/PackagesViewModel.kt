@@ -11,6 +11,7 @@ import com.kieronquinn.app.smartspacer.plugin.amazon.BuildConfig
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.AmazonDomain
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.database.AmazonDelivery.Delivery
 import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonRepository
+import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonRepository.SelectingFor
 import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonRepository.WebViewState
 import com.kieronquinn.app.smartspacer.plugin.amazon.repositories.AmazonSettingsRepository
 import com.kieronquinn.app.smartspacer.plugin.amazon.utils.extensions.createWebView
@@ -59,6 +60,7 @@ abstract class PackagesViewModel: ViewModel() {
     abstract fun onSignOutClicked()
 
     abstract fun persistOrderDetails(
+        id: String,
         orderId: String,
         orderDetailsUrl: String,
         trackingId: String,
@@ -115,7 +117,7 @@ class PackagesViewModelImpl(
     private val resumeBus = MutableStateFlow(System.currentTimeMillis())
     private val webViewLoading = MutableStateFlow(true)
     private val webViewDocument = MutableStateFlow<Document?>(null)
-    private val selectingOrderId = MutableStateFlow<String?>(null)
+    private val selectingFor = MutableStateFlow<SelectingFor?>(null)
 
     private val hasNotificationPermission = resumeBus.map {
         context.hasNotificationPermission()
@@ -144,9 +146,9 @@ class PackagesViewModelImpl(
 
     private val webViewState = combine(
         webViewDocument.filterNotNull(),
-        selectingOrderId
-    ) { document, orderId ->
-        amazonRepository.getWebViewState(headlessOrderDetailsWebView, document, orderId)
+        selectingFor
+    ) { document, selectingFor ->
+        amazonRepository.getWebViewState(headlessOrderDetailsWebView, document, selectingFor)
     }.flowOn(Dispatchers.IO).flattenConcat()
 
     private val permissions = combine(
@@ -257,7 +259,11 @@ class PackagesViewModelImpl(
 
     override fun onLinkDeliveryClicked(delivery: Delivery) {
         viewModelScope.launch {
-            selectingOrderId.emit(delivery.orderId)
+            val selectingFor = SelectingFor(
+                delivery.id,
+                delivery.orderId
+            )
+            this@PackagesViewModelImpl.selectingFor.emit(selectingFor)
         }
     }
 
@@ -284,6 +290,7 @@ class PackagesViewModelImpl(
     }
 
     override fun persistOrderDetails(
+        id: String,
         orderId: String,
         orderDetailsUrl: String,
         trackingId: String,
@@ -292,13 +299,14 @@ class PackagesViewModelImpl(
     ) {
         viewModelScope.launch {
             amazonRepository.persistOrderDetails(
+                id,
                 orderId,
                 orderDetailsUrl,
                 trackingId,
                 customerId,
                 csrfToken
             )
-            selectingOrderId.emit(null)
+            selectingFor.emit(null)
             webViewReloadBus.emit(System.currentTimeMillis())
         }
     }

@@ -10,7 +10,7 @@ interface DatabaseRepository {
 
     fun getAmazonDeliveries(): Flow<List<AmazonDelivery>>
     suspend fun addAmazonDelivery(delivery: AmazonDelivery)
-    suspend fun deleteAmazonDelivery(shipmentId: String)
+    suspend fun deleteAmazonDelivery(id: String)
     suspend fun clearAll()
 
 }
@@ -27,8 +27,8 @@ class DatabaseRepositoryImpl(
         this@DatabaseRepositoryImpl.amazonDelivery.insert(delivery)
     }
 
-    override suspend fun deleteAmazonDelivery(shipmentId: String) = withContext(Dispatchers.IO) {
-        this@DatabaseRepositoryImpl.amazonDelivery.delete(shipmentId)
+    override suspend fun deleteAmazonDelivery(id: String) = withContext(Dispatchers.IO) {
+        this@DatabaseRepositoryImpl.amazonDelivery.delete(id)
     }
 
     override suspend fun clearAll() = withContext(Dispatchers.IO) {

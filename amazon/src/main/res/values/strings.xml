@@ -79,15 +79,48 @@
     <string name="domain_BR">amazon.com.br</string>
     <string name="domain_MX">amazon.com.mx</string>
     <string name="domain_TR">amazon.com.tr</string>
+    <string name="domain_CO">amazon.com.co</string>
+    <string name="domain_CL">amazon.cl</string>
+    <string name="domain_NG">amazon.com.ng</string>
     <string name="domain_DE">amazon.de</string>
     <string name="domain_EG">amazon.eg</string>
     <string name="domain_ES">amazon.es</string>
     <string name="domain_FR">amazon.fr</string>
     <string name="domain_IN">amazon.in</string>
+    <string name="domain_IT">amazon.it</string>
     <string name="domain_NL">amazon.nl</string>
     <string name="domain_PL">amazon.pl</string>
     <string name="domain_SA">amazon.sa</string>
     <string name="domain_SE">amazon.se</string>
     <string name="domain_SG">amazon.sg</string>
+    <string name="domain_ZA">amazon.co.za</string>
+
+    <!-- Domain Countries -->
+    <string name="domain_name_AE">United Arab Emirates</string>
+    <string name="domain_name_CA">Canada</string>
+    <string name="domain_name_CN">China</string>
+    <string name="domain_name_JP">Japan</string>
+    <string name="domain_name_UK">United Kingdom</string>
+    <string name="domain_name_US">United States</string>
+    <string name="domain_name_AU">Australia</string>
+    <string name="domain_name_BE">Belgium</string>
+    <string name="domain_name_BR">Brazil</string>
+    <string name="domain_name_MX">Mexico</string>
+    <string name="domain_name_TR">Turkey</string>
+    <string name="domain_name_CO">Colombia</string>
+    <string name="domain_name_CL">Chile</string>
+    <string name="domain_name_NG">Nigeria</string>
+    <string name="domain_name_DE">Germany</string>
+    <string name="domain_name_EG">Egypt</string>
+    <string name="domain_name_ES">Spain</string>
+    <string name="domain_name_FR">France</string>
+    <string name="domain_name_IN">India</string>
+    <string name="domain_name_IT">Italy</string>
+    <string name="domain_name_NL">Netherlands</string>
+    <string name="domain_name_PL">Poland</string>
+    <string name="domain_name_SA">Saudi Arabia</string>
+    <string name="domain_name_SE">Sweden</string>
+    <string name="domain_name_SG">Singapore</string>
+    <string name="domain_name_ZA">South Africa</string>
 
 </resources>

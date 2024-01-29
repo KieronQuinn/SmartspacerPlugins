@@ -1,5 +1,6 @@
 package com.kieronquinn.app.smartspacer.plugin.amazon.ui.screens.domain
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.AmazonDomain
@@ -34,6 +35,7 @@ abstract class DomainPickerViewModel: ViewModel() {
 class DomainPickerViewModelImpl(
     private val navigation: ContainerNavigation,
     private val amazonRepository: AmazonRepository,
+    context: Context,
     settingsRepository: AmazonSettingsRepository,
 ): DomainPickerViewModel() {
 
@@ -52,6 +54,7 @@ class DomainPickerViewModelImpl(
         allDomains
     ) { recommended, all ->
         val otherDomains = all.filterNot { it == recommended }
+            .sortedBy { context.getString(it.countryRes).lowercase() }
         State.Loaded(recommended, otherDomains)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, State.Loading)
 
