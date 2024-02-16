@@ -7,8 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
-import com.kieronquinn.app.smartspacer.plugin.amazon.PACKAGE_NAME_GLOBAL
-import com.kieronquinn.app.smartspacer.plugin.amazon.PACKAGE_NAME_INDIA
+import com.kieronquinn.app.smartspacer.plugin.amazon.getFromPackageName
 import com.kieronquinn.app.smartspacer.plugin.amazon.model.api.AmazonDomain
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.getPackageInfoCompat
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.isPackageInstalled
@@ -26,27 +25,19 @@ fun Context.hasDisabledBatteryOptimisation(): Boolean {
 
 fun Context.getAmazonMarketplaceDomain(): AmazonDomain? {
     val packageManager = packageManager
-    return when {
-        packageManager.isPackageInstalled(PACKAGE_NAME_INDIA) -> {
-            contentResolver.getMarketplaceDomain(PACKAGE_NAME_INDIA)
-        }
-        packageManager.isPackageInstalled(PACKAGE_NAME_GLOBAL) -> {
-            contentResolver.getMarketplaceDomain(PACKAGE_NAME_GLOBAL)
-        }
-        else -> null
+    return getFromPackageName {
+        if(packageManager.isPackageInstalled(it)) {
+            contentResolver.getMarketplaceDomain(it)
+        }else null
     }
 }
 
 fun Context.getAmazonAppVersion(): String? {
     val packageManager = packageManager
-    return when {
-        packageManager.isPackageInstalled(PACKAGE_NAME_INDIA) -> {
-            packageManager.getPackageInfoCompat(PACKAGE_NAME_INDIA).versionName
-        }
-        packageManager.isPackageInstalled(PACKAGE_NAME_GLOBAL) -> {
-            packageManager.getPackageInfoCompat(PACKAGE_NAME_GLOBAL).versionName
-        }
-        else -> null
+    return getFromPackageName {
+        if(packageManager.isPackageInstalled(it)) {
+            packageManager.getPackageInfoCompat(it).versionName
+        }else null
     }
 }
 

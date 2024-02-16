@@ -1,9 +1,25 @@
 package com.kieronquinn.app.smartspacer.plugin.amazon
 
 const val AMZN_APP_CTXT = "amzn-app-ctxt"
-const val PACKAGE_NAME_GLOBAL = "com.amazon.mShop.android.shopping"
-const val PACKAGE_NAME_INDIA = "in.amazon.mShop.android.shopping"
-const val DEFAULT_APP_VERSION = "26.23.4.100"
+
+/**
+ *  Package names from https://amazon.com/.well-known/assetlinks.json, in reverse order of
+ *  likeliness of being installed
+ */
+val PACKAGE_NAMES = arrayOf(
+    "com.amazon.mShop.android.beta",
+    "cn.amazon.mShop.android",
+    "in.amazon.mShop.android.business.shopping",
+    "in.amazon.mShop.android.shopping",
+    "com.amazon.mShop.android.business.shopping",
+    "com.amazon.mShop.android.shopping"
+)
+
+fun <T> getFromPackageName(block: (packageName: String) -> T?): T? {
+    return PACKAGE_NAMES.firstNotNullOfOrNull(block)
+}
+
+const val DEFAULT_APP_VERSION = "28.3.0.100"
 
 val HEADERS = mapOf(
     "X-Requested-With" to "com.amazon.mShop.android.shopping"
