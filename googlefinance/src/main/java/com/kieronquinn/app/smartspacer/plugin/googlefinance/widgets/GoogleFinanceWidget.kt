@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.os.Build
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.RemoteViews
 import android.widget.TextView
 import androidx.core.graphics.drawable.toBitmap
@@ -15,6 +16,7 @@ import com.kieronquinn.app.smartspacer.plugin.googlefinance.model.FinancialWidge
 import com.kieronquinn.app.smartspacer.plugin.googlefinance.repositories.GoogleFinanceRepository
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
 import com.kieronquinn.app.smartspacer.sdk.utils.RemoteAdapter
+import com.kieronquinn.app.smartspacer.sdk.utils.findByType
 import com.kieronquinn.app.smartspacer.sdk.utils.viewstructure.ViewGroup
 import com.kieronquinn.app.smartspacer.sdk.utils.viewstructure.mapWidgetViewStructure
 import org.koin.android.ext.android.inject
@@ -40,21 +42,6 @@ class GoogleFinanceWidget: SmartspacerWidgetProvider() {
         private const val IDENTIFIER_PRICE_FIRST = "price_first"
         private const val IDENTIFIER_PRICE_SECOND = "price_second"
         private const val IDENTIFIER_DIRECTION = "direction"
-
-        private val STRUCTURE_ROOT: ViewGroup.() -> Unit = {
-            relativeLayout {
-                relativeLayout {
-                    linearLayout {
-                        index = 1
-                        linearLayout {
-                            listView {
-                                id = IDENTIFIER_LIST
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         private val STRUCTURE_ITEM: ViewGroup.() -> Unit = {
             relativeLayout {
@@ -162,8 +149,8 @@ class GoogleFinanceWidget: SmartspacerWidgetProvider() {
 
     override fun onWidgetChanged(smartspacerId: String, remoteViews: RemoteViews?) {
         val views = remoteViews?.load() ?: return
-        val structure = mapWidgetViewStructure(views, STRUCTURE_ROOT) ?: return
-        val listViewId = structure.getViewIdFromStructureId(IDENTIFIER_LIST) ?: return
+        val listView = views.findByType<ListView>() ?: return
+        val listViewId = listView.id
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             getRemoteCollectionItems(smartspacerId, listViewId)
         }else{
