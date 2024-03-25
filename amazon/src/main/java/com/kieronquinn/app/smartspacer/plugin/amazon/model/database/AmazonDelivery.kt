@@ -120,6 +120,8 @@ data class AmazonDelivery(
         }
 
         fun getBestStatus(): Status {
+            //Edge case: Regular status can be set to delivered without tracking update, handle that
+            if(status == Status.DELIVERED) return status
             //Prefer live tracking data if it is available
             return trackingData?.packageLocationDetails?.status?.toStatus() ?: status
         }
