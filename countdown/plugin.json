@@ -1,7 +1,7 @@
 {
 	"description": "This simple plugin contains a Complication which counts down to a day of your choice, with either a custom icon or one of thousands of built in ones",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/countdown/countdown-release.apk",
-	"version_code": 101,
-	"changelog": "Fixed date picker selecting the wrong date on some timezones",
+	"version_code": 102,
+	"changelog": "- Fixed countdown days being incorrect on some timezones\n- Added option to count up once the day has passed",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/countdown/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/countdown/screenshots/2.jpg"]
 }
