@@ -34,6 +34,7 @@ abstract class ConfigurationViewModel: ViewModel() {
     abstract fun setup(smartspacerId: String)
     abstract fun onPermissionClicked()
     abstract fun onDateChanged(date: Long)
+    abstract fun onCountUpChanged(enabled: Boolean)
     abstract fun onIconClicked(key: String)
     abstract fun onIconChanged(icon: Icon)
 
@@ -82,6 +83,12 @@ class ConfigurationViewModelImpl(
             .toLocalDate().format(DateTimeFormatter.ISO_LOCAL_DATE)
         updateComplicationData {
             it.copy(endDate = instant)
+        }
+    }
+
+    override fun onCountUpChanged(enabled: Boolean) {
+        updateComplicationData {
+            it.copy(allowCountUp = enabled)
         }
     }
 

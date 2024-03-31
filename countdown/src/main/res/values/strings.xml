@@ -15,6 +15,8 @@
     <string name="configuration_permission_content">Permission to create alarms &amp; reminders is required to update the countdown at midnight (no noise will be made), tap to grant</string>
     <string name="configuration_date_title">Countdown to</string>
     <string name="configuration_date_content">Set the date to countdown to</string>
+    <string name="configuration_date_count_up_title">Count Up</string>
+    <string name="configuration_date_count_up_content">Count up from a date in the past, rather than stopping at 0 days</string>
 
     <string name="configuration_icon_title">Icon</string>
     <string name="configuration_icon_from_font_title">Built In</string>

@@ -13,6 +13,7 @@ import com.kieronquinn.app.smartspacer.plugin.countdown.ui.screens.icon.IconPick
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.BaseSettingsItem
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Card
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.Setting
+import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem.SwitchSetting
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.BackAvailable
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsAdapter
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsFragment
@@ -95,6 +96,13 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable {
             ) {
                 onDateClicked(data.endTimestamp ?: getDefaultTime())
             },
+            SwitchSetting(
+                data.countUp,
+                getString(R.string.configuration_date_count_up_title),
+                getString(R.string.configuration_date_count_up_content),
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_count_up),
+                onChanged = viewModel::onCountUpChanged
+            ),
             Setting(
                 getString(R.string.configuration_icon_title),
                 data.icon.describe(requireContext()),

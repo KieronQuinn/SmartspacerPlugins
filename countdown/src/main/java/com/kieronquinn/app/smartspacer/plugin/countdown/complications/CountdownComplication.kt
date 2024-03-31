@@ -18,12 +18,13 @@ import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.Text
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerComplicationProvider
 import com.kieronquinn.app.smartspacer.sdk.utils.ComplicationTemplate
 import org.koin.android.ext.android.inject
-import java.time.Duration
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.Date
 import kotlin.math.abs
+import kotlin.math.absoluteValue
 import android.graphics.drawable.Icon as AndroidIcon
 import com.kieronquinn.app.smartspacer.plugin.countdown.model.Icon as CountdownIcon
 
@@ -39,16 +40,17 @@ class CountdownComplication: SmartspacerComplicationProvider() {
     override fun getSmartspaceActions(smartspacerId: String): List<SmartspaceAction> {
         val data = getComplicationData(smartspacerId)
         return data?.endLocalDate?.let {
-            getComplication(smartspacerId, it, data.icon)
+            getComplication(smartspacerId, it, data.icon, data.countUp)
         } ?: emptyList()
     }
 
     private fun getComplication(
         smartspacerId: String,
         endTime: LocalDate,
-        icon: CountdownIcon
+        icon: CountdownIcon,
+        allowCountUp: Boolean
     ): List<SmartspaceAction> {
-        val daysUtil = endTime.getDaysLeft().toInt()
+        val daysUtil = endTime.getDaysLeft(allowCountUp).toInt()
         val content = resources.getQuantityString(
             R.plurals.complication_countdown, daysUtil, daysUtil
         )
@@ -151,17 +153,20 @@ class CountdownComplication: SmartspacerComplicationProvider() {
         return dateFormat.format(date)
     }
 
-    private fun LocalDate.getDaysLeft(): Long {
-        val now = LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault())
-        val end = atStartOfDay().atZone(ZoneId.systemDefault())
-        return Duration.between(now, end).toDays().coerceAtLeast(0L)
+    private fun LocalDate.getDaysLeft(allowNegative: Boolean): Long {
+        val now = LocalDate.now()
+        return ChronoUnit.DAYS.between(now, this).let {
+            if(allowNegative) it.absoluteValue else it.coerceAtLeast(0L)
+        }
     }
 
     data class ComplicationData(
         @SerializedName("end_time")
         val endDate: String? = null,
         @SerializedName("icon")
-        val icon: CountdownIcon = CountdownIcon.default()
+        val icon: CountdownIcon = CountdownIcon.default(),
+        @SerializedName("allow_count_up")
+        val allowCountUp: Boolean? = null
     ) {
 
         val endLocalDate: LocalDate?
@@ -176,6 +181,9 @@ class CountdownComplication: SmartspacerComplicationProvider() {
                 ?.atZone(ZoneId.systemDefault())
                 ?.toInstant()
                 ?.toEpochMilli()
+
+        val countUp: Boolean
+            get() = allowCountUp ?: false
 
         companion object {
             const val TYPE = "countdown"
