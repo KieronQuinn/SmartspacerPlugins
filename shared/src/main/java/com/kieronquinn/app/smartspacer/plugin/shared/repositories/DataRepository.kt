@@ -28,6 +28,7 @@ interface DataRepository {
 
     fun <T> getRequirementDataFlow(id: String, type: Class<T>): Flow<T?>
     fun <T> getRequirementData(id: String, type: Class<T>): T?
+    fun <T> getAllRequirementData(ofType: String, type: Class<T>): Flow<List<T>>
     fun deleteRequirementData(id: String)
     suspend fun addRequirementData(requirementData: RequirementData)
 
@@ -159,11 +160,17 @@ class DataRepositoryImpl(
         }
     }
 
-
-
     override fun <T> getRequirementData(id: String, type: Class<T>): T? = runBlocking {
         databaseRepository.getRequirementDataById(id)?.let {
             gson.fromJson(it.data, type)
+        }
+    }
+
+    override fun <T> getAllRequirementData(ofType: String, type: Class<T>): Flow<List<T>> {
+        return databaseRepository.getRequirementDataOfType(ofType).map { items ->
+            items.map { item ->
+                gson.fromJson(item.data, type)
+            }
         }
     }
 

@@ -1,0 +1,144 @@
+<resources>
+    <string name="app_name">Device Controls Plugin for Smartspacer</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
+
+    <string name="complication_label">Device Control</string>
+    <string name="target_label">Device Control</string>
+    <string name="requirement_label">Device Control</string>
+    <string name="complication_description">Show a Device Control from a supported app</string>
+    <string name="complication_description_set">Show %1s from %1s</string>
+    <string name="target_description">Show a Device Control from a supported app</string>
+    <string name="target_description_set">Show %1s from %1s</string>
+    <string name="target_title_default">Device Control</string>
+    <string name="requirement_description">Only show based on the state of %1s from %1s</string>
+    <string name="requirement_description_unset">Only show based on the state of a Device Control</string>
+
+    <string name="configuration_settings_title">Settings</string>
+    <string name="configuration_settings_description">Set the Device Control to use and options on how to display it</string>
+    <string name="configuration_settings_description_requirement">Set the Device Control to use and options on how the Requirement should depend on it</string>
+    <string name="configuration_incompatible">Sorry, this plugin is not compatible with your device. This may be because:\n- You\'re not rooted (this plugin requires root)\n- You have not got Sui installed or have not started Shizuku as root\n- Your device does not support Device Controls</string>
+    <string name="configuration_disable_battery_optimisation">Disable Battery Optimisation to allow the plugin to update Controls in the background</string>
+    <string name="configuration_grant_notification_permission">Allow the plugin to notify you of issues loading Controls by granting notification permissions</string>
+    <string name="configuration_select_control_title">Select Control</string>
+    <string name="configuration_select_control_content">Pick a Device Control to use</string>
+    <string name="configuration_select_control_content_set">%1s (%1s)</string>
+    <string name="configuration_control_custom_name_title">Custom Name</string>
+    <string name="configuration_control_custom_name_content">Set a custom name for this Control</string>
+    <string name="configuration_control_custom_icon_title">Custom Icon</string>
+    <string name="configuration_control_custom_icon_content">Set a custom icon for this Control</string>
+    <string name="configuration_app_picker_title">Select App</string>
+    <string name="configuration_app_picker_empty">No apps are installed which provide Device Controls</string>
+    <string name="configuration_control_picker_error">Error loading Device Controls from %1s, try again later</string>
+    <string name="configuration_control_picker_empty">No controls available from %1s</string>
+    <string name="configuration_options">Options</string>
+    <string name="configuration_loading_config_title">Loading Behaviour</string>
+    <string name="configuration_loading_config_content">Select what to show when a Control is being updated: %1s</string>
+    <string name="configuration_loading_config_content_alt">Select what to do when a Control is loading: %1s</string>
+    <string name="configuration_loading_config_loading">Loading text</string>
+    <string name="configuration_loading_config_cached">Previous cached Control (if available)</string>
+    <string name="configuration_loading_config_hidden">Hide entirely</string>
+    <string name="configuration_loading_config_loading_alt">Wait for Control to load</string>
+    <string name="configuration_loading_config_cached_alt">Use cached Control state</string>
+    <string name="configuration_tap_action_title">Tap Action</string>
+    <string name="configuration_tap_action_content">What to do when tapped: %1s</string>
+    <string name="configuration_float_set_title">Value to Set</string>
+    <string name="configuration_float_set_content">Specify the value to set when tapped</string>
+    <string name="configuration_mode_set_title">Mode to Set</string>
+    <string name="configuration_mode_set_content">Specify the mode to set when tapped: %1s</string>
+    <string name="configuration_hide_details_title">Hide Details</string>
+    <string name="configuration_hide_details_content">Don\'t show additional detail from the Control, for example the mode or the value (this would normally be shown after the status)</string>
+    <string name="configuration_requires_unlock_title">Require Unlock</string>
+    <string name="configuration_requires_unlock_content">Require the device to be unlocked when using the Tap Action.\n\n<b>Note:</b> Disabling this may not work for all Controls and if it launches an app, the app may appear behind the lock screen and require manual unlock</string>
+    <string name="configuration_customisation_header">Customisation</string>
+    <string name="configuration_custom_title_title">Custom Title</string>
+    <string name="configuration_custom_title_content"><b>Optional:</b> Set a custom title to display for this Control</string>
+    <string name="configuration_custom_subtitle_title">Custom Subtitle</string>
+    <string name="configuration_custom_subtitle_content"><b>Optional:</b> Set a custom subtitle to display for this Control</string>
+    <string name="configuration_custom_icon_title">Custom Icon</string>
+    <string name="configuration_custom_icon_content"><b>Optional:</b> Set a custom icon to display for this Control</string>
+
+    <string name="configuration_icon_title">Icon</string>
+    <string name="configuration_icon_default_title">Default</string>
+    <string name="configuration_icon_default_content">Use the icon provided by the Control</string>
+    <string name="configuration_icon_from_font_title">Built In</string>
+    <string name="configuration_icon_from_font_content">Choose from thousands of built in icons</string>
+    <string name="configuration_icon_from_file_title">From File</string>
+    <string name="configuration_icon_from_file_content">Use an image from file</string>
+
+    <string name="configuration_icon_font_picker_content">%1d icons</string>
+    <string name="configuration_icon_font_icon_picker_title">Icons</string>
+    <string name="configuration_icon_font_description">%1s (%1s)</string>
+    <string name="configuration_icon_font_description_error">Icon not found</string>
+
+    <string name="configuration_icon_file_pick_title">Select File</string>
+    <string name="configuration_icon_tint_title">Tint</string>
+    <string name="configuration_icon_tint_content">Apply an automatic tint to this image, making it always visible in Smartspacer. This will break solid icons which are not of a distinct shape.</string>
+    <string name="configuration_icon_description">Image: %1s</string>
+    <string name="configuration_icon_description_error">Image from file</string>
+
+    <string name="control_loading">Loading…</string>
+    <string name="control_sending">Loading…</string>
+    <string name="control_error">Error</string>
+    <string name="control_template_two_part">%1s • %1s</string>
+    <string name="control_template_state_unknown">Unknown</string>
+    <string name="control_template_state_off">Off</string>
+    <string name="control_template_state_cool">Cool</string>
+    <string name="control_template_state_eco">Eco</string>
+    <string name="control_template_state_heat">Heat</string>
+    <string name="control_template_state_heat_cool">Heat-Cool</string>
+
+    <string name="control_tap_action_show_control">Open Control</string>
+    <string name="control_tap_action_open_panel">Launch Controls Panel</string>
+    <string name="control_tap_action_open_app">Long Click Control</string>
+    <string name="control_tap_action_command">Click Control</string>
+    <string name="control_tap_action_boolean">Toggle Control</string>
+    <string name="control_tap_action_mode_set">Set Mode</string>
+    <string name="control_tap_action_float">Set Value</string>
+
+    <string name="requirement_warning"><b>Important:</b> This Requirement will only work when the Device Control that is being monitored is added to Smartspacer as a Target or Complication, it does not work standalone</string>
+    <string name="requirement_type_title">Comparison</string>
+    <string name="requirement_type_content">What to check for the Requirement to be met: %1s</string>
+    <string name="requirement_type_available">Device available</string>
+    <string name="requirement_type_boolean">Device toggle state</string>
+    <string name="requirement_type_boolean_title">Required State</string>
+    <string name="requirement_type_boolean_content">Requirement is met when the Control has a state matching this toggle</string>
+    <string name="requirement_type_mode">Device mode</string>
+    <string name="requirement_type_mode_title">Required Mode</string>
+    <string name="requirement_type_mode_content">Requirement is met when the Control has a mode matching: %1s</string>
+    <string name="requirement_type_float">Device value state</string>
+    <string name="requirement_type_float_title">Required Value</string>
+    <string name="requirement_type_float_content">Requirement is met with value, when performing the comparison set above</string>
+    <string name="requirement_type_float_type_title">Value comparison</string>
+    <string name="requirement_type_float_type_content">Requirement is met when the value set below is %1s the value of the Device Control</string>
+    <string name="requirement_type_float_type_equals">equal to</string>
+    <string name="requirement_type_float_type_less_than">less than</string>
+    <string name="requirement_type_float_type_less_than_equal_to">less than or equal to</string>
+    <string name="requirement_type_float_type_greater_than">greater than</string>
+    <string name="requirement_type_float_type_greater_than_or_equal_to">greater than or equal to</string>
+
+    <string name="notification_channel_background_service_title">Background Service</string>
+    <string name="notification_channel_background_service_subtitle">Notifications shown when Device Controls Plugin for Smartspacer is running in the background</string>
+    <string name="notification_title_background_service">Running in the background</string>
+    <string name="notification_content_background_service">Device Controls Plugin for Smartspacer is running in the background, tap to hide</string>
+    <string name="popup_control_open_controls">Open Device Controls</string>
+
+    <string name="controls_pin_verify">Verify %s</string>
+    <string name="controls_confirmation_message">Confirm change for %s</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_refresh_period_title">Control Load Period</string>
+    <string name="settings_refresh_period_content">How long to keep Controls loaded and listening for updates while Smartspacer is visible: %1s.\n\n<b>Warning:</b> If you are using Smartspacer on the AoD, using higher periods will cause significant battery drain.</string>
+    <string name="settings_refresh_on_screen_state_changed_title">Refresh on Screen State Changed</string>
+    <string name="settings_refresh_on_screen_state_changed_content">Refresh Targets &amp; Complications when the screen turns off, on, or is unlocked. Recommended if you\'re Smartspacer on the AoD to allow refreshing when waking to the lock screen.</string>
+
+    <string name="refresh_period_15_seconds">15 seconds</string>
+    <string name="refresh_period_30_seconds">30 seconds</string>
+    <string name="refresh_period_1_minute">1 minute</string>
+    <string name="refresh_period_5_minutes">5 minutes</string>
+    <string name="refresh_period_15_minutes">15 minutes</string>
+    <string name="refresh_period_30_minutes">30 minutes</string>
+    <string name="refresh_period_1_hour">1 hour</string>
+    <string name="refresh_period_infinite">Infinite</string>
+
+</resources>

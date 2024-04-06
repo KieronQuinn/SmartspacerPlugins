@@ -3,6 +3,7 @@ package com.kieronquinn.app.smartspacer.plugin.shared
 import android.app.Application
 import android.content.Context
 import androidx.annotation.CallSuper
+import com.google.android.material.color.DynamicColors
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kieronquinn.app.smartspacer.plugin.shared.components.blur.BlurProvider
@@ -29,6 +30,11 @@ abstract class SmartspacerPlugin: Application() {
             modules(sharedModule(), getModule(base))
         }
         base.configure()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        DynamicColors.applyToActivitiesIfAvailable(this)
     }
 
     private fun sharedModule() = module {

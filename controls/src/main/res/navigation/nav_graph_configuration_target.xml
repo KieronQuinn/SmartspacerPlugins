@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_configuration_target"
+    app:startDestination="@id/targetConfigurationFragment">
+
+    <fragment
+        android:id="@+id/targetConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.target.TargetConfigurationFragment"
+        android:label="@string/target_label"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_nav_graph_app_picker"
+            app:destination="@id/nav_graph_app_picker" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_nav_graph_icon_picker"
+            app:destination="@id/nav_graph_icon_picker">
+            <argument
+                android:name="config"
+                app:argType="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.IconPickerFragment$Config" />
+        </action>
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_nav_graph_custom_title"
+            app:destination="@id/nav_graph_custom_title">
+            <argument
+                android:name="current"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_customSubtitleBottomSheetFragment"
+            app:destination="@id/customSubtitleBottomSheetFragment" />
+        <action
+            android:id="@+id/action_targetConfigurationFragment_to_nav_graph_settings"
+            app:destination="@id/nav_graph_settings" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_app_picker" />
+    <include app:graph="@navigation/nav_graph_icon_picker" />
+    <include app:graph="@navigation/nav_graph_custom_title" />
+    <dialog
+        android:id="@+id/customSubtitleBottomSheetFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.target.subtitle.CustomSubtitleBottomSheetFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_custom_subtitle_bottom_sheet">
+        <argument
+            android:name="current"
+            app:argType="string" />
+    </dialog>
+    <include app:graph="@navigation/nav_graph_settings" />
+
+</navigation>

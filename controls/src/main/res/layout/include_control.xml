@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kieronquinn.app.smartspacer.plugin.controls.ui.views.ControlView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/control_default_background"
+    tools:layout_gravity="center"
+    tools:layout_height="100dp"
+    tools:layout_width="200dp">
+
+    <ImageView
+        android:id="@+id/control_thumbnail"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_16">
+
+        <ImageView
+            android:id="@+id/control_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/control_secondary_text"
+            tools:src="@drawable/ic_device_light" />
+
+        <TextView
+            android:id="@+id/control_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer.Medium"
+            android:textColor="@color/control_secondary_text"
+            app:layout_constraintBottom_toBottomOf="@id/control_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/control_icon"
+            app:layout_constraintTop_toTopOf="@id/control_icon"
+            tools:text="Status" />
+
+        <TextView
+            android:id="@+id/control_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer.Medium"
+            android:textColor="@color/control_primary_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/control_icon"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/control_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Smartspacer"
+            android:textColor="@color/control_secondary_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/control_title"
+            tools:text="Subtitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.kieronquinn.app.smartspacer.plugin.controls.ui.views.ControlView>

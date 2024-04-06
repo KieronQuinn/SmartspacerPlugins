@@ -2,6 +2,7 @@ package com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.Animatable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -33,6 +34,7 @@ import com.kieronquinn.app.smartspacer.plugin.shared.utils.onClicked
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.onLongClicked
 import com.kieronquinn.monetcompat.core.MonetCompat
 import com.kieronquinn.monetcompat.extensions.views.applyMonet
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 abstract class BaseSettingsAdapter(
     recyclerView: LifecycleAwareRecyclerView,
@@ -231,11 +233,15 @@ abstract class BaseSettingsAdapter(
         itemSettingsSliderSlider.applyMonet()
         itemSettingsSliderSlider.valueFrom = item.minValue
         itemSettingsSliderSlider.valueTo = item.maxValue
-        itemSettingsSliderSlider.value = item.startValue
         itemSettingsSliderSlider.stepSize = item.step
+        itemSettingsSliderSlider.value = item.startValue
         itemSettingsSliderSlider.setLabelFormatter(item.labelFormatter)
+        itemSettingsSliderSlider.labelBehavior = item.labelBehavior
+        Log.d("CR69", "Setup")
         whenResumed {
-            binding.itemSettingsSliderSlider.onChanged().collect {
+            binding.itemSettingsSliderSlider.clearOnChangeListeners()
+            binding.itemSettingsSliderSlider.onChanged().distinctUntilChanged().collect {
+                Log.d("CR69", "onChanged to $it")
                 item.onChanged(it)
             }
         }

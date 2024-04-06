@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_configuration_complication"
+    app:startDestination="@id/complicationConfigurationFragment">
+
+    <fragment
+        android:id="@+id/complicationConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.complication.ComplicationConfigurationFragment"
+        android:label="@string/complication_label"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_complicationConfigurationFragment_to_nav_graph_app_picker"
+            app:destination="@id/nav_graph_app_picker" />
+        <action
+            android:id="@+id/action_complicationConfigurationFragment_to_nav_graph_icon_picker"
+            app:destination="@id/nav_graph_icon_picker">
+            <argument
+                android:name="config"
+                app:argType="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.IconPickerFragment$Config" />
+        </action>
+        <action
+            android:id="@+id/action_complicationConfigurationFragment_to_nav_graph_custom_title"
+            app:destination="@id/nav_graph_custom_title">
+            <argument
+                android:name="current"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_complicationConfigurationFragment_to_nav_graph_settings"
+            app:destination="@id/nav_graph_settings" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_app_picker" />
+    <include app:graph="@navigation/nav_graph_icon_picker" />
+    <include app:graph="@navigation/nav_graph_custom_title" />
+    <include app:graph="@navigation/nav_graph_settings" />
+
+</navigation>

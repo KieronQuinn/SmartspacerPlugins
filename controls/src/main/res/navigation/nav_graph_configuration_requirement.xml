@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_configuration_requirement"
+    app:startDestination="@id/requirementConfigurationFragment">
+
+    <fragment
+        android:id="@+id/requirementConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.requirement.RequirementConfigurationFragment"
+        android:label="@string/requirement_label"
+        tools:layout="@layout/fragment_settings_base" >
+        <action
+            android:id="@+id/action_requirementConfigurationFragment_to_nav_graph_app_picker"
+            app:destination="@id/nav_graph_app_picker" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_app_picker" />
+
+</navigation>

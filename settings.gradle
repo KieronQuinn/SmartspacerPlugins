@@ -12,6 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
         mavenLocal()
         maven { url 'https://jitpack.io' }
+        jcenter()
     }
 }
 rootProject.name = "Smartspacer Plugins"

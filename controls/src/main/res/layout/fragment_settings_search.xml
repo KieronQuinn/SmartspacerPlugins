@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_8"
+    android:transitionGroup="true">
+
+    <include
+        android:id="@+id/include_search"
+        layout="@layout/include_search"/>
+
+    <com.kieronquinn.app.smartspacer.plugin.shared.ui.views.LifecycleAwareRecyclerView
+        android:id="@+id/settings_base_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingTop="@dimen/search_box_recyclerview_padding"
+        android:layout_marginTop="@dimen/search_box_negative_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/include_search"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_bottom_fab"
+        tools:listitem="@layout/item_settings_text_item" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/settings_base_loading_progress"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toTopOf="@id/settings_base_loading_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:trackCornerRadius="4dp"
+        app:trackThickness="8dp" />
+
+    <TextView
+        android:id="@+id/settings_base_loading_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:text="@string/loading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Smartspacer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_base_loading_progress" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/settings_base_loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="settings_base_loading_label,settings_base_loading_progress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

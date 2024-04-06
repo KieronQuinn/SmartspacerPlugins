@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_icon_picker"
+    app:startDestination="@id/iconPickerFragment">
+
+    <fragment
+        android:id="@+id/iconPickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.IconPickerFragment"
+        android:label="@string/configuration_icon_title"
+        tools:layout="@layout/fragment_settings_base">
+        <action
+            android:id="@+id/action_iconPickerFragment_to_filePickerFragment"
+            app:destination="@id/filePickerFragment" />
+        <action
+            android:id="@+id/action_iconPickerFragment_to_fontPickerFragment"
+            app:destination="@id/fontPickerFragment" />
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.IconPickerFragment$Config" />
+    </fragment>
+    <fragment
+        android:id="@+id/filePickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.file.FilePickerFragment"
+        android:label="@string/configuration_icon_from_file_title"
+        tools:layout="@layout/fragment_settings_fab">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.file.FilePickerFragment$Config" />
+    </fragment>
+    <fragment
+        android:id="@+id/fontPickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.font.FontPickerFragment"
+        android:label="@string/configuration_icon_from_font_title"
+        tools:layout="@layout/fragment_settings_base">
+        <action
+            android:id="@+id/action_fontPickerFragment_to_fontIconPickerFragment"
+            app:destination="@id/fontIconPickerFragment" />
+        <argument
+            android:name="key"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fontIconPickerFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.font.picker.FontIconPickerFragment"
+        android:label="@string/configuration_icon_font_icon_picker_title"
+        tools:layout="@layout/fragment_settings_search">
+        <argument
+            android:name="config"
+            app:argType="com.kieronquinn.app.smartspacer.plugin.controls.ui.screens.configuration.icon.font.picker.FontIconPickerFragment$Config" />
+    </fragment>
+</navigation>

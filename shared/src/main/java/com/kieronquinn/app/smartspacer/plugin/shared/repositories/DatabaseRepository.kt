@@ -25,6 +25,7 @@ interface DatabaseRepository {
     suspend fun deleteComplicationData(id: String)
 
     suspend fun getRequirementDataById(id: String): RequirementData?
+    fun getRequirementDataOfType(type: String): Flow<List<RequirementData>>
     suspend fun addRequirementData(requirementData: RequirementData)
     suspend fun deleteRequirementData(id: String)
 
@@ -101,6 +102,12 @@ open class DatabaseRepositoryImpl(
         return withContext(Dispatchers.IO) {
             requirementData.getById(id)
         }
+    }
+
+    override fun getRequirementDataOfType(type: String): Flow<List<RequirementData>> {
+        return requirementData.getAll().mapLatest {
+            it.filter { t -> t.type == type }
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getRequirementDataByIdAsFlow(id: String): Flow<RequirementData?> {

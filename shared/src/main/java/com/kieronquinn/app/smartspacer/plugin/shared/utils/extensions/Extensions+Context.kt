@@ -1,6 +1,7 @@
 package com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.os.Build
@@ -61,4 +62,8 @@ private fun Context.getDisplayHeight(): Int {
         windowManager.defaultDisplay.getRealMetrics(displayMetrics)
         displayMetrics.heightPixels
     }
+}
+
+fun Context.hasPermission(vararg permission: String): Boolean {
+    return permission.all { checkCallingOrSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
 }

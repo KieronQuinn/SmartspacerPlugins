@@ -80,6 +80,7 @@ sealed class GenericSettingsItem(val type: GenericSettingsItemType): BaseSetting
         val subtitle: CharSequence,
         val icon: Drawable?,
         val labelFormatter: LabelFormatter? = null,
+        val labelBehavior: Int = LabelFormatter.LABEL_FLOATING,
         val onChanged: (value: Float) -> Unit
     ): GenericSettingsItem(GenericSettingsItemType.SLIDER) {
         override fun getItemId() = title.hashCode().toLong()
