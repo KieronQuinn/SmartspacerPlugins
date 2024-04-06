@@ -15,8 +15,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.controls"
         minSdk 30 //Controls is Android 11+
         targetSdk target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -76,6 +76,9 @@ dependencies {
     implementation 'com.mikepenz:community-material-typeface:+@aar'
     //noinspection GradleDynamicVersion
     implementation 'com.mikepenz:phosphor-typeface:+@aar'
+
+    //Bypass hidden API restrictions
+    implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
 
     //Data storage
     ksp "androidx.room:room-compiler:$room_version"

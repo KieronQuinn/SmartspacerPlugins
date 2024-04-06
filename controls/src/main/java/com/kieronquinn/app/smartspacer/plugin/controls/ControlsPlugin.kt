@@ -46,8 +46,14 @@ import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DatabaseReposi
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.NavGraphRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import org.lsposed.hiddenapibypass.HiddenApiBypass
 
 class ControlsPlugin: SmartspacerPlugin() {
+
+    override fun attachBaseContext(base: Context) {
+        HiddenApiBypass.addHiddenApiExemptions("")
+        super.attachBaseContext(base)
+    }
 
     override fun getModule(context: Context) = module {
         single { ControlsDatabase.getDatabase(get()) }
