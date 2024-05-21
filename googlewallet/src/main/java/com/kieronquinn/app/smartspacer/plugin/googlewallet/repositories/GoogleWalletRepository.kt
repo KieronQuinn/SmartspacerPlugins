@@ -4,14 +4,22 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Base64
-import android.util.Log
 import androidx.annotation.CallSuper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.google.internal.tapandpay.v1.valuables.*
-import com.google.internal.tapandpay.v1.valuables.CommonProto.*
+import com.google.internal.tapandpay.v1.valuables.CommonProto.GroupingInfo
+import com.google.internal.tapandpay.v1.valuables.CommonProto.IssuerInfo
+import com.google.internal.tapandpay.v1.valuables.CommonProto.RedemptionInfo
+import com.google.internal.tapandpay.v1.valuables.EventTicketProto
+import com.google.internal.tapandpay.v1.valuables.FlightProto
+import com.google.internal.tapandpay.v1.valuables.GenericCardProto
+import com.google.internal.tapandpay.v1.valuables.GiftCardProto
+import com.google.internal.tapandpay.v1.valuables.HealthCardProto
+import com.google.internal.tapandpay.v1.valuables.LoyaltyCardProto
+import com.google.internal.tapandpay.v1.valuables.OfferProto
 import com.google.internal.tapandpay.v1.valuables.SyncValuablesRequestProto.SyncValuablesRequest
 import com.google.internal.tapandpay.v1.valuables.SyncValuablesRequestProto.SyncValuablesRequest.SyncValuablesRequestInner.Request
+import com.google.internal.tapandpay.v1.valuables.TransitProto
 import com.google.internal.tapandpay.v1.valuables.ValuableWrapperProto.ValuableWrapper
 import com.google.internal.tapandpay.v1.valuables.ValuableWrapperProto.ValuableWrapper.ValuableCase
 import com.google.protobuf.ByteString
@@ -24,7 +32,12 @@ import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWa
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWalletRepository.Valuable.RefreshPeriod
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.targets.GoogleWalletDynamicTarget
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.targets.GoogleWalletValuableTarget
-import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.*
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.compress
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.getRoundedBitmap
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toColour
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toDuration
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toZonedDateTime
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toZonedDateTimeOrNull
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.glide.WalletValuableImageTransformation
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.CONTENT_TYPE_PROTOBUF
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.toRequestBody
@@ -32,7 +45,13 @@ import com.kieronquinn.app.smartspacer.plugin.shared.utils.room.EncryptedValue
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerTargetProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.RequestBody
@@ -46,7 +65,7 @@ import java.time.Duration
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.TextStyle
-import java.util.*
+import java.util.Locale
 import kotlin.math.roundToInt
 import com.google.internal.tapandpay.v1.valuables.SyncValuablesResponseProto.SyncValuablesResponse as ProtoSyncValuablesResponse
 import com.google.internal.tapandpay.v1.valuables.SyncValuablesResponseProto.SyncValuablesResponse.Inner.Valuables.Valuable as ProtoValuable

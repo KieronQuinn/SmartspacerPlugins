@@ -1,7 +1,7 @@
 import com.android.build.gradle.internal.dsl.SigningConfig
 
 buildscript {
-    ext.nav_version = "2.7.6"
+    ext.nav_version = "2.7.7"
     ext.protobuf_version = '0.9.0'
     ext.refine_version = '4.4.0'
     ext.room_version = "2.6.1"

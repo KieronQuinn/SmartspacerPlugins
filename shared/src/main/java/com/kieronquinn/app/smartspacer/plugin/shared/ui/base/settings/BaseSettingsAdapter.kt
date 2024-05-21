@@ -2,7 +2,6 @@ package com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.Animatable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -237,11 +236,9 @@ abstract class BaseSettingsAdapter(
         itemSettingsSliderSlider.value = item.startValue
         itemSettingsSliderSlider.setLabelFormatter(item.labelFormatter)
         itemSettingsSliderSlider.labelBehavior = item.labelBehavior
-        Log.d("CR69", "Setup")
         whenResumed {
             binding.itemSettingsSliderSlider.clearOnChangeListeners()
             binding.itemSettingsSliderSlider.onChanged().distinctUntilChanged().collect {
-                Log.d("CR69", "onChanged to $it")
                 item.onChanged(it)
             }
         }

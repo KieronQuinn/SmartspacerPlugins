@@ -389,7 +389,7 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
                     cancelledLeg.origin
                 )
             }
-            impossibleLegChange != -1 -> {
+            impossibleLegChange != -1 && extras.legList.isNotEmpty() -> {
                 val impossibleLeg = extras.legList[impossibleLegChange]
                 provideContext().getString(
                     R.string.target_wallet_dynamic_transit_impossible_at_title,

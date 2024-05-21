@@ -5,16 +5,25 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager.NameNotFoundException
 import android.os.Build
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.Result
-import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.*
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.SearchLocationsResponse
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.SearchRoutesRequest
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.SearchRoutesResponse
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.SearchRoutesResponse.Leg
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.SearchRoutesResponse.OutwardJourney
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.SetupRequest
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.Station
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.datasources.trainline.TravelServiceInformationResponse
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.extras.TransitCardExtrasProto.TransitCardExtras
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.extras.TransitCardExtrasProto.TransitCardExtras.TransitLeg
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.model.extras.TransitCardExtrasProto.TransitCardExtras.TransitLeg.Mode
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.datasources.TrainlineService.Companion.HEADER_CONTEXT_ID
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.datasources.TrainlineService.Companion.HEADER_CONVERSATION_ID
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.datasources.TrainlineService.Companion.getUserAgentHeader
-import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.*
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.atUtc
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.getArrival
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.getDeparture
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toDateTime
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toZonedDateTime
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.getPackageInfoCompat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
@@ -24,11 +33,17 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Locale
+import java.util.UUID
 import okhttp3.Headers as ResponseHeaders
 
 interface TrainlineRepository {
@@ -535,7 +550,7 @@ interface TrainlineService {
         API_VERSION_4,
         PLATFORM_TYPE
     )
-    @POST("mobile/op/search")
+    @POST("gateway/search")
     fun searchRoutes(
         @Header(HEADER_APP_VERSION) appVersionName: String,
         @Header(HEADER_USER_AGENT) userAgent: String,
