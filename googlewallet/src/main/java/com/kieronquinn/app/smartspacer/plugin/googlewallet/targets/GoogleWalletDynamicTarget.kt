@@ -84,6 +84,7 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
     }
 
     private fun Valuable.toTarget(): SmartspaceTarget? {
+        if(!isActive()) return null
         return when(this){
             is Valuable.Flight -> toTarget()
             is Valuable.EventTicket -> toTarget()
@@ -590,6 +591,10 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
     private fun JavaDateFormat.formatTime(time: ZonedDateTime): String {
         val instant = time.toInstant()
         return format(Date.from(instant))
+    }
+
+    private fun Valuable.isActive(): Boolean {
+        return metadata?.isActive == true
     }
 
     override fun onDismiss(smartspacerId: String, targetId: String): Boolean {

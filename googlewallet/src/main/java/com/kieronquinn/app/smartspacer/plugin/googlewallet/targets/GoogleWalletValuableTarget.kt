@@ -94,7 +94,7 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
             subtitle = Text(groupingInfo.groupingSubtitle),
             icon = Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_google_wallet)),
             image = Icon(AndroidIcon.createWithBitmap(image)),
-            onClick = getCardClickAction(settings.showAsPopup)
+            onClick = getCardClickAction(settings.showAsPopup, settings.lockOrientation)
         ).create()
     }
 
@@ -108,7 +108,7 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
             title = Text(groupingInfo.groupingTitle),
             subtitle = Text(groupingInfo.groupingSubtitle),
             icon = Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_google_wallet)),
-            onClick = getCardClickAction(settings.showAsPopup)
+            onClick = getCardClickAction(settings.showAsPopup, settings.lockOrientation)
         ).create()
     }
 
@@ -128,9 +128,12 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
         ).create()
     }
 
-    private fun GoogleWalletRepository.Valuable.getCardClickAction(showAsPopup: Boolean): TapAction {
+    private fun GoogleWalletRepository.Valuable.getCardClickAction(
+        showAsPopup: Boolean,
+        lockOrientation: Boolean
+    ): TapAction {
         val intent = if(showAsPopup){
-            PopupWalletDialogFragment.createLaunchIntent(provideContext(), id)
+            PopupWalletDialogFragment.createLaunchIntent(provideContext(), id, lockOrientation)
         }else{
             Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("https://pay.google.com/gp/v/valuable/$id?vs=gp_lp")
@@ -168,7 +171,9 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
         @SerializedName("show_card_image")
         val showCardImage: Boolean = true,
         @SerializedName("show_as_popup")
-        val showAsPopup: Boolean = false
+        val showAsPopup: Boolean = false,
+        @SerializedName("lock_orientation")
+        val lockOrientation: Boolean = true
     ) {
 
         companion object {

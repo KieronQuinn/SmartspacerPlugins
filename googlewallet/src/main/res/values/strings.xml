@@ -13,6 +13,9 @@
     <string name="target_wallet_valuable_type_loyalty_card">Loyalty Card</string>
     <string name="target_wallet_valuable_type_gift_card">Gift Card</string>
     <string name="target_wallet_valuable_type_offer">Offer</string>
+    <string name="target_wallet_valuable_type_event_ticket">Event Ticket</string>
+    <string name="target_wallet_valuable_type_flight">Flight</string>
+    <string name="target_wallet_valuable_type_transit_card">Transit Card</string>
     <string name="target_wallet_valuable_type_health_card">Health Card</string>
     <string name="target_wallet_valuable_type_generic">Generic Card</string>
     <string name="target_wallet_valuable_type_sensitive_generic">Sensitive Generic Card</string>
@@ -25,6 +28,8 @@
     <string name="target_wallet_valuable_settings_show_card_image_content_unavailable">This item does not have an image</string>
     <string name="target_wallet_valuable_settings_show_as_popup_title">Open as popup</string>
     <string name="target_wallet_valuable_settings_show_as_popup_content">Open the item as a popup showing a scannable code when tapped, rather than opening Google Wallet directly. This also allows access from the lock screen.</string>
+    <string name="target_wallet_valuable_settings_popup_portrait_title">Lock Portrait</string>
+    <string name="target_wallet_valuable_settings_popup_portrait_content">Lock the popup in portrait to allow easier scanning</string>
 
     <string name="target_wallet_dynamic_title">Google Wallet (Dynamic)</string>
     <string name="target_wallet_dynamic_title_short">Google Wallet</string>

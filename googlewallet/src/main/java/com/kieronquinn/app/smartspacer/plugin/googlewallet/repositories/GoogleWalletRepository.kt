@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.internal.tapandpay.v1.valuables.CommonProto.GroupingInfo
 import com.google.internal.tapandpay.v1.valuables.CommonProto.IssuerInfo
+import com.google.internal.tapandpay.v1.valuables.CommonProto.Metadata
 import com.google.internal.tapandpay.v1.valuables.CommonProto.RedemptionInfo
 import com.google.internal.tapandpay.v1.valuables.EventTicketProto
 import com.google.internal.tapandpay.v1.valuables.FlightProto
@@ -121,6 +122,7 @@ interface GoogleWalletRepository {
     sealed class Valuable(
         open val id: String,
         open val hash: Long,
+        open val metadata: Metadata?,
         open val image: ByteArray?,
         open val cardImage: ByteArray?,
         open val isDismissed: Boolean
@@ -133,7 +135,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: LoyaltyCardProto.LoyaltyCard
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo {
                 return proto.groupingInfo
             }
@@ -149,8 +151,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as LoyaltyCard
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -167,7 +168,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: GiftCardProto.GiftCard
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo {
                 return proto.groupingInfo
             }
@@ -183,8 +184,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as GiftCard
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -201,7 +201,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: OfferProto.Offer
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo {
                 return proto.groupingInfo
             }
@@ -217,8 +217,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as Offer
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -235,7 +234,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: EventTicketProto.EventTicket
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo {
                 return proto.groupingInfo
             }
@@ -251,8 +250,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as EventTicket
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -269,7 +267,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: FlightProto.Flight
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo {
                 return proto.groupingInfo
             }
@@ -285,8 +283,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as Flight
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -304,7 +301,7 @@ interface GoogleWalletRepository {
             override val isDismissed: Boolean,
             val proto: TransitProto.TransitCard,
             val extras: TransitCardExtras?
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo {
                 return proto.groupingInfo
             }
@@ -340,7 +337,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: HealthCardProto.HealthCard
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, null, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo? {
                 return null
             }
@@ -356,8 +353,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as HealthCard
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -374,7 +370,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: GenericCardProto.GenericCard
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo? {
                 return proto.groupingInfo
             }
@@ -390,8 +386,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as GenericCard
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -408,7 +403,7 @@ interface GoogleWalletRepository {
             override val cardImage: ByteArray?,
             override val isDismissed: Boolean,
             val proto: GenericCardProto.GenericCard
-        ): Valuable(id, hash, image, cardImage, isDismissed) {
+        ): Valuable(id, hash, proto.metadata, image, cardImage, isDismissed) {
             override fun getGroupingInfo(): GroupingInfo? {
                 return proto.groupingInfo
             }
@@ -424,8 +419,7 @@ interface GoogleWalletRepository {
             override fun equals(other: Any?): Boolean {
                 if(!super.equals(other)) return false
                 other as SensitiveGenericPass
-                if (proto != other.proto) return false
-                return true
+                return proto == other.proto
             }
 
             override fun hashCode(): Int {
@@ -900,6 +894,7 @@ class GoogleWalletRepositoryImpl(
     }
 
     private fun Valuable.isActive(): Boolean {
+        if(metadata?.isActive == false) return false
         val now = ZonedDateTime.now()
         return when(this) {
             is Valuable.Flight -> {
@@ -911,7 +906,7 @@ class GoogleWalletRepositoryImpl(
                 val end = (flightStatus.actualArrival ?: flightStatus.scheduledArrival)
                     .toZonedDateTimeOrNull() ?: return false
                 val adjustedEnd = end + Duration.ofMinutes(OFFSET_DEPARTURE_ARRIVAL_MINUTES)
-                adjustedEnd.isAfter(now)
+                adjustedEnd.isAfter(now) && proto.metadata.isActive
             }
             is Valuable.TransitCard -> {
                 //A transit card must have a notification for this to work

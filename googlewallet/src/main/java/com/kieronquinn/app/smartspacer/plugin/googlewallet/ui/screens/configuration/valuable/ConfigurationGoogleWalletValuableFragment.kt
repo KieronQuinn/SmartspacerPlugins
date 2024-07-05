@@ -79,7 +79,7 @@ class ConfigurationGoogleWalletValuableFragment: BaseSettingsFragment(), BackAva
                     R.string.target_wallet_valuable_settings_show_card_image_content_unavailable
                 )
             }
-            listOf(
+            listOfNotNull(
                 GenericSettingsItem.Header(
                     getString(R.string.target_wallet_valuable_settings_title)
                 ),
@@ -101,7 +101,16 @@ class ConfigurationGoogleWalletValuableFragment: BaseSettingsFragment(), BackAva
                         requireContext(), R.drawable.ic_target_google_wallet_valuable_show_as_popup
                     ),
                     onChanged = viewModel::onShowPopupChanged
-                )
+                ),
+                GenericSettingsItem.SwitchSetting(
+                    settings.lockOrientation,
+                    getString(R.string.target_wallet_valuable_settings_popup_portrait_title),
+                    getString(R.string.target_wallet_valuable_settings_popup_portrait_content),
+                    ContextCompat.getDrawable(
+                        requireContext(), R.drawable.ic_settings_lock_rotation
+                    ),
+                    onChanged = viewModel::onLockRotationChanged
+                ).takeIf { settings.showAsPopup }
             )
         } else emptyList()
         return picker + settings

@@ -2,12 +2,15 @@ package com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.popup
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
@@ -33,12 +36,14 @@ class PopupWalletDialogFragment: BoundFragment<FragmentPopupWalletBinding>(Fragm
 
     companion object {
         private const val EXTRA_VALUABLE_ID = "valuable_id"
+        private const val EXTRA_LOCK_ORIENTATION = "lock_orientation"
 
-        fun createLaunchIntent(context: Context, valuableId: String): Intent {
+        fun createLaunchIntent(context: Context, valuableId: String, lockOrientation: Boolean): Intent {
             return Intent(context, PopupWalletDialogActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 putExtra(EXTRA_VALUABLE_ID, valuableId)
+                putExtra(EXTRA_LOCK_ORIENTATION, lockOrientation)
             }
         }
     }
@@ -51,6 +56,13 @@ class PopupWalletDialogFragment: BoundFragment<FragmentPopupWalletBinding>(Fragm
         setupTapOutside()
         setupState()
         viewModel.setupWithId(requireActivity().intent.getStringExtra(EXTRA_VALUABLE_ID)!!)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(requireActivity().intent.getBooleanExtra(EXTRA_LOCK_ORIENTATION, false)) {
+            requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
     }
 
     private fun setupState() {

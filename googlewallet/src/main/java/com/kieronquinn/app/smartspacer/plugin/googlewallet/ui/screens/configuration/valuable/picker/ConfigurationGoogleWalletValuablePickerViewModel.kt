@@ -14,7 +14,15 @@ import com.kieronquinn.app.smartspacer.plugin.shared.components.navigation.Conta
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DataRepository
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerTargetProvider
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class ConfigurationGoogleWalletValuablePickerViewModel: ViewModel() {
@@ -24,7 +32,9 @@ abstract class ConfigurationGoogleWalletValuablePickerViewModel: ViewModel() {
             Valuable.LoyaltyCard::class.java to R.string.target_wallet_valuable_type_loyalty_card,
             Valuable.GiftCard::class.java to R.string.target_wallet_valuable_type_gift_card,
             Valuable.Offer::class.java to R.string.target_wallet_valuable_type_offer,
-            Valuable.HealthCard::class.java to R.string.target_wallet_valuable_type_health_card,
+            Valuable.EventTicket::class.java to R.string.target_wallet_valuable_type_event_ticket,
+            Valuable.Flight::class.java to R.string.target_wallet_valuable_type_flight,
+            Valuable.TransitCard::class.java to R.string.target_wallet_valuable_type_transit_card,
             Valuable.GenericCard::class.java to R.string.target_wallet_valuable_type_generic,
             Valuable.SensitiveGenericPass::class.java to R.string.target_wallet_valuable_type_sensitive_generic
         )
@@ -84,8 +94,12 @@ class ConfigurationGoogleWalletValuablePickerViewModelImpl(
 
     private fun List<Valuable>.filterCompatible(): List<Valuable> {
         return filter {
-            ALLOWED_VALUABLE_TYPES.keys.contains(it::class.java)
+            ALLOWED_VALUABLE_TYPES.keys.contains(it::class.java) && it.isActive()
         }
+    }
+
+    private fun Valuable.isActive(): Boolean {
+        return metadata?.isActive == true
     }
 
     override fun setupWithId(smartspacerId: String) {
