@@ -1,7 +1,7 @@
 {
 	"description": "With the Google Wallet plugin, you can automatically have live flight & train times, boarding passes, and tickets shown in Smartspace for easy access, as well as selecting loyalty cards and passes to display in Targets. By combining with location or time requirements, you can display cards & passes automatically when they are required, and where possible (and if enabled) they can be accessed without even unlocking your device.\n\n**Requires Google sign in, [source code available on GitHub for inspection](https://github.com/KieronQuinn/SmartspacerPlugins/tree/main/googlewallet)**",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/googlewallet/googlewallet-release.apk",
-	"changelog": "Fixed live train times not working",
-	"version_code": 101,
+	"changelog": "- Popup is now locked to portrait orientation by default, you can disable this in the Target settings\n- You can now select any Wallet valuable type for the static Target, including time sensitive passes. Please note that the valuable must not be archived to be selected.",
+	"version_code": 110,
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlewallet/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlewallet/screenshots/2.jpg"]
 }
