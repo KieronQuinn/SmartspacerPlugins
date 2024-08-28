@@ -4,5 +4,6 @@
 	"version_code": 111,
 	"changelog": "- Fixed some icons being stretched",
 	"required_package": "com.google.android.settings.intelligence",
+	"required_features": ["com.google.android.feature.PIXEL_EXPERIENCE"],
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/battery/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/battery/screenshots/2.jpg"]
 }
