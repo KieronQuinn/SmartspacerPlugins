@@ -1,7 +1,8 @@
 {
 	"description": "Get live tracking information displayed right on your home screen, lock screen and always on display with the Aftership plugin.\n\nThis plugin supports up to 3 concurrent deliveries, showing tracking information and locations (with maps if available) to follow your package every step of the way.",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/aftership/aftership-release.apk",
-	"version_code": 1,
+	"version_code": 101,
+	"changelog": "- Allow adding Target more than once",
 	"required_package": "com.aftership.AfterShip",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/amazon/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/amazon/screenshots/2.jpg"]
 }

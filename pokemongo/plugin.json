@@ -1,6 +1,7 @@
 {
 	"description": "Always know how far you still need to go to hatch an egg or get candy from your buddy with this plugin. Add the Complication to your lock screen or always on display (if available) to monitor your game progress even when locked",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/pokemongo/pokemongo-release.apk",
-	"version_code": 1,
+	"version_code": 101,
+	"changelog": "- Allow adding Complication more than once",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/pokemongo/screenshots/1.jpg"]
 }

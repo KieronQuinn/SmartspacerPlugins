@@ -1,8 +1,8 @@
 {
 	"description": "Monitor battery percentages for your connected devices with the battery plugin. This plugin reads connected device info from the Android system Battery widget, and displays it as a complication with icon and percentage.",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/battery/battery-release.apk",
-	"version_code": 110,
-	"changelog": "- The Battery Plugin can now cache the last known battery level and continue to show it when the device is not shown in the widget. This can workaround the widget 'losing' the device (even though it is still connected), when combined with Smartspacer's new Bluetooth device connected Requirement. This is opt in, so make sure to enable it if you want it.\n- Allowed showing the battery level of the current device",
+	"version_code": 111,
+	"changelog": "- Fixed some icons being stretched",
 	"required_package": "com.google.android.settings.intelligence",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/battery/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/battery/screenshots/2.jpg"]
 }

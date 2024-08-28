@@ -1,6 +1,7 @@
 {
 	"description": "Always know the subscriber count for a YouTube channel with this simple complication. Content creators, this is for you!",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/youtube/youtube-release.apk",
-	"version_code": 1,
+	"version_code": 101,
+	"changelog": "- Allow adding Complication more than once",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/youtube/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/youtube/screenshots/2.jpg"]
 }

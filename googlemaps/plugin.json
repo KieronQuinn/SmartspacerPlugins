@@ -1,8 +1,8 @@
 {
 	"description": "Get your local traffic conditions at your fingertips with the Google Maps plugin. This plugin provides a Target showing a map of your local conditions, which can be dynamically shown if there is traffic.",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/googlemaps/googlemaps-release.apk",
-	"version_code": 110,
-	"changelog": "Improve permission request in an attempt to workaround Google Maps issue",
+	"version_code": 111,
+	"changelog": "- Allow adding Target more than once",
 	"required_package": "com.google.android.apps.maps",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlemaps/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/googlemaps/screenshots/2.jpg"]
 }
