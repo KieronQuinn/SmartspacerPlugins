@@ -122,7 +122,8 @@ class UberTarget: SmartspacerTargetProvider() {
             AndroidIcon.createWithResource(provideContext(), R.drawable.ic_uber),
             notificationProvider = UberNotificationProvider.AUTHORITY,
             configActivity = createIntent(provideContext(), NavGraphMapping.TARGET_UBER),
-            compatibilityState = getCompatibilityState()
+            compatibilityState = getCompatibilityState(),
+            allowAddingMoreThanOnce = true
         )
     }
 

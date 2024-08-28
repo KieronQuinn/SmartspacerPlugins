@@ -20,6 +20,13 @@
             android:excludeFromRecents="true"
             android:exported="false" />
 
+        <activity android:name=".ui.activities.WalletLaunchProxyActivity"
+            android:excludeFromRecents="true"
+            android:showOnLockScreen="true"
+            android:theme="@style/Theme.Transparent"
+            android:exported="true"
+            android:noHistory="true"/>
+
         <activity android:name=".ui.activities.PopupWalletDialogActivity"
             android:theme="@style/PopupWalletDialog"
             android:showOnLockScreen="true"

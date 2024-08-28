@@ -86,7 +86,8 @@ class BBCWeatherTarget: SmartspacerTargetProvider() {
             resources.getString(R.string.target_description),
             AndroidIcon.createWithResource(provideContext(), R.drawable.ic_bbc_weather),
             widgetProvider = BBCWeatherTargetWidget.AUTHORITY,
-            compatibilityState = getCompatibilityState()
+            compatibilityState = getCompatibilityState(),
+            allowAddingMoreThanOnce = true
         )
     }
 

@@ -58,7 +58,7 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
 
     implementation "dev.rikka.tools.refine:runtime:$refine_version"
-    implementation "androidx.lifecycle:lifecycle-service:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-service:2.8.4"
 
     //Custom Control icons
     implementation "com.mikepenz:iconics-core:5.4.0"

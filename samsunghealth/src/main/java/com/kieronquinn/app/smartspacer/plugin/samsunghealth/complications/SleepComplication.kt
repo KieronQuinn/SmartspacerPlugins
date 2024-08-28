@@ -77,7 +77,8 @@ class SleepComplication: SmartspacerComplicationProvider() {
             compatibilityState = getCompatibilityState(),
             configActivity = createIntent(provideContext(), NavGraphMapping.SLEEP),
             //Refresh by a factor of the timeouts to hide after the time period
-            refreshPeriodMinutes = 15
+            refreshPeriodMinutes = 15,
+            allowAddingMoreThanOnce = true
         )
     }
 

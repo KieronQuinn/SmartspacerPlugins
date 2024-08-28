@@ -110,7 +110,17 @@ class ConfigurationGoogleWalletValuableFragment: BaseSettingsFragment(), BackAva
                         requireContext(), R.drawable.ic_settings_lock_rotation
                     ),
                     onChanged = viewModel::onLockRotationChanged
-                ).takeIf { settings.showAsPopup }
+                ).takeIf { settings.showAsPopup },
+                GenericSettingsItem.SwitchSetting(
+                    settings.popUnder,
+                    getString(R.string.target_wallet_valuable_settings_pop_under_title),
+                    getString(R.string.target_wallet_valuable_settings_pop_under_content),
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_google_wallet
+                    ),
+                    onChanged = viewModel::onPopUnderChanged
+                )
             )
         } else emptyList()
         return picker + settings

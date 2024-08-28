@@ -30,6 +30,8 @@
     <string name="target_wallet_valuable_settings_show_as_popup_content">Open the item as a popup showing a scannable code when tapped, rather than opening Google Wallet directly. This also allows access from the lock screen.</string>
     <string name="target_wallet_valuable_settings_popup_portrait_title">Lock Portrait</string>
     <string name="target_wallet_valuable_settings_popup_portrait_content">Lock the popup in portrait to allow easier scanning</string>
+    <string name="target_wallet_valuable_settings_pop_under_title">Open Full Google Wallet</string>
+    <string name="target_wallet_valuable_settings_pop_under_content">When opening Google Wallet, open the full application first, allowing going back into the main UI. This is useful if you have an additional card you may want to access, for example a specific credit card.</string>
 
     <string name="target_wallet_dynamic_title">Google Wallet (Dynamic)</string>
     <string name="target_wallet_dynamic_title_short">Google Wallet</string>
@@ -40,6 +42,8 @@
     <string name="target_wallet_dynamic_settings_refresh_now_title">Reload Now</string>
     <string name="target_wallet_dynamic_settings_refresh_now_content">Reload dynamic Wallet Targets now, without needing a Wallet notification</string>
     <string name="target_wallet_dynamic_settings_refresh_now_content_reloading">Reloading…</string>
+    <string name="target_wallet_dynamic_settings_pop_under_title">Open Full Google Wallet</string>
+    <string name="target_wallet_dynamic_settings_pop_under_content">When opening Google Wallet, open the full application first, allowing going back into the main UI. This is useful if you have an additional card you may want to access, for example a frequent flyer number or a Railcard.</string>
 
     <string name="target_wallet_dynamic_flight_title_departed">Est arrival: %1s</string>
     <string name="target_wallet_dynamic_flight_title_gate_closed">%1s → %1s</string>

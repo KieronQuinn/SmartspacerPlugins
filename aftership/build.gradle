@@ -12,8 +12,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.aftership"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,7 +45,7 @@ dependencies {
     implementation project(path: ':shared')
     implementation project(path: ':shared-maps')
 
-    implementation 'org.jsoup:jsoup:1.16.1'
+    implementation 'org.jsoup:jsoup:1.16.2'
 
     //Data storage
     ksp "androidx.room:room-compiler:$room_version"

@@ -1,16 +1,15 @@
 package com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.popup
 
+import android.annotation.SuppressLint
+import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.ColorStateList
-import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
@@ -23,6 +22,7 @@ import com.kieronquinn.app.smartspacer.plugin.googlewallet.R
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.databinding.FragmentPopupWalletBinding
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWalletRepository.Valuable
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.activities.PopupWalletDialogActivity
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.activities.WalletLaunchProxyActivity
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.popup.PopupWalletDialogViewModel.State
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toBitmap
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toColour
@@ -37,18 +37,28 @@ class PopupWalletDialogFragment: BoundFragment<FragmentPopupWalletBinding>(Fragm
     companion object {
         private const val EXTRA_VALUABLE_ID = "valuable_id"
         private const val EXTRA_LOCK_ORIENTATION = "lock_orientation"
+        private const val EXTRA_POP_UNDER = "pop_under"
 
-        fun createLaunchIntent(context: Context, valuableId: String, lockOrientation: Boolean): Intent {
+        fun createLaunchIntent(context: Context, valuableId: String, lockOrientation: Boolean, popUnder: Boolean): Intent {
             return Intent(context, PopupWalletDialogActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 putExtra(EXTRA_VALUABLE_ID, valuableId)
                 putExtra(EXTRA_LOCK_ORIENTATION, lockOrientation)
+                putExtra(EXTRA_POP_UNDER, popUnder)
             }
         }
     }
 
     private val viewModel by viewModel<PopupWalletDialogViewModel>()
+
+    private val popUnder by lazy {
+        requireActivity().intent.getBooleanExtra(EXTRA_POP_UNDER, false)
+    }
+
+    private val keyguardManager by lazy {
+        requireContext().getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,6 +68,7 @@ class PopupWalletDialogFragment: BoundFragment<FragmentPopupWalletBinding>(Fragm
         viewModel.setupWithId(requireActivity().intent.getStringExtra(EXTRA_VALUABLE_ID)!!)
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(requireActivity().intent.getBooleanExtra(EXTRA_LOCK_ORIENTATION, false)) {
@@ -165,14 +176,35 @@ class PopupWalletDialogFragment: BoundFragment<FragmentPopupWalletBinding>(Fragm
         backgroundTintList = card.getGroupingInfo()?.backgroundColor?.toColour()
             ?.let { ColorStateList.valueOf(it) }
         setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(
-                    "https://pay.google.com/gp/v/valuable/${card.id}?vs=gp_lp"
+            unlockAndInvoke {
+                startActivity(
+                    WalletLaunchProxyActivity.createIntent(
+                        requireContext(),
+                        card.id,
+                        popUnder
+                    )
                 )
-            })
+            }
         }
         setTextColor(card.getTextColor())
         iconTint = ColorStateList.valueOf(card.getTextColor())
+    }
+
+    private fun unlockAndInvoke(block: () -> Unit) {
+        if(!isAdded) return
+        if(!keyguardManager.isKeyguardLocked){
+            block()
+            return
+        }
+        keyguardManager.requestDismissKeyguard(
+            requireActivity(),
+            object: KeyguardManager.KeyguardDismissCallback() {
+                override fun onDismissSucceeded() {
+                    super.onDismissSucceeded()
+                    block()
+                }
+            }
+        )
     }
 
     private fun setupCode(card: Valuable) = with(binding.popupWalletCodeImage) {

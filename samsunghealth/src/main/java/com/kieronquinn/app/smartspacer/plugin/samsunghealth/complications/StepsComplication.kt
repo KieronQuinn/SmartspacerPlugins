@@ -47,7 +47,8 @@ class StepsComplication: SmartspacerComplicationProvider() {
             description = resources.getString(R.string.complication_steps_description),
             icon = AndroidIcon.createWithResource(provideContext(), R.drawable.ic_complication_steps),
             widgetProvider = "${BuildConfig.APPLICATION_ID}.widgets.steps",
-            compatibilityState = getCompatibilityState()
+            compatibilityState = getCompatibilityState(),
+            allowAddingMoreThanOnce = true
         )
     }
 

@@ -12,8 +12,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.googlemaps"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 110
-        versionName "1.1"
+        versionCode 111
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,12 +64,12 @@ dependencies {
     ksp "androidx.room:room-compiler:$room_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
 
-    androidTestImplementation 'androidx.test:core-ktx:1.5.0'
-    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test:core-ktx:1.6.1'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
     androidTestImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2'
     //Tracking https://github.com/mockk/mockk/issues/1035
-    androidTestImplementation 'io.mockk:mockk-android:1.13.2'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
-    androidTestUtil 'androidx.test:orchestrator:1.4.2'
+    androidTestImplementation 'io.mockk:mockk-android:1.13.8'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestUtil 'androidx.test:orchestrator:1.5.0'
 }

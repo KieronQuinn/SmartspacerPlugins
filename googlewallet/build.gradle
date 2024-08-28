@@ -15,8 +15,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.googlewallet"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 110
-        versionName "1.1"
+        versionCode 120
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -68,7 +68,7 @@ protobuf {
 }
 
 dependencies {
-    implementation "com.google.protobuf:protobuf-javalite:3.21.9"
+    implementation "com.google.protobuf:protobuf-javalite:3.25.2"
     implementation project(path: ':shared')
 
     //Data storage
@@ -80,7 +80,7 @@ dependencies {
 
     //Test
     testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
 }

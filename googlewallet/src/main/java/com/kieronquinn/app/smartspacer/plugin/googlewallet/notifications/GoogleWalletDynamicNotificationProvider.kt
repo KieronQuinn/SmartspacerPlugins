@@ -2,6 +2,7 @@ package com.kieronquinn.app.smartspacer.plugin.googlewallet.notifications
 
 import android.service.notification.StatusBarNotification
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.PACKAGE_GMS
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.PACKAGE_WALLET
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWalletRepository
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerNotificationProvider
 import org.koin.android.ext.android.inject
@@ -29,7 +30,7 @@ class GoogleWalletDynamicNotificationProvider: SmartspacerNotificationProvider()
     }
 
     override fun getConfig(smartspacerId: String): Config {
-        return Config(setOf(PACKAGE_GMS))
+        return Config(setOf(PACKAGE_GMS, PACKAGE_WALLET))
     }
 
 }

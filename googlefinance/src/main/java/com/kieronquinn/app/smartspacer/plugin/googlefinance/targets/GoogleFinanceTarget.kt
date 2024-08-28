@@ -205,7 +205,8 @@ class GoogleFinanceTarget: SmartspacerTargetProvider() {
             AndroidIcon.createWithResource(provideContext(), R.drawable.ic_target_icon),
             widgetProvider = GoogleFinanceWidget.AUTHORITY,
             configActivity = createIntent(provideContext(), NavGraphMapping.TARGET_GOOGLE_FINANCE),
-            compatibilityState = getCompatibilityState()
+            compatibilityState = getCompatibilityState(),
+            allowAddingMoreThanOnce = true
         )
     }
 

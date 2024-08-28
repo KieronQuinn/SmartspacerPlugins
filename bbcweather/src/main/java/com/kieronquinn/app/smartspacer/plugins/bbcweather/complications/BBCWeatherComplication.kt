@@ -76,7 +76,8 @@ class BBCWeatherComplication: SmartspacerComplicationProvider() {
             resources.getString(R.string.complication_description),
             AndroidIcon.createWithResource(provideContext(), R.drawable.ic_bbc_weather),
             widgetProvider = BBCWeatherComplicationWidget.AUTHORITY,
-            compatibilityState = getCompatibilityState()
+            compatibilityState = getCompatibilityState(),
+            allowAddingMoreThanOnce = true
         )
     }
 

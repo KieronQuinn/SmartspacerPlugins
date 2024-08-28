@@ -31,6 +31,7 @@ import org.koin.dsl.module
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DatabaseRepository as SharedDatabaseRepository
 
 const val PACKAGE_GMS = "com.google.android.gms"
+const val PACKAGE_WALLET = "com.google.android.apps.walletnfcrel"
 
 class GoogleWalletPluginApplication: SmartspacerPlugin() {
 
@@ -47,7 +48,7 @@ class GoogleWalletPluginApplication: SmartspacerPlugin() {
         viewModel<SignInWithGoogleViewModel> { SignInWithGoogleViewModelImpl(get(), get(), get()) }
         viewModel<ConfigurationGoogleWalletValuableViewModel> { ConfigurationGoogleWalletValuableViewModelImpl(get(), get(), get()) }
         viewModel<ConfigurationGoogleWalletValuablePickerViewModel> { ConfigurationGoogleWalletValuablePickerViewModelImpl(get(), get(), get(), get()) }
-        viewModel<ConfigurationGoogleWalletDynamicViewModel> { ConfigurationGoogleWalletDynamicViewModelImpl(get(), get(), get()) }
+        viewModel<ConfigurationGoogleWalletDynamicViewModel> { ConfigurationGoogleWalletDynamicViewModelImpl(get(), get(), get(), get()) }
         viewModel<PopupWalletDialogViewModel> { PopupWalletDialogViewModelImpl(get()) }
     }
 

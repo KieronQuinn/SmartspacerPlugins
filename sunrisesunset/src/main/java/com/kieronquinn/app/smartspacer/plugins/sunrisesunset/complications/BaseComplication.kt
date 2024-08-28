@@ -65,7 +65,8 @@ abstract class BaseComplication: SmartspacerComplicationProvider() {
             resources.getString(label),
             resources.getString(description),
             AndroidIcon.createWithResource(provideContext(), icon),
-            configActivity = settingsIntent
+            configActivity = settingsIntent,
+            allowAddingMoreThanOnce = true
         )
     }
 

@@ -47,7 +47,8 @@ class GoogleMapsTrafficTarget: SmartspacerTargetProvider() {
             compatibilityState = getCompatibility(),
             configActivity = BaseConfigurationActivity.createIntent(
                 provideContext(), NavGraphMapping.TARGET_GOOGLE_MAPS
-            )
+            ),
+            allowAddingMoreThanOnce = true
         )
     }
 

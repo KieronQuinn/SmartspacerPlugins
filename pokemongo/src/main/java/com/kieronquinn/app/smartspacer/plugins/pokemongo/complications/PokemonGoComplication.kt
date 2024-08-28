@@ -72,7 +72,8 @@ abstract class PokemonGoComplication: SmartspacerComplicationProvider() {
             AndroidIcon.createWithResource(provideContext(), iconRes),
             compatibilityState = getCompatibilityState(),
             configActivity = getConfigurationIntent(),
-            widgetProvider = widgetProvider
+            widgetProvider = widgetProvider,
+            allowAddingMoreThanOnce = true
         )
     }
 

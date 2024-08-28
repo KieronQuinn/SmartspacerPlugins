@@ -1,14 +1,15 @@
 package com.kieronquinn.app.smartspacer.plugin.googlewallet.targets
 
 import android.content.ComponentName
-import android.content.Intent
-import android.net.Uri
+import android.content.Context
 import android.text.SpannableStringBuilder
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.TextUtils
 import android.text.format.DateFormat
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.google.internal.tapandpay.v1.valuables.FlightProto.Flight
 import com.google.internal.tapandpay.v1.valuables.FlightProto.Flight.AirportInfo
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.BuildConfig
@@ -20,7 +21,9 @@ import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleAp
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWalletRepository
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWalletRepository.Valuable
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWalletRepository.Valuable.RefreshPeriod
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.targets.GoogleWalletValuableTarget.TargetData
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.activities.ConfigurationActivity.NavGraphMapping
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.activities.WalletLaunchProxyActivity
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.getArrival
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.getDeparture
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.matches
@@ -29,8 +32,10 @@ import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toBi
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toColour
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toZonedDateTime
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toZonedDateTimeOrNull
+import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DataRepository
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.activities.BaseConfigurationActivity.Companion.createIntent
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.takeEllipsised
+import com.kieronquinn.app.smartspacer.sdk.model.Backup
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceTarget
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.Icon
 import com.kieronquinn.app.smartspacer.sdk.model.uitemplatedata.TapAction
@@ -58,6 +63,8 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
 
     private val googleWalletRepository by inject<GoogleWalletRepository>()
     private val googleApiRepository by inject<GoogleApiRepository>()
+    private val dataRepository by inject<DataRepository>()
+    private val gson by inject<Gson>()
 
     private val timeFormat by lazy {
         DateFormat.getTimeFormat(provideContext())
@@ -67,7 +74,12 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
         getSignInTarget(smartspacerId)?.let {
             return listOf(it)
         }
-        return googleWalletRepository.getActiveDynamicValuables().mapNotNull { it.toTarget() }
+        val popUnder = getSettings(smartspacerId)?.popUnder ?: false
+        return googleWalletRepository.getActiveDynamicValuables().mapNotNull { it.toTarget(popUnder) }
+    }
+
+    private fun getSettings(smartspacerId: String): TargetData? {
+        return dataRepository.getTargetData(smartspacerId, TargetData::class.java)
     }
 
     private fun getSignInTarget(smartspacerId: String): SmartspaceTarget? {
@@ -83,24 +95,24 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
         ).create()
     }
 
-    private fun Valuable.toTarget(): SmartspaceTarget? {
+    private fun Valuable.toTarget(popUnder: Boolean): SmartspaceTarget? {
         if(!isActive()) return null
         return when(this){
-            is Valuable.Flight -> toTarget()
-            is Valuable.EventTicket -> toTarget()
-            is Valuable.TransitCard -> toTarget()
+            is Valuable.Flight -> toTarget(popUnder)
+            is Valuable.EventTicket -> toTarget(popUnder)
+            is Valuable.TransitCard -> toTarget(popUnder)
             else -> null
         }
     }
 
-    private fun Valuable.getTapAction(): TapAction {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse("https://pay.google.com/gp/v/valuable/$id?vs=gp_lp")
-        }
+    private fun Valuable.getTapAction(popUnder: Boolean): TapAction {
+        val intent = WalletLaunchProxyActivity.createIntent(provideContext(), id, popUnder)
         return TapAction(intent = intent)
     }
 
-    private fun Valuable.EventTicket.toTarget(): SmartspaceTarget = with(proto) {
+    private fun Valuable.EventTicket.toTarget(
+        popUnder: Boolean
+    ): SmartspaceTarget = with(proto) {
         val title = groupingInfo.groupingTitle
         val eventVenue = venue?.name
         val subtitle = if(eventVenue != null){
@@ -125,7 +137,7 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
                 items.map { Text(it) },
                 Icon(eventIcon, shouldTint = false),
                 Text(""),
-                getTapAction()
+                getTapAction(popUnder)
             ).create()
         }else{
             TargetTemplate.Basic(
@@ -135,12 +147,14 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
                 Text(title),
                 Text(subtitle),
                 Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_event_ticket)),
-                getTapAction()
+                getTapAction(popUnder)
             ).create()
         }
     }
 
-    private fun Valuable.Flight.toTarget(): SmartspaceTarget = with(proto) {
+    private fun Valuable.Flight.toTarget(
+        popUnder: Boolean
+    ): SmartspaceTarget = with(proto) {
         val title = getGateBasedTitle() ?: getStatusBasedTitle()
         val subtitle = getSubtitle()
         val items = getItems()
@@ -161,7 +175,7 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
                 items.map { Text(it) },
                 airlineIcon,
                 Text(""),
-                getTapAction()
+                getTapAction(popUnder)
             ).create()
         }else{
             TargetTemplate.LoyaltyCard(
@@ -173,7 +187,7 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
                 Icon(AndroidIcon.createWithResource(provideContext(), getIcon())),
                 airlineIcon,
                 Text(items.first()),
-                onClick = getTapAction()
+                onClick = getTapAction(popUnder)
             ).create()
         }
     }
@@ -336,11 +350,13 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
         }
     }
 
-    private fun Valuable.TransitCard.toTarget(): SmartspaceTarget {
+    private fun Valuable.TransitCard.toTarget(
+        popUnder: Boolean
+    ): SmartspaceTarget {
         val icon = image?.toBitmap()?.let {
             Icon(AndroidIcon.createWithBitmap(it), shouldTint = false)
         } ?: Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_google_wallet))
-        val tapAction = getTapAction()
+        val tapAction = getTapAction(popUnder)
         return getExtrasBasedTarget(icon, tapAction) ?: getFallbackTarget(icon, tapAction)
     }
 
@@ -623,5 +639,46 @@ class GoogleWalletDynamicTarget: SmartspacerTargetProvider() {
             )
         )
     }
+
+    override fun onProviderRemoved(smartspacerId: String) {
+        super.onProviderRemoved(smartspacerId)
+        dataRepository.deleteTargetData(smartspacerId)
+    }
+
+    override fun createBackup(smartspacerId: String): Backup {
+        val targetData = getConfig(smartspacerId)
+        return Backup(gson.toJson(targetData), resources.getString(R.string.target_wallet_dynamic_description))
+    }
+
+    override fun restoreBackup(smartspacerId: String, backup: Backup): Boolean {
+        val targetData = try {
+            gson.fromJson(backup.data, TargetData::class.java)
+        }catch (e: Exception){
+            null
+        } ?: return false
+        dataRepository.updateTargetData(
+            smartspacerId,
+            TargetData::class.java,
+            TargetData.TYPE,
+            ::onRestoreComplete
+        ) {
+            targetData
+        }
+        return true
+    }
+
+    private fun onRestoreComplete(context: Context, smartspacerId: String) {
+        notifyChange(smartspacerId)
+    }
+
+    data class TargetData(
+        @SerializedName("pop_under")
+        val popUnder: Boolean = false
+    ) {
+        companion object {
+            const val TYPE = "wallet_dynamic"
+        }
+    }
+
 
 }

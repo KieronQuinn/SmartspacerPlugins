@@ -12,8 +12,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugin.uber"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

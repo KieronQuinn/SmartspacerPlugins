@@ -12,8 +12,8 @@ android {
         applicationId "com.kieronquinn.app.smartspacer.plugins.sunrisesunset"
         minSdk min_sdk
         targetSdk target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,5 +51,5 @@ dependencies {
     implementation 'org.shredzone.commons:commons-suncalc:3.7'
 
     //Google Play Services for location queries
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
 }

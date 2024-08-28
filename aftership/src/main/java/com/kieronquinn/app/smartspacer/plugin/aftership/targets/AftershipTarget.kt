@@ -180,7 +180,8 @@ class AftershipTarget: SmartspacerTargetProvider() {
                 provideContext(), NavGraphMapping.TARGET_AFTERSHIP
             ),
             refreshPeriodMinutes = if(targetData.enableUpdates) 60 else 0,
-            refreshIfNotVisible = targetData.enableUpdates
+            refreshIfNotVisible = targetData.enableUpdates,
+            allowAddingMoreThanOnce = true
         )
     }
 

@@ -12,14 +12,15 @@ import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.R
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.databinding.FragmentConfigurationGoogleWalletValuableSignInBinding
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.targets.GoogleWalletDynamicTarget.TargetData
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.configuration.dynamic.ConfigurationGoogleWalletDynamicViewModel.State
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.BaseSettingsItem
 import com.kieronquinn.app.smartspacer.plugin.shared.model.settings.GenericSettingsItem
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.BackAvailable
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.BoundFragment
 import com.kieronquinn.app.smartspacer.plugin.shared.ui.base.settings.BaseSettingsAdapter
-import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.onApplyInsets
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.isDarkMode
+import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.onApplyInsets
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.onClicked
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.whenResumed
 import com.kieronquinn.app.smartspacer.sdk.SmartspacerConstants
@@ -107,7 +108,8 @@ class ConfigurationGoogleWalletDynamicFragment: BoundFragment<FragmentConfigurat
                 binding.configurationGoogleSignIn.root.isVisible = false
                 binding.configurationGoogleSettings.settingsBaseRecyclerView.isVisible = true
                 adapter.update(
-                    state.loadItems(), binding.configurationGoogleSettings.settingsBaseRecyclerView
+                    state.loadItems(state.settings),
+                    binding.configurationGoogleSettings.settingsBaseRecyclerView
                 )
                 //Only OK adding the Target if the user has logged in successfully
                 requireActivity().setResult(Activity.RESULT_OK)
@@ -115,7 +117,7 @@ class ConfigurationGoogleWalletDynamicFragment: BoundFragment<FragmentConfigurat
         }
     }
 
-    private fun State.Loaded.loadItems(): List<BaseSettingsItem> {
+    private fun State.Loaded.loadItems(settings: TargetData): List<BaseSettingsItem> {
         return listOf(
             GenericSettingsItem.SwitchSetting(
                 allowOnMetered,
@@ -138,6 +140,13 @@ class ConfigurationGoogleWalletDynamicFragment: BoundFragment<FragmentConfigurat
                 },
                 isEnabled = !isReloading,
                 onClick = viewModel::onReloadClicked
+            ),
+            GenericSettingsItem.SwitchSetting(
+                settings.popUnder,
+                getString(R.string.target_wallet_dynamic_settings_pop_under_title),
+                getString(R.string.target_wallet_dynamic_settings_pop_under_content),
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_google_wallet),
+                onChanged = viewModel::onPopUnderChanged
             )
         )
     }

@@ -83,7 +83,8 @@ class SubscriberComplication: SmartspacerComplicationProvider() {
             AndroidIcon.createWithResource(provideContext(), R.drawable.ic_youtube),
             refreshIfNotVisible = true,
             refreshPeriodMinutes = complicationData?.refreshRate?.minutes ?: 0,
-            configActivity = createIntent(provideContext(), COMPLICATION_SUBSCRIPTIONS)
+            configActivity = createIntent(provideContext(), COMPLICATION_SUBSCRIPTIONS),
+            allowAddingMoreThanOnce = true
         )
     }
 

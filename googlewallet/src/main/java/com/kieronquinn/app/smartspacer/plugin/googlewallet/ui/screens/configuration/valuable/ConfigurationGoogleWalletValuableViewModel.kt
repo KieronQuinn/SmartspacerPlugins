@@ -30,6 +30,7 @@ abstract class ConfigurationGoogleWalletValuableViewModel: ViewModel() {
     abstract fun onShowImageChanged(enabled: Boolean)
     abstract fun onShowPopupChanged(enabled: Boolean)
     abstract fun onLockRotationChanged(enabled: Boolean)
+    abstract fun onPopUnderChanged(enabled: Boolean)
 
     sealed class State {
         data object Loading: State()
@@ -108,6 +109,18 @@ class ConfigurationGoogleWalletValuableViewModelImpl(
             ::onTargetDataSaved
         ) {
             (it ?: TargetData()).copy(lockOrientation = enabled)
+        }
+    }
+
+    override fun onPopUnderChanged(enabled: Boolean) {
+        val id = smartspacerId.value ?: return
+        dataRepository.updateTargetData(
+            id,
+            TargetData::class.java,
+            TargetData.TYPE,
+            ::onTargetDataSaved
+        ) {
+            (it ?: TargetData()).copy(popUnder = enabled)
         }
     }
 

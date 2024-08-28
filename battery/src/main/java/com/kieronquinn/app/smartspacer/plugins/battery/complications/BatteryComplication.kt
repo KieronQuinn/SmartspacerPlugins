@@ -11,6 +11,7 @@ import com.kieronquinn.app.smartspacer.plugins.battery.R
 import com.kieronquinn.app.smartspacer.plugins.battery.model.BatteryLevels.BatteryLevel
 import com.kieronquinn.app.smartspacer.plugins.battery.repositories.BatteryRepository
 import com.kieronquinn.app.smartspacer.plugins.battery.ui.activities.ConfigurationActivity.NavGraphMapping
+import com.kieronquinn.app.smartspacer.plugins.battery.utils.extensions.makeSquare
 import com.kieronquinn.app.smartspacer.plugins.battery.widgets.BatteryWidget
 import com.kieronquinn.app.smartspacer.sdk.model.Backup
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceAction
@@ -42,7 +43,7 @@ class BatteryComplication: SmartspacerComplicationProvider() {
     private fun BatteryLevel.toComplication(smartspacerId: String): SmartspaceAction {
         return ComplicationTemplate.Basic(
             "battery_${smartspacerId}_at_${System.currentTimeMillis()}",
-            Icon(AndroidIcon.createWithBitmap(icon)),
+            Icon(AndroidIcon.createWithBitmap(icon.makeSquare())),
             Text(getLabel(provideContext())),
             TapAction(intent = Intent(Settings.ACTION_BLUETOOTH_SETTINGS))
         ).create()

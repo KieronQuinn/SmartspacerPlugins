@@ -1,15 +1,14 @@
 package com.kieronquinn.app.smartspacer.plugin.googlewallet.targets
 
 import android.content.ComponentName
-import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import com.google.gson.annotations.SerializedName
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.R
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleApiRepository
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.repositories.GoogleWalletRepository
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.activities.ConfigurationActivity
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.activities.ConfigurationActivity.NavGraphMapping.TARGET_WALLET_STATIC
+import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.activities.WalletLaunchProxyActivity
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.ui.screens.popup.PopupWalletDialogFragment
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.toBitmap
 import com.kieronquinn.app.smartspacer.plugin.shared.repositories.DataRepository
@@ -67,6 +66,11 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
         return dataRepository.getTargetData(smartspacerId, TargetData::class.java)
     }
 
+    override fun onProviderRemoved(smartspacerId: String) {
+        super.onProviderRemoved(smartspacerId)
+        dataRepository.deleteTargetData(smartspacerId)
+    }
+
     private fun getValuable(smartspacerId: String): GoogleWalletRepository.Valuable? {
         val id = getSettings(smartspacerId)?.valuableId ?: return null
         return walletRepository.getValuableById(id)
@@ -94,7 +98,7 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
             subtitle = Text(groupingInfo.groupingSubtitle),
             icon = Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_google_wallet)),
             image = Icon(AndroidIcon.createWithBitmap(image)),
-            onClick = getCardClickAction(settings.showAsPopup, settings.lockOrientation)
+            onClick = getCardClickAction(settings.showAsPopup, settings.lockOrientation, settings.popUnder)
         ).create()
     }
 
@@ -108,7 +112,7 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
             title = Text(groupingInfo.groupingTitle),
             subtitle = Text(groupingInfo.groupingSubtitle),
             icon = Icon(AndroidIcon.createWithResource(provideContext(), R.drawable.ic_google_wallet)),
-            onClick = getCardClickAction(settings.showAsPopup, settings.lockOrientation)
+            onClick = getCardClickAction(settings.showAsPopup, settings.lockOrientation, settings.popUnder)
         ).create()
     }
 
@@ -130,14 +134,13 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
 
     private fun GoogleWalletRepository.Valuable.getCardClickAction(
         showAsPopup: Boolean,
-        lockOrientation: Boolean
+        lockOrientation: Boolean,
+        popUnder: Boolean
     ): TapAction {
         val intent = if(showAsPopup){
-            PopupWalletDialogFragment.createLaunchIntent(provideContext(), id, lockOrientation)
+            PopupWalletDialogFragment.createLaunchIntent(provideContext(), id, lockOrientation, popUnder)
         }else{
-            Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://pay.google.com/gp/v/valuable/$id?vs=gp_lp")
-            }
+            WalletLaunchProxyActivity.createIntent(provideContext(), id, popUnder)
         }
         return TapAction(
             intent = intent,
@@ -173,7 +176,9 @@ class GoogleWalletValuableTarget: SmartspacerTargetProvider() {
         @SerializedName("show_as_popup")
         val showAsPopup: Boolean = false,
         @SerializedName("lock_orientation")
-        val lockOrientation: Boolean = true
+        val lockOrientation: Boolean = true,
+        @SerializedName("pop_under")
+        val popUnder: Boolean = false
     ) {
 
         companion object {
