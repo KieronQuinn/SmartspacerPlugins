@@ -524,7 +524,7 @@ interface TrainlineService {
         @Header(HEADER_APP_VERSION) appVersionName: String,
         @Header(HEADER_USER_AGENT) userAgent: String,
         @Header(HEADER_CONVERSATION_ID) dummyConversationId: String = getDummyConversationId(),
-        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTag(),
+        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTagCompat(),
         @Body request: SetupRequest = SetupRequest()
     ): Call<Unit>
 
@@ -539,8 +539,8 @@ interface TrainlineService {
         @Header(HEADER_USER_AGENT) userAgent: String,
         @Header(HEADER_CONVERSATION_ID) conversationId: String,
         @Header(HEADER_CONTEXT_ID) contextId: String,
-        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTag(),
-        @Query("locale") locale: String = Locale.getDefault().toLanguageTag(),
+        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTagCompat(),
+        @Query("locale") locale: String = Locale.getDefault().toLanguageTagCompat(),
         @Query("connections") vararg connection: String,
         @Query("searchTerm") searchTerm: String
     ): Call<SearchLocationsResponse>
@@ -556,7 +556,7 @@ interface TrainlineService {
         @Header(HEADER_USER_AGENT) userAgent: String,
         @Header(HEADER_CONVERSATION_ID) conversationId: String,
         @Header(HEADER_CONTEXT_ID) contextId: String,
-        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTag(),
+        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTagCompat(),
         @Body request: SearchRoutesRequest
     ): Call<SearchRoutesResponse>
 
@@ -571,7 +571,7 @@ interface TrainlineService {
         @Header(HEADER_USER_AGENT) userAgent: String,
         @Header(HEADER_CONVERSATION_ID) conversationId: String,
         @Header(HEADER_CONTEXT_ID) contextId: String,
-        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTag(),
+        @Header(HEADER_ACCEPT_LANGUAGE) acceptLanguage: String = Locale.getDefault().toLanguageTagCompat(),
         @Path("carrier") carrier: String,
         @Path("serviceId") serviceId: String,
         @Query("customerDepartureDate") departureDate: String,
@@ -579,5 +579,9 @@ interface TrainlineService {
         @Query("customerOrigin") origin: String,
         @Query("customerDestination") destination: String
     ): Call<TravelServiceInformationResponse>
+
+    private fun Locale.toLanguageTagCompat(): String {
+        return "$country-$language"
+    }
 
 }

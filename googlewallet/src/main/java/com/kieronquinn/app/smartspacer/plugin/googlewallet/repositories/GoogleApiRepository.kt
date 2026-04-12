@@ -11,8 +11,14 @@ import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.firs
 import com.kieronquinn.app.smartspacer.plugin.googlewallet.utils.extensions.parseCookie
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.getPackageInfoCompat
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerTargetProvider
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -20,7 +26,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Header
 import retrofit2.http.POST
-import java.util.*
+import java.util.Locale
 
 interface GoogleApiRepository {
 
@@ -182,7 +188,8 @@ interface GoogleApiService {
         @Field("ACCESS_TOKEN") systemPartition: String = "1",
         @Field("callerPkg") callerPackage: String = Scope.AC2DM.packageName,
         @Field("callerSig") callerSig: String = Scope.AC2DM.clientSig,
-        @Field("add_account") addAccount: String = "1"
+        @Field("add_account") addAccount: String = "1",
+        @Field("droidguard_results") droidguardResults: String = "null"
     ): Call<ResponseBody>
 
     @FormUrlEncoded
