@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".GoogleHealthPlugin"
+        android:theme="@style/Theme.Smartspacer">
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"/>
+
+        <activity-alias
+            android:name=".ui.activities.HealthConfigurationActivity"
+            android:description="@string/configuration_health_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/configuration_health_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <provider
+            android:authorities="${applicationId}.complications.health"
+            android:name=".complications.GoogleHealthComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.widgets.health"
+            android:name=".widgets.GoogleHealthWidget"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+    </application>
+
+    <queries>
+        <package android:name="com.fitbit.FitbitMobile"/>
+    </queries>
+
+</manifest>

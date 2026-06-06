@@ -65,8 +65,7 @@ class AftershipWidgetProvider: SmartspacerWidgetProvider() {
         val items = ArrayList<WidgetListItem>()
         for(i in 0 until adapter.getCount()) {
             val item = adapter.getViewAt(i) ?: continue
-            val extra = item.onClickResponses.firstOrNull()?.response?.fillInIntent?.extras
-                ?: continue
+            val extra = item.onClickResponses.firstOrNull()?.response?.fillInIntent?.extras ?: continue
             val view = item.remoteViews.load() ?: continue
             val title = view.findViewByIdentifier<TextView>(IDENTIFIER_TITLE)?.text ?: continue
             val courier = view.findViewByIdentifier<TextView>(IDENTIFIER_COURIER)?.text ?: continue

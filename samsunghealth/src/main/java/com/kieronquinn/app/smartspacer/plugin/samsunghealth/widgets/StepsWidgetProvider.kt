@@ -3,6 +3,7 @@ package com.kieronquinn.app.smartspacer.plugin.samsunghealth.widgets
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
+import android.view.ViewGroup
 import android.widget.RemoteViews
 import android.widget.TextView
 import com.kieronquinn.app.smartspacer.plugin.samsunghealth.SamsungHealthPlugin.Companion.PACKAGE_NAME
@@ -11,7 +12,7 @@ import com.kieronquinn.app.smartspacer.plugin.samsunghealth.repositories.Samsung
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.dp
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerComplicationProvider
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
-import com.kieronquinn.app.smartspacer.sdk.utils.findViewByIdentifier
+import com.kieronquinn.app.smartspacer.sdk.utils.findViewsByType
 import org.koin.android.ext.android.inject
 
 class StepsWidgetProvider: SmartspacerWidgetProvider() {
@@ -19,7 +20,6 @@ class StepsWidgetProvider: SmartspacerWidgetProvider() {
     companion object {
         private const val PROVIDER_CLASS =
             "com.sec.android.app.shealth.widget.WalkMatePlainAppWidget"
-        private const val IDENTIFIER_STEPS = "$PACKAGE_NAME:id/step_count"
 
         fun getProvider(context: Context): AppWidgetProviderInfo? {
             val manager = context.getSystemService(Context.APPWIDGET_SERVICE) as AppWidgetManager
@@ -40,8 +40,10 @@ class StepsWidgetProvider: SmartspacerWidgetProvider() {
     }
 
     override fun onWidgetChanged(smartspacerId: String, remoteViews: RemoteViews?) {
-        val views = remoteViews?.load() ?: return
-        val steps = views.findViewByIdentifier<TextView>(IDENTIFIER_STEPS)?.text ?: return
+        val views = remoteViews?.load() as? ViewGroup ?: return
+        val steps = views.findViewsByType(TextView::class.java).firstNotNullOfOrNull {
+            it.text?.toString()?.toIntOrNull()
+        } ?: return
         settings.steps.setSync(steps.toString())
         SmartspacerComplicationProvider.notifyChange(provideContext(), StepsComplication::class.java)
     }

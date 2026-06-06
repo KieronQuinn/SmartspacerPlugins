@@ -8,8 +8,14 @@
 
     <string name="complication_buddy_label">Pokémon Go Buddy Walk Distance</string>
     <string name="complication_buddy_label_samsung">Pokémon Go Buddy Walk Distance (Galaxy Store)</string>
-    <string name="complication_buddy_label_short">Walk Distance</string>
+    <string name="complication_buddy_label_short">Buddy Walk Distance</string>
     <string name="complication_buddy_description">Shows your current Adventure Sync Buddy Walk Together Distance from Pokémon Go</string>
+
+    <string name="complication_distance_label">Pokémon Go Weekly Walk Distance</string>
+    <string name="complication_distance_label_samsung">Pokémon Go Weekly Walk Distance (Galaxy Store)</string>
+    <string name="complication_distance_label_short">Weekly Walk Distance</string>
+    <string name="complication_distance_description">Shows your current Adventure Sync Weekly Walk Distance from Pokémon Go</string>
+    <string name="complication_distance_km">%1skm</string>
 
     <string name="complication_incompatible">This Complication requires the Play Store version of Pokémon Go</string>
     <string name="complication_incompatible_samsung">This Complication requires the Galaxy Store version of Pokémon Go</string>
@@ -18,6 +24,6 @@
     <string name="configuration_description">Set whether to use a static icon</string>
     <string name="configuration_use_static_title">Use Static Icon</string>
     <string name="configuration_egg_use_static_content">Use a static egg icon rather than the currently incubating type</string>
-    <string name="configuration_buddy_use_static_content">Use a static walking icon rather than the current buddy</string>
+    <string name="configuration_buddy_use_static_content">Use a static buddy icon rather than the current buddy</string>
 
 </resources>

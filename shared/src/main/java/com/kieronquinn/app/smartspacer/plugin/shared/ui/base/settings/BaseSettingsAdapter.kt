@@ -306,7 +306,14 @@ abstract class BaseSettingsAdapter(
     ) {
         val popup = PopupMenu(context, this)
         item.options.forEachIndexed { index, option ->
-            popup.menu.add(Menu.NONE, index, Menu.NONE, item.adapter(option))
+            when {
+                item.stringAdapter != null -> {
+                    popup.menu.add(Menu.NONE, index, Menu.NONE, item.stringAdapter(option))
+                }
+                item.adapter != null -> {
+                    popup.menu.add(Menu.NONE, index, Menu.NONE, item.adapter(option))
+                }
+            }
         }
         popup.setOnMenuItemClickListener {
             item.onSet(item.options[it.itemId])

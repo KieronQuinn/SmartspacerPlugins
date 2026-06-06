@@ -6,11 +6,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.children
 import androidx.core.view.isVisible
 import com.kieronquinn.app.smartspacer.plugins.pokemongo.PokemonGoPlugin.Variant
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
 import com.kieronquinn.app.smartspacer.sdk.utils.findViewByIdentifier
+import com.kieronquinn.app.smartspacer.sdk.utils.findViewsByType
 
 abstract class BaseWidgetProvider: SmartspacerWidgetProvider() {
 
@@ -21,13 +21,9 @@ abstract class BaseWidgetProvider: SmartspacerWidgetProvider() {
     }
 
     protected fun LinearLayout.getProgressText(): String {
-        return children.filterIsInstance<TextView>().joinToString(" ") {
+        return findViewsByType(TextView::class.java).joinToString(" ") {
             it.text
         }
-    }
-
-    protected fun LinearLayout.child(): LinearLayout? {
-        return children.firstOrNull { it is LinearLayout } as? LinearLayout
     }
 
     protected fun getIdentifier(identifier: String): String {

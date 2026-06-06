@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okio.BufferedSink
 import retrofit2.Call
@@ -25,7 +26,7 @@ private suspend fun <T> Call<T>.getSuspended() = suspendCancellableCoroutine<T?>
         }
 
         override fun onFailure(call: Call<T>, t: Throwable) {
-            Log.d("RetrofitError", "Failed to ${call.request().method()} ${call.request().url()}", t)
+            Log.d("RetrofitError", "Failed to ${call.request().method} ${call.request().url}", t)
             it.resume(null)
         }
     })
@@ -39,7 +40,7 @@ private suspend fun <T> Call<T>.getSuspended() = suspendCancellableCoroutine<T?>
 fun ByteArray.toRequestBody(contentType: String): RequestBody {
     return object: RequestBody() {
         override fun contentType(): MediaType? {
-            return MediaType.parse(contentType)
+            return contentType.toMediaTypeOrNull()
         }
 
         override fun writeTo(sink: BufferedSink) {

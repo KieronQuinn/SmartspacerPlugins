@@ -12,7 +12,6 @@ android {
 
     defaultConfig {
         minSdk min_sdk
-        targetSdk target_sdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,39 +32,45 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+    lint {
+        targetSdk 34
+    }
+    testOptions {
+        targetSdk 34
+    }
 }
 
 dependencies {
     //AndroidX + Material
-    api 'androidx.core:core-ktx:1.13.1'
-    api 'androidx.appcompat:appcompat:1.7.0'
-    api 'com.google.android.material:material:1.12.0'
+    api 'androidx.core:core-ktx:1.18.0'
+    api 'androidx.appcompat:appcompat:1.7.1'
+    api 'com.google.android.material:material:1.14.0'
     api "androidx.navigation:navigation-fragment-ktx:$nav_version"
     api "androidx.navigation:navigation-ui-ktx:$nav_version"
-    api "androidx.security:security-crypto:1.1.0-alpha06"
+    api "androidx.security:security-crypto:1.1.0"
 
     //Hidden APIs
     api "dev.rikka.tools.refine:runtime:$refine_version"
 
     //Smartspacer SDK
-    api 'com.kieronquinn.smartspacer:sdk-plugin:1.0.3'
+    api 'com.kieronquinn.smartspacer:sdk-plugin:1.1.2'
 
     //Dependency Injection
-    api "io.insert-koin:koin-android:3.5.6"
+    api "io.insert-koin:koin-android:4.2.1"
 
     //Theming
     api 'com.github.KieronQuinn:MonetCompat:0.4.1'
 
     //Image Loading
-    api 'com.github.bumptech.glide:glide:4.16.0'
-    ksp 'com.github.bumptech.glide:ksp:4.15.1'
+    api 'com.github.bumptech.glide:glide:5.0.7'
+    ksp 'com.github.bumptech.glide:ksp:5.0.7'
 
     //Data Loading
-    api "com.squareup.retrofit2:retrofit:2.11.0"
-    api "com.squareup.retrofit2:converter-gson:2.11.0"
+    api "com.squareup.retrofit2:retrofit:3.0.0"
+    api "com.squareup.retrofit2:converter-gson:3.0.0"
 
     //Used in Backup + Restore
-    api 'com.google.code.gson:gson:2.11.0'
+    api 'com.google.code.gson:gson:2.14.0'
 
     //Room for data storage
     api "androidx.room:room-runtime:$room_version"

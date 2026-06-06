@@ -24,10 +24,10 @@ abstract class EggWidgetProvider: BaseWidgetProvider() {
         private const val IDENTIFIER_SINGLE_EGG = ":id/single_egg_view"
         private const val IDENTIFIER_MULTIPLE_EGG = ":id/multiple_eggs_view"
         private const val IDENTIFIER_PROGRESS = ":id/egg_hatching_progress"
-        private const val IDENTIFIER_PROGRESS_0 = ":id/incubator_progress_0"
-        private const val IDENTIFIER_PROGRESS_1 = ":id/incubator_progress_1"
-        private const val IDENTIFIER_PROGRESS_2 = ":id/incubator_progress_2"
-        private const val IDENTIFIER_PROGRESS_3 = ":id/incubator_progress_3"
+        private const val IDENTIFIER_PROGRESS_0 = ":id/egg_hatching_progress_0"
+        private const val IDENTIFIER_PROGRESS_1 = ":id/egg_hatching_progress_1"
+        private const val IDENTIFIER_PROGRESS_2 = ":id/egg_hatching_progress_2"
+        private const val IDENTIFIER_PROGRESS_3 = ":id/egg_hatching_progress_3"
         private const val IDENTIFIER_IMAGE = ":id/incubator_egg_image"
         private const val IDENTIFIER_IMAGE_0 = ":id/incubator_egg_image_0"
         private const val IDENTIFIER_IMAGE_1 = ":id/incubator_egg_image_1"
@@ -91,13 +91,12 @@ abstract class EggWidgetProvider: BaseWidgetProvider() {
         progress: String, image: String, hatching: String
     ): WidgetConfiguration? {
         val container = findViewByIdentifier<LinearLayout>(getIdentifier(progress)) ?: return null
-        if(!container.isVisible) return null
         val hatchingText = findViewByIdentifier<TextView>(getIdentifier(hatching))
         val text = if(hatchingText?.isVisible == true){
             hatchingText.text.toString()
         }else{
-            container.child()?.child()?.getProgressText()
-        } ?: return null
+            container.getProgressText()
+        }
         val egg = findViewByIdentifier<ImageView>(getIdentifier(image))?.getImageAsBitmap()
         return WidgetConfiguration(text, egg)
     }
@@ -110,8 +109,8 @@ abstract class EggWidgetProvider: BaseWidgetProvider() {
         val text = if(hatchingText?.isVisible == true){
             hatchingText.text.toString()
         }else {
-            container.child()?.getProgressText()
-        } ?: return null
+            container.getProgressText()
+        }
         val egg = findViewByIdentifier<ImageView>(getIdentifier(image))?.getImageAsBitmap()
         return WidgetConfiguration(text, egg)
     }

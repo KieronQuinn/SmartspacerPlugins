@@ -4,7 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
+import androidx.core.net.toUri
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.kieronquinn.app.smartspacer.plugin.aftership.AftershipPlugin.Companion.PACKAGE_NAME
@@ -32,6 +32,8 @@ class AftershipTarget: SmartspacerTargetProvider() {
 
     companion object {
         private const val TARGET_PREFIX = "aftership_"
+        private const val TRACKING_BASE_URL = "https://link.aftership.com"
+        private const val TRACKING_PARAM_LINK = "link"
     }
 
     private val aftershipRepository by inject<AftershipRepository>()
@@ -138,8 +140,11 @@ class AftershipTarget: SmartspacerTargetProvider() {
 
     private fun Package.getTapAction(): TapAction {
         val intent = aftershipRepository.getTrackingUrl(this)?.let {
+            val trackingUri = TRACKING_BASE_URL.toUri().buildUpon()
+                .appendQueryParameter(TRACKING_PARAM_LINK, it)
+                .build()
             Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(it)
+                data = trackingUri
                 `package` = PACKAGE_NAME
             }
         } ?: run {

@@ -57,7 +57,8 @@ sealed class GenericSettingsItem(val type: GenericSettingsItemType): BaseSetting
         val setting: T,
         val onSet: (T) -> Unit,
         val options: List<T>,
-        val adapter: (T) -> Int
+        val stringAdapter: ((T) -> String)? = null,
+        val adapter: ((T) -> Int)?,
     ): GenericSettingsItem(GenericSettingsItemType.DROPDOWN)
 
     data class SwitchSetting(

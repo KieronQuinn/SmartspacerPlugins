@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_health"
+    app:startDestination="@id/healthConfigurationFragment">
+
+    <fragment
+        android:id="@+id/healthConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlehealth.ui.screens.HealthConfigurationFragment"
+        android:label="@string/configuration_health_title" >
+        <action
+            android:id="@+id/action_healthConfigurationFragment_to_healthConfigurationFocusFragment"
+            app:destination="@id/healthConfigurationFocusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/healthConfigurationFocusFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlehealth.ui.screens.focus.HealthConfigurationFocusFragment"
+        android:label="@string/configuration_health_focus" />
+
+</navigation>

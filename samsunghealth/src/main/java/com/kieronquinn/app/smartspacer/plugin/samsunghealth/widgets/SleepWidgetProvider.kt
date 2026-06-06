@@ -3,23 +3,21 @@ package com.kieronquinn.app.smartspacer.plugin.samsunghealth.widgets
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
-import android.widget.LinearLayout
+import android.view.ViewGroup
 import android.widget.RemoteViews
 import android.widget.TextView
-import androidx.core.view.children
 import com.kieronquinn.app.smartspacer.plugin.samsunghealth.SamsungHealthPlugin.Companion.PACKAGE_NAME
 import com.kieronquinn.app.smartspacer.plugin.samsunghealth.complications.SleepComplication
 import com.kieronquinn.app.smartspacer.plugin.samsunghealth.repositories.SamsungHealthSettingsRepository
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.dp
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerComplicationProvider
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
-import com.kieronquinn.app.smartspacer.sdk.utils.findViewByIdentifier
+import com.kieronquinn.app.smartspacer.sdk.utils.findViewsByType
 import org.koin.android.ext.android.inject
 
 class SleepWidgetProvider: SmartspacerWidgetProvider() {
 
     companion object {
-        private const val IDENTIFIER_TIME_HOURS = "$PACKAGE_NAME:id/sleep_widget_hour_value"
         private const val PROVIDER_CLASS =
             "com.samsung.android.app.shealth.tracker.sleepWidget.SleepWidget"
 
@@ -41,10 +39,10 @@ class SleepWidgetProvider: SmartspacerWidgetProvider() {
     }
 
     override fun onWidgetChanged(smartspacerId: String, remoteViews: RemoteViews?) {
-        val views = remoteViews?.load() ?: return
-        val hours = views.findViewByIdentifier<TextView>(IDENTIFIER_TIME_HOURS) ?: return
-        val container = hours.parent as LinearLayout
-        val sleepTime = container.getSleepTime()
+        val views = remoteViews?.load() as? ViewGroup ?: return
+        val sleepTime = views.findViewsByType(TextView::class.java).joinToString("") {
+            it.text
+        }
         //Only update if required, this also prevents resetting the time without changes
         val current = settings.sleepTime.getSync()
         if(sleepTime == current) return
@@ -58,12 +56,6 @@ class SleepWidgetProvider: SmartspacerWidgetProvider() {
             width = WIDGET_WIDTH,
             height = WIDGET_HEIGHT
         )
-    }
-
-    private fun LinearLayout.getSleepTime(): String {
-        return children.filterIsInstance<TextView>().joinToString("") {
-            it.text
-        }
     }
 
 }

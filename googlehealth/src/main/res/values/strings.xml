@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Google Health Plugin for Smartspacer</string>
+
+    <string name="complication_google_health_title">Google Health</string>
+    <string name="complication_google_health_description">Display %1s from Google Health</string>
+    <string name="complication_google_health_description_unset">Display a health focus from Google Health</string>
+    <string name="complication_google_health_incompatible">This Complication requires the Google Health app</string>
+    <string name="configuration_health_title">Settings</string>
+    <string name="configuration_health_description">Set the health focus and configure timeout options</string>
+    <string name="configuration_health_focus">Health Focus</string>
+    <string name="configuration_tap_action">Tap Action</string>
+    <string name="configuration_health_timeout">Hide After Timeout</string>
+    <string name="configuration_health_timeout_content">Hides the Complication after a time after its last update, rather than showing it all the time. The Complication will re-appear when the focus value changes next.</string>
+    <string name="configuration_health_timeout_time_title">Timeout Time</string>
+    <string name="configuration_focus_not_available">Not available, set this focus as one of your top six in the Google Health app to use it.</string>
+    <string name="configuration_focus_no_longer_available">The selected health focus is no longer set as one of your top six in the Google Health app, and is therefore no longer available. Either re-set it as one of your top six, or select a different focus</string>
+
+    <string name="tap_action_open_metric">Open Google Health to Focus</string>
+    <string name="tap_action_open_app">Open Google Health to home</string>
+    <string name="tap_action_refresh">Refresh Focus</string>
+
+    <string name="timeout_15_minutes">15 minutes</string>
+    <string name="timeout_30_minutes">30 minutes</string>
+    <string name="timeout_60_minutes">1 hour</string>
+    <string name="timeout_120_minutes">2 hours</string>
+
+    <string name="metric_steps">Steps</string>
+    <string name="metric_run_distance">Run Distance</string>
+    <string name="metric_distance">Distance</string>
+    <string name="metric_exercise_days">Exercise Days</string>
+    <string name="metric_active_zone_minutes">Active Zone Minutes</string>
+    <string name="metric_calories_burned">Calories Burned</string>
+    <string name="metric_floors">Floors</string>
+    <string name="metric_readiness">Readiness</string>
+    <string name="metric_heart_rate">Heart Rate</string>
+    <string name="metric_cardio_load">Cardio Load</string>
+    <string name="metric_sleep">Sleep</string>
+    <string name="metric_calories">Calorie Intake</string>
+    <string name="metric_hydration">Hydration</string>
+    <string name="metric_weight">Weight</string>
+    <string name="metric_not_available">Not available</string>
+    <string name="metric_setup">Set up</string>
+    <string name="metric_unset">Not set</string>
+    <string name="metric_refreshing">…</string>
+
+</resources>

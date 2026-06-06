@@ -39,6 +39,8 @@ abstract class PokemonGoComplication: SmartspacerComplicationProvider() {
     private val dataRepository by inject<DataRepository>()
     private val gson by inject<Gson>()
 
+    protected open val hasConfiguration = true
+
     abstract fun getWidgets(): List<WidgetConfiguration>
 
     override fun getSmartspaceActions(smartspacerId: String): List<SmartspaceAction> {
@@ -71,7 +73,7 @@ abstract class PokemonGoComplication: SmartspacerComplicationProvider() {
             resources.getString(descriptionRes),
             AndroidIcon.createWithResource(provideContext(), iconRes),
             compatibilityState = getCompatibilityState(),
-            configActivity = getConfigurationIntent(),
+            configActivity = getConfigurationIntent().takeIf { hasConfiguration },
             widgetProvider = widgetProvider,
             allowAddingMoreThanOnce = true
         )

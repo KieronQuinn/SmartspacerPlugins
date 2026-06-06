@@ -3,6 +3,7 @@ package com.kieronquinn.app.smartspacer.plugin.aftership.utils.extensions
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import androidx.core.graphics.createBitmap
 import java.io.File
 
 fun Bitmap.writeToFile(file: File) {
@@ -15,7 +16,7 @@ fun Bitmap.writeToFile(file: File) {
 
 fun Bitmap.makeSquare(): Bitmap {
     val maxSize = maxOf(width, height)
-    return Bitmap.createBitmap(maxSize, maxSize, config).apply {
+    return createBitmap(maxSize, maxSize, config!!).apply {
         val canvas = Canvas(this)
         canvas.drawColor(Color.WHITE)
         canvas.drawBitmap(

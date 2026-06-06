@@ -98,7 +98,7 @@ class ConfigurationFragment: BaseSettingsFragment(), BackAvailable, ProvidesTitl
         SwitchSetting(
             useStaticIcon,
             getString(R.string.configuration_use_static_title),
-            getString(widgetType.configurationStaticIconContent),
+            widgetType.configurationStaticIconContent?.let { getString(it) } ?: "",
             ContextCompat.getDrawable(requireContext(), widgetType.staticIcon)
         ) {
             viewModel.onUseStaticIconChanged(it, widgetType, variant)

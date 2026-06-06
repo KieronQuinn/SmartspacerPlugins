@@ -64,6 +64,26 @@
         </provider>
 
         <provider
+            android:authorities="${applicationId}.complication.distance.play"
+            android:name=".complications.DistanceComplicationPlay"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.complication.distance.samsung"
+            android:name=".complications.DistanceComplicationSamsung"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
             android:authorities="${applicationId}.widgets.egg.play"
             android:name=".providers.EggWidgetProviderPlay"
             android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
@@ -84,6 +104,18 @@
         <provider
             android:authorities="${applicationId}.widgets.buddy.samsung"
             android:name=".providers.BuddyWidgetProviderSamsung"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.distance.play"
+            android:name=".providers.DistanceWidgetProviderPlay"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="${applicationId}.widgets.distance.samsung"
+            android:name=".providers.DistanceWidgetProviderSamsung"
             android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
             android:exported="true"/>
 

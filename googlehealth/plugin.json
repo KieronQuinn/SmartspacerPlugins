@@ -1,0 +1,7 @@
+{
+	"description": "Monitor your health focuses from your home screen, lock screen and always on display with a Complication provided by the Google Health plugin",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/googlehealth/googlehealth-release.apk",
+	"version_code": 100,
+	"required_package": "com.fitbit.FitbitMobile",
+	"screenshots": []
+}

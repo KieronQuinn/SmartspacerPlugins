@@ -11,6 +11,8 @@ import com.kieronquinn.app.smartspacer.plugins.pokemongo.PokemonGoPlugin.Variant
 import com.kieronquinn.app.smartspacer.plugins.pokemongo.R
 import com.kieronquinn.app.smartspacer.plugins.pokemongo.complications.BuddyComplicationPlay
 import com.kieronquinn.app.smartspacer.plugins.pokemongo.complications.BuddyComplicationSamsung
+import com.kieronquinn.app.smartspacer.plugins.pokemongo.complications.DistanceComplicationPlay
+import com.kieronquinn.app.smartspacer.plugins.pokemongo.complications.DistanceComplicationSamsung
 import com.kieronquinn.app.smartspacer.plugins.pokemongo.complications.EggComplicationPlay
 import com.kieronquinn.app.smartspacer.plugins.pokemongo.complications.EggComplicationSamsung
 import com.kieronquinn.app.smartspacer.plugins.pokemongo.repositories.WidgetRepository.EggConfiguration
@@ -26,6 +28,7 @@ interface WidgetRepository {
 
     fun getEggConfiguration(variant: Variant): EggConfiguration?
     fun getBuddyConfiguration(variant: Variant): WidgetConfiguration?
+    fun getDistanceConfiguration(variant: Variant): WidgetConfiguration?
 
     fun writeEggConfiguration(
         variant: Variant,
@@ -33,6 +36,11 @@ interface WidgetRepository {
     )
 
     fun writeBuddyConfiguration(
+        variant: Variant,
+        widgetConfiguration: WidgetConfiguration?
+    )
+
+    fun writeDistanceConfiguration(
         variant: Variant,
         widgetConfiguration: WidgetConfiguration?
     )
@@ -60,7 +68,7 @@ interface WidgetRepository {
         @StringRes
         val configurationTitle: Int,
         @StringRes
-        val configurationStaticIconContent: Int,
+        val configurationStaticIconContent: Int?,
         @DrawableRes
         val staticIcon: Int
     ) {
@@ -77,6 +85,13 @@ interface WidgetRepository {
             R.string.complication_buddy_label_short,
             R.string.configuration_buddy_use_static_content,
             R.drawable.ic_complication_buddy
+        ),
+        DISTANCE(
+            "distance",
+            "notification://dl_action=OPEN_PLAYER_PROFILE",
+            R.string.complication_distance_label_short,
+            null,
+            R.drawable.ic_complication_distance
         )
     }
 
@@ -100,6 +115,10 @@ class WidgetRepositoryImpl(private val context: Context): WidgetRepository {
 
     override fun getEggConfiguration(variant: Variant): EggConfiguration? {
         return getJsonFile(variant, WidgetType.EGG).readEggConfiguration()
+    }
+
+    override fun getDistanceConfiguration(variant: Variant): WidgetConfiguration? {
+        return getJsonFile(variant, WidgetType.DISTANCE).readWidgetConfiguration()
     }
 
     override fun writeBuddyConfiguration(
@@ -135,6 +154,22 @@ class WidgetRepositoryImpl(private val context: Context): WidgetRepository {
         SmartspacerComplicationProvider.notifyChange(context, complication)
     }
 
+    override fun writeDistanceConfiguration(
+        variant: Variant,
+        widgetConfiguration: WidgetConfiguration?
+    ) {
+        getJsonFile(variant, WidgetType.DISTANCE).apply {
+            if(widgetConfiguration == null){
+                delete()
+            }else{
+                // No icon for this one
+                writeText(gson.toJson(widgetConfiguration))
+            }
+        }
+        val complication = getComplicationClass(variant, WidgetType.DISTANCE)
+        SmartspacerComplicationProvider.notifyChange(context, complication)
+    }
+
     override fun getComplicationClass(
         variant: Variant,
         widgetType: WidgetType
@@ -150,6 +185,12 @@ class WidgetRepositoryImpl(private val context: Context): WidgetRepository {
                 when(variant) {
                     Variant.PLAY -> BuddyComplicationPlay::class.java
                     Variant.SAMSUNG -> BuddyComplicationSamsung::class.java
+                }
+            }
+            WidgetType.DISTANCE -> {
+                when(variant) {
+                    Variant.PLAY -> DistanceComplicationPlay::class.java
+                    Variant.SAMSUNG -> DistanceComplicationSamsung::class.java
                 }
             }
         }

@@ -45,7 +45,7 @@ abstract class BuddyWidgetProvider: BaseWidgetProvider() {
             views.isVisible(IDENTIFIER_BUDDY_STATS) -> {
                 val progress = views.findViewByIdentifier<LinearLayout>(
                     getIdentifier(IDENTIFIER_STATS)
-                )?.child()?.child()?.child()?.getProgressText()
+                )?.getProgressText()
                 val image = views.findViewByIdentifier<ImageView>(getIdentifier(IDENTIFIER_IMAGE))
                     ?.getImageAsBitmap()
                 progress?.let {

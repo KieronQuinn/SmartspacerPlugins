@@ -9,7 +9,6 @@ android {
 
     defaultConfig {
         minSdk min_sdk
-        targetSdk target_sdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -30,6 +29,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '17'
+    }
+    lint {
+        targetSdk 34
+    }
+    testOptions {
+        targetSdk 34
     }
 }
 
