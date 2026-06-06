@@ -3,5 +3,5 @@
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/googlehealth/googlehealth-release.apk",
 	"version_code": 100,
 	"required_package": "com.fitbit.FitbitMobile",
-	"screenshots": []
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/refs/heads/main/googlehealth/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/refs/heads/main/googlehealth/screenshots/2.jpg"]
 }
