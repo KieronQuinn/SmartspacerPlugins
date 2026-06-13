@@ -2,7 +2,7 @@
     <string name="app_name">Samsung Health Plugin for Smartspacer</string>
 
     <string name="complication_sleep_title">Sleep</string>
-    <string name="complication_sleep_description">Shows your sleep time from Samsung Health</string>
+    <string name="complication_sleep_description">Shows your sleep time from Samsung Health, if available</string>
     <string name="complication_steps_title">Steps</string>
     <string name="complication_steps_description">Shows your steps for today from Samsung Health</string>
     <string name="complication_incompatible">This Complication requires the Samsung Health app</string>

@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Google Home Plugin for Smartspacer</string>
+
+    <string name="shared_google_home_title">Google Home</string>
+    <string name="shared_google_home_description_unset">Display items from Google Home</string>
+    <string name="shared_google_home_description_one">Display %1d item from Google Home</string>
+    <string name="shared_google_home_description_other">Display %1d items from Google Home</string>
+    <string name="shared_google_home_settings_title">Settings</string>
+    <string name="shared_google_home_settings_description">Change the items to show and when to show them</string>
+
+    <string name="complication_google_home_incompatible">This Complication requires the Google Home app</string>
+    <string name="complication_google_home_bullet">%1s • %1s</string>
+
+    <string name="target_google_home_incompatible">This Complication requires the Google Home app</string>
+    <string name="target_google_home_subtitle_toggle">Tap to Toggle</string>
+    <string name="target_google_home_subtitle_open">Tap to Open</string>
+
+    <string name="shared_configuration_choose_items_title">Choose Items</string>
+    <string name="shared_configuration_choose_items_content">Open Google Home to change which items are shown</string>
+    <string name="shared_configuration_hide_mode_title">Hide Items</string>
+    <string name="shared_configuration_hide_mode_content">Automatically hide items when they\'re: %1s</string>
+    <string name="complication_configuration_show_subtitle_title">Show State</string>
+    <string name="complication_configuration_show_subtitle_content">Show the state after the name if it is available\n\n<b>Note:</b> There may not be sufficient space to show this in some cases</string>
+
+    <string name="hide_mode_disabled">Don\'t hide</string>
+    <string name="hide_mode_off">Off</string>
+    <string name="hide_mode_on">On</string>
+</resources>

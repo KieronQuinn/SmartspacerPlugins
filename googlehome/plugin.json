@@ -1,0 +1,8 @@
+{
+	"description": "View and control your smart home devices with the Google Home plugin for Smartspacer. This plugin allows basic control of your devices, such as turning lights on and off, viewing the state of more complex devices such as blinds, with direct access to the Google Home app to control them.",
+	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/googlehome/googlehome-release.apk",
+	"version_code": 100,
+	"required_package": "com.google.android.apps.chromecast.app",
+	"required_sdk": 31,
+	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/refs/heads/main/googlehome/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/refs/heads/main/googlehome/screenshots/2.jpg"]
+}

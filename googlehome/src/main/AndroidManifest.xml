@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:name=".GoogleHomePlugin"
+        android:theme="@style/Theme.Smartspacer">
+
+        <provider
+            android:authorities="${applicationId}.complications.home"
+            android:name=".complications.GoogleHomeComplication"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_COMPLICATIONS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.targets.home"
+            android:name=".targets.GoogleHomeTarget"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_TARGETS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.kieronquinn.app.smartspacer.TARGET" />
+            </intent-filter>
+        </provider>
+
+        <provider
+            android:authorities="${applicationId}.widgets.home"
+            android:name=".widgets.GoogleHomeWidget"
+            android:permission="com.kieronquinn.app.smartspacer.permission.ACCESS_SMARTSPACER_WIDGETS"
+            android:exported="true"/>
+
+        <activity
+            android:name=".ui.activities.ConfigurationActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"/>
+
+        <activity-alias
+            android:name=".ui.activities.GoogleHomeTargetConfigurationActivity"
+            android:description="@string/shared_google_home_settings_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/shared_google_home_settings_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+        <activity-alias
+            android:name=".ui.activities.GoogleHomeComplicationConfigurationActivity"
+            android:description="@string/shared_google_home_settings_description"
+            android:exported="true"
+            android:icon="@drawable/ic_settings"
+            android:label="@string/shared_google_home_settings_title"
+            android:targetActivity=".ui.activities.ConfigurationActivity" />
+
+    </application>
+
+    <queries>
+        <package android:name="com.google.android.apps.chromecast.app"/>
+    </queries>
+
+</manifest>

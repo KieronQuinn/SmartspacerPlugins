@@ -4,8 +4,10 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.RemoteViews
 import android.widget.TextView
+import androidx.core.view.children
 import com.kieronquinn.app.smartspacer.plugin.samsunghealth.SamsungHealthPlugin.Companion.PACKAGE_NAME
 import com.kieronquinn.app.smartspacer.plugin.samsunghealth.complications.SleepComplication
 import com.kieronquinn.app.smartspacer.plugin.samsunghealth.repositories.SamsungHealthSettingsRepository
@@ -28,8 +30,8 @@ class SleepWidgetProvider: SmartspacerWidgetProvider() {
             }
         }
 
-        private val WIDGET_WIDTH = 368.dp
-        private val WIDGET_HEIGHT = 146.dp
+        private val WIDGET_WIDTH = 736.dp
+        private val WIDGET_HEIGHT = 736.dp
     }
 
     private val settings by inject<SamsungHealthSettingsRepository>()
@@ -40,15 +42,34 @@ class SleepWidgetProvider: SmartspacerWidgetProvider() {
 
     override fun onWidgetChanged(smartspacerId: String, remoteViews: RemoteViews?) {
         val views = remoteViews?.load() as? ViewGroup ?: return
-        val sleepTime = views.findViewsByType(TextView::class.java).joinToString("") {
-            it.text
-        }
-        //Only update if required, this also prevents resetting the time without changes
+        val sleepTimeRemoteViewsContainer = views.findViewsByType(LinearLayout::class.java)
+            .findSleepTimeContainer()
+        // The time is not always provided, we can't show anything if it's not
+        val sleepTime = sleepTimeRemoteViewsContainer
+            ?.findViewsByType(TextView::class.java)?.joinToString("") { it.text }
+        // Only update if required, this also prevents resetting the time without changes
         val current = settings.sleepTime.getSync()
-        if(sleepTime == current) return
-        settings.sleepTime.setSync(sleepTime)
-        settings.sleepTimestamp.setSync(System.currentTimeMillis())
+        if (sleepTime == current) return
+        if (sleepTime != null) {
+            settings.sleepTime.setSync(sleepTime)
+            settings.sleepTimestamp.setSync(System.currentTimeMillis())
+        } else {
+            settings.sleepTime.clearSync()
+            settings.sleepTimestamp.clearSync()
+        }
         SmartspacerComplicationProvider.notifyChange(provideContext(), SleepComplication::class.java)
+    }
+
+    /**
+     *  Attempts to find the sleep time LinearLayout using the following parameters:
+     *  - Should contain an even number of TextViews
+     *  - The first TextView should be a number
+     */
+    private fun List<LinearLayout>.findSleepTimeContainer(): LinearLayout? {
+        return firstOrNull {
+            val children = it.children.toList().filterIsInstance<TextView>()
+            children.size % 2 == 0 && children.firstOrNull()?.text?.toString()?.toIntOrNull() != null
+        }
     }
 
     override fun getConfig(smartspacerId: String): Config {

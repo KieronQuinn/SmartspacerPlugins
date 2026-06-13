@@ -1,7 +1,7 @@
 {
 	"description": "Complications for notification counts for WhatsApp, Facebook, Facebook Messenger, Telegram, Outlook, K9 Mail, Google Voice, Twitter, Instagram and Threads!",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/notifications/notifications-release.apk",
-	"changelog": "- Added Outlook Complication\n- Added K9 Mail Complication\n- Added Google Voice Complication\n- Added new WhatsApp Complication, widget based, replacing the badge one. The badge one will still work, but will be removed in a future release",
-	"version_code": 110,
+	"changelog": "- K9 Complication updated for Thunderbird",
+	"version_code": 111,
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/notifications/screenshots/1.jpg"]
 }

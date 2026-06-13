@@ -50,9 +50,9 @@
     <string name="complication_outlook_description">Display a count of unread Outlook messages</string>
     <string name="complication_outlook_incompatible">This Complication requires the Outlook app</string>
 
-    <string name="complication_k9_label">K9 Mail Unread</string>
-    <string name="complication_k9_description">Display a count of unread K9 Mail messages</string>
-    <string name="complication_k9_incompatible">This Complication requires the K9 Mail app</string>
+    <string name="complication_k9_label">Thunderbird Mail Unread</string>
+    <string name="complication_k9_description">Display a count of unread Thunderbird Mail messages</string>
+    <string name="complication_k9_incompatible">This Complication requires the Thunderbird Mail app</string>
 
     <string name="complication_settings_title">Configure</string>
     <string name="complication_settings_content">Change settings in the app</string>

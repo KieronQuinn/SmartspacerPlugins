@@ -1,8 +1,8 @@
 {
 	"description": "Monitor your sleep and step tracking on your home screen, lock screen and always on display with a Complication provided by the Samsung Health plugin",
 	"download_url": "https://github.com/KieronQuinn/SmartspacerPlugins/releases/download/samsunghealth/samsunghealth-release.apk",
-	"version_code": 102,
-	"changelog": "- Fixed Complications not updating",
+	"version_code": 103,
+	"changelog": "- Fixed steps complication not updating when the number of steps contains a comma\n- Tweaked sleep complication to detect and only show sleep times rather than scores",
 	"required_package": "com.sec.android.app.shealth",
 	"screenshots": ["https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/samsunghealth/screenshots/1.jpg", "https://raw.githubusercontent.com/KieronQuinn/SmartspacerPlugins/main/samsunghealth/screenshots/2.jpg"]
 }

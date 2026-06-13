@@ -19,7 +19,7 @@ class K9WidgetProvider: SmartspacerWidgetProvider() {
         private const val IDENTIFIER_UNREAD = "${PACKAGE_NAME}:id/unread_count"
 
         private val COMPONENT_WIDGET = ComponentName(
-            PACKAGE_NAME, "com.fsck.k9.provider.UnreadWidgetProvider"
+            PACKAGE_NAME, "net.thunderbird.android.widget.provider.UnreadWidgetProvider"
         )
 
         fun getAppWidgetProviderInfo(context: Context): AppWidgetProviderInfo? {

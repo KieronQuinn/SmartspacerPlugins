@@ -13,7 +13,7 @@ import org.koin.android.ext.android.inject
 class K9Complication: BaseComplication() {
 
     companion object {
-        const val PACKAGE_NAME = "com.fsck.k9"
+        const val PACKAGE_NAME = "net.thunderbird.android"
     }
 
     private val databaseRepository by inject<DatabaseRepository>()

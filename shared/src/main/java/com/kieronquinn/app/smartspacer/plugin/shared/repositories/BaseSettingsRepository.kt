@@ -21,7 +21,11 @@ import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.parseHexCo
 import com.kieronquinn.app.smartspacer.plugin.shared.utils.extensions.toHexString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.properties.ReadWriteProperty
@@ -41,6 +45,7 @@ interface BaseSettingsRepository {
         abstract suspend fun get(): T
         abstract suspend fun getOrNull(): T?
         abstract suspend fun clear()
+        abstract fun clearSync()
         abstract fun setSync(value: T)
         abstract fun getSync(): T
         abstract fun asFlow(): Flow<T>
@@ -99,6 +104,10 @@ interface BaseSettingsRepository {
         }
 
         override suspend fun clear() {
+            throw RuntimeException("Not implemented!")
+        }
+
+        override fun clearSync() {
             throw RuntimeException("Not implemented!")
         }
 
@@ -365,6 +374,10 @@ abstract class BaseSettingsRepositoryImpl: BaseSettingsRepository {
             withContext(Dispatchers.IO) {
                 sharedPreferences.edit().remove(key).commit()
             }
+        }
+
+        override fun clearSync() {
+            sharedPreferences.edit().remove(key).commit()
         }
 
         override fun asFlow() = callbackFlow {

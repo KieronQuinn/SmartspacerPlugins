@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="shared_google_home_description">
+        <item quantity="one">@string/shared_google_home_description_one</item>
+        <item quantity="other">@string/shared_google_home_description_other</item>
+    </plurals>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_complication"
+    app:startDestination="@id/googleHomeComplicationConfigurationFragment">
+    <fragment
+        android:id="@+id/googleHomeComplicationConfigurationFragment"
+        android:name="com.kieronquinn.app.smartspacer.plugin.googlehome.ui.screens.complication.GoogleHomeComplicationConfigurationFragment"
+        android:label="@string/shared_google_home_settings_title" />
+</navigation>

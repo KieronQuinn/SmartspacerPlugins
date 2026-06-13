@@ -14,6 +14,8 @@ import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerComplicationProvi
 import com.kieronquinn.app.smartspacer.sdk.provider.SmartspacerWidgetProvider
 import com.kieronquinn.app.smartspacer.sdk.utils.findViewsByType
 import org.koin.android.ext.android.inject
+import java.text.NumberFormat
+import java.text.ParseException
 
 class StepsWidgetProvider: SmartspacerWidgetProvider() {
 
@@ -42,10 +44,19 @@ class StepsWidgetProvider: SmartspacerWidgetProvider() {
     override fun onWidgetChanged(smartspacerId: String, remoteViews: RemoteViews?) {
         val views = remoteViews?.load() as? ViewGroup ?: return
         val steps = views.findViewsByType(TextView::class.java).firstNotNullOfOrNull {
-            it.text?.toString()?.toIntOrNull()
+            val text = it.text?.toString() ?: return@firstNotNullOfOrNull null
+            text.takeIf { t -> t.isInt() }
         } ?: return
-        settings.steps.setSync(steps.toString())
+        settings.steps.setSync(steps)
         SmartspacerComplicationProvider.notifyChange(provideContext(), StepsComplication::class.java)
+    }
+
+    private fun String.isInt(): Boolean {
+        return try {
+            NumberFormat.getInstance().parse(this) != null
+        } catch (e: ParseException) {
+            false
+        }
     }
 
     override fun getConfig(smartspacerId: String): Config {
